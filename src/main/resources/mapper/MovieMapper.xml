@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmsj.cinema.common.mapper.MovieMapper">
+  <resultMap id="BaseResultMap" type="com.pmsj.cinema.common.entity.Movie">
+    <id column="movie_id" jdbcType="INTEGER" property="movieId" />
+    <result column="movie_name" jdbcType="VARCHAR" property="movieName" />
+    <result column="movie_release_time" jdbcType="DATE" property="movieReleaseTime" />
+    <result column="movie_area" jdbcType="VARCHAR" property="movieArea" />
+    <result column="movie_info" jdbcType="VARCHAR" property="movieInfo" />
+    <result column="movie_img" jdbcType="VARCHAR" property="movieImg" />
+    <result column="movie_ename" jdbcType="VARCHAR" property="movieEname" />
+    <result column="movie_score" jdbcType="REAL" property="movieScore" />
+    <result column="movie_status" jdbcType="INTEGER" property="movieStatus" />
+    <result column="movie_count" jdbcType="INTEGER" property="movieCount" />
+    <result column="movie_box_office" jdbcType="INTEGER" property="movieBoxOffice" />
+    <result column="movie_time" jdbcType="VARCHAR" property="movieTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from movie
+    where movie_id = #{movieId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Movie">
+    insert into movie (movie_id, movie_name, movie_release_time, 
+      movie_area, movie_info, movie_img, 
+      movie_ename, movie_score, movie_status, 
+      movie_count, movie_box_office, movie_time
+      )
+    values (#{movieId,jdbcType=INTEGER}, #{movieName,jdbcType=VARCHAR}, #{movieReleaseTime,jdbcType=DATE}, 
+      #{movieArea,jdbcType=VARCHAR}, #{movieInfo,jdbcType=VARCHAR}, #{movieImg,jdbcType=VARCHAR}, 
+      #{movieEname,jdbcType=VARCHAR}, #{movieScore,jdbcType=REAL}, #{movieStatus,jdbcType=INTEGER}, 
+      #{movieCount,jdbcType=INTEGER}, #{movieBoxOffice,jdbcType=INTEGER}, #{movieTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.pmsj.cinema.common.entity.Movie">
+    update movie
+    set movie_name = #{movieName,jdbcType=VARCHAR},
+      movie_release_time = #{movieReleaseTime,jdbcType=DATE},
+      movie_area = #{movieArea,jdbcType=VARCHAR},
+      movie_info = #{movieInfo,jdbcType=VARCHAR},
+      movie_img = #{movieImg,jdbcType=VARCHAR},
+      movie_ename = #{movieEname,jdbcType=VARCHAR},
+      movie_score = #{movieScore,jdbcType=REAL},
+      movie_status = #{movieStatus,jdbcType=INTEGER},
+      movie_count = #{movieCount,jdbcType=INTEGER},
+      movie_box_office = #{movieBoxOffice,jdbcType=INTEGER},
+      movie_time = #{movieTime,jdbcType=VARCHAR}
+    where movie_id = #{movieId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select movie_id, movie_name, movie_release_time, movie_area, movie_info, movie_img, 
+    movie_ename, movie_score, movie_status, movie_count, movie_box_office, movie_time
+    from movie
+    where movie_id = #{movieId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select movie_id, movie_name, movie_release_time, movie_area, movie_info, movie_img, 
+    movie_ename, movie_score, movie_status, movie_count, movie_box_office, movie_time
+    from movie
+  </select>
+</mapper>

@@ -1,0 +1,43 @@
+package com.pmsj.cinema.common.entity;
+
+public class Cast {
+    private Integer actorId;
+
+    private String actorName;
+
+    private Integer actorTpye;
+
+    private String actorImg;
+
+    public Integer getActorId() {
+        return actorId;
+    }
+
+    public void setActorId(Integer actorId) {
+        this.actorId = actorId;
+    }
+
+    public String getActorName() {
+        return actorName;
+    }
+
+    public void setActorName(String actorName) {
+        this.actorName = actorName == null ? null : actorName.trim();
+    }
+
+    public Integer getActorTpye() {
+        return actorTpye;
+    }
+
+    public void setActorTpye(Integer actorTpye) {
+        this.actorTpye = actorTpye;
+    }
+
+    public String getActorImg() {
+        return actorImg;
+    }
+
+    public void setActorImg(String actorImg) {
+        this.actorImg = actorImg == null ? null : actorImg.trim();
+    }
+}

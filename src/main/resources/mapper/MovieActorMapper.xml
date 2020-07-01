@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmsj.cinema.common.mapper.MovieActorMapper">
+  <resultMap id="BaseResultMap" type="com.pmsj.cinema.common.entity.MovieActor">
+    <id column="movie_id" jdbcType="INTEGER" property="movieId" />
+    <result column="actor_id" jdbcType="INTEGER" property="actorId" />
+    <result column="movie_actor_role" jdbcType="VARCHAR" property="movieActorRole" />
+    <result column="movie_actor_type" jdbcType="INTEGER" property="movieActorType" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from movie_actor
+    where movie_id = #{movieId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pmsj.cinema.common.entity.MovieActor">
+    insert into movie_actor (movie_id, actor_id, movie_actor_role, 
+      movie_actor_type)
+    values (#{movieId,jdbcType=INTEGER}, #{actorId,jdbcType=INTEGER}, #{movieActorRole,jdbcType=VARCHAR}, 
+      #{movieActorType,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.pmsj.cinema.common.entity.MovieActor">
+    update movie_actor
+    set actor_id = #{actorId,jdbcType=INTEGER},
+      movie_actor_role = #{movieActorRole,jdbcType=VARCHAR},
+      movie_actor_type = #{movieActorType,jdbcType=INTEGER}
+    where movie_id = #{movieId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select movie_id, actor_id, movie_actor_role, movie_actor_type
+    from movie_actor
+    where movie_id = #{movieId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select movie_id, actor_id, movie_actor_role, movie_actor_type
+    from movie_actor
+  </select>
+</mapper>

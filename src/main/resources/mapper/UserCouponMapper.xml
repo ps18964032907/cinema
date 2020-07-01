@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmsj.cinema.common.mapper.UserCouponMapper">
+  <resultMap id="BaseResultMap" type="com.pmsj.cinema.common.entity.UserCoupon">
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="coupon_id" jdbcType="INTEGER" property="couponId" />
+    <result column="coupon_status" jdbcType="INTEGER" property="couponStatus" />
+  </resultMap>
+  <insert id="insert" parameterType="com.pmsj.cinema.common.entity.UserCoupon">
+    insert into user_coupon (user_id, coupon_id, coupon_status
+      )
+    values (#{userId,jdbcType=INTEGER}, #{couponId,jdbcType=INTEGER}, #{couponStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select user_id, coupon_id, coupon_status
+    from user_coupon
+  </select>
+</mapper>

@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///cinema?useTimezone=true&serverTimezone=GMT
+    username: root
+    password: 1234
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
