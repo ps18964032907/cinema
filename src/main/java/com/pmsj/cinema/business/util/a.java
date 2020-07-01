@@ -1,4 +1,4 @@
-package com.pmsj.cinema.business.uitl;
+package com.pmsj.cinema.business.util;
 
 /*
  * @Author 潘升
