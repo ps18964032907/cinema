@@ -1,5 +1,7 @@
 package com.pmsj.cinema.common.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.pmsj.cinema.common.mapper.MovieMapper;
 import lombok.ToString;
 
 import java.util.Date;
@@ -10,7 +12,7 @@ public class Movie {
     private Integer movieId;
 
     private String movieName;
-
+    @JsonFormat (pattern = "yyyy年MM月dd日")
     private Date movieReleaseTime;
 
     private String movieArea;

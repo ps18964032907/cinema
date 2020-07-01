@@ -57,4 +57,20 @@
     movie_ename, movie_score, movie_status, movie_count, movie_box_office, movie_time
     from movie
   </select>
+  <select id="selectOnline" resultMap="BaseResultMap">
+    select movie_id, movie_name, movie_release_time, movie_area, movie_info, movie_img,
+    movie_ename, movie_score, movie_status, movie_count, movie_box_office, movie_time
+    from movie
+    where
+    movie_count>0
+  </select>
+
+  <select id="selectComingSoon" resultMap="BaseResultMap">
+    select movie_id, movie_name, movie_release_time, movie_area, movie_info, movie_img,
+    movie_ename, movie_score, movie_status, movie_count, movie_box_office, movie_time
+    from movie
+    where
+    movie_count=0
+  </select>
+
 </mapper>
