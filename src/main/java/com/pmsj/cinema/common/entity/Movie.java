@@ -1,5 +1,6 @@
 package com.pmsj.cinema.common.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pmsj.cinema.common.mapper.MovieMapper;
 import lombok.ToString;

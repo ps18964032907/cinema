@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @Author sjh
  * @creat 2020/7/1 11:26
+ *
  */
 @RestController
 @RequestMapping("movieDetails")

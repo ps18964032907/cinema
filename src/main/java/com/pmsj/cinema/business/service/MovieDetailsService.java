@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * @Author sjh
  * @creat 2020/7/1 11:20
+ *
  */
 @Service
 @RequestMapping("movieDetail")
