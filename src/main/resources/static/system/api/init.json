@@ -4,8 +4,8 @@
     "href": "page/welcome-1.html?t=1"
   },
   "logoInfo": {
-    "title": "LAYUI MINI",
-    "image": "images/logo.png",
+    "title": "猫 眼 电 影",
+    "image": "images/Blogo.png",
     "href": ""
   },
   "menuInfo": [
@@ -16,13 +16,13 @@
       "target": "_self",
       "child": [
         {
-          "title": "主页模板",
+          "title": "主页",
           "href": "",
           "icon": "fa fa-home",
           "target": "_self",
           "child": [
             {
-              "title": "主页一",
+              "title": "主页",
               "href": "page/welcome-1.html",
               "icon": "fa fa-tachometer",
               "target": "_self"
@@ -54,10 +54,30 @@
           "target": "_self"
         },
         {
-          "title": "表格示例",
-          "href": "page/table.html",
+          "title": "影院管理",
+          "href": "",
           "icon": "fa fa-file-text",
-          "target": "_self"
+          "target": "_self",
+          "child": [
+            {
+              "title": "影院品牌",
+              "href": "page/brand.html",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            },
+            {
+              "title": "影院信息",
+              "href": "page/cinema.html",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            },
+            {
+              "title": "影厅管理",
+              "href": "page/hall.html",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            }
+          ]
         },
         {
           "title": "表单示例",

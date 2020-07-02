@@ -23,8 +23,13 @@
     from brand
     where brand_id = #{brandId,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectAll" parameterType="map" resultMap="BaseResultMap">
     select brand_id, brand_name
     from brand
+    <!--<where>-->
+      <!--<if test="searchParams！= null and searchParams.brand != null ">-->
+        <!--brand_name like '%${searchParams.brand}%'-->
+      <!--</if>-->
+    <!--</where>-->
   </select>
 </mapper>
