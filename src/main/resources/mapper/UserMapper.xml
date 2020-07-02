@@ -28,6 +28,11 @@
       #{userPhone,jdbcType=VARCHAR}, #{userGender,jdbcType=CHAR}, #{userBirthday,jdbcType=DATE}, 
       #{userAutograph,jdbcType=VARCHAR}, #{userPoints,jdbcType=INTEGER})
   </insert>
+    <insert id="register">
+    insert into user (user_account,user_password, user_email,user_phone)
+    values (#{userAccount,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR},
+      #{userPhone,jdbcType=VARCHAR})
+    </insert>
     <update id="updateByPrimaryKey" parameterType="com.pmsj.cinema.common.entity.User">
     update user
     set user_name = #{userName,jdbcType=VARCHAR},

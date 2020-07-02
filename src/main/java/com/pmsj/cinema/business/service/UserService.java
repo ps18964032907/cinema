@@ -28,4 +28,8 @@ public class UserService {
 
         return (int) a;
     }
+
+    public void register(String userAccount, String password, String email, String phone) {
+        userMapper.register(userAccount, password,email, phone);
+    }
 }

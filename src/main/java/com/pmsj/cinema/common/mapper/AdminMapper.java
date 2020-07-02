@@ -1,6 +1,8 @@
 package com.pmsj.cinema.common.mapper;
 
 import com.pmsj.cinema.common.entity.Admin;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface AdminMapper {
@@ -13,4 +15,6 @@ public interface AdminMapper {
     List<Admin> selectAll();
 
     int updateByPrimaryKey(Admin record);
+
+    Admin selectAdmin(@Param("adminAccount") String username, @Param("adminPassword") String password);
 }
