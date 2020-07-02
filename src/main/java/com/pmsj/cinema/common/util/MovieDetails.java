@@ -56,7 +56,11 @@ public class MovieDetails implements PageProcessor {
         String date = all.get(2).replaceAll("<li class=\"ellipsis\">", "").replaceAll("</li>", "").substring(0, 10);
 
 
+
+
+
         movie.setMovieImg(imgs.get(0));
+
         movie.setMovieArea(area);
         movie.setMovieImg(imgs.get(0));
         movie.setMovieName(movieName.get(0));
@@ -91,7 +95,6 @@ public class MovieDetails implements PageProcessor {
 
     public Movie getMovie(String path) {
         Spider.create(new MovieDetails()).addUrl(path).thread(1).run();
-
 
         return movie;
     }
