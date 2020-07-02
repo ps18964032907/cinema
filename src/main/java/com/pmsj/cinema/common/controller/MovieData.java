@@ -2,7 +2,9 @@ package com.pmsj.cinema.common.controller;
 
 import com.pmsj.cinema.common.entity.Movie;
 import com.pmsj.cinema.common.mapper.MovieMapper;
+import com.pmsj.cinema.common.service.MovieBugAddVoService;
 import com.pmsj.cinema.common.util.GithubRepoPageProcessor;
+import com.pmsj.cinema.common.vo.MovieBugAddVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,17 +18,17 @@ public class MovieData {
 
 
     @Autowired
-    MovieMapper movieMapper;
+    MovieBugAddVoService movieBugAddVoService;
 
     @RequestMapping("getMovieData")
     @ResponseBody
     public String getData() {
-        List<Movie> paChong = new GithubRepoPageProcessor().getPaChong();
+        List<MovieBugAddVo> paChong = new GithubRepoPageProcessor().getPaChong();
         System.out.println(paChong);
 
-//        for (Movie movie : paChong) {
-//            movieMapper.insert(movie);
-//        }
+        for (MovieBugAddVo movie : paChong) {
+            movieBugAddVoService.addMovieBugAddVo(movie);
+        }
         return "abc";
     }
 

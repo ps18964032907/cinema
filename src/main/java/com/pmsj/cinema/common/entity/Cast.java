@@ -1,6 +1,16 @@
 package com.pmsj.cinema.common.entity;
 
+import lombok.Data;
+import lombok.ToString;
+
+/**
+ * @author EDZ
+ */
+@Data
+@ToString
 public class Cast {
+    private String actorRole;
+
     private Integer actorId;
 
     private String actorName;

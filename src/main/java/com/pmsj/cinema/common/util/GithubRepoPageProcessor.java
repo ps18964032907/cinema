@@ -1,6 +1,7 @@
 package com.pmsj.cinema.common.util;
 
 import com.pmsj.cinema.common.entity.Movie;
+import com.pmsj.cinema.common.vo.MovieBugAddVo;
 import org.springframework.stereotype.Repository;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -15,7 +16,7 @@ import java.util.List;
 public class GithubRepoPageProcessor implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
-    static List<Movie> movies = new ArrayList<>();
+    static List<MovieBugAddVo> movies = new ArrayList<>();
 
     @Override
     public void process(Page page) {
@@ -36,7 +37,7 @@ public class GithubRepoPageProcessor implements PageProcessor {
 
         System.out.println(paths);
         for (String path : paths) {
-            Movie movie = new MovieDetails().getMovie("https://maoyan.com/" + path);
+            MovieBugAddVo movie = new MovieDetails().getMovie("https://maoyan.com/" + path);
 
             System.out.println(movie);
             if (movie.getMovieName() != null && !movies.contains(movie)) {
@@ -57,7 +58,7 @@ public class GithubRepoPageProcessor implements PageProcessor {
     }
 
 
-    public List<Movie> getPaChong() {
+    public List<MovieBugAddVo> getPaChong() {
         Spider.create(new GithubRepoPageProcessor()).addUrl("https://maoyan.com/films?showType=3").thread(1).run();
         return movies;
     }
