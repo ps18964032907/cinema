@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>毒液：致命守护者 - 猫眼电影 - 一网打尽好电影</title>
+    <title id="movieTitle">{{movieHead.movieName}} - 猫眼电影 - 一网打尽好电影</title>
     <link rel="stylesheet" href="../CSS/normalize.css">
     <link rel="stylesheet" href="../CSS/dianyingxiangqing.css">
     <link rel="shortcut icon" href="../IMG/Blogo.png" type="image/x-icon">
@@ -737,81 +737,81 @@
 <!-- 详情头 -->
 <article class="xiangding">
     <div class="beijing1" id="moviedetail">
-            <div class="beijing1_1">
-                <div>
-                    <i></i>
+        <div class="beijing1_1">
+            <div>
+                <i></i>
+                <a href="#">
+                    <img :src="movieInfoUp.movieImg" alt="" style="width: 240px; height: 330px">
+                </a>
+            </div>
+
+        </div>
+        <div class="beijing1_2">
+            <div class="beijing1_2_1">
+                <ul>
+                    <li>
+                        <h3>{{movieInfoUp.movieName}}</h3>
+                    </li>
+                    <li>
+                        <p>{{movieInfoUp.movieEname}}</p>
+                    </li>
+                    <li>
+                        <p>
+                            动作,惊悚,科幻
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            {{movieInfoUp.movieArea}}/ {{movieInfoUp.movieTime}}
+                        </p>
+                    </li>
+                    <li>
+                        <p>{{movieInfoUp.movieReleaseTime}}上映</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="beijing1_2_2">
+                <div class="beijing1_2_2_1">
                     <a href="#">
-                        <img :src="movieInfoUp.movieImg" alt="" style="width: 240px; height: 330px">
+                        <i></i>
+                        <span>想看</span>
                     </a>
                 </div>
-
-            </div>
-            <div class="beijing1_2">
-                <div class="beijing1_2_1">
-                    <ul>
-                        <li>
-                            <h3>{{movieInfoUp.movieName}}</h3>
-                        </li>
-                        <li>
-                            <p>{{movieInfoUp.movieEname}}</p>
-                        </li>
-                        <li>
-                            <p>
-                                动作,惊悚,科幻
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                {{movieInfoUp.movieArea}}/ {{movieInfoUp.movieTime}}
-                            </p>
-                        </li>
-                        <li>
-                            <p>{{movieInfoUp.movieReleaseTime}}上映</p>
-                        </li>
-                    </ul>
+                <div class="beijing1_2_2_2">
+                    <a href="#">
+                        <i></i>
+                        <span>评分</span>
+                    </a>
                 </div>
-                <div class="beijing1_2_2">
-                    <div class="beijing1_2_2_1">
-                        <a href="#">
-                            <i></i>
-                            <span>想看</span>
-                        </a>
+                <div class="beijing1_2_2_3">
+                    <a href="#">特惠购票</a>
+                </div>
+            </div>
+        </div>
+        <div class="beijing1_3">
+            <div class="beijing1_3_1">
+                <p class="beijing1_3_11">用户评分</p>
+                <div class="beijing1_3_1_2">
+                    <div class="beijing1_3_1_21">
+                        <span>9.3</span>
                     </div>
-                    <div class="beijing1_2_2_2">
-                        <a href="#">
-                            <i></i>
-                            <span>评分</span>
-                        </a>
-                    </div>
-                    <div class="beijing1_2_2_3">
-                        <a href="#">特惠购票</a>
+                    <div class="beijing1_3_1_22">
+                        <div></div>
+                        <p>
+                            <span>81.6</span>
+                            <span>万人评分</span>
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="beijing1_3">
-                <div class="beijing1_3_1">
-                    <p class="beijing1_3_11">用户评分</p>
-                    <div class="beijing1_3_1_2">
-                        <div class="beijing1_3_1_21">
-                            <span>9.3</span>
-                        </div>
-                        <div class="beijing1_3_1_22">
-                            <div></div>
-                            <p>
-                                <span>81.6</span>
-                                <span>万人评分</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="beijing1_3_2">
-                    <p>累计票房</p>
-                    <p>
-                        <span>17.31</span>
-                        <span>亿</span>
-                    </p>
-                </div>
+            <div class="beijing1_3_2">
+                <p>累计票房</p>
+                <p>
+                    <span>17.31</span>
+                    <span>亿</span>
+                </p>
             </div>
+        </div>
     </div>
 </article>
 <!-- 内容部分 -->
@@ -1427,6 +1427,23 @@
         }
 
     })
+
+    new Vue({
+        el: '#movieTitle',
+        data: {
+            movieHead: [],
+        },
+        beforeMount: function () {
+            let _this = this;
+            $.get("/movieDetails/indexMovieDetails/" + id, null, function (data) {
+
+                _this.movieHead = data;
+                console.log(_this.movieHead);
+            })
+        }
+
+    })
+
 
     new Vue({
         el: '#movieinformation',
