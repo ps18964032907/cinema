@@ -1,4 +1,4 @@
-package com.pmsj.cinema.system.uitl;
+package com.pmsj.cinema.system.util;
 
 
 
