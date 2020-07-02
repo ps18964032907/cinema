@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Service
-@RequestMapping("movieDetail")
 public class MovieDetailsService {
     @Autowired
     MovieMapper movieMapper;
-    @RequestMapping("/indexDetail{movieId}")
+
     public Movie selectByPrimaryKey(Integer movieId){
         return movieMapper.selectByPrimaryKey(movieId);
     }

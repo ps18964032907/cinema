@@ -811,7 +811,7 @@
                     <dl>
                         <dd v-for="onlineMovie in movieOnline">
                             <div class="zhuL1_2_1" >
-                                <a href="../HTML/dianyingxiangqing.html">
+                                <a :href="'../HTML/dianyingxiangqing.html?movieId='+onlineMovie.movieId">
                                     <img :src="onlineMovie.movieImg" alt="" style="width: 160px; height: 220px">
                                     <div >
                                             <span >
