@@ -44,6 +44,17 @@ public class BrandService {
     }
 
     /**
+     * 查询单挑数据
+     * @return
+     */
+    public Brand getBrandById(Integer brandId){
+        if(brandId==null){
+                throw new NullParametersException("BrandId is null");
+        }
+        return brandMapper.selectByPrimaryKey(brandId);
+    }
+
+    /**
      * 添加品牌
      * @param brand
      * @return
@@ -54,6 +65,48 @@ public class BrandService {
         }else {
             return brandMapper.insert(brand);
         }
+    }
+
+    /**
+     * 批量删除
+     * @param list
+     */
+    public void deleteBatches(List<Brand> list){
+        if (list==null){
+            throw new NullParametersException("BrandList is null");
+        }
+        for (Brand brand:list){
+            brandMapper.deleteByPrimaryKey(brand.getBrandId());
+        }
+    }
+
+    /**
+     * 更新数据
+     * @param brand
+     * @return
+     */
+    public Integer updateBrand(Brand brand){
+        if (brand==null||brand.getBrandName()==null){
+            throw new NullParametersException("Brand is null");
+        }
+        Brand oldBrand=brandMapper.selectByPrimaryKey(brand.getBrandId());
+
+        if (!oldBrand.getBrandName().equals(brand.getBrandName())){
+            oldBrand.setBrandName(brand.getBrandName());
+        }
+        return brandMapper.updateByPrimaryKey(oldBrand);
+    }
+
+    /**
+     * 根据id删除数据
+     * @param brandId
+     * @return
+     */
+    public Integer deleteBrand(Integer brandId){
+        if(brandId==null){
+            throw new NullParametersException("BrandId is null");
+        }
+        return brandMapper.deleteByPrimaryKey(brandId);
     }
 
 

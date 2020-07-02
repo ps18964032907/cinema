@@ -10,7 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author mhd
@@ -50,5 +54,66 @@ public class BrandController {
             return "ERROR";
         }
 
+    }
+
+    @RequestMapping("/deleteBatches")
+    @ResponseBody
+    public String deleteBatches(@RequestBody List<Brand> list) {
+        try {
+            brandService.deleteBatches(list);
+            return "SUCCESS";
+        } catch (NullParametersException e) {
+            e.printStackTrace();
+            return "ERROR";
+        }
+    }
+
+    /**
+     * 编辑初始化
+     *
+     * @param brandId
+     * @param maps
+     * @return
+     */
+    @RequestMapping("/editInit")
+    public String editInit(@RequestParam Integer brandId, Map maps) {
+        try {
+            Brand brand = brandService.getBrandById(brandId);
+            maps.put("brand", brand);
+        } catch (NullParametersException e) {
+            e.printStackTrace();
+            maps.put("message", "ERROR");
+        }
+        return "system/page/table/editBrand";
+
+
+    }
+
+    /**
+     * 编辑品牌
+     * @param brand
+     * @return
+     */
+    @RequestMapping("/edit")
+    @ResponseBody
+    public String edit(@RequestBody Brand brand) {
+        try {
+            brandService.updateBrand(brand);
+            return "SUCCESS";
+        } catch (NullParametersException e) {
+            e.printStackTrace();
+            return "ERROR";
+        }
+    }
+    @RequestMapping("/del")
+    @ResponseBody
+    public String del(@RequestBody Integer brandId) {
+        try {
+            brandService.deleteBrand(brandId);
+            return "SUCCESS";
+        } catch (NullParametersException e) {
+            e.printStackTrace();
+            return "ERROR";
+        }
     }
 }
