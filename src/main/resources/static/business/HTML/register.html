@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册 | 猫眼电影</title>
+    <link rel="stylesheet" href="../CSS/normalize.css">
+    <link rel="stylesheet" href="../CSS/reg.css">
+    <link rel="shortcut icon" href="../IMG/Blogo.png" type="image/x-icon">
+    <script src="../JS/jquery-1.11.0.min.js"></script>
+</head>
+
+<body>
+<!-- 顶部 -->
+<header>
+    <div>
+        <a href="#"></a>
+    </div>
+</header>
+<!-- 注册部分 -->
+<div class="zhuche">
+    <form action="/user/register" method="post" style="margin-left: 300px">
+        <div class="zhuche1">
+            <label for="username">用户名</label>
+            <input type="text" name="userAccount" id="username" required>
+        </div>
+        <!-- 创建密码 -->
+        <div class="zhuche4">
+            <label for="password1">密码</label>
+            <input type="password1" name="password1" id="password1" maxlength="16" required>
+            <div id="intension">
+                <span>弱</span>
+                <span>中</span>
+                <span>强</span>
+            </div>
+        </div>
+        <!-- 确认密码 -->
+        <div class="zhuche1">
+            <label for="password2">确认密码</label>
+            <input type="password2" name="password2" id="password2" required><span id="tip1"></span>
+        </div>
+        <div class="zhuche1">
+            <!-- 手机号 -->
+            <label for="phone">手机号</label>
+            <input type="text" name="phone" id="phone" maxlength="11" required><span id="tip2"></span>
+
+            <div class="zhuche1">
+                <!-- 邮箱 -->
+                <label for="email">邮箱</label>
+                <input type="text" name="email" id="email" required><span id="tip3"></span>
+            </div>
+            <!-- 短信 获取-->
+            <div class="zhuche2">
+                <input type="button" id="getCode" value="免费获取短信动态码" onclick="GetCodemo(this)">
+            </div>
+            <!-- 短信 -->
+            <div class="zhuche3">
+                <label for="duanxin">短信动态码</label>
+                <input type="text" name="verifycode" id="duanxin" required>
+            </div>
+
+            <div class="zhuche6">
+                <input type="submit" name="commit" value="同意以下协议并注册">
+            </div>
+            <div class="zhuche7">
+                <a href="#">《美团网用户协议》</a>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<!-- 底部 -->
+<footer style="margin-top: 80px">
+    <p>
+        <span>&copy;</span>
+        <a href="#">meituan.com</a>
+        <a href="#">京ICP证070791号</a>
+        <span>京公网安备11010502025545号</span>
+    </p>
+</footer>
+<script type="text/javascript">
+    var password2 = document.getElementById("password2");
+    password2.onkeyup = function () {
+        var pwd1 = document.getElementById("password1").value;
+        var pwd2 = password2.value;
+        <!-- 对比两次输入的密码 -->
+        if (pwd1 == pwd2) {
+            document.getElementById("tip1").innerHTML = "<font color='green'>两次密码相同</font>";
+        } else {
+            document.getElementById("tip1").innerHTML = "<font color='red'>两次密码不相同</font>";
+        }
+    }
+    var oPassword = document.getElementById("password1");
+    var oDiv = document.getElementById("intension");
+    var spans = oDiv.getElementsByTagName("span");
+    oPassword.onkeyup = function () {
+        var oValue = oPassword.value;
+        var patrn = /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/im;
+        if (oValue.length == 0) {
+            spans[0].style.backgroundColor = "gray";
+            spans[1].style.backgroundColor = "gray";
+            spans[2].style.backgroundColor = "gray";
+        } else if (/\d/.test(oValue) && patrn.test(oValue) && (/[a-z]/.test(oValue) || /[A-Z]/.test(oValue))) {
+            spans[0].style.backgroundColor = "red";
+            spans[1].style.backgroundColor = "red";
+            spans[2].style.backgroundColor = "red";
+        } else if (/^\d+$/.test(oValue) || /^[A-Z]+$/.test(oValue) || /^[a-z]+$/.test(oValue)) {
+            spans[0].style.backgroundColor = "red";
+            spans[1].style.backgroundColor = "gray";
+            spans[2].style.backgroundColor = "gray";
+        } else {
+            spans[0].style.backgroundColor = "red";
+            spans[1].style.backgroundColor = "red";
+            spans[2].style.backgroundColor = "gray";
+        }
+    }
+
+    var phone = document.getElementById('phone');
+    phone.onkeyup = function () {
+        var ph = phone.value;
+        if (/^1[3456789]\d{9}$/.test(ph)) {
+            document.getElementById("tip2").innerHTML = "<font color='green'>手机格式正确</font>";
+        } else {
+            document.getElementById("tip2").innerHTML = "<font color='red'>手机格式不正确</font>";
+        }
+    }
+    var ema = document.getElementById('email');
+    ema.onkeyup = function () {
+        var e = ema.value;
+        var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+        <!-- 对比两次输入的密码 -->
+        if (reg.test(e)) {
+            document.getElementById("tip3").innerHTML = "<font color='green'>邮箱格式正确</font>";
+        } else {
+            document.getElementById("tip3").innerHTML = "<font color='red'>邮箱格式不正确</font>";
+        }
+    }
+    var wait = 60;
+
+    function GetCodemo(o) {
+        //发送验证码
+        if (wait == 60) {
+
+            //请求后台获取数据、
+            $.post('/user/getCode', 'email='+ ema.value, function (data) {
+                alert("aaaaaaa")
+                alert(data)
+               /* if (data.status == 1) {
+                    //发送成功
+                } else {
+                    //发送失败
+                }*/
+            }, 'json');
+        }
+        if (wait == 0) {
+            o.removeAttribute('disabled');//禁用
+            o.value = '重新发送';
+            wait = 60;
+        } else {
+            o.setAttribute('disabled', true);
+            o.value = "已发送(" + wait + ")";
+            wait--;
+            setTimeout(function () {
+                GetCodemo(o)
+            }, 1000);
+        }
+    }
+</script>
+</body>
+</html>
