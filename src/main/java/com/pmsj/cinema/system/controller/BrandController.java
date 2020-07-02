@@ -5,7 +5,7 @@ import com.pmsj.cinema.common.entity.Brand;
 import com.pmsj.cinema.system.exception.NullParametersException;
 import com.pmsj.cinema.system.exception.PageInfoErrorException;
 import com.pmsj.cinema.system.service.BrandService;
-import com.pmsj.cinema.system.uitl.ReturnUtil;
+import com.pmsj.cinema.system.util.ReturnUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
