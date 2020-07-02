@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author mhd
@@ -30,7 +29,7 @@ public class BrandService {
      * @param pageSize
      * @return
      */
-    public PageInfo<Brand> getAllBrands(Integer pageNum, Integer pageSize, Map searchParams){
+    public PageInfo<Brand> getAllBrands(Integer pageNum, Integer pageSize, Brand searchParams){
         if (pageSize==null||pageSize<=0){
             throw new PageInfoErrorException("PageSize is illegal");
         }

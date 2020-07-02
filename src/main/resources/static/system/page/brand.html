@@ -21,7 +21,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">品牌名称</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="brand" autocomplete="off" class="layui-input">
+                                <input type="text" name="brandName" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -66,7 +66,7 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'brandId', width: 80, title: 'ID', sort: true},
+                {type: 'numbers', width: 80, title: '序号', sort: true},
                 {field: 'brandName', width: 200, title: '品牌名'},
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
@@ -78,10 +78,10 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            var result = JSON.stringify(data.field);
-            layer.alert(result, {
-                title: '最终的搜索信息'
-            });
+            // var result = JSON.stringify(data.field);
+            // layer.alert(result, {
+            //     title: '最终的搜索信息'
+            // });
 
             //执行搜索重载
             table.reload('currentTableId', {
@@ -89,7 +89,7 @@
                     curr: 1
                 }
                 , where: {
-                    searchParams: result
+                    brandName: data.field.brandName
                 }
             }, 'data');
 

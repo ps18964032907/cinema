@@ -31,9 +31,9 @@ public class BrandController {
 
     @RequestMapping("/getAll")
     @ResponseBody
-    public ReturnUtil getAllBrands(Integer page, Integer limit) {
+    public ReturnUtil getAllBrands(Integer page, Integer limit,Brand brand) {
         try {
-            PageInfo<Brand> pageInfo = brandService.getAllBrands(page, limit, null);
+            PageInfo<Brand> pageInfo = brandService.getAllBrands(page, limit, brand);
             ReturnUtil returnUtil = new ReturnUtil(0, "success", pageInfo.getTotal(), pageInfo.getList());
             return returnUtil;
         } catch (PageInfoErrorException e) {
