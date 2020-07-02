@@ -4,7 +4,6 @@
     <resultMap id="BaseResultMap" type="com.pmsj.cinema.common.entity.Cast">
         <id column="actor_id" jdbcType="INTEGER" property="actorId"/>
         <result column="actor_name" jdbcType="VARCHAR" property="actorName"/>
-        <result column="actor_tpye" jdbcType="INTEGER" property="actorTpye"/>
         <result column="actor_img" jdbcType="VARCHAR" property="actorImg"/>
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -12,29 +11,28 @@
     where actor_id = #{actorId,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Cast">
-    insert into cast (actor_id, actor_name, actor_tpye, 
+    insert into cast (actor_id, actor_name,
       actor_img)
-    values (#{actorId,jdbcType=INTEGER}, #{actorName,jdbcType=VARCHAR}, #{actorTpye,jdbcType=INTEGER}, 
+    values (#{actorId,jdbcType=INTEGER}, #{actorName,jdbcType=VARCHAR},
       #{actorImg,jdbcType=VARCHAR})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.pmsj.cinema.common.entity.Cast">
     update cast
     set actor_name = #{actorName,jdbcType=VARCHAR},
-      actor_tpye = #{actorTpye,jdbcType=INTEGER},
       actor_img = #{actorImg,jdbcType=VARCHAR}
     where actor_id = #{actorId,jdbcType=INTEGER}
   </update>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select actor_id, actor_name, actor_tpye, actor_img
+    select *
     from cast
     where actor_id = #{actorId,jdbcType=INTEGER}
   </select>
     <select id="selectAll" resultMap="BaseResultMap">
-    select actor_id, actor_name, actor_tpye, actor_img
+    select *
     from cast
   </select>
     <select id="selectByCastName" resultMap="BaseResultMap">
-    select actor_id, actor_name, actor_tpye, actor_img
+    select *
       from cast  where actor_name = #{actorName}
     </select>
     <select id="getMaxId" resultType="java.lang.Integer">

@@ -71,7 +71,7 @@ public class MovieBugAddVoService {
             Cast cast1 = castMapper.selectByCastName(cast.getActorName().trim());
             MovieActor movieActor = new MovieActor();
             if (cast1 == null) {
-                castMapper.insert(cast1);
+                castMapper.insert(cast);
                 int maxId = castMapper.getMaxId();
                 //关联导演或者演员
                 movieActor.setActorId(maxId);
