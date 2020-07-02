@@ -20,6 +20,7 @@ public class GithubRepoPageProcessor implements PageProcessor {
     @Override
     public void process(Page page) {
 
+        System.out.println(page.getHtml());
 
         List<String> all = page.getHtml().css(".movie-poster img").regex("<img\\b[^<>]*?\\bsrc[\\s\\t\\r\\n]*=[\\s\\t\\r\\n]*[\"\"']?[\\s\\t\\r\\n]*(?<imgUrl>[^\\s\\t\\r\\n\"\"'<>]*)[^<>]*?/?[\\s\\t\\r\\n]*>").regex("^http.*$").all();
         //name
@@ -52,13 +53,12 @@ public class GithubRepoPageProcessor implements PageProcessor {
 
     @Override
     public Site getSite() {
-        //aa啊啊啊浩浩
         return site;
     }
 
 
     public List<Movie> getPaChong() {
-        Spider.create(new GithubRepoPageProcessor()).addUrl("https://maoyan.com/films?showType=3&offset=60").thread(1).run();
+        Spider.create(new GithubRepoPageProcessor()).addUrl("https://maoyan.com/films?showType=3").thread(1).run();
         return movies;
     }
 

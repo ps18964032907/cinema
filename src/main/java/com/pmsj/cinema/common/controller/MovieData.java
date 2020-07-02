@@ -24,9 +24,9 @@ public class MovieData {
         List<Movie> paChong = new GithubRepoPageProcessor().getPaChong();
         System.out.println(paChong);
 
-        for (Movie movie : paChong) {
-            movieMapper.insert(movie);
-        }
+//        for (Movie movie : paChong) {
+//            movieMapper.insert(movie);
+//        }
         return "abc";
     }
 

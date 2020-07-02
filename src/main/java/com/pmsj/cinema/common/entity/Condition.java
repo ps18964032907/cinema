@@ -1,17 +1,13 @@
 package com.pmsj.cinema.common.entity;
 
-import java.util.Date;
-
 public class Condition {
     private Integer conditionId;
-
-    private Date conditionTime;
 
     private Integer movieId;
 
     private Integer cinemaId;
 
-    private Integer userId;
+    private Integer couponId;
 
     public Integer getConditionId() {
         return conditionId;
@@ -19,14 +15,6 @@ public class Condition {
 
     public void setConditionId(Integer conditionId) {
         this.conditionId = conditionId;
-    }
-
-    public Date getConditionTime() {
-        return conditionTime;
-    }
-
-    public void setConditionTime(Date conditionTime) {
-        this.conditionTime = conditionTime;
     }
 
     public Integer getMovieId() {
@@ -45,11 +33,11 @@ public class Condition {
         this.cinemaId = cinemaId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getCouponId() {
+        return couponId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setCouponId(Integer couponId) {
+        this.couponId = couponId;
     }
 }

@@ -1,5 +1,12 @@
 package com.pmsj.cinema.common.entity;
 
+import lombok.Data;
+import lombok.ToString;
+
+import java.util.Date;
+
+@Data
+@ToString
 public class UserCoupon {
     private Integer userId;
 
@@ -7,27 +14,8 @@ public class UserCoupon {
 
     private Integer couponStatus;
 
-    public Integer getUserId() {
-        return userId;
-    }
+    private Date couponDate;
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+    private Condition condition;
 
-    public Integer getCouponId() {
-        return couponId;
-    }
-
-    public void setCouponId(Integer couponId) {
-        this.couponId = couponId;
-    }
-
-    public Integer getCouponStatus() {
-        return couponStatus;
-    }
-
-    public void setCouponStatus(Integer couponStatus) {
-        this.couponStatus = couponStatus;
-    }
 }
