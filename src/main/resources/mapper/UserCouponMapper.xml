@@ -49,4 +49,18 @@
     where uc.user_id = #{userId}
     and uc.coupon_date &gt; #{date}
     </select>
+    <select id="getAllOverCoupon" resultType="com.pmsj.cinema.common.vo.UserCouponVo">
+        select *
+        from user_coupon uc
+        LEFT JOIN coupon c
+        on c.coupon_id = uc.coupon_id
+        LEFT JOIN `condition` con
+        on con.coupon_id =c.coupon_id
+        LEFT JOIN movie m
+        on m.movie_id = con.movie_id
+        LEFT JOIN cinema cinema
+        on cinema.cinema_id = con.cinema_id
+        where uc.user_id = #{userId}
+        and uc.coupon_date &lt; #{date}
+    </select>
 </mapper>

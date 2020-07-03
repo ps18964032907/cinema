@@ -1,9 +1,12 @@
 package com.pmsj.cinema.common.entity;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 public class Order {
     private Integer orderId;
 
-    private String no;
+    private String orderNo;
 
     private Integer movieId;
 
@@ -11,15 +14,21 @@ public class Order {
 
     private Integer hallId;
 
-    private Integer seatId;
-
-    private Integer cash;
+    private BigDecimal orderTotalDiscountsCash;
 
     private Integer couponId;
 
     private Integer userId;
 
     private Integer orderStatus;
+
+    private Integer orderCount;
+
+    private BigDecimal orderTotalInitialCash;
+
+    private BigDecimal orderUnitprice;
+
+    private Date orderTime;
 
     public Integer getOrderId() {
         return orderId;
@@ -29,12 +38,12 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public String getNo() {
-        return no;
+    public String getOrderNo() {
+        return orderNo;
     }
 
-    public void setNo(String no) {
-        this.no = no == null ? null : no.trim();
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 
     public Integer getMovieId() {
@@ -61,20 +70,12 @@ public class Order {
         this.hallId = hallId;
     }
 
-    public Integer getSeatId() {
-        return seatId;
+    public BigDecimal getOrderTotalDiscountsCash() {
+        return orderTotalDiscountsCash;
     }
 
-    public void setSeatId(Integer seatId) {
-        this.seatId = seatId;
-    }
-
-    public Integer getCash() {
-        return cash;
-    }
-
-    public void setCash(Integer cash) {
-        this.cash = cash;
+    public void setOrderTotalDiscountsCash(BigDecimal orderTotalDiscountsCash) {
+        this.orderTotalDiscountsCash = orderTotalDiscountsCash;
     }
 
     public Integer getCouponId() {
@@ -99,5 +100,37 @@ public class Order {
 
     public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public Integer getOrderCount() {
+        return orderCount;
+    }
+
+    public void setOrderCount(Integer orderCount) {
+        this.orderCount = orderCount;
+    }
+
+    public BigDecimal getOrderTotalInitialCash() {
+        return orderTotalInitialCash;
+    }
+
+    public void setOrderTotalInitialCash(BigDecimal orderTotalInitialCash) {
+        this.orderTotalInitialCash = orderTotalInitialCash;
+    }
+
+    public BigDecimal getOrderUnitprice() {
+        return orderUnitprice;
+    }
+
+    public void setOrderUnitprice(BigDecimal orderUnitprice) {
+        this.orderUnitprice = orderUnitprice;
+    }
+
+    public Date getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
     }
 }

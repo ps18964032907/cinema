@@ -796,10 +796,10 @@
 <!-- 主体 -->
 
 <div class="mian">
-    <div class="mian1" >
+    <div class="mian1">
         <article>
             <!-- 正在热映 -->
-            <div  class="zhuL1" id="vonline">
+            <div class="zhuL1" id="vonline">
                 <div class="zhuL1_1">
                     <span class="zhuL1_1_1">正在热映（{{onlineTotalNumber}}）</span>
                     <span class="zhuL1_1_2">
@@ -810,17 +810,17 @@
                 <div class="zhuL1_2">
                     <dl>
                         <dd v-for="onlineMovie in movieOnline">
-                            <div class="zhuL1_2_1" >
+                            <div class="zhuL1_2_1">
                                 <a :href="'../HTML/dianyingxiangqing.html?movieId='+onlineMovie.movieId">
                                     <img :src="onlineMovie.movieImg" alt="" style="width: 160px; height: 220px">
-                                    <div >
-                                            <span >
+                                    <div>
+                                            <span>
                                                 {{onlineMovie.movieName}}
                                             </span>
-<!--                                        <span>-->
-<!--                                                <i>9.</i>-->
-<!--                                                <i>3</i>-->
-<!--                                            </span>-->
+                                        <!--                                        <span>-->
+                                        <!--                                                <i>9.</i>-->
+                                        <!--                                                <i>3</i>-->
+                                        <!--                                            </span>-->
                                     </div>
                                     <i class="DIMAX3"></i>
                                 </a>
@@ -838,7 +838,7 @@
             </div>
             <!--即将上映 -->
 
-            <div  class="zhuL2" id="vcomingSoon">
+            <div class="zhuL2" id="vcomingSoon">
                 <div class="zhuL2_1">
                     <span class="zhuL2_1_1">即将上映（{{comingSoonTotal}}）</span>
                     <span class="zhuL2_1_2">
@@ -848,7 +848,7 @@
                 </div>
                 <dl>
                     <dd v-for="comingSoon in comingSoonMovie">
-                        <div class="zhuL2_2" >
+                        <div class="zhuL2_2">
                             <a :href="'../HTML/dianyingxiangqing.html?movieId='+comingSoon.movieId">
                                 <div class="zhuL2_2_1">
                                     <img :src="comingSoon.movieImg" alt="" style="width: 160px; height: 220px">
@@ -1347,15 +1347,15 @@
 <a class="miao" href="./zajindan.html" target="blank">
 </a>
 </body>
-<script >
+<script>
     new Vue({
         el: '#vonline',
         data: {
             movieOnline: [],
             onlineTotalNumber: 0
         },
-        beforeMount:function () {
-            let _this =this;
+        beforeMount: function () {
+            let _this = this;
             $.get("/index/online", null, function (data) {
                 data.size = 6;
 
@@ -1366,7 +1366,7 @@
             })
             $.get("/index/onlineTotal", null, function (data) {
 
-                _this.onlineTotalNumber =data;
+                _this.onlineTotalNumber = data;
                 console.log(data);
             })
         }
@@ -1374,25 +1374,25 @@
     new Vue({
         el: '#vcomingSoon',
         data: {
-            comingSoonMovie:[],
+            comingSoonMovie: [],
             comingSoonTotal: 0
         },
-        beforeMount:function ()  {
-                let _this = this;
-                $.get("/index/comingSoon", null, function (data) {
+        beforeMount: function () {
+            let _this = this;
+            $.get("/index/comingSoon", null, function (data) {
 
-                     _this.comingSoonMovie=data;
-                    _this.comingSoonMovie.length = 8;
-                    console.log(data);
+                _this.comingSoonMovie = data;
+                _this.comingSoonMovie.length = 8;
+                console.log(data);
 
-                })
+            })
 
 
-                $.get("/index/comingSoonTotal", null, function (data) {
-                    _this.comingSoonTotal=data;
-                    console.log(data);
-                })
-            }
+            $.get("/index/comingSoonTotal", null, function (data) {
+                _this.comingSoonTotal = data;
+                console.log(data);
+            })
+        }
 
 
     })

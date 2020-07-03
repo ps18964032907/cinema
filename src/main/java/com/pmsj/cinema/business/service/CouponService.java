@@ -68,6 +68,11 @@ public class CouponService {
     }
 
     public List<UserCouponVo> getAllCoupon(int userId) {
-        return userCouponMapper.selectAllByUserId(userId,new Date());
+        return userCouponMapper.selectAllByUserId(userId, new Date());
+    }
+
+    public List<UserCouponVo> getAllOverCoupon(int userId) {
+
+        return userCouponMapper.getAllOverCoupon(userId, new Date());
     }
 }

@@ -49,8 +49,15 @@ public class CouponController {
     public List<UserCouponVo> getAllCoupon() {
 
         int userId = 1;
-        System.out.println(couponService.getAllCoupon(userId));
         return couponService.getAllCoupon(userId);
+    }
+
+
+    @RequestMapping("getAllOverCoupon")
+    public List<UserCouponVo> getAllOverCoupon() {
+
+        int userId = 1;
+        return couponService.getAllOverCoupon(userId);
     }
 
 }
