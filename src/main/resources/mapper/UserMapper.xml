@@ -66,4 +66,8 @@
     <select id="getUserAllOrderCount" resultType="java.lang.Long">
         select count(*) from `order` where user_id = #{i} and order_status = 1
     </select>
+    <select id="accountExist" resultMap="BaseResultMap">
+    select * from user
+    where user_account = #{userAccount,jdbcType=VARCHAR}
+    </select>
 </mapper>

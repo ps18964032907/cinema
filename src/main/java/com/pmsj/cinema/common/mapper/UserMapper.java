@@ -22,5 +22,9 @@ public interface UserMapper {
 
     long getUserAllOrderCount(int i);
 
+    User accountExist(@Param("userAccount") String account);
+
     void register(@Param("userAccount") String userAccount, @Param("userPassword") String password, @Param("userEmail") String email, @Param("userPhone") String phone);
+
+
 }

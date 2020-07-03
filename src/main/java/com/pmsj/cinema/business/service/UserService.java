@@ -1,5 +1,6 @@
 package com.pmsj.cinema.business.service;
 
+import com.pmsj.cinema.common.entity.User;
 import com.pmsj.cinema.common.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,12 @@ public class UserService {
 
         return (int) a;
     }
-
+    public User accountExist(String account) {
+       return userMapper.accountExist(account);
+    }
     public void register(String userAccount, String password, String email, String phone) {
         userMapper.register(userAccount, password,email, phone);
     }
+
+
 }

@@ -2,9 +2,12 @@ package com.pmsj.cinema.business.controller;
 
 import com.pmsj.cinema.business.service.UserService;
 import com.pmsj.cinema.business.util.EmailUtil;
+import com.pmsj.cinema.common.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 /*
@@ -19,6 +22,17 @@ public class UserController {
     UserService userService;
     Long code;
 
+    @RequestMapping("/accountExist")
+    @ResponseBody
+    public String accountExist(String account) {
+        User user = userService.accountExist(account);
+        if (user == null) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+
     @RequestMapping("/getCode")
     public void getCode(HttpServletRequest request, HttpServletResponse response) {
         String email = request.getParameter("email");
@@ -29,8 +43,8 @@ public class UserController {
     public String register(HttpServletRequest request, String verifycode, String userAccount, String password1, String email, String phone) {
         int vcode = Integer.parseInt(verifycode);
         if (vcode == code) {
-            userService.register(userAccount,password1,email,phone);
-            return "redirect:/business/HTML/index.html";
+            userService.register(userAccount, password1, email, phone);
+            return "redirect:/business/HTML/login.html";
         }
         return "redirect:/business/HTML/register.html";
     }
