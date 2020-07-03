@@ -1,6 +1,8 @@
 package com.pmsj.cinema.common.mapper;
 
 import com.pmsj.cinema.common.entity.Cinema;
+import com.pmsj.cinema.common.vo.CinemaVo;
+
 import java.util.List;
 
 public interface CinemaMapper {
@@ -13,4 +15,6 @@ public interface CinemaMapper {
     List<Cinema> selectAll();
 
     int updateByPrimaryKey(Cinema record);
+
+    List<CinemaVo> getAllCinemaVo();
 }

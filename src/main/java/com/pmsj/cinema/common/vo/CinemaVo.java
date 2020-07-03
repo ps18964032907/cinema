@@ -1,4 +1,4 @@
-package com.pmsj.cinema.common.entity;
+package com.pmsj.cinema.common.vo;
 
 
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @ToString
 @Data
-public class Cinema {
+public class CinemaVo {
     private Integer cinemaId;
 
     private String cinemaName;
@@ -28,6 +28,9 @@ public class Cinema {
     private String cinemaLat;
 
     private String cinemaProvince;
+
+    private String brandName;
+
 
     public Integer getCinemaId() {
         return cinemaId;
@@ -85,7 +88,7 @@ public class Cinema {
         this.cinemaImg = cinemaImg == null ? null : cinemaImg.trim();
     }
 
-    public String cinemaAreagetCinemaCity() {
+    public String getCinemaCity() {
         return cinemaCity;
     }
 

@@ -1,46 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pmsj.cinema.common.mapper.CinemaMapper">
-  <resultMap id="BaseResultMap" type="com.pmsj.cinema.common.entity.Cinema">
-    <id column="cinema_id" jdbcType="INTEGER" property="cinemaId" />
-    <result column="cinema_name" jdbcType="VARCHAR" property="cinemaName" />
-    <result column="cinema_phone" jdbcType="VARCHAR" property="cinemaPhone" />
-    <result column="cinema_area" jdbcType="VARCHAR" property="cinemaArea" />
-    <result column="cinema_location" jdbcType="VARCHAR" property="cinemaLocation" />
-    <result column="cinema_brand" jdbcType="INTEGER" property="cinemaBrand" />
-    <result column="cinema_img" jdbcType="VARCHAR" property="cinemaImg" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <resultMap id="BaseResultMap" type="com.pmsj.cinema.common.entity.Cinema">
+        <id column="cinema_id" jdbcType="INTEGER" property="cinemaId"/>
+        <result column="cinema_name" jdbcType="VARCHAR" property="cinemaName"/>
+        <result column="cinema_phone" jdbcType="VARCHAR" property="cinemaPhone"/>
+        <result column="cinema_area" jdbcType="VARCHAR" property="cinemaArea"/>
+        <result column="cinema_location" jdbcType="VARCHAR" property="cinemaLocation"/>
+        <result column="cinema_brand" jdbcType="INTEGER" property="cinemaBrand"/>
+        <result column="cinema_img" jdbcType="VARCHAR" property="cinemaImg"/>
+        <result column="cinema_city" jdbcType="VARCHAR" property="cinemaCity"/>
+        <result column="cinema_lng" jdbcType="VARCHAR" property="cinemaLng"/>
+        <result column="cinema_lat" jdbcType="VARCHAR" property="cinemaLat"/>
+        <result column="cinema_province" jdbcType="VARCHAR" property="cinemaProvince"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cinema
     where cinema_id = #{cinemaId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Cinema">
+    <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Cinema">
     insert into cinema (cinema_id, cinema_name, cinema_phone, 
       cinema_area, cinema_location, cinema_brand, 
-      cinema_img)
+      cinema_img, cinema_city, cinema_lng, 
+      cinema_lat, cinema_province)
     values (#{cinemaId,jdbcType=INTEGER}, #{cinemaName,jdbcType=VARCHAR}, #{cinemaPhone,jdbcType=VARCHAR}, 
       #{cinemaArea,jdbcType=VARCHAR}, #{cinemaLocation,jdbcType=VARCHAR}, #{cinemaBrand,jdbcType=INTEGER}, 
-      #{cinemaImg,jdbcType=VARCHAR})
+      #{cinemaImg,jdbcType=VARCHAR}, #{cinemaCity,jdbcType=VARCHAR}, #{cinemaLng,jdbcType=VARCHAR}, 
+      #{cinemaLat,jdbcType=VARCHAR}, #{cinemaProvince,jdbcType=VARCHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.pmsj.cinema.common.entity.Cinema">
+    <update id="updateByPrimaryKey" parameterType="com.pmsj.cinema.common.entity.Cinema">
     update cinema
     set cinema_name = #{cinemaName,jdbcType=VARCHAR},
       cinema_phone = #{cinemaPhone,jdbcType=VARCHAR},
       cinema_area = #{cinemaArea,jdbcType=VARCHAR},
       cinema_location = #{cinemaLocation,jdbcType=VARCHAR},
       cinema_brand = #{cinemaBrand,jdbcType=INTEGER},
-      cinema_img = #{cinemaImg,jdbcType=VARCHAR}
+      cinema_img = #{cinemaImg,jdbcType=VARCHAR},
+      cinema_city = #{cinemaCity,jdbcType=VARCHAR},
+      cinema_lng = #{cinemaLng,jdbcType=VARCHAR},
+      cinema_lat = #{cinemaLat,jdbcType=VARCHAR},
+      cinema_province = #{cinemaProvince,jdbcType=VARCHAR}
     where cinema_id = #{cinemaId,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select cinema_id, cinema_name, cinema_phone, cinema_area, cinema_location, cinema_brand, 
-    cinema_img
+    cinema_img, cinema_city, cinema_lng, cinema_lat, cinema_province
     from cinema
     where cinema_id = #{cinemaId,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectAll" resultMap="BaseResultMap">
     select cinema_id, cinema_name, cinema_phone, cinema_area, cinema_location, cinema_brand, 
-    cinema_img
+    cinema_img, cinema_city, cinema_lng, cinema_lat, cinema_province
     from cinema
   </select>
+
+
+    <resultMap id="BaseResultMapVo" type="com.pmsj.cinema.common.vo.CinemaVo">
+        <id column="cinema_id" jdbcType="INTEGER" property="cinemaId"/>
+        <result column="cinema_name" jdbcType="VARCHAR" property="cinemaName"/>
+        <result column="cinema_phone" jdbcType="VARCHAR" property="cinemaPhone"/>
+        <result column="cinema_area" jdbcType="VARCHAR" property="cinemaArea"/>
+        <result column="cinema_location" jdbcType="VARCHAR" property="cinemaLocation"/>
+        <result column="cinema_brand" jdbcType="INTEGER" property="cinemaBrand"/>
+        <result column="cinema_img" jdbcType="VARCHAR" property="cinemaImg"/>
+        <result column="cinema_city" jdbcType="VARCHAR" property="cinemaCity"/>
+        <result column="cinema_lng" jdbcType="VARCHAR" property="cinemaLng"/>
+        <result column="cinema_lat" jdbcType="VARCHAR" property="cinemaLat"/>
+        <result column="cinema_province" jdbcType="VARCHAR" property="cinemaProvince"/>
+        <result column="brand_name" jdbcType="VARCHAR" property="brandName"/>
+
+    </resultMap>
+    <select id="getAllCinemaVo" resultMap="BaseResultMapVo">
+          select * from cinema c
+          left join brand b
+          on b.brand_id = c.cinema_brand
+    </select>
 </mapper>

@@ -25,7 +25,9 @@
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                            <button type="submit" class="layui-btn layui-btn-primary" lay-submit
+                                    lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -34,8 +36,8 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>
-                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>
+                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加</button>
+                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除</button>
             </div>
         </script>
 
@@ -105,7 +107,7 @@
                     title: '添加品牌',
                     type: 2,
                     shade: 0.2,
-                    maxmin:true,
+                    maxmin: true,
                     shadeClose: true,
                     area: ['100%', '100%'],
                     content: '../page/table/addBrand.html',
@@ -133,17 +135,17 @@
                     success: function (data) {
                         if (data === "SUCCESS") {
                             var index = layer.alert('删除成功', {
-                                    title: 'message'
-                                }, function () {
-                                    // 关闭弹出层
-                                    layer.close(index);
+                                title: 'message'
+                            }, function () {
+                                // 关闭弹出层
+                                layer.close(index);
                                 table.reload('currentTableId', {
                                     page: {
                                         curr: 1
                                     }
                                 }, 'data');
 
-                                });
+                            });
                         } else {
                             layer.msg("删除失败")
                         }
@@ -165,10 +167,10 @@
                     title: '编辑品牌',
                     type: 2,
                     shade: 0.2,
-                    maxmin:true,
+                    maxmin: true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '/brand/editInit?brandId='+data.brandId,
+                    content: '/brand/editInit?brandId=' + data.brandId,
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -186,7 +188,7 @@
                         success: function (data) {
                             if (data === "SUCCESS") {
                                 layer.msg("删除成功");
-                                setTimeout(function(){
+                                setTimeout(function () {
                                     obj.del();
                                 }, 1000);
                             } else {

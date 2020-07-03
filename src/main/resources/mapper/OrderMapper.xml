@@ -97,7 +97,7 @@
     </resultMap>
 
     <select id="getAllOrderByUser" resultMap="VoResultMap">
-           select * from `order` o
+    select * from `order` o
         left join movie m
         on m.movie_id = o.movie_id
         left join cinema cinema
