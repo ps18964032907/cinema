@@ -58,16 +58,26 @@
     user_phone, user_gender, user_birthday, user_autograph, user_points
     from user
   </select>
-
-
     <select id="getUserAllMoney" resultType="java.lang.Double">
         select sum(order_total_discounts_cash) from `order` where user_id =  #{i} and order_status =1
     </select>
     <select id="getUserAllOrderCount" resultType="java.lang.Long">
         select count(*) from `order` where user_id = #{i} and order_status = 1
     </select>
+
     <select id="accountExist" resultMap="BaseResultMap">
     select * from user
     where user_account = #{userAccount,jdbcType=VARCHAR}
+    </select>
+
+    <select id="accountLogin" resultType="com.pmsj.cinema.common.entity.User">
+    select * from user
+    where user_account = #{userAccount,jdbcType=VARCHAR}
+    and user_password = #{userPassword,jdbcType=VARCHAR}
+    </select>
+
+    <select id="emailLogin" resultType="com.pmsj.cinema.common.entity.User">
+    select * from user
+    where user_email = #{userEmail,jdbcType=VARCHAR}
     </select>
 </mapper>

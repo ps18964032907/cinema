@@ -36,5 +36,11 @@ public class UserService {
         userMapper.register(userAccount, password,email, phone);
     }
 
+    public User accountLogin(String account, String password) {
+        return userMapper.accountLogin(account,password);
+    }
 
+    public User emailLogin(String email) {
+        return userMapper.emailLogin(email);
+    }
 }

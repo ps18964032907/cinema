@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UserController {
     @Autowired
     UserService userService;
+
     Long code;
 
     @RequestMapping("/accountExist")
@@ -34,18 +35,40 @@ public class UserController {
     }
 
     @RequestMapping("/getCode")
-    public void getCode(HttpServletRequest request, HttpServletResponse response) {
+    public void getCode(HttpServletRequest request) {
         String email = request.getParameter("email");
         code = EmailUtil.sendMail(email);
     }
 
     @RequestMapping("/register")
-    public String register(HttpServletRequest request, String verifycode, String userAccount, String password1, String email, String phone) {
+    public String register(String verifycode, String userAccount, String password1, String email, String phone) {
         int vcode = Integer.parseInt(verifycode);
         if (vcode == code) {
             userService.register(userAccount, password1, email, phone);
             return "redirect:/business/HTML/login.html";
         }
         return "redirect:/business/HTML/register.html";
+    }
+
+    @RequestMapping("/accountLogin")
+    public String accountLogin(String account, String password) {
+        User user = userService.accountLogin(account, password);
+        if (user == null) {
+            return "redirect:/business/HTML/index.html";
+        }
+        return "redirect:/business/HTML/login.html";
+    }
+
+    @RequestMapping("/emailLogin")
+    public String emailLogin(String email, String verifycode) {
+        int vcode = Integer.parseInt(verifycode);
+        System.out.println(vcode);
+        if (code==vcode) {
+            User user = userService.emailLogin(email);
+            if (user == null) {
+                return "redirect:/business/HTML/index.html";
+            }
+        }
+        return "redirect:/business/HTML/denglu.html";
     }
 }
