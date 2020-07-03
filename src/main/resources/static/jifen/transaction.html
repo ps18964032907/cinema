@@ -12,6 +12,123 @@
     <script src="../js/vue.js"></script>
 
     <title>深蓝时代 | 交易管理</title>
+    <style>
+        * {
+
+        }
+
+        .allOrder * {
+            box-sizing: border-box;
+
+        }
+
+        .allOrder {
+            margin-bottom: 26px;
+        }
+
+        .allOrder_top {
+            font-weight: bold;
+            box-sizing: border-box;
+            border: #e6e6e6 solid 1px;
+            padding: 6px;
+            background-color: #f4f5f9;
+        }
+
+        .allOrder_top .order_time {
+            margin-right: 10px;
+        }
+
+        .allOrder_center {
+            border: #e6e6e6 solid 1px;
+            box-sizing: border-box;
+            height: 120px;
+
+        }
+
+        .allOrder_center div {
+            display: inline-block;
+            float: left;
+            /*float: left;*/
+        }
+
+        .allOrder_center .allOrder_0 {
+            /*width: 300px;*/
+        }
+
+        .allOrder_center .allOrder_0 img {
+            border: 1px solid #cccccc;
+            height: 120px;
+        }
+
+        .allOrder_center .allOrder_1 {
+            height: 120px;
+            width: 300px;
+            text-align: left;
+            padding: 10px;
+            padding-top: 20px;
+
+            /*line-height: 120px;*/
+        }
+
+        .allOrder_1 .cinemaName {
+            font-size: 14px;
+        }
+
+
+        .allOrder_1 .movieTilte {
+            font-size: 17px;
+            font-weight: bold;
+            color: #b90505;
+        }
+
+        .allOrder_2 {
+            line-height: 120px;
+            font-size: 18px;
+            color: #d80101;
+        }
+
+        .allOrder_1 p {
+            height: 10px;
+        }
+
+        .allOrder_3 {
+            line-height: 120px;
+            margin-right: 18px;
+            font-size: 16px;
+        }
+
+        #limit {
+            /*float: right;*/
+            display: inline-block;
+            margin-left: 300px;
+            width: 300px;
+            line-height: 30px;
+        }
+
+        #limit button {
+            margin: 0;
+            padding: 0;
+            background-color: #0e4354;
+            border: 0px solid #00bd97;
+            color: white;
+            outline: none;
+            width: 75px;
+            height: 30px;
+        }
+
+        .select {
+            background-color: #1E9FFF;
+        }
+
+        #limit span {
+            display: inline-block;
+            width: 30px;
+            color: white;
+            text-align: center;
+            background-color: #7c898e;
+
+        }
+    </style>
 </head>
 <body style="position: static;">
 <!--[if IE]>
@@ -92,39 +209,65 @@
             <dl>
                 <dt><i></i>优惠券</dt>
                 <dd><a href="coupons.html">我的优惠券</a></dd>
-                <dd><a href="#">已失效优惠券</a></dd>
+                <dd><a href="overCoupons.html">已失效优惠券</a></dd>
             </dl>
         </div>
         <div id="memberMain">
             <div class="title"><h4>查看优惠劵</h4></div>
             <div class="height18"></div>
             <div class="memberList clearfix">
-                <div class="tableClass">
-                    <table cellpadding="0" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <th>详情</th>
-                            <th>适用影院</th>
-                            <th>适用影片</th>
-                            <th>过期时间</th>
-                            <th>操作</th>
-                        </tr>
+                <div class="tableClass" id="app">
+                    <div class="allOrder" v-for="order in orders.list">
+                        <div class="allOrder_top">
+                            <span class="order_time">{{order.orderTime}}</span>
+                            <span class="order_no">订单号：{{order.orderNo}}</span>
+                        </div>
+                        <div class="allOrder_center">
+                            <div class="allOrder_0">
+                                <img :src="order.movieImg">
+                            </div>
+                            <div class="allOrder_1">
+                                <span class="movieTilte">《{{order.movieName}}》</span>
+                                <p></p>
+                                <span class="cinemaName" style="margin-left: 10px"> {{order.cinemaName}}</span>
+                                <p></p>
+                                <ii style="margin-left: 10px"></ii>
+                                {{order.hallName}}
+                                <span v-for="seat in order.seatList">
+                                    {{seat.seatX}}排{{seat.seatY}}座
+                                </span>
+                                <p></p>
+                            </div>
+                            <div class="allOrder_2">
+                                ￥{{order.orderTotalDiscountsCash}}
+                            </div>
+                            <div class="allOrder_3" style="float: right;">
+                                已付款
+                            </div>
+                        </div>
 
-                        </thead>
-                        <tbody>
-                        <tr class="">
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                        </tr>
-                        </tbody>
-                    </table>
+
+                    </div>
+
+
+                    <div id="limit">
+                        <button @click="goPage(orders.prePage)">上一页</button>
+
+                        <span v-for="num in orders.pageNum" @click="goPage(num)">
+                            <num v-if="num == orders.pages" style="color: #35ff02">{{num}}</num>
+                            <num v-else>
+                                {{num}}
+                            </num>
+                        </span>
+
+                        <button @click="goPage(orders.nextPage)">下一页</button>
+                    </div>
+
                 </div>
-            </div>
 
+            </div>
         </div>
+
 
     </div>
 </div>
@@ -174,4 +317,37 @@
     </section>
 </footer>
 </body>
+<script>
+    let vue = new Vue({
+        el: '#app',
+        data: {
+            a: 1,
+            orders: [],
+            allMoney: 0,
+            orderCount: 0,
+        },
+
+        methods: {
+            goPage(page) {
+                let _this = this;
+                let url = "/PersonalCentreController/getAllOrderByUser?currentPage=" + page;
+
+                $.get(url, null, function (data) {
+                    _this.orders = data;
+                });
+            }
+        },
+        beforeMount: function () {
+            // `this` 指向 vm 实例
+            let _this = this;
+            let url = "/PersonalCentreController/getAllOrderByUser";
+
+            $.get(url, null, function (data) {
+                _this.orders = data;
+            });
+
+        }
+    });
+
+</script>
 </html>

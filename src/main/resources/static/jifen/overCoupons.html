@@ -91,8 +91,8 @@
             </dl>
             <dl>
                 <dt><i></i>优惠券</dt>
-                <dd class="curr"><a href="coupons.html">我的优惠券</a></dd>
-                <dd><a href="overCoupons.html">已失效优惠券</a></dd>
+                <dd><a href="coupons.html">我的优惠券</a></dd>
+                <dd class="curr"><a href="#">已失效优惠券</a></dd>
             </dl>
         </div>
         <div id="memberMain">
@@ -204,7 +204,7 @@
         beforeMount: function () {
             // `this` 指向 vm 实例
             let _this = this;
-            let url = "/CouponController/getAllCoupon";
+            let url = "/CouponController/getAllOverCoupon";
 
             $.get(url, null, function (data) {
                 console.log(data);

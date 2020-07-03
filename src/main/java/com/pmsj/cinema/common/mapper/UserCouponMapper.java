@@ -16,4 +16,6 @@ public interface UserCouponMapper {
     List<UserCoupon> selectAll();
 
     List<UserCouponVo> selectAllByUserId(@Param("userId") int userId, @Param("date") Date date);
+
+    List<UserCouponVo> getAllOverCoupon(@Param("userId") int userId, @Param("date") Date date);
 }

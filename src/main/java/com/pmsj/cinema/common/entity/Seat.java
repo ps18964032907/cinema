@@ -1,5 +1,8 @@
 package com.pmsj.cinema.common.entity;
 
+import lombok.ToString;
+
+@ToString
 public class Seat {
     private Integer seatId;
 

@@ -9,9 +9,25 @@
     <link rel="shortcut icon" href="favicon.ico"/>
     <script type="text/javascript" src="unpan/dist/js/jquery.min.js"></script>
     <script src="../js/layer/layer.js"></script>
-	<script src="../js/vue.js"></script>
+    <script src="../js/vue.js"></script>
     <script src="js/main.js"></script>
     <title>深蓝时代 | 账户管理</title>
+    <style>
+        .passLeft, .passRight {
+            display: inline-block;
+            padding: 5px;
+
+            /*border: 1px solid #0C0C0C;*/
+        }
+
+        .passLeft {
+            width: 5%;
+        }
+
+        .passRight {
+            width: 89%;
+        }
+    </style>
 </head>
 <body style="position: static;">
 <!--[if IE]>
@@ -81,9 +97,7 @@
                 <li class="curr">
                     <a href="account.html" rel="nofollow">账户管理</a>
                 </li>
-                <li>
-                    <a href="help.html" rel="nofollow">帮助中心</a>
-                </li>
+
             </ul>
         </nav>
         <!-- 用户已登录的显示信息 -->
@@ -107,10 +121,7 @@
 <div id="memberNav">
     <div class="layout">
         <ul>
-            <li class="curr"><a href="#">账户首页</a></li>
-            <li><a href="#">我的团队</a></li>
-            <li><a href="#">钱包转账</a></li>
-            <li><a href="#">个人资料</a></li>
+            <li class="curr"><a href="#">个人资料</a></li>
         </ul>
     </div>
 </div>
@@ -168,133 +179,56 @@
 <div class="height18">
 </div>
 <div class="layout member" id="userMoney">
-    <div class="clearfix borderGray bgWhite ">
-        <dl>
-            <dt>原始积分
-                <i class="helpTipsIcon">
-                    <div class="helpTipsText">
-                        可用于购买增值消费,提现收取20%手续费
-                    </div>
-                    <i class="helpTipsI"></i>
-                </i>
-            </dt>
-            <dd><a href="#" class="money">0.00</a>元</dd>
-            <dd><span>个人业绩：<a href="#"> 20,000.00</a>元</span></dd>
-        </dl>
-        <dl class="Index_hqb">
-            <dt>资本积分
-                <i class="helpTipsIcon" style="background-position: 0px -180px;">
-                    <div class="helpTipsText" style="top: -53px; display: none;">
-                        30天一轮的本金+收益积分,每天返还,提现无手续费用.
-                    </div>
-                    <i class="helpTipsI" style="display: none;"></i>
-                </i>
-                <span>可复投可提现</span></dt>
-            <dd><a href="#" class="money">0.00</a>元</dd>
-            <dd><span><em>复投不累计增加业绩</em>
-			<a href="#" target="_blank">复投</a>
-			<a href="#" target="_blank">提现</a>
-			</span>
-            </dd>
-        </dl>
-        <dl class="rewardDl">
-            <dt>动态积分 <i class="helpTipsIcon">
-                <div class="helpTipsText">
-                    动态收益积分,可提现
-                </div>
-                <i class="helpTipsI"></i></i></dt>
-            <dd><a href="#" class="money">0.00</a>元</dd>
-        </dl>
-        <div class="reward">
-            <h4>奖励组成<span></span></h4>
-            <ul>
-                <li>
-                    <span></span>
-                    <a style="color: #f60; font-size: 14px;" href="#">向好友推荐消费，按自己投资1:1计算奖金(70%)</a>
-                </li>
-                <li>
-                    <span></span>
-                    <em class="fontGray">复消积分(20%)</em></li>
-                <li>
-                    <span></span>
-                    <em class="fontGray">公益积分(5%)</em></li>
-                </li>
-                <li>
-                    <span></span>
-                    <em class="fontGray">管理费(5%)</em></li>
-                </li>
-            </ul>
-        </div>
-    </div>
     <!---start---->
     <div class="clearfix borderGray bgWhite ">
-        <dl>
-            <dt>消费积分
-                <i class="helpTipsIcon">
-                    <div class="helpTipsText">
-                        增值消费时按消费额度扣除1%
-                    </div>
-                    <i class="helpTipsI"></i>
-                </i>
-                <span>消费额度1%扣除</span></dt>
-            </dt>
-            <dd><a href="#" class="money">0.00</a>元</dd>
-        </dl>
-        <dl class="Index_hqb">
-            <dt>模态积分
-                <i class="helpTipsIcon" style="background-position: 0px -180px;">
-                    <div class="helpTipsText" style="top: -53px; display: none;">
-                        7天一轮的本金积分,可提现 100的倍数,500元起提.80%可提现,20%作为产品手续费
-                    </div>
-                    <i class="helpTipsI" style="display: none;"></i>
-                </i>
-                <span>可复投可提现</span></dt>
-            <dd><a href="#" class="money">0.00</a>元</dd>
-            <dd><span><em>复投不累计增加业绩</em>
-			<a href="#" target="_blank">复投</a>
-			<a href="#" target="_blank">提现</a>
-			</span>
-            </dd>
-        </dl>
-        <dl class="rewardDl">
-            <dt>静态积分 <i class="helpTipsIcon">
-                <div class="helpTipsText">
-                    7天一轮的静态收益积分,一轮结算后返还,可提现
-                </div>
-                <i class="helpTipsI"></i></i></dt>
-            <dd><a href="#" class="money">0.00</a>元</dd>
-        </dl>
-        <div class="reward">
-            <h4>奖励组成<span></span></h4>
-            <ul>
-                <li>
-                    <span></span>
-                    <a style="color: #2abbb4; font-size: 14px;" href="#">7天一轮投资的静态收益(70%)</a>
-                </li>
-                <li>
-                    <span></span>
-                    <em class="fontGray">复消积分(20%)</em></li>
-                <li>
-                <li>
-                    <span></span>
-                    <em class="fontGray">公益积分(5%)</em></li>
-                </li>
-                <li>
-                    <span></span>
-                    <em class="fontGray">管理费(5%)</em></li>
-                </li>
-            </ul>
-        </div>
+
         <div class="moneyE">
-            <div class="li">
-                <i></i>投资进行中总额 <a href="#" class="money">
-                0.00
-            </a>元
+            <form>
+                <div class="li">
+                    昵称：<input><br>
+                    性别：<input type="radio"> 男 <input type="radio"> 女<br>
+                    个性签名：<input type="text">
+                    <p></p>
+                    <button type="submit">提交</button>
+                </div>
+                <div class="li">
+                    邮箱：<input><br>
+                    手机：<input><br>
+                    出生日期：<input>
+                    <br>
+
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="height18">
+</div>
+<div class="layout member" id="userP">
+    <div class="clearfix borderGray bgWhite">
+        <div class="w1" style="width: 100%">
+            <div class="title" style="width: 100%">
+                <h4>密码修改</h4>
             </div>
-            <div class="li li2" style="width: 375px;">
-                <i></i>今日投资收益 <a href="#" class="money">0.00</a>元
-                <i class="helpTipsIcon"><span class="helpTipsText">仅显示今日投资收益不包括好友动态奖励,如查看全部详情点击金额查看</span><i
-                        class="helpTipsI"></i></i>
+            <div class="height18">
+
+            </div>
+            <div class="tableC clearfix">
+                <div class="passLeft">密码 ：</div>
+                <div class="passRight"><input><br></div>
+                <div class="passLeft">验证码 ：</div>
+                <div class="passRight"><input>
+                    <button>发送验证码</button>
+                </div>
+                <div class="passLeft"><button>提交</button></div>
+
+            </div>
+            <div class="height18">
+
             </div>
         </div>
     </div>
@@ -305,9 +239,9 @@
 </div>
 <div class="layout member" id="userP">
     <div class="clearfix borderGray bgWhite">
-        <div class="w1">
-            <div class="title">
-                <h4>团队业绩</h4>
+        <div class="w1" style="width: 100%">
+            <div class="title" style="width: 100%">
+                <h4>最近消费</h4>
             </div>
             <div class="height18">
             </div>
@@ -353,20 +287,6 @@
                 </table>
             </div>
             <div class="height18">
-            </div>
-        </div>
-        <div class="w2">
-            <div class="title">
-                <h4>近期投资<i class="helpTipsIcon"><span class="helpTipsText">显示近期投资,点击更多查看详情</span><i
-                        class="helpTipsI"></i></i></h4>
-                <a href="#">更多</a>
-            </div>
-            <div id="shouyibao">
-                <div style="margin: auto; text-align: center">
-                    <span style="text-align: center;margin: auto ;width: 94%; padding: 3%; float: left ;font-size: 15px; color: dimgray">您近期还没有投资哦，马上开始轻松透明的深蓝时代之旅!</span>
-                    <span style="text-align: center;margin: auto; width:94%; padding: 3%; float: left"><a class="aLink1"
-                                                                                                          href="#">即刻启程</a></span>
-                </div>
             </div>
         </div>
     </div>
