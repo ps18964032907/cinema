@@ -1364,8 +1364,9 @@
                 data.size = 6;
 
                 _this.movieOnline = data;
-                _this.movieOnline.length = 8;
-
+                if(_this.movieOnline.length>8) {
+                    _this.movieOnline.length = 8;
+                }
                 console.log(data);
             })
             $.get("/index/onlineTotal", null, function (data) {
@@ -1386,7 +1387,9 @@
             $.get("/index/comingSoon", null, function (data) {
 
                 _this.comingSoonMovie = data;
-                _this.comingSoonMovie.length = 8;
+                if(_this.comingSoonMovie.length>8) {
+                    _this.comingSoonMovie.length = 8;
+                }
                 console.log(data);
 
             })
