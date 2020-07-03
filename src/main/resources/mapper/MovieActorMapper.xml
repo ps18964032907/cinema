@@ -6,6 +6,8 @@
     <result column="actor_id" jdbcType="INTEGER" property="actorId" />
     <result column="movie_actor_role" jdbcType="VARCHAR" property="movieActorRole" />
     <result column="movie_actor_type" jdbcType="INTEGER" property="movieActorType" />
+    <result column="actor_name" jdbcType="VARCHAR" property="actorName" />
+    <result column="actor_img" jdbcType="VARCHAR" property="actorImg" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from movie_actor
@@ -33,4 +35,24 @@
     select movie_id, actor_id, movie_actor_role, movie_actor_type
     from movie_actor
   </select>
+  <select id="selectActor"  resultMap="BaseResultMap">
+    SELECT a.*,c.actor_name,actor_img
+    FROM
+    movie_actor a LEFT JOIN `cast` c ON a.`actor_id`=c.`actor_id`
+    WHERE
+    a.movie_actor_type=1
+    AND
+    a.movie_id=#{movieId}
+  </select>
+
+  <select id="selectDirector"  resultMap="BaseResultMap">
+    SELECT a.*,c.actor_name,actor_img
+    FROM
+    movie_actor a LEFT JOIN `cast` c ON a.`actor_id`=c.`actor_id`
+    WHERE
+    a.movie_actor_type=0
+    AND
+    a.movie_id=#{movieId}
+  </select>
+
 </mapper>

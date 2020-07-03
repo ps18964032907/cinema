@@ -16,4 +16,8 @@ public interface MovieActorMapper {
     List<MovieActor> selectAll();
 
     int updateByPrimaryKey(MovieActor record);
+
+    List<MovieActor> selectActor(Integer movieId);
+
+    List<MovieActor> selectDirector(Integer movieId);
 }

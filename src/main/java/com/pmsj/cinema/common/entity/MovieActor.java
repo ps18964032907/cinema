@@ -1,5 +1,10 @@
 package com.pmsj.cinema.common.entity;
 
+import lombok.Data;
+import lombok.ToString;
+
+@Data
+@ToString
 public class MovieActor {
     private Integer movieId;
 
@@ -8,6 +13,10 @@ public class MovieActor {
     private String movieActorRole;
 
     private Integer movieActorType;
+
+    private String actorName;
+
+    private String actorImg;
 
     public Integer getMovieId() {
         return movieId;

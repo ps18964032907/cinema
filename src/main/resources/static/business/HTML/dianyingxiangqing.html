@@ -853,89 +853,43 @@
                     <i></i>
                 </div>
             </div>
-            <div class="content_L3_2">
-                <ul>
+            <div class="content_L3_2" >
+                <ul id="movieDirector">
                     <!-- 1 -->
-                    <li>
-                        <div>
-                            导演
+                    <li  v-for="(Director,index) in movieDirectorInfo">
+                        <div >
+                            <span v-if="index==0">导演</span>
                         </div>
-                        <div>
+                        <div >
                             <a href="#">
-                                <img src="../IMG/duye_yanzhi_1.jpg" alt="">
+                                <img :src="Director.actorImg" alt="">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                鲁本·弗雷斯彻
+                                {{Director.actorName}}
                             </a>
                         </div>
                     </li>
                     <!-- 2 -->
-                    <li>
-                        <div>
-                            演员
+                    <li v-for="(Actor,index) in movieActorInfo">
+                        <div >
+                            <span v-if="index==0">演员</span>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="../IMG/duye_yanzhi_2.jpg" alt="">
+                                <img :src="Actor.actorImg" alt="">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                汤姆·哈迪
+                                {{Actor.actorName}}
                             </a>
-                            <p title="饰：埃迪·布洛克/毒液 Eddie Brock / Venom">饰：埃迪·布洛克/..</p>
+                            <p >{{Actor.movieActorRole}}</p>
                         </div>
                     </li>
                     <!-- 3 -->
-                    <li>
-                        <div>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <img src="../IMG/duye_yanzhi_3.jpg" alt="">
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                米歇尔·威廉姆斯
-                            </a>
-                            <p title="饰：安妮·韦英 Anne Weying">饰：安妮·韦英 An...</p>
-                        </div>
-                    </li>
-                    <!-- 4 -->
-                    <li>
-                        <div>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <img src="../IMG/duye_yanzhi_4.jpg" alt="">
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                里兹·阿迈德
-                            </a>
-                            <p title="饰：德雷克博士 Dr. Carlton Drake">饰：德雷克博士 D...</p>
-                        </div>
-                    </li>
-                    <!-- 5 -->
-                    <li>
-                        <div>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <img src="../IMG/duye_yanzhi_5.jpg" alt="">
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                斯科特·黑兹
-                            </a>
-                            <p title="饰：Security Chief Roland Treece">饰：Security Chie...</p>
-                        </div>
-                    </li>
+
                 </ul>
             </div>
 
@@ -1460,6 +1414,30 @@
         }
 
     })
+
+    new Vue({
+        el:'#movieDirector',
+        data:{
+            movieDirectorInfo:[],
+            movieActorInfo:[]
+        },
+        beforeMount:function () {
+            let _this=this;
+            $.get("/movieActorOrDirector/Director/"+id,null,function (data) {
+                _this.movieDirectorInfo=data;
+                console.log(data);
+
+            })
+
+            $.get("/movieActorOrDirector/Actor/"+id,null,function (data) {
+                _this.movieActorInfo=data;
+                console.log(data);
+
+            })
+        }
+    })
+
+
 
 </script>
 
