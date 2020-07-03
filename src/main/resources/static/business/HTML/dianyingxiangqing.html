@@ -13,8 +13,6 @@
 </head>
 
 
-
-
 <body>
 
 <script src="/js/vue.js"></script>
@@ -742,7 +740,7 @@
     <div class="beijing1" id="moviedetail">
         <div class="beijing1_1">
             <div>
-                <i></i>
+<!--                <i></i>-->
                 <a href="#">
                     <img :src="movieInfoUp.movieImg" alt="" style="width: 240px; height: 330px">
                 </a>
@@ -758,10 +756,11 @@
                     <li>
                         <p>{{movieInfoUp.movieEname}}</p>
                     </li>
-                    <li>
-                        <p>
-                            动作,惊悚,科幻
-                        </p>
+                    <li >
+                        <span v-for="mt in movieTypeByMovieId">
+                            {{mt.typeName}}
+                        </span>
+
                     </li>
                     <li>
                         <p>
@@ -856,14 +855,14 @@
                     <i></i>
                 </div>
             </div>
-            <div class="content_L3_2" >
+            <div class="content_L3_2">
                 <ul id="movieDirector">
                     <!-- 1 -->
-                    <li  v-for="(Director,index) in movieDirectorInfo">
-                        <div >
+                    <li v-for="(Director,index) in movieDirectorInfo">
+                        <div>
                             <span v-if="index==0">导演</span>
                         </div>
-                        <div >
+                        <div>
                             <a href="#">
                                 <img :src="Director.actorImg" alt="">
                             </a>
@@ -876,7 +875,7 @@
                     </li>
                     <!-- 2 -->
                     <li v-for="(Actor,index) in movieActorInfo">
-                        <div >
+                        <div>
                             <span v-if="index==0">演员</span>
                         </div>
                         <div>
@@ -888,7 +887,7 @@
                             <a href="#">
                                 {{Actor.actorName}}
                             </a>
-                            <p >{{Actor.movieActorRole}}</p>
+                            <p>{{Actor.movieActorRole}}</p>
                         </div>
                     </li>
                     <!-- 3 -->
@@ -1373,6 +1372,7 @@
         el: '#moviedetail',
         data: {
             movieInfoUp: [],
+            movieTypeByMovieId: []
         },
         beforeMount: function () {
             let _this = this;
@@ -1381,7 +1381,12 @@
                 _this.movieInfoUp = data;
                 console.log(_this.movieInfoUp);
             })
+            $.get("/movieDetails/movieType/" + id, null, function (data) {
+                _this.movieTypeByMovieId = data;
+                console.log(data);
+            })
         }
+
 
     })
 
@@ -1419,27 +1424,26 @@
     })
 
     new Vue({
-        el:'#movieDirector',
-        data:{
-            movieDirectorInfo:[],
-            movieActorInfo:[]
+        el: '#movieDirector',
+        data: {
+            movieDirectorInfo: [],
+            movieActorInfo: []
         },
-        beforeMount:function () {
-            let _this=this;
-            $.get("/movieActorOrDirector/Director/"+id,null,function (data) {
-                _this.movieDirectorInfo=data;
+        beforeMount: function () {
+            let _this = this;
+            $.get("/movieActorOrDirector/Director/" + id, null, function (data) {
+                _this.movieDirectorInfo = data;
                 console.log(data);
 
             })
 
-            $.get("/movieActorOrDirector/Actor/"+id,null,function (data) {
-                _this.movieActorInfo=data;
+            $.get("/movieActorOrDirector/Actor/" + id, null, function (data) {
+                _this.movieActorInfo = data;
                 console.log(data);
 
             })
         }
     })
-
 
 
 </script>

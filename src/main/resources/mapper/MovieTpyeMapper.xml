@@ -5,6 +5,7 @@
         <id column="type_id" jdbcType="INTEGER" property="typeId"/>
         <result column="type_name" jdbcType="VARCHAR" property="typeName"/>
         <result column="tpye_status" jdbcType="INTEGER" property="tpyeStatus"/>
+        <result column="movie_id" jdbcType="INTEGER" property="movieId" />
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from movie_tpye
@@ -36,6 +37,27 @@
     select type_id, type_name, tpye_status
     from movie_tpye
   </select>
+
+    <select id="selectByMovieId"  resultMap="BaseResultMap">
+    SELECT i.movie_id,t.*
+    FROM
+    (movie_tpye_mid i
+    LEFT JOIN
+    movie_tpye t
+    ON
+    i.type_id = t.type_id
+    )
+    LEFT JOIN
+    movie m
+    ON
+    i.movie_id = m.`movie_id`
+    WHERE
+    m.`movie_id` = #{movieId}
+  </select>
+
+
+
+
     <select id="selectByName" resultMap="BaseResultMap">
 
     select type_id, type_name, tpye_status

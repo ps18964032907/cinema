@@ -1,6 +1,13 @@
 package com.pmsj.cinema.common.entity;
 
+import lombok.Data;
+import lombok.ToString;
+
+@Data
+@ToString
 public class MovieTpye {
+    private Integer movieId;
+
     private Integer typeId;
 
     private String typeName;

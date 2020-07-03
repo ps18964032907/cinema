@@ -16,6 +16,8 @@ public interface MovieTpyeMapper {
 
     List<MovieTpye> selectAll();
 
+    List<MovieTpye> selectByMovieId(Integer movieId);
+
     int updateByPrimaryKey(MovieTpye record);
 
     MovieTpye selectByName(String movieTpyeName);
