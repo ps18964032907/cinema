@@ -22,8 +22,8 @@
 <div class="zhuche">
     <form action="/user/register" method="post" style="margin-left: 300px">
         <div class="zhuche1">
-            <label for="username">用户名</label>
-            <input type="text" name="userAccount" id="username" required>
+            <label for="userAccount">用户名</label>
+            <input type="text" name="userAccount" id="userAccount" required><span id="tip4"></span>
         </div>
         <!-- 创建密码 -->
         <div class="zhuche4">
@@ -52,11 +52,11 @@
             </div>
             <!-- 短信 获取-->
             <div class="zhuche2">
-                <input type="button" id="getCode" value="免费获取短信动态码" onclick="GetCodemo(this)">
+                <input type="button" id="getCode" value="获取邮箱动态码" onclick="GetCodemo(this)">
             </div>
             <!-- 短信 -->
             <div class="zhuche3">
-                <label for="duanxin">短信动态码</label>
+                <label for="duanxin">邮箱动态码</label>
                 <input type="text" name="verifycode" id="duanxin" required>
             </div>
 
@@ -80,21 +80,22 @@
     </p>
 </footer>
 <script type="text/javascript">
-    var password2 = document.getElementById("password2");
-    password2.onkeyup = function () {
-        var pwd1 = document.getElementById("password1").value;
-        var pwd2 = password2.value;
-        <!-- 对比两次输入的密码 -->
-        if (pwd1 == pwd2) {
-            document.getElementById("tip1").innerHTML = "<font color='green'>两次密码相同</font>";
-        } else {
-            document.getElementById("tip1").innerHTML = "<font color='red'>两次密码不相同</font>";
-        }
+    var userAccount = document.getElementById('userAccount');
+    userAccount.onkeyup = function () {
+        var account = userAccount.value;
+        $.post('/user/accountExist', 'account=' + account, function (data) {
+            if (true == data) {
+                document.getElementById("tip4").innerHTML = "<font color='green'>用户名可用</font>";
+            } else {
+                document.getElementById("tip4").innerHTML = "<font color='red'>用户名已存在</font>";
+            }
+        }, 'json');
     }
     var oPassword = document.getElementById("password1");
     var oDiv = document.getElementById("intension");
     var spans = oDiv.getElementsByTagName("span");
     oPassword.onkeyup = function () {
+        var pwd2 = document.getElementById("password2").value;
         var oValue = oPassword.value;
         var patrn = /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/im;
         if (oValue.length == 0) {
@@ -114,8 +115,25 @@
             spans[1].style.backgroundColor = "red";
             spans[2].style.backgroundColor = "gray";
         }
+        if (pwd2 != "") {
+            if (oValue == pwd2) {
+                document.getElementById("tip1").innerHTML = "<font color='green'>两次密码相同</font>";
+            } else {
+                document.getElementById("tip1").innerHTML = "<font color='red'>两次密码不相同</font>";
+            }
+        }
     }
-
+    var password2 = document.getElementById("password2");
+    password2.onkeyup = function () {
+        var pwd1 = document.getElementById("password1").value;
+        var pwd2 = password2.value;
+        <!-- 对比两次输入的密码 -->
+        if (pwd1 == pwd2) {
+            document.getElementById("tip1").innerHTML = "<font color='green'>两次密码相同</font>";
+        } else {
+            document.getElementById("tip1").innerHTML = "<font color='red'>两次密码不相同</font>";
+        }
+    }
     var phone = document.getElementById('phone');
     phone.onkeyup = function () {
         var ph = phone.value;
@@ -139,31 +157,28 @@
     var wait = 60;
 
     function GetCodemo(o) {
+        var e = document.getElementById('email').value;
         //发送验证码
-        if (wait == 60) {
-
-            //请求后台获取数据、
-            $.post('/user/getCode', 'email='+ ema.value, function (data) {
-                alert("aaaaaaa")
-                alert(data)
-               /* if (data.status == 1) {
-                    //发送成功
-                } else {
-                    //发送失败
-                }*/
-            }, 'json');
-        }
-        if (wait == 0) {
-            o.removeAttribute('disabled');//禁用
-            o.value = '重新发送';
-            wait = 60;
+        if (e != "") {
+            if (wait == 60) {
+                //请求后台获取数据、
+                $.post('/user/getCode', 'email=' + e, function (data) {
+                }, 'json');
+            }
+            if (wait == 0) {
+                o.removeAttribute('disabled');//禁用
+                o.value = '重新发送';
+                wait = 60;
+            } else {
+                o.setAttribute('disabled', true);
+                o.value = "已发送(" + wait + ")";
+                wait--;
+                setTimeout(function () {
+                    GetCodemo(o)
+                }, 1000);
+            }
         } else {
-            o.setAttribute('disabled', true);
-            o.value = "已发送(" + wait + ")";
-            wait--;
-            setTimeout(function () {
-                GetCodemo(o)
-            }, 1000);
+            document.getElementById("tip3").innerHTML = "<font color='red'>请输入邮箱号</font>";
         }
     }
 </script>
