@@ -21,7 +21,6 @@ public class MovieActorController {
 
     @RequestMapping("/Actor/{movieId}")
     public List<MovieActor> selectActor(@PathVariable Integer movieId){
-        System.out.println(movieId);
         return movieActorService.selectActor(movieId);
     }
     @RequestMapping("/Director/{movieId}")

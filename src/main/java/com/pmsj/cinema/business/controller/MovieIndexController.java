@@ -22,7 +22,6 @@ public class MovieIndexController {
     @RequestMapping("/online")
     public  List<Movie> selectOnline(){
         List<Movie> movieOnline = movieIndexService.selectOnline();
-        System.out.println(movieOnline);
         return movieOnline;
     }
     @RequestMapping("/comingSoon")

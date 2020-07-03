@@ -19,7 +19,6 @@ public class MovieIndexService {
     MovieMapper movieMapper;
 
     public List<Movie> selectOnline(){
-        System.out.println(movieMapper.selectOnline());
         return movieMapper.selectOnline();
     }
 

@@ -20,7 +20,6 @@ public class MovieDetailsController {
 
     @RequestMapping("indexMovieDetails/{movieId}")
     public Movie selectByPrimaryKey(@PathVariable Integer movieId) {
-        System.out.println(movieId);
         Movie movie = movieDetailsService.selectByPrimaryKey(movieId);
         return movie;
     }
