@@ -37,6 +37,9 @@ public class Movie {
 
     private String types[];
 
+    private Integer typeId;
+
+
 //    private
 
     private List<Cast> cast;
