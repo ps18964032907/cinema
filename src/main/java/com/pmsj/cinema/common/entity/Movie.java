@@ -39,6 +39,8 @@ public class Movie {
 
     private Integer typeId;
 
+    private Integer paixu;
+
 
 //    private
 

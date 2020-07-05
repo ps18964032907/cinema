@@ -34,9 +34,9 @@ public interface MovieMapper {
 
     int getMaxId();
 
-    List<Movie> selectAllOnlineMovie(@Param(value = "typeId") Integer typeId,@Param(value = "area")String movieArea,@Param(value = "year") Date movieReleaseTime);
+    List<Movie> selectAllMovie(@Param(value = "status") Integer status,@Param(value = "tId") Integer typeId,@Param(value = "area")String movieArea,@Param(value = "year") String movieReleaseTime,@Param(value ="paixu" ) Integer paixu);
 
-    List<Movie> selectAllComingSoonMovie(@Param(value = "typeId") Integer typeId,@Param(value = "area")String movieArea,@Param(value = "year")Date movieReleaseTime);
-
-    List<Movie> selectAllOfflineMovie(@Param(value = "typeId") Integer typeId,@Param(value = "area")String movieArea,@Param(value = "year")Date movieReleaseTime);
+//    List<Movie> selectAllComingSoonMovie(@Param(value = "typeId") Integer typeId,@Param(value = "area")String movieArea,@Param(value = "year")Date movieReleaseTime);
+//
+//    List<Movie> selectAllOfflineMovie(@Param(value = "typeId") Integer typeId,@Param(value = "area")String movieArea,@Param(value = "year")Date movieReleaseTime);
 }

@@ -732,238 +732,227 @@
         </nav>
     </header>
     <!-- 大类 -->
-    <div class="header" >
+    <div class="header" id="MovieStatus">
         <ul>
             <li >
-                <a href="#">正在热映</a>
+                <a  v-on:click="getMoive(1)">正在热映</a>
             </li>
             <li>
-                <a href="#">即将上映</a>
+                <a  v-on:click="getMoive(2)">即将上映</a>
             </li>
             <li>
-                <a href="#">经典影片</a>
+                <a  v-on:click="getMoive(3)">经典影片</a>
             </li>
         </ul>
     </div>
     <!-- 主体 -->
-    <div class="main" id="Movie">
-        <article>
+    <div class="main" >
+        <form id="formbody">
+            <input type="hidden"id="status" name="status" value="1" >
+            <input type="hidden"id="offset"name="offset" value="0">
+            <input type="hidden"id="limit"name="limit" value="30">
+            <article>
             <!-- 电影详细分类 -->
-            <div class="lei">
-                <ul class="lei_1">
-                    <li>
-                        <div>
-                            类型：
-                        </div>
-                        <ul class="lei_2">
-                            <li >
-                                <input type="radio" id="quanbu" name="leixing" checked>
-                                <label for="quanbu">
-                                    <a>全部</a>
-                                </label>
-                                <span v-for="mtype in movieType">
-                                <input type="radio" :id="mtype.typeId" name="type" >
-                                <label :for="mtype.typeId">
-                                    <a>{{mtype.typeName}}</a>
-                                </label>
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <div>
-                            区域：
-                        </div>
-                        <ul class="lei_2">
+                <span id="MovieType">
+                    <div class="lei" >
+                        <ul class="lei_1">
                             <li>
-                                <input type="radio" id="quanbu2" name="quyu" checked>
-                                <label for="quanbu2">
-                                    <a>全部</a>
-                                </label>
-                                <input type="radio" id="dalu" name="quyu">
-                                <label for="dalu">
-                                    <a>大陆</a>
-                                </label>
-                                <input type="radio" id="meiguo" name="quyu">
-                                <label for="meiguo">
-                                    <a>美国</a>
-                                </label>
-                                <input type="radio" id="hanguo" name="quyu">
-                                <label for="hanguo">
-                                    <a>韩国</a>
-                                </label>
-                                <input type="radio" id="riben" name="quyu">
-                                <label for="riben">
-                                    <a>日本</a>
-                                </label>
-                                <input type="radio" id="zhongguoxianggang" name="quyu">
-                                <label for="zhongguoxianggang">
-                                    <a>中国香港</a>
-                                </label>
-                                <input type="radio" id="zhongguotaiwan" name="quyu">
-                                <label for="zhongguotaiwan">
-                                    <a>中国台湾</a>
-                                </label>
-                                <input type="radio" id="taiguo" name="quyu">
-                                <label for="taiguo">
-                                    <a>泰国</a>
-                                </label>
-                                <input type="radio" id="yindu" name="quyu">
-                                <label for="yindu">
-                                    <a>印度</a>
-                                </label>
-                                <input type="radio" id="faguo" name="quyu">
-                                <label for="faguo">
-                                    <a>法国</a>
-                                </label>
-                                <input type="radio" id="yingguo" name="quyu">
-                                <label for="yingguo">
-                                    <a>英国</a>
-                                </label>
-                                <input type="radio" id="eluosi" name="quyu">
-                                <label for="eluosi">
-                                    <a>俄罗斯</a>
-                                </label>
-                                <input type="radio" id="yidali" name="quyu">
-                                <label for="yidali">
-                                    <a>意大利</a>
-                                </label>
-                                <input type="radio" id="xibanya" name="quyu">
-                                <label for="xibanya">
-                                    <a>西班牙</a>
-                                </label>
-                                <input type="radio" id="deguo" name="quyu">
-                                <label for="deguo">
-                                    <a>德国</a>
-                                </label>
-                                <input type="radio" id="bolan" name="quyu">
-                                <label for="bolan">
-                                    <a>波兰</a>
-                                </label>
-                                <input type="radio" id="aodaliya" name="quyu">
-                                <label for="aodaliya">
-                                    <a>澳大利亚</a>
-                                </label>
-                                <input type="radio" id="yilang" name="quyu">
-                                <label for="yilang">
-                                    <a>伊朗</a>
-                                </label>
-                                <input type="radio" id="qita2" name="quyu">
-                                <label for="qita2">
-                                    <a>其他</a>
-                                </label>
+                                <div>
+                                    类型：
+                                </div>
+                                <ul class="lei_2">
+                                    <li >
+                                        <input type="radio" id="quanbu" name="tId" checked v-on:click="getMoive" value="">
+                                        <label for="quanbu">
+                                            <a>全部</a>
+                                        </label>
+                                        <span v-for="(mtype,index) in movieType" class="type">
+                                        <input type="radio" :id="'tId'+(index+2)" name="tId" :value="mtype.typeId"
+                                               v-on:click="getMoive">
+                                        <label :for="'tId'+(index+2)">
+                                            <a>{{mtype.typeName}}</a>
+                                        </label>
+                                        </span>
+                                    </li>
+                                </ul>
                             </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <div>
-                            年代：
-                        </div>
-                        <ul class="lei_2">
                             <li>
-                                <input type="radio" id="quanbu3" name="niandai" checked>
-                                <label for="quanbu3">
-                                    <a>全部</a>
-                                </label>
-                                <input type="radio" id="yihou" name="niandai">
-                                <label for="yihou">
-                                    <a>2018以后</a>
-                                </label>
-                                <input type="radio" id="2018" name="niandai">
-                                <label for="2018">
-                                    <a>2018</a>
-                                </label>
-                                <input type="radio" id="2017" name="niandai">
-                                <label for="2017">
-                                    <a>2017</a>
-                                </label>
-                                <input type="radio" id="2016" name="niandai">
-                                <label for="2016">
-                                    <a>2016</a>
-                                </label>
-                                <input type="radio" id="2015" name="niandai">
-                                <label for="2015">
-                                    <a>2015</a>
-                                </label>
-                                <input type="radio" id="2014" name="niandai">
-                                <label for="2014">
-                                    <a>2014</a>
-                                </label>
-                                <input type="radio" id="2013" name="niandai">
-                                <label for="2013">
-                                    <a>2013</a>
-                                </label>
-                                <input type="radio" id="2012" name="niandai">
-                                <label for="2012">
-                                    <a>2012</a>
-                                </label>
-                                <input type="radio" id="2011" name="niandai">
-                                <label for="2011">
-                                    <a>2011</a>
-                                </label>
-                                <input type="radio" id="2000-2010" name="niandai">
-                                <label for="2000-2010">
-                                    <a>2000-2010</a>
-                                </label>
-                                <input type="radio" id="90" name="niandai">
-                                <label for="90">
-                                    <a>90年代</a>
-                                </label>
-                                <input type="radio" id="80" name="niandai">
-                                <label for="80">
-                                    <a>80年代</a>
-                                </label>
-                                <input type="radio" id="70" name="niandai">
-                                <label for="70">
-                                    <a>70年代</a>
-                                </label>
-                                <input type="radio" id="gengzao" name="niandai">
-                                <label for="gengzao">
-                                    <a>更早</a>
-                                </label>
+                                <div>
+                                    区域：
+                                </div>
+                                <ul class="lei_2">
+                                    <li>
+                                        <input type="radio" id="quanbu2" name="area" checked value="" v-on:click="getMoive">
+                                        <label for="quanbu2">
+                                            <a>全部</a>
+                                        </label>
+                                        <input type="radio" id="dalu" name="area" value="大陆" v-on:click="getMoive">
+                                        <label for="dalu">
+                                            <a>大陆</a>
+                                        </label>
+                                        <input type="radio" id="meiguo" name="area" value="美国" v-on:click="getMoive">
+                                        <label for="meiguo">
+                                            <a>美国</a>
+                                        </label>
+                                        <input type="radio" id="hanguo" name="area" value="韩国" v-on:click="getMoive">
+                                        <label for="hanguo">
+                                            <a>韩国</a>
+                                        </label>
+                                        <input type="radio" id="riben" name="area" value="日本" v-on:click="getMoive">
+                                        <label for="riben">
+                                            <a>日本</a>
+                                        </label>
+                                        <input type="radio" id="zhongguoxianggang" name="area" value="中国香港" v-on:click="getMoive">
+                                        <label for="zhongguoxianggang">
+                                            <a>中国香港</a>
+                                        </label>
+                                        <input type="radio" id="zhongguotaiwan" name="area" value="中国台湾" v-on:click="getMoive">
+                                        <label for="zhongguotaiwan">
+                                            <a>中国台湾</a>
+                                        </label>
+                                        <input type="radio" id="taiguo" name="area" value="泰国" v-on:click="getMoive">
+                                        <label for="taiguo">
+                                            <a>泰国</a>
+                                        </label>
+                                        <input type="radio" id="yindu" name="area" value="印度" v-on:click="getMoive">
+                                        <label for="yindu">
+                                            <a>印度</a>
+                                        </label>
+                                        <input type="radio" id="faguo" name="area" value="法国" v-on:click="getMoive">
+                                        <label for="faguo">
+                                            <a>法国</a>
+                                        </label>
+                                        <input type="radio" id="yingguo" name="area" value="英国" v-on:click="getMoive">
+                                        <label for="yingguo">
+                                            <a>英国</a>
+                                        </label>
+                                        <input type="radio" id="eluosi" name="area" value="俄罗斯" v-on:click="getMoive">
+                                        <label for="eluosi">
+                                            <a>俄罗斯</a>
+                                        </label>
+                                        <input type="radio" id="yidali" name="area" value="意大利" v-on:click="getMoive">
+                                        <label for="yidali">
+                                            <a>意大利</a>
+                                        </label>
+                                        <input type="radio" id="xibanya" name="area" value="西班牙" v-on:click="getMoive">
+                                        <label for="xibanya">
+                                            <a>西班牙</a>
+                                        </label>
+                                        <input type="radio" id="deguo" name="area" value="德国" v-on:click="getMoive">
+                                        <label for="deguo">
+                                            <a>德国</a>
+                                        </label>
+                                        <input type="radio" id="bolan" name="area" value="波兰" v-on:click="getMoive">
+                                        <label for="bolan">
+                                            <a>波兰</a>
+                                        </label>
+                                        <input type="radio" id="aodaliya" name="area" value="澳大利亚" v-on:click="getMoive">
+                                        <label for="aodaliya">
+                                            <a>澳大利亚</a>
+                                        </label>
+                                        <input type="radio" id="yilang" name="area" value="伊朗" v-on:click="getMoive">
+                                        <label for="yilang">
+                                            <a>伊朗</a>
+                                        </label>
+                                        <input type="radio" id="qita2" name="area" value="其他" v-on:click="getMoive">
+                                        <label for="qita2">
+                                            <a>其他</a>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div>
+                                    年代：
+                                </div>
+                                <ul class="lei_2">
+                                    <li>
+                                        <input type="radio" id="quanbu3" name="year" checked value="" v-on:click="getMoive">
+                                        <label for="quanbu3">
+                                            <a>全部</a>
+                                        </label>
+                                        <input type="radio" id="2020" name="year" value="2020" v-on:click="getMoive">
+                                        <label for="2020">
+                                            <a>2020</a>
+                                        </label>
+                                        <input type="radio" id="2019" name="year" value="2019" v-on:click="getMoive">
+                                        <label for="2019">
+                                            <a>2019</a>
+                                        </label>
+                                        <input type="radio" id="2018" name="year" value="2018" v-on:click="getMoive">
+                                        <label for="2018">
+                                            <a>2018</a>
+                                        </label>
+                                        <input type="radio" id="2017" name="year" value="2017" v-on:click="getMoive">
+                                        <label for="2017">
+                                            <a>2017</a>
+                                        </label>
+                                        <input type="radio" id="2016" name="year" value="2016" v-on:click="getMoive">
+                                        <label for="2016">
+                                            <a>2016</a>
+                                        </label>
+                                        <input type="radio" id="2015" name="year" value="2015" v-on:click="getMoive">
+                                        <label for="2015">
+                                            <a>2015</a>
+                                        </label>
+                                        <input type="radio" id="2014" name="year" value="2014" v-on:click="getMoive">
+                                        <label for="2014">
+                                            <a>2014</a>
+                                        </label>
+                                        <input type="radio" id="2013" name="year" value="2013" v-on:click="getMoive">
+                                        <label for="2013">
+                                            <a>2013</a>
+                                        </label>
+                                        <input type="radio" id="2012" name="year" value="2012" v-on:click="getMoive">
+                                        <label for="2012">
+                                            <a>2012</a>
+                                        </label>
+                                        <input type="radio" id="2011" name="year" value="2011" v-on:click="getMoive">
+                                        <label for="2011">
+                                            <a>2011</a>
+                                        </label>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
-                    </li>
-                </ul>
-            </div>
+                    </div>
 
-            <!-- 排序 -->
-            <div class="paixu">
-                <ul>
-                    <li>
-                        <input type="radio" id="anremen" name="paixu" checked>
-                        <label for="anremen">
-                            <a>按热门排序</a>
-                        </label>
-                        <input type="radio" id="anshijian" name="paixu">
-                        <label for="anshijian">
-                            <a>按时间排序</a>
-                        </label>
-                        <input type="radio" id="anpingjia" name="paixu">
-                        <label for="anpingjia">
-                            <a>按评价排序</a>
-                        </label>
-                    </li>
-                </ul>
-            </div>
+                    <!-- 排序 -->
+                    <div class="paixu">
+                        <ul>
+                            <li>
+                                <input type="radio" id="anremen" name="paixu" checked value="1" v-on:click="getMoive">
+                                <label for="anremen">
+                                    <a>按热门排序</a>
+                                </label>
+                                <input type="radio" id="anshijian" name="paixu" checked value="2" v-on:click="getMoive">
+                                <label for="anshijian">
+                                    <a>按时间排序</a>
+                                </label>
+                                <input type="radio" id="anpingjia" name="paixu" checked value="3" v-on:click="getMoive">
+                                <label for="anpingjia">
+                                    <a>按评价排序</a>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </span>
             <!-- 影片 -->
-            <div class="yingpian">
-                <dl>
+            <div class="yingpian" id="bodyMovie">
+                <dl >
                     <!-- 1 -->
-                    <dd>
+                    <dd v-for="allmovie in movie">
                         <div>
-                            <i class="DIMAX3"></i>
                             <a href="./dianyingxiangqing.html">
-                                <img src="../IMG/Dianying_1.jpg" alt="">
+                                <img :src="allmovie.movieImg" alt="" style="width: 160px; height: 220px">
                             </a>
                             <a href="./dianyingxiangqing.html">购票</a>
                         </div>
                         <div>
-                            <a href="./dianyingxiangqing.html" title="毒液：致命守护者">毒液：致命守护者</a>
+                            <a href="./dianyingxiangqing.html">{{allmovie.movieName}}</a>
                         </div>
                         <div>
-                            <i>9.</i>
-                            <i>3</i>
+                            <i>{{allmovie.movieScore}}</i>
                         </div>
                     </dd>
                     <!-- 2 -->
@@ -997,6 +986,7 @@
                 </ul>
             </div>
         </article>
+        </form>
     </div>
 
     <!-- 底部 -->
@@ -1033,69 +1023,83 @@
 
 
 <script>
+    var movieStatus=new Vue({
+        el:"#MovieStatus",
+        data:{
+            status:1
+        },
+        methods: {
+            getMoive: function (index) {
+
+                $("#status").val(index);
+                console.log($("#formbody").serialize());
+                getAllMovie($("#formbody").serialize())
+            }
+
+        },
 
 
-   new Vue({
-        el:"#Movie",
+    })
+
+   var headtype=new Vue({
+        el:"#MovieType",
         data: {
             params:{
                 offset:0,
                 limit:30,
+                status:1,
                 year:"",
-                typeId:0,
-                area:""
+                tId:0,
+                area:"",
+                paixu:1
             },
-            online:[],
-            comingSoon:[],
-            offline:[],
             movieType:[]
-
         },
+       methods: {
+           getMoive: function (index) {
+
+               $("#status").val(index);
+               console.log($("#formbody").serialize());
+               getAllMovie($("#formbody").serialize())
+           }
+
+       },
 
         mounted: function (){
             let _this=this;
 
-            $.get("/AllMovie/OnlineMovie",_this.params,function (on) {
-                _this.online=on;
-                console.log(on);
-            })
-
-            $.get("/AllMovie/ComingSoonMovie",_this.params,function (soon) {
-                _this.comingSoon=soon;
-                console.log(soon);
-            })
-
-            $.get("/AllMovie/OfflineMovie",_this.params,function (off) {
-                _this.offline=off;
-                console.log(off);
-            })
-            $.get("/AllMovie/AllMovieType",_this.params,function (type) {
+            $.get("/AllMovie/AllMovieType",null,function (type) {
                 _this.movieType=type;
                 console.log(type);
             })
+        },
+       beforeUpdate: function () {
+           getAllMovie($("#formbody").serialize());
+       }
 
 
-        }
     });
 
 
-   // var movieBody = new Vue({
-   //     el:"#bodyMovie",
-   //     data:{
-   //         params:{},
-   //         online:[],
-   //         comingSoon:[],
-   //         offline:[],
-   //         movieType:[]
-   //
-   //     }
-   // });
-   //
-   // movieBody.data.params = movieHead.data.params;
-   // movieBody.data.online = movieHead.data.online;
-   // movieBody.data.comingSoon = movieHead.data.comingSoon;
-   // movieBody.data.offline = movieHead.data.offline;
-   // movieBody.data.movieType = movieHead.data.movieType;
+   var movieBody = new Vue({
+       el:"#bodyMovie",
+       data:{
+
+           movie:[],
+
+       },
+   });
+   function getAllMovie(data){
+       $.get("/AllMovie/Movie",data,function (data2) {
+
+           movieStatus.status=headtype.status;
+           data=headtype.params;
+           movieBody.movie=data2.list;
+           console.log(movieBody.movie);
+           console.log(movieBody.movie.movieName);
+       })
+   }
+
 
 </script>
 </body>

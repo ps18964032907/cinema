@@ -24,7 +24,7 @@ public class MovieAllService {
     @Autowired
     MovieTpyeMapper movieTpyeMapper;
 
-    public PageInfo<Movie> selectAllOnlineMovie(Integer offset,Integer limit,Integer typeId,String movieArea,Date movieReleaseTime){
+    public PageInfo<Movie> selectAllMovie(Integer offset,Integer limit,Integer movieStatus,Integer typeId,String movieArea,String movieReleaseTime,Integer paixu){
         int PageNum = 1;
         if (offset != 0) {
             PageNum = (offset / limit) + 1;
@@ -32,38 +32,38 @@ public class MovieAllService {
         if (offset != -1 && limit != -1) {
             PageHelper.startPage(PageNum, limit);
         }
-        List<Movie> selectAllOnlineMovie = movieMapper.selectAllOnlineMovie(typeId,movieArea,movieReleaseTime);
-        PageInfo<Movie> selectOnlineMovie=new PageInfo<>(selectAllOnlineMovie);
-        return selectOnlineMovie;
+        List<Movie> selectAllMovie = movieMapper.selectAllMovie(movieStatus,typeId,movieArea,movieReleaseTime,paixu);
+        PageInfo<Movie> AllMovie=new PageInfo<>(selectAllMovie);
+        return AllMovie;
     }
 
-    public PageInfo<Movie> selectAllComingSoonMovie(Integer offset,Integer limit,Integer typeId,String movieArea,Date movieReleaseTime){
-        int PageNum = 1;
-        if (offset != 0) {
-            PageNum = (offset / limit) + 1;
-        }
-        if (offset != -1 && limit != -1) {
-            PageHelper.startPage(PageNum, limit);
-        }
-        List<Movie> selectAllComingSoonMovie = movieMapper.selectAllComingSoonMovie(typeId,movieArea,movieReleaseTime);
-        PageInfo<Movie> selectComingSoonMovie=new PageInfo<>(selectAllComingSoonMovie);
-        return selectComingSoonMovie;
-    }
-
-
-    public PageInfo<Movie> selectAllOfflineMovie(Integer offset,Integer limit,Integer typeId,String movieArea,Date movieReleaseTime){
-        int PageNum = 1;
-        if (offset != 0) {
-            PageNum = (offset / limit) + 1;
-        }
-        if (offset != -1 && limit != -1) {
-            PageHelper.startPage(PageNum, limit);
-        }
-        List<Movie> selectAllOfflineMovie = movieMapper.selectAllOfflineMovie(typeId,movieArea,movieReleaseTime);
-        PageInfo<Movie> selectOfflineMovie=new PageInfo<>(selectAllOfflineMovie);
-        return selectOfflineMovie;
-    }
-
+//    public PageInfo<Movie> selectAllComingSoonMovie(Integer offset,Integer limit,Integer typeId,String movieArea,Date movieReleaseTime){
+//        int PageNum = 1;
+//        if (offset != 0) {
+//            PageNum = (offset / limit) + 1;
+//        }
+//        if (offset != -1 && limit != -1) {
+//            PageHelper.startPage(PageNum, limit);
+//        }
+//        List<Movie> selectAllComingSoonMovie = movieMapper.selectAllComingSoonMovie(typeId,movieArea,movieReleaseTime);
+//        PageInfo<Movie> selectComingSoonMovie=new PageInfo<>(selectAllComingSoonMovie);
+//        return selectComingSoonMovie;
+//    }
+//
+//
+//    public PageInfo<Movie> selectAllOfflineMovie(Integer offset,Integer limit,Integer typeId,String movieArea,Date movieReleaseTime){
+//        int PageNum = 1;
+//        if (offset != 0) {
+//            PageNum = (offset / limit) + 1;
+//        }
+//        if (offset != -1 && limit != -1) {
+//            PageHelper.startPage(PageNum, limit);
+//        }
+//        List<Movie> selectAllOfflineMovie = movieMapper.selectAllOfflineMovie(typeId,movieArea,movieReleaseTime);
+//        PageInfo<Movie> selectOfflineMovie=new PageInfo<>(selectAllOfflineMovie);
+//        return selectOfflineMovie;
+//    }
+//
     public List<MovieTpye> selectAllMovieType(){
         return movieTpyeMapper.selectAll();
     }

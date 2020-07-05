@@ -6,6 +6,8 @@ import com.pmsj.cinema.common.entity.Movie;
 import com.pmsj.cinema.common.entity.MovieTpye;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -20,20 +22,21 @@ import java.util.List;
 public class MovieAllController {
     @Autowired
     MovieAllService movieAllService;
-    @RequestMapping("/OnlineMovie")
-    public PageInfo<Movie> selectAllOnlineMovie(Integer offset, Integer limit, Integer typeId, String movieArea, Date movieReleaseTime){
-        return movieAllService.selectAllOnlineMovie(offset,limit,typeId,movieArea,movieReleaseTime);
+    @RequestMapping("/Movie")
+    public PageInfo<Movie> selectAllMovie(Integer offset, Integer limit, @RequestParam(value = "status")Integer movieStatus, @RequestParam(value = "tId")Integer typeId, @RequestParam(value = "area")String movieArea, @RequestParam(value = "year")String movieReleaseTime,@RequestParam Integer paixu){
+        System.out.println(paixu);
+        return movieAllService.selectAllMovie(offset,limit,movieStatus,typeId,movieArea,movieReleaseTime,paixu);
     }
 
-    @RequestMapping("/ComingSoonMovie")
-    public PageInfo<Movie> selectAllComingSoonMovie(Integer offset, Integer limit, Integer typeId, String movieArea, Date movieReleaseTime){
-        return movieAllService.selectAllComingSoonMovie(offset,limit,typeId,movieArea,movieReleaseTime);
-    }
-
-    @RequestMapping("/OfflineMovie")
-    public PageInfo<Movie> selectAllOfflineMovie(Integer offset, Integer limit, Integer typeId, String movieArea, Date movieReleaseTime){
-        return movieAllService.selectAllOfflineMovie(offset,limit,typeId,movieArea,movieReleaseTime);
-    }
+//    @RequestMapping("/ComingSoonMovie")
+//    public PageInfo<Movie> selectAllComingSoonMovie(Integer offset, Integer limit, Integer typeId, String movieArea, Date movieReleaseTime){
+//        return movieAllService.selectAllComingSoonMovie(offset,limit,typeId,movieArea,movieReleaseTime);
+//    }
+//
+//    @RequestMapping("/OfflineMovie")
+//    public PageInfo<Movie> selectAllOfflineMovie(Integer offset, Integer limit, Integer typeId, String movieArea, Date movieReleaseTime){
+//        return movieAllService.selectAllOfflineMovie(offset,limit,typeId,movieArea,movieReleaseTime);
+//    }
     @RequestMapping("/AllMovieType")
     public List<MovieTpye> selectAllMovieType(){
         return movieAllService.selectAllMovieType();
