@@ -6,10 +6,14 @@ package com.pmsj.cinema.system.service;
  * @Date 2020/7/3 19:07
  **/
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.pmsj.cinema.common.entity.Brand;
 import com.pmsj.cinema.common.entity.Cinema;
+import com.pmsj.cinema.common.entity.HallTpye;
 import com.pmsj.cinema.common.mapper.BrandMapper;
 import com.pmsj.cinema.common.mapper.CinemaMapper;
+import com.pmsj.cinema.common.mapper.HallTpyeMapper;
 import com.pmsj.cinema.common.vo.CinemaVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +26,9 @@ public class CinemaService {
 
     @Autowired
     BrandMapper brandMapper;
+
+    @Autowired
+    HallTpyeMapper hallTpyeMapper;
 
 
     @Autowired
@@ -39,8 +46,13 @@ public class CinemaService {
     }
 
 
-    public List<CinemaVo> getAllCinema() {
-        return cinemaMapper.getAllCinemaVo();
+    public PageInfo<CinemaVo> getAllCinema(Integer page, Integer limit, Cinema cinema) {
+
+        PageHelper.startPage(page, limit);
+
+        List<CinemaVo> allCinemaVo = cinemaMapper.getAllCinemaVo(cinema);
+
+        return new PageInfo<CinemaVo>(allCinemaVo);
     }
 
     public Cinema getCinemaById(Integer cinemaId) {
@@ -54,5 +66,14 @@ public class CinemaService {
 
     public void delCinemaById(Integer cinemaId) {
         cinemaMapper.deleteByPrimaryKey(cinemaId);
+    }
+
+    public List<HallTpye> getAllHallType() {
+
+        return hallTpyeMapper.selectAll();
+    }
+
+    public List<CinemaVo> getAllCinemaByAll(String brand, String hallType, String area, String province, String city) {
+        return cinemaMapper.getAllCinemaByAll(brand, hallType, area, province, city);
     }
 }

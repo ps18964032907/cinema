@@ -71,8 +71,50 @@
 
     </resultMap>
     <select id="getAllCinemaVo" resultMap="BaseResultMapVo">
-          select * from cinema c
-          left join brand b
-          on b.brand_id = c.cinema_brand
+        select * from cinema c
+        left join brand b
+        on b.brand_id = c.cinema_brand
+        <where>
+            <if test="cinemaBrand != '' and cinemaBrand != null">
+                and cinema_brand = #{cinemaBrand}
+            </if>
+
+            <if test="cinemaName != '' and cinemaName != null">
+                and cinema_name like '%${cinemaName}%'
+            </if>
+
+            <if test="cinemaProvince != '' and cinemaProvince != null">
+                and cinema_province = #{cinemaProvince}
+            </if>
+
+            <if test="cinemaCity != '' and cinemaCity != null">
+                and cinema_city = #{cinemaCity}
+            </if>
+
+            <if test="cinemaArea != '' and cinemaArea != null">
+                and cinema_area = #{cinemaArea}
+            </if>
+
+        </where>
     </select>
+    <select id="getAllCinemaByAll" resultMap="BaseResultMap">
+        select * from cinema
+        left join hall
+        on hall.cinema_id = cinema.cinema_id
+        <where>
+            <if test="area != '' and area != null">
+                and cinema.cinema_area = #{area}
+            </if>
+            <if test="brand != '' and brand != null">
+                and cinema.cinema_brand = #{brand}
+            </if>
+            <if test="province != '' and province != null">
+                and cinema.cinema_province = #{province}
+            </if>
+            <if test="hallType != '' and hallType != null">
+                and hall.hall_type = #{hallType}
+            </if>
+        </where>
+    </select>
+
 </mapper>

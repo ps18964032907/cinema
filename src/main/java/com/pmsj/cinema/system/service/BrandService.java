@@ -109,4 +109,7 @@ public class BrandService {
     }
 
 
+    public List<Brand> getAllBrandsJson() {
+      return  brandMapper.selectAll(null);
+    }
 }

@@ -5,80 +5,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
     <title>输入提示后查询</title>
-    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main.css"/>
-    <script type="text/javascript"
-            src="https://webapi.amap.com/maps?v=1.4.15&key=2d48cd6bbd59d166e39880aad4842c1c"></script>
-    <style type="text/css">
-        body {
-            font-size: 12px;
-        }
-
-        #tip {
-            background-color: #ddf;
-            color: #333;
-            border: 1px solid silver;
-            box-shadow: 3px 4px 3px 0px silver;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            border-radius: 5px;
-            overflow: hidden;
-            line-height: 20px;
-        }
-
-        #tip input[type="text"] {
-            height: 25px;
-            border: 0;
-            padding-left: 5px;
-            width: 280px;
-            border-radius: 3px;
-            outline: none;
-        }
-
-    </style>
 </head>
 <body>
 
-
-<div id="mapContainer"></div>
-<div id="tip">
-    <input type="text" id="keyword" name="keyword" value="请输入关键字：(选定后搜索)" onfocus='this.value=""'/>
+<h1>云信 Web SDK Online Test</h1>
+<div>
+    <p>
+        <span>APPKEY:</span>
+        <input type="text" id="appkey" value="45c6af3c98409b18a84451215d0bdd6e">
+    </p>
+    <p>
+        <span>ACCOUNT:</span>
+        <input type="text" id="account" value="greatcs4">
+    </p>
+    <p>
+        <span>TOKEN:</span>
+        <input type="text" id="token" value="e10adc3949ba59abbe56e057f20f883e">
+    </p>
+    <p>
+        <button id="connect-sdk">连接SDK</button>
+    </p>
 </div>
+<script src="http://yx-web.nos.netease.com/official/websdk/NIM_Web_SDK_v4.8.0.js"></script>
 
-
-<script type="text/javascript">
-    var windowsArr = [];
-    var marker = [];
-    var map = new AMap.Map("mapContainer", {
-        resizeEnable: true,
-        center: [116.397428, 39.90923],//地图中心点
-        zoom: 13,//地图显示的缩放级别
-        keyboardEnable: false
-    });
-    AMap.plugin(['AMap.Autocomplete', 'AMap.PlaceSearch'], function () {
-        var autoOptions = {
-            city: "上海", //城市，默认全国
-            input: "keyword"//使用联想输入的input的id
-        };
-        autocomplete = new AMap.Autocomplete(autoOptions);
-        var placeSearch = new AMap.PlaceSearch({
-            city: '上海',
-            map: map
+<script>
+    function connectSDK() {
+        var appkey = document.getElementById('appkey').value
+        var account = document.getElementById('account').value
+        var token = document.getElementById('token').value
+        window.nim = SDK.NIM.getInstance({
+            appKey: appkey,
+            account: account,
+            token: token,
+            onconnect: function () {
+                alert('SDK 连接成功')
+                // 连接成功后才能发消息
+                window.nim.sendText({
+                    scene: 'p2p',
+                    to: 'account',
+                    text: 'hello',
+                    done: function sendMsgDone(msg) {
+                    }
+                })
+            },
+            ondisconnect: function (obj) {
+                console.log('SDK 连接断开', obj)
+            },
+            onerror: function (error) {
+                console.log('SDK 连接失败', error)
+            }
         })
-        AMap.event.addListener(autocomplete, "select", function (e) {
-            //TODO 针对选中的poi实现自己的功能
-            placeSearch.setCity(e.poi.adcode);
-            console.log(e.poi.adcode);
-            placeSearch.search(e.poi.name);
+    }
 
-            placeSearch.getDetails(e.poi.id, function (status, result) {
-                // 查询成功时，result即为对应的POI详情
-                console.log(result)
-            })
-            console.log(e)
-        });
-    });
+    document.getElementById('connect-sdk').addEventListener('click', function () {
+        connectSDK()
+    })
 </script>
-<script type="text/javascript" src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>
 </body>
 </html>

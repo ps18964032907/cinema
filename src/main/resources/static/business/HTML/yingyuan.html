@@ -1,738 +1,744 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:http="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>影院 - 猫眼电影 - 一网打尽好电影</title>
     <link rel="stylesheet" href="../CSS/normalize.css">
+    <script src="../../js/jquery.min.js"></script>
     <link rel="stylesheet" href="../CSS/yingyuan.css">
     <link rel="shortcut icon" href="../IMG/Blogo.png" type="image/x-icon">
+    <script src="../../js/vue.js"></script>
+
 </head>
 
 <body>
-    <!-- 顶部 -->
-    <header class="dingbu">
-        <nav>
-            <a href="#" class="logo"></a>
-            <div class="xiala1 bian">
-                <div class="xiala1_1">
-                    <a href="#" class="cd">成都</a>
-                    <span class="sanjiao"></span>
-                    <ul>
-                        <div class="xiala1_1_d">
-                            定位城市：
-                            <a href="#">成都</a>
-                        </div>
-                        <li>
-                            <span>A</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>B</span>
-                            <div>
-                                <a href="#">北京</a>
-                                <a href="#">保定</a>
-                                <a href="#">蚌埠</a>
-                                <a href="#">包头</a>
-                                <a href="#">本溪</a>
-                                <a href="#">巴彦淖尔</a>
-                                <a href="#">白城</a>
-                                <a href="#">白山</a>
-                                <a href="#">毫州</a>
-                                <a href="#">滨州</a>
-                                <a href="#">巴中</a>
-                                <a href="#">北海</a>
-                                <a href="#">百色</a>
-                                <a href="#">毕节</a>
-                                <a href="#">保山</a>
-                                <a href="#">宝鸡</a>
-                                <a href="#">白银</a>
-                                <a href="#">巴州</a>
-                                <a href="#">博尔塔拉</a>
-                                <a href="#">滨海</a>
-                                <a href="#">宝应</a>
-                                <a href="#">北流</a>
-                                <a href="#">博爱</a>
-                                <a href="#">北碚</a>
-                                <a href="#">宝丰</a>
-                                <a href="#">洣阳</a>
-                                <a href="#">博兴</a>
-                                <a href="#">博山</a>
-                                <a href="#">璧山</a>
-                                <a href="#">彬县</a>
-                                <a href="#">宾阳</a>
-                                <a href="#">博白县</a>
-                                <a href="#">博罗县</a>
-                                <a href="#">北镇市</a>
-                                <a href="#">泊头市</a>
-                                <a href="#">北京市</a>
-                                <a href="#">巴彦县</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>C</span>
-                            <div>
-                                <a href="#">重庆</a>
-                                <a href="#">成都</a>
-                                <a href="#">长沙</a>
-                                <a href="#">常州</a>
-                                <a href="#">长春</a>
-                                <a href="#">沧州</a>
-                                <a href="#">承德</a>
-                                <a href="#">赤峰</a>
-                                <a href="#">长治</a>
-                                <a href="#">朝阳</a>
-                                <a href="#">池州</a>
-                                <a href="#">巢湖</a>
-                                <a href="#">滁州</a>
-                                <a href="#">潮州</a>
-                                <a href="#">郴州</a>
-                                <a href="#">常德</a>
-                                <a href="#">崇左</a>
-                                <a href="#">楚雄</a>
-                                <a href="#">昌吉</a>
-                                <a href="#">从化</a>
-                                <a href="#">常熟</a>
-                                <a href="#">长乐</a>
-                                <a href="#">长兴</a>
-                                <a href="#">慈溪</a>
-                                <a href="#">昌邑</a>
-                                <a href="#">长葛</a>
-                                <a href="#">苍南</a>
-                                <a href="#">承德县</a>
-                                <a href="#">赤壁</a>
-                                <a href="#">崇州</a>
-                                <a href="#">淳安</a>
-                                <a href="#">曹妃甸</a>
-                                <a href="#">昌乐</a>
-                                <a href="#">磁县</a>
-                                <a href="#">昌黎</a>
-                                <a href="#">岑溪</a>
-                                <a href="#">成安</a>
-                                <a href="#">长垣</a>
-                                <a href="#">曹县</a>
-                                <a href="#">城阳</a>
-                                <a href="#">茌平</a>
-                                <a href="#">长汀</a>
-                                <a href="#">城固</a>
-                                <a href="#">赤水</a>
-                                <a href="#">常山</a>
-                                <a href="#">长寿</a>
-                                <a href="#">潮安</a>
-                                <a href="#">潮阳</a>
-                                <a href="#">澄海</a>
-                                <a href="#">长丰县</a>
-                                <a href="#">茶陵</a>
-                                <a href="#">常宁市</a>
-                                <a href="#">苍溪县</a>
-                                <a href="#">慈利</a>
-                                <a href="#">长清区</a>
-                                <a href="#">崇明区</a>
-                                <a href="#">成武县</a>
-                                <a href="#">澄江县</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>D</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>E</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>F</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>G</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>H</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>I</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>J</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>K</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>L</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>M</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>N</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>O</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>P</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>Q</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>R</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>S</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>T</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>U</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>V</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>W</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>X</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>Y</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span>Z</span>
-                            <div>
-                                <a href="#">阿拉善盟</a>
-                                <a href="#">鞍山</a>
-                                <a href="#">安庆</a>
-                                <a href="#">安阳</a>
-                                <a href="#">阿坝</a>
-                                <a href="#">安顺</a>
-                                <a href="#">安康</a>
-                                <a href="#">阿勒泰</a>
-                                <a href="#">阿克苏</a>
-                                <a href="#">安吉</a>
-                                <a href="#">安丘</a>
-                                <a href="#">安岳</a>
-                                <a href="#">安平</a>
-                                <a href="#">安宁</a>
-                                <a href="#">安溪</a>
-                                <a href="#">安化</a>
-                                <a href="#">阿勒泰市</a>
-                                <a href="#">安福</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <ul class="navbar">
-                <li>
-                    <a href="./index.html">首页</a>
-                </li>
-                <li>
-                    <a href="./dianying.html">电影</a>
-                </li>
-                <li>
-                    <a href="./yingyuan.html">影院</a>
-                </li>
-                <li>
-                    <a href="./bangdan.html">榜单</a>
-                </li>
-                <li>
-                    <a href="./redian.html">热点</a>
-                </li>
-            </ul>
-            <div class="shouji bian">
-                <span class="shouji_1"></span>
-                <span>APP下载</span>
+<!-- 顶部 -->
+<header class="dingbu">
+    <nav>
+        <a href="#" class="logo"></a>
+        <div class="xiala1 bian">
+            <div class="xiala1_1">
+                <a href="#" class="cd">成都</a>
                 <span class="sanjiao"></span>
-                <div class="shouji1">
-                    <div>
-                        <div></div>
+                <ul>
+                    <div class="xiala1_1_d">
+                        定位城市：
+                        <a href="#">成都</a>
                     </div>
-                    <p>扫码下载APP</p>
-                    <p>选座更优惠</p>
-                </div>
+                    <li>
+                        <span>A</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>B</span>
+                        <div>
+                            <a href="#">北京</a>
+                            <a href="#">保定</a>
+                            <a href="#">蚌埠</a>
+                            <a href="#">包头</a>
+                            <a href="#">本溪</a>
+                            <a href="#">巴彦淖尔</a>
+                            <a href="#">白城</a>
+                            <a href="#">白山</a>
+                            <a href="#">毫州</a>
+                            <a href="#">滨州</a>
+                            <a href="#">巴中</a>
+                            <a href="#">北海</a>
+                            <a href="#">百色</a>
+                            <a href="#">毕节</a>
+                            <a href="#">保山</a>
+                            <a href="#">宝鸡</a>
+                            <a href="#">白银</a>
+                            <a href="#">巴州</a>
+                            <a href="#">博尔塔拉</a>
+                            <a href="#">滨海</a>
+                            <a href="#">宝应</a>
+                            <a href="#">北流</a>
+                            <a href="#">博爱</a>
+                            <a href="#">北碚</a>
+                            <a href="#">宝丰</a>
+                            <a href="#">洣阳</a>
+                            <a href="#">博兴</a>
+                            <a href="#">博山</a>
+                            <a href="#">璧山</a>
+                            <a href="#">彬县</a>
+                            <a href="#">宾阳</a>
+                            <a href="#">博白县</a>
+                            <a href="#">博罗县</a>
+                            <a href="#">北镇市</a>
+                            <a href="#">泊头市</a>
+                            <a href="#">北京市</a>
+                            <a href="#">巴彦县</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>C</span>
+                        <div>
+                            <a href="#">重庆</a>
+                            <a href="#">成都</a>
+                            <a href="#">长沙</a>
+                            <a href="#">常州</a>
+                            <a href="#">长春</a>
+                            <a href="#">沧州</a>
+                            <a href="#">承德</a>
+                            <a href="#">赤峰</a>
+                            <a href="#">长治</a>
+                            <a href="#">朝阳</a>
+                            <a href="#">池州</a>
+                            <a href="#">巢湖</a>
+                            <a href="#">滁州</a>
+                            <a href="#">潮州</a>
+                            <a href="#">郴州</a>
+                            <a href="#">常德</a>
+                            <a href="#">崇左</a>
+                            <a href="#">楚雄</a>
+                            <a href="#">昌吉</a>
+                            <a href="#">从化</a>
+                            <a href="#">常熟</a>
+                            <a href="#">长乐</a>
+                            <a href="#">长兴</a>
+                            <a href="#">慈溪</a>
+                            <a href="#">昌邑</a>
+                            <a href="#">长葛</a>
+                            <a href="#">苍南</a>
+                            <a href="#">承德县</a>
+                            <a href="#">赤壁</a>
+                            <a href="#">崇州</a>
+                            <a href="#">淳安</a>
+                            <a href="#">曹妃甸</a>
+                            <a href="#">昌乐</a>
+                            <a href="#">磁县</a>
+                            <a href="#">昌黎</a>
+                            <a href="#">岑溪</a>
+                            <a href="#">成安</a>
+                            <a href="#">长垣</a>
+                            <a href="#">曹县</a>
+                            <a href="#">城阳</a>
+                            <a href="#">茌平</a>
+                            <a href="#">长汀</a>
+                            <a href="#">城固</a>
+                            <a href="#">赤水</a>
+                            <a href="#">常山</a>
+                            <a href="#">长寿</a>
+                            <a href="#">潮安</a>
+                            <a href="#">潮阳</a>
+                            <a href="#">澄海</a>
+                            <a href="#">长丰县</a>
+                            <a href="#">茶陵</a>
+                            <a href="#">常宁市</a>
+                            <a href="#">苍溪县</a>
+                            <a href="#">慈利</a>
+                            <a href="#">长清区</a>
+                            <a href="#">崇明区</a>
+                            <a href="#">成武县</a>
+                            <a href="#">澄江县</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>D</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>E</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>F</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>G</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>H</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>I</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>J</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>K</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>L</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>M</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>N</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>O</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>P</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>Q</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>R</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>S</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>T</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>U</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>V</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>W</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>X</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>Y</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>Z</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            <div class="sousuo">
-                <input class="sousuo_1" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off">
-                <input class="sousuo_2" type="submit" value="">
-            </div>
-            <div class="denglu bian">
-                <a href="#">
-                    <img src="../IMG/avatar.png" alt="">
-                </a>
-                <span class="sanjiao"></span>
+        </div>
+        <ul class="navbar">
+            <li>
+                <a href="./index.html">首页</a>
+            </li>
+            <li>
+                <a href="./dianying.html">电影</a>
+            </li>
+            <li>
+                <a href="./yingyuan.html">影院</a>
+            </li>
+            <li>
+                <a href="./bangdan.html">榜单</a>
+            </li>
+            <li>
+                <a href="./redian.html">热点</a>
+            </li>
+        </ul>
+        <div class="shouji bian">
+            <span class="shouji_1"></span>
+            <span>APP下载</span>
+            <span class="sanjiao"></span>
+            <div class="shouji1">
                 <div>
-                    <a href="./login.html" target="blank">登录</a>
+                    <div></div>
                 </div>
+                <p>扫码下载APP</p>
+                <p>选座更优惠</p>
             </div>
-        </nav>
-    </header>
-    <div class="main">
+        </div>
+        <div class="sousuo">
+            <input class="sousuo_1" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off">
+            <input class="sousuo_2" type="submit" value="">
+        </div>
+        <div class="denglu bian">
+            <a href="#">
+                <img src="../IMG/avatar.png" alt="">
+            </a>
+            <span class="sanjiao"></span>
+            <div>
+                <a href="./login.html" target="blank">登录</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="main">
+    <form id="form">
+
         <article>
             <!-- 电影详细分类 -->
-            <div class="lei">
+            <div class="lei" id="app">
+                <input type="hidden" name="province" :value="province">
+                <input type="hidden" name="city" :value="city">
                 <ul class="lei_1">
                     <li>
                         <div>
@@ -740,535 +746,272 @@
                         </div>
                         <ul class="lei_2">
                             <li>
-                                <input type="radio" id="pingpai1" name="leixing" checked>
-                                <label for="pingpai1">
-                                    <a>全部</a>
+
+
+                            <span>
+                            <input type="radio" id="pingpai1" name="brand" value="" checked v-on:click="getAllMoive">
+                            <label for="pingpai1">
+                                <a>全部</a>
+                            </label>
+                            </span>
+
+                                <span v-for="(brand,index) in allBrand" class="brand">
+                                <input type="radio" :id="'pingpai'+(index+2)" name="brand" :value="brand.brandId"
+                                       v-on:click="getAllMoive">
+                                <label :for="'pingpai'+(index+2)">
+                                    <a>{{brand.brandName}}</a>
                                 </label>
-                                <input type="radio" id="pingpai2" name="leixing">
-                                <label for="pingpai2">
-                                    <a>万达影城</a>
-                                </label>
-                                <input type="radio" id="pingpai3" name="leixing">
-                                <label for="pingpai3">
-                                    <a>太平洋电影城</a>
-                                </label>
-                                <input type="radio" id="pingpai4" name="leixing">
-                                <label for="pingpai4">
-                                    <a>星美国际影城</a>
-                                </label>
-                                <input type="radio" id="pingpai5" name="leixing">
-                                <label for="pingpai5">
-                                    <a>CGV影城</a>
-                                </label>
-                                <input type="radio" id="pingpai6" name="leixing">
-                                <label for="pingpai6">
-                                    <a>橙天嘉禾影城</a>
-                                </label>
-                                <input type="radio" id="pingpai7" name="leixing">
-                                <label for="pingpai7">
-                                    <a>横店电影城</a>
-                                </label>
-                                <input type="radio" id="pingpai8" name="leixing">
-                                <label for="pingpai8">
-                                    <a>金逸影城</a>
-                                </label>
-                                <input type="radio" id="pingpai9" name="leixing">
-                                <label for="pingpai9">
-                                    <a>大地影院</a>
-                                </label>
-                                <input type="radio" id="pingpai10" name="leixing">
-                                <label for="pingpai10">
-                                    <a>卢米埃影城</a>
-                                </label>
-                                <input type="radio" id="pingpai11" name="leixing">
-                                <label for="pingpai11">
-                                    <a>UME国际影城</a>
-                                </label>
-                                <input type="radio" id="pingpai12" name="leixing">
-                                <label for="pingpai12">
-                                    <a>SFC上影影城</a>
-                                </label>
-                                <input type="radio" id="pingpai13" name="leixing">
-                                <label for="pingpai13">
-                                    <a>保利国际影城</a>
-                                </label>
-                                <input type="radio" id="pingpai14" name="leixing">
-                                <label for="pingpai14">
-                                    <a>中影国际影城</a>
-                                </label>
-                                <input type="radio" id="pingpai15" name="leixing">
-                                <label for="pingpai15">
-                                    <a>越界影城</a>
-                                </label>
-                                <input type="radio" id="pingpai16" name="leixing">
-                                <label for="pingpai16">
-                                    <a>和平影城城</a>
-                                </label>
-                                <input type="radio" id="pingpai17" name="leixing">
-                                <label for="pingpai17">
-                                    <a>幸福蓝海国际影城</a>
-                                </label>
-                                <input type="radio" id="pingpai18" name="leixing">
-                                <label for="pingpai18">
-                                    <a>雅图数字影院</a>
-                                </label>
-                                <input type="radio" id="pingpai19" name="leixing">
-                                <label for="pingpai19">
-                                    <a>新时代影城</a>
-                                </label>
-                                <input type="radio" id="pingpai20" name="leixing">
-                                <label for="pingpai20">
-                                    <a>耀莱成龙国际影城</a>
-                                </label>
-                                <input type="radio" id="pingpai21" name="leixing">
-                                <label for="pingpai21">
-                                    <a>恒大影城</a>
-                                </label>
-                                <input type="radio" id="pingpai22" name="leixing">
-                                <label for="pingpai22">
-                                    <a>峨眉影城</a>
-                                </label>
-                                <input type="radio" id="pingpai23" name="leixing">
-                                <label for="pingpai23">
-                                    <a>百丽宫影城</a>
-                                </label>
-                                <input type="radio" id="pingpai24" name="leixing">
-                                <label for="pingpai24">
-                                    <a>百老汇影城</a>
-                                </label>
-                                <input type="radio" id="qita" name="leixing">
-                                <label for="qita">
-                                    <a>其他</a>
-                                </label>
+                            </span>
+
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <div>
-                            行政区：
-                        </div>
-                        <ul class="lei_2">
-                            <li>
-                                <input type="radio" id="xingzheng1" name="quyu" checked>
-                                <label for="xingzheng1">
-                                    <a>全部</a>
-                                </label>
-                                <input type="radio" id="xingzheng2" name="quyu">
-                                <label for="xingzheng2">
-                                    <a>地铁附近</a>
-                                </label>
-                                <input type="radio" id="xingzheng3" name="quyu">
-                                <label for="xingzheng3">
-                                    <a>武侯区</a>
-                                </label>
-                                <input type="radio" id="xingzheng4" name="quyu">
-                                <label for="xingzheng4">
-                                    <a>郫县</a>
-                                </label>
-                                <input type="radio" id="xingzheng5" name="quyu">
-                                <label for="xingzheng5">
-                                    <a>锦江区</a>
-                                </label>
-                                <input type="radio" id="xingzheng6" name="quyu">
-                                <label for="xingzheng6">
-                                    <a>双流区</a>
-                                </label>
-                                <input type="radio" id="xingzheng7" name="quyu">
-                                <label for="xingzheng7">
-                                    <a>青羊区</a>
-                                </label>
-                                <input type="radio" id="xingzheng8" name="quyu">
-                                <label for="xingzheng8">
-                                    <a>成华区</a>
-                                </label>
-                                <input type="radio" id="xingzheng9" name="quyu">
-                                <label for="xingzheng9">
-                                    <a>新都区</a>
-                                </label>
-                                <input type="radio" id="xingzheng10" name="quyu">
-                                <label for="xingzheng10">
-                                    <a>金牛区</a>
-                                </label>
-                                <input type="radio" id="xingzheng11" name="quyu">
-                                <label for="xingzheng11">
-                                    <a>龙泉驿区</a>
-                                </label>
-                                <input type="radio" id="xingzheng12" name="quyu">
-                                <label for="xingzheng12">
-                                    <a>金堂县</a>
-                                </label>
-                                <input type="radio" id="xingzheng13" name="quyu">
-                                <label for="xingzheng13">
-                                    <a>温江区</a>
-                                </label>
-                                <input type="radio" id="xingzheng14" name="quyu">
-                                <label for="xingzheng14">
-                                    <a>崇州市</a>
-                                </label>
-                                <input type="radio" id="xingzheng15" name="quyu">
-                                <label for="xingzheng15">
-                                    <a>都江堰市</a>
-                                </label>
-                                <input type="radio" id="xingzheng16" name="quyu">
-                                <label for="xingzheng16">
-                                    <a>大邑县</a>
-                                </label>
-                                <input type="radio" id="xingzheng17" name="quyu">
-                                <label for="xingzheng17">
-                                    <a>青白江区</a>
-                                </label>
-                                <input type="radio" id="xingzheng18" name="quyu">
-                                <label for="xingzheng18">
-                                    <a>邛崃市</a>
-                                </label>
-                                <input type="radio" id="xingzheng19" name="quyu">
-                                <label for="xingzheng19">
-                                    <a>简阳市</a>
-                                </label>
-                                <input type="radio" id="xingzheng20" name="quyu">
-                                <label for="xingzheng20">
-                                    <a>彭州市</a>
-                                </label>
-                                <input type="radio" id="xingzheng21" name="quyu">
-                                <label for="xingzheng21">
-                                    <a>新津县</a>
-                                </label>
-                                <input type="radio" id="xingzheng22" name="quyu">
-                                <label for="xingzheng22">
-                                    <a>高新区</a>
-                                </label>
-                                <input type="radio" id="xingzheng23" name="quyu">
-                                <label for="xingzheng23">
-                                    <a>蒲江县</a>
-                                </label>
-                            </li>
-                        </ul>
-                    </li>
+
                     <li>
                         <div>
                             特殊厅：
                         </div>
                         <ul class="lei_2">
                             <li>
-                                <input type="radio" id="teshu1" name="niandai" checked>
+
+                                <input type="radio" id="teshu1" name="hallType" value="" checked
+                                       v-on:click="getAllMoive">
                                 <label for="teshu1">
                                     <a>全部</a>
                                 </label>
-                                <input type="radio" id="teshu2" name="niandai">
-                                <label for="teshu2">
-                                    <a>IMAX厅</a>
+
+                                <span v-for="(hallType,index) in allHallType">
+                                    <input type="radio" :id="'teshu'+(index+2)" :value="hallType.htId" name="hallType"
+                                           v-on:click="getAllMoive">
+                                    <label :for="'teshu'+(index+2)">
+                                        <a>{{hallType.htName}}</a>
+                                    </label>
+                               </span>
+
+
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                    <li>
+                        <div>
+                            行政区：
+                        </div>
+                        <ul class="lei_2">
+                            <li>
+
+                                <input type="radio" id="xingzheng1" value="" name="area" checked
+                                       v-on:click="getAllMoive">
+                                <label for="xingzheng1">
+                                    <a>全部</a>
                                 </label>
-                                <input type="radio" id="teshu3" name="niandai">
-                                <label for="teshu3">
-                                    <a>CGS中国巨幕厅</a>
-                                </label>
-                                <input type="radio" id="teshu4" name="niandai">
-                                <label for="teshu4">
-                                    <a>杜比全景声厅</a>
-                                </label>
-                                <input type="radio" id="teshu5" name="niandai">
-                                <label for="teshu5">
-                                    <a>Dolby Cimema厅</a>
-                                </label>
-                                <input type="radio" id="teshu6" name="niandai">
-                                <label for="teshu6">
-                                    <a>realD厅</a>
-                                </label>
-                                <input type="radio" id="teshu7" name="niandai">
-                                <label for="teshu7">
-                                    <a>realD 6FL厅</a>
-                                </label>
-                                <input type="radio" id="teshu8" name="niandai">
-                                <label for="teshu8">
-                                    <a>LUXE巨幕厅</a>
-                                </label>
-                                <input type="radio" id="teshu9" name="niandai">
-                                <label for="teshu9">
-                                    <a>4DX厅</a>
-                                </label>
-                                <input type="radio" id="teshu10" name="niandai">
-                                <label for="teshu10">
-                                    <a>DTS:X临境音乐厅</a>
-                                </label>
-                                <input type="radio" id="teshu11" name="niandai">
-                                <label for="teshu11">
-                                    <a>儿童厅</a>
-                                </label>
-                                <input type="radio" id="teshu12" name="niandai">
-                                <label for="teshu12">
-                                    <a>4K厅</a>
-                                </label>
-                                <input type="radio" id="teshu13" name="niandai">
-                                <label for="teshu13">
-                                    <a>4D厅</a>
-                                </label>
-                                <input type="radio" id="teshu14" name="niandai">
-                                <label for="teshu14">
-                                    <a>巨幕厅</a>
-                                </label>
+
+                                <span v-for="(district,index) in districts">
+                                    <input type="radio" :id="'xingzheng'+(index+2)" name="area" :value="district.name"
+                                           v-on:click="getAllMoive">
+                                    <label :for="'xingzheng'+(index+2)">
+                                        <a>{{district.name}}</a>
+                                    </label>
+                                </span>
+
                             </li>
                         </ul>
                     </li>
                 </ul>
+
+                </li>
+                </ul>
             </div>
         </article>
-    </div>
-    <!-- 影院列表 -->
-    <div class="liebiao">
-        <h3>影院列表</h3>
-        <ul>
-            <!-- 1 -->
-            <li>
-                <div>
-                    <a href="#">太平洋影城(北欧知识城店)</a>
-                    <p>地址：新都区斑竹园镇中利路169号北欧商业广场4号楼4楼</p>
-                </div>
-                <div>
-                    <p>
-                        <span>￥</span>
-                        <span>24</span>
-                        <span>起</span>
-                    </p>
-                    <a href="#">选座购票</a>
-                </div>
-            </li>
-            <!-- 2 -->
-            <li>
-                <div>
-                    <a href="#">承光国际影城</a>
-                    <p>地址：双流区临港路二段承光影城</p>
-                </div>
-                <div>
-                    <p>
-                        <span>￥</span>
-                        <span>33</span>
-                        <span>起</span>
-                    </p>
-                    <a href="#">选座购票</a>
-                </div>
-            </li>
-            <!-- 3 -->
-            <li>
-                <div>
-                    <a href="#">联娱国际影城(兰天店)</a>
-                    <p>地址：金堂县赵镇新建路133号兰天城市广场5号楼四楼</p>
-                </div>
-                <div>
-                    <p>
-                        <span>￥</span>
-                        <span>28</span>
-                        <span>起</span>
-                    </p>
-                    <a href="#">选座购票</a>
-                </div>
-            </li>
-            <!-- 4 -->
-            <li>
-                <div>
-                    <a href="#">万达影城(双流万达广场店)</a>
-                    <p>地址：双流区星空路二段万达广场四楼</p>
-                </div>
-                <div>
-                    <p>
-                        <span>￥</span>
-                        <span>36.5</span>
-                        <span>起</span>
-                    </p>
-                    <a href="#">选座购票</a>
-                </div>
-            </li>
-            <!-- 5 -->
-            <li>
-                <div>
-                    <a href="#">天智创客影城(川外店)</a>
-                    <p>地址：都江堰市大观镇高尔夫大街367号四川外国语大学成都学院33栋百汇园4楼</p>
-                </div>
-                <div>
-                    <p>
-                        <span>￥</span>
-                        <span>23</span>
-                        <span>起</span>
-                    </p>
-                    <a href="#">选座购票</a>
-                </div>
-            </li>
-            <!-- 6 -->
-            <li>
-                <div>
-                    <a href="#">太平洋影城(羊安店)</a>
-                    <p>地址：邛崃市永康大道33号</p>
-                </div>
-                <div>
-                    <p>
-                        <span>￥</span>
-                        <span>28</span>
-                        <span>起</span>
-                    </p>
-                    <a href="#">选座购票</a>
-                </div>
-            </li>
-            <!-- 7 -->
-            <li>
-                <div>
-                    <a href="#">太平洋影城(新津店)</a>
-                    <p>地址：新津县迎宾大道74号（原艺术中心）</p>
-                </div>
-                <div>
-                    <p>
-                        <span>￥</span>
-                        <span>34</span>
-                        <span>起</span>
-                    </p>
-                    <a href="#">选座购票</a>
-                </div>
-            </li>
-            <!-- 8 -->
-            <li>
-                <div>
-                    <a href="#">CGV影城(科华店)</a>
-                    <p>地址：武侯区长荣路66号泛悦国际购物中心4楼</p>
-                </div>
-                <div>
-                    <p>
-                        <span>￥</span>
-                        <span>36</span>
-                        <span>起</span>
-                    </p>
-                    <a href="#">选座购票</a>
-                </div>
-            </li>
-            <!-- 9 -->
-            <li>
-                <div>
-                    <a href="#">天智创客影城(成都大学店)</a>
-                    <p>地址：龙泉驿区十陵镇成都大学第六教学楼</p>
-                </div>
-                <div>
-                    <p>
-                        <span>￥</span>
-                        <span>33</span>
-                        <span>起</span>
-                    </p>
-                    <a href="#">选座购票</a>
-                </div>
-            </li>
-            <!-- 10 -->
-            <li>
-                <div>
-                    <a href="#">太平洋影城(时代豪廷店)</a>
-                    <p>地址：郫都区望丛中路1092号时代豪廷广场3楼、4楼</p>
-                </div>
-                <div>
-                    <p>
-                        <span>￥</span>
-                        <span>23</span>
-                        <span>起</span>
-                    </p>
-                    <a href="#">选座购票</a>
-                </div>
-            </li>
-            <!-- 11 -->
-            <li>
-                <div>
-                    <a href="#">CGV影城(卓锦店)</a>
-                    <p>地址：锦江区枫树街2号卓锦曼购中心3楼</p>
-                </div>
-                <div>
-                    <p>
-                        <span>￥</span>
-                        <span>36</span>
-                        <span>起</span>
-                    </p>
-                    <a href="#">选座购票</a>
-                </div>
-            </li>
-            <!-- 12 -->
-            <li>
-                <div>
-                    <a href="#">太平洋影城(安仁戏院)</a>
-                    <p>地址：大邑县安仁镇裕民街仁和街交叉口南100米路东（原星廷戏院）</p>
-                </div>
-                <div>
-                    <p>
-                        <span>￥</span>
-                        <span>26</span>
-                        <span>起</span>
-                    </p>
-                    <a href="#">选座购票</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <!-- 页 -->
-    <div class="ye">
-        <ul>
-            <li>
-                <input type="radio" id="1" name="ye" checked>
-                <label for="1">
-                    <a>1</a>
-                </label>
-                <input type="radio" id="2" name="ye">
-                <label for="2">
-                    <a>2</a>
-                </label>
-                <input type="radio" id="3" name="ye">
-                <label for="3">
-                    <a>3</a>
-                </label>
-                <input type="radio" id="4" name="ye">
-                <label for="4">
-                    <a>4</a>
-                </label>
-                <input type="radio" id="5" name="ye">
-                <label for="5">
-                    <a>5</a>
-                </label>
-                <input type="radio" id="dian" name="ye">
-                <label for="dian">
-                    <a>···</a>
-                </label>
-                <input type="radio" id="17" name="ye">
-                <label for="17">
-                    <a>17</a>
-                </label>
-                <input type="radio" id="xia" name="ye">
-                <label for="xia">
-                    <a>下一页</a>
-                </label>
-            </li>
-        </ul>
-    </div>
-        <!-- 底部 -->
-        <footer>
+    </form>
+</div>
+<!-- 影院列表 -->
+<div class="liebiao" id="vueCinema">
+    <h3>影院列表</h3>
+    <ul>
+
+        <!-- 1 -->
+        <li v-for="cinema in cinemas">
+            <div>
+                <a href="#">{{cinema.cinemaName}}</a>
+                <p>地址：{{cinema.cinemaLocation}}</p>
+            </div>
+            <div>
                 <p>
-                    商务合作邮箱：v@maoyan.com 客服电话：10105335 违法和不良信息举报电话：4006018900
+                    <span>￥</span>
+                    <span>24</span>
+                    <span>起</span>
                 </p>
-                <p>
-                    投诉举报邮箱：tousujubao@meituan.com 舞弊线索举报邮箱：wubijubao@maoyan.com
-                </p>
-                <p>
-                    友情链接 :
-                    <a href="#">美团网</a>
-                    <span></span>
-                    <a href="#">美团下载</a>
-                    <span></span>
-                    <a href="#">欢喜首映</a>
-                </p>
-                <p>
-                    ©2016猫眼电影 maoyan.com
-                    <a href="#">京ICP证160733号</a>
-                    <a href="#">京ICP备16022489号-1</a>
-                    <a href="#">京公网安备 11010102003232号</a>
-                    <a href="#">网络文化经营许可证</a>
-                    <a href="#">电子公告服务规则</a>
-                </p>
-                <p>
-                    北京猫眼文化传媒有限公司
-                </p>
-            </footer>
-            <!-- 喵 -->
-            <a class="miao" href="./zajindan.html" target="blank">
-            </a>
+                <a href="#">选座购票</a>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!-- 页 -->
+<div class="ye">
+    <ul>
+        <li>
+            <input type="radio" id="1" name="ye" checked>
+            <label for="1">
+                <a>1</a>
+            </label>
+            <input type="radio" id="2" name="ye">
+            <label for="2">
+                <a>2</a>
+            </label>
+            <input type="radio" id="3" name="ye">
+            <label for="3">
+                <a>3</a>
+            </label>
+            <input type="radio" id="4" name="ye">
+            <label for="4">
+                <a>4</a>
+            </label>
+            <input type="radio" id="5" name="ye">
+            <label for="5">
+                <a>5</a>
+            </label>
+            <input type="radio" id="dian" name="ye">
+            <label for="dian">
+                <a>···</a>
+            </label>
+            <input type="radio" id="17" name="ye">
+            <label for="17">
+                <a>17</a>
+            </label>
+            <input type="radio" id="xia" name="ye">
+            <label for="xia">
+                <a>下一页</a>
+            </label>
+        </li>
+    </ul>
+</div>
+<!-- 底部 -->
+<footer>
+    <p>
+        商务合作邮箱：v@maoyan.com 客服电话：10105335 违法和不良信息举报电话：4006018900
+    </p>
+    <p>
+        投诉举报邮箱：tousujubao@meituan.com 舞弊线索举报邮箱：wubijubao@maoyan.com
+    </p>
+    <p>
+        友情链接 :
+        <a href="#">美团网</a>
+        <span></span>
+        <a href="#">美团下载</a>
+        <span></span>
+        <a href="#">欢喜首映</a>
+    </p>
+    <p>
+        ©2016猫眼电影 maoyan.com
+        <a href="#">京ICP证160733号</a>
+        <a href="#">京ICP备16022489号-1</a>
+        <a href="#">京公网安备 11010102003232号</a>
+        <a href="#">网络文化经营许可证</a>
+        <a href="#">电子公告服务规则</a>
+    </p>
+    <p>
+        北京猫眼文化传媒有限公司
+    </p>
+</footer>
+<!-- 喵 -->
+<a class="miao" href="./zajindan.html" target="blank">
+</a>
 </body>
+<script src='https://webapi.amap.com/maps?v=2.0&key=2d48cd6bbd59d166e39880aad4842c1c'></script>
+<script src="/js/distpicker-master/dist/distpicker.js"
+        th:src="@{/js/distpicker-master/dist/distpicker.js}"></script>
+<script>
+
+
+    var vue = new Vue({
+        el: '#app',
+        data: {
+
+            allBrand: {},
+            districts: {},
+            allHallType: {},
+            city: "",
+            province: ""
+
+        },
+
+        methods: {
+            getAllMoive: function () {
+                console.log($("#form").serialize());
+                getAllCinema($("#form").serialize())
+            }
+
+        },
+        mounted: function () {
+
+            var _this = this;
+            $.get("/brand/getAllBrandsJson", function (data) {
+                _this.allBrand = data
+            });
+
+            $.get("/cinema/getAllHallType", function (data) {
+                _this.allHallType = data
+            });
+
+            AMap.plugin('AMap.CitySearch', function () {
+                var citySearch = new AMap.CitySearch();
+                citySearch.getLocalCity(function (status, result) {
+                    if (status === 'complete' && result.info === 'OK') {
+                        // 查询成功，result即为当前所在城市信息
+                        _this.city = result.city;
+                        _this.province = result.province;
+                        console.log(_this.province)
+                        
+                        var cityCode = null;
+                        $.get("https://restapi.amap.com/v3/config/district?key=815ea338cd645cc5e60a7feed7a5cf04&keywords=" + result.city + "&subdistrict=0&extensions=base", function (data) {
+                            cityCode = data.districts[0].citycode
+
+                            $.get("https://restapi.amap.com/v3/config/district?key=815ea338cd645cc5e60a7feed7a5cf04&keywords=" + cityCode + "&subdistrict=0&extensions=base", function (data) {
+
+                                _this.districts = data.districts;
+
+                                if (cityCode == '021') {
+                                    _this.districts.shift();
+                                }
+                                _this.districts.shift();
+
+
+                            });
+                        });
+                    }
+                })
+            });
+
+
+        },
+        beforeUpdate: function () {
+            getAllCinema($("#form").serialize());
+        }
+
+    });
+
+
+    var vueCinema = new Vue({
+        el: '#vueCinema',
+        data: {
+
+            cinemas: {},
+
+
+        },
+    });
+
+    function getAllCinema(data) {
+        $.get("/cinema/getAllCinemaByAll", data, function (data2) {
+            vueCinema.cinemas = data2
+        })
+
+    }
+
+</script>
+<script src="/js/distpicker-master/dist/distpicker.js" th:src="@{/js/distpicker-master/dist/distpicker.js}"></script>
 
 </html>

@@ -31,7 +31,7 @@ public class BrandController {
 
     @RequestMapping("/getAll")
     @ResponseBody
-    public ReturnUtil getAllBrands(Integer page, Integer limit,Brand brand) {
+    public ReturnUtil getAllBrands(Integer page, Integer limit, Brand brand) {
         try {
             PageInfo<Brand> pageInfo = brandService.getAllBrands(page, limit, brand);
             ReturnUtil returnUtil = new ReturnUtil(0, "success", pageInfo.getTotal(), pageInfo.getList());
@@ -40,6 +40,14 @@ public class BrandController {
             e.printStackTrace();
             return new ReturnUtil().failure();
         }
+    }
+
+
+    @RequestMapping("/getAllBrandsJson")
+    @ResponseBody
+    public List<Brand> getAllBrandsJson() {
+        return brandService.getAllBrandsJson();
+
     }
 
 
@@ -91,6 +99,7 @@ public class BrandController {
 
     /**
      * 编辑品牌
+     *
      * @param brand
      * @return
      */
@@ -105,6 +114,7 @@ public class BrandController {
             return "ERROR";
         }
     }
+
     @RequestMapping("/del")
     @ResponseBody
     public String del(@RequestBody Integer brandId) {

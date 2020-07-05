@@ -6,8 +6,10 @@ package com.pmsj.cinema.system.controller;
  * @Date 2020/7/3 19:06
  **/
 
+import com.github.pagehelper.PageInfo;
 import com.pmsj.cinema.common.entity.Brand;
 import com.pmsj.cinema.common.entity.Cinema;
+import com.pmsj.cinema.common.entity.HallTpye;
 import com.pmsj.cinema.common.entity.Result;
 import com.pmsj.cinema.common.vo.CinemaVo;
 import com.pmsj.cinema.system.service.CinemaService;
@@ -16,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,15 @@ public class CinemaController {
     @RequestMapping("getAllCinema")
     @ResponseBody
     public ReturnUtil getAllCinema(Integer page, Integer limit, Cinema cinema) {
-        ReturnUtil returnUtil = new ReturnUtil(0, "success", (long) cinemaService.getAllCinema().size(), cinemaService.getAllCinema());
+        if (page == null || page == 0) {
+            page = 1;
+        }
+        if (limit == null || limit == 0) {
+            limit = 5;
+        }
+
+        PageInfo<CinemaVo> allCinema = cinemaService.getAllCinema(page, limit, cinema);
+        ReturnUtil returnUtil = new ReturnUtil(0, "success", allCinema.getTotal(), allCinema.getList());
         return returnUtil;
     }
 
@@ -60,6 +69,20 @@ public class CinemaController {
         Cinema cinema = cinemaService.getCinemaById(cinemaId);
         map.put("cinema", cinema);
         return "system/page/table/editCinema.html";
+
+    }
+
+    @RequestMapping("getAllHallType")
+    @ResponseBody
+    public List<HallTpye> getAllHallType() {
+        return cinemaService.getAllHallType();
+    }
+
+
+    @RequestMapping("getAllCinemaByAll")
+    @ResponseBody
+    public List<CinemaVo> getAllCinemaByAll(String brand, String hallType, String area, String province, String city) {
+        return cinemaService.getAllCinemaByAll(brand, hallType, area, province, city);
 
     }
 
