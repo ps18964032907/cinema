@@ -92,7 +92,7 @@
         select max(movie_id)
         from movie
     </select>
-    <select id="selectAllOnlineMovie" resultMap="BaseResultMap">
+    <select id="selectAllMovie" resultMap="BaseResultMap">
         SELECT m.*
         FROM
         (movie_tpye_mid i
@@ -106,11 +106,11 @@
         ON
         i.movie_id = m.`movie_id`
         <where>
-            movie_count>0
-            and
-            movie_status=1
-            <if test="typeId!=0">
-            and t.type_id like #{typeId}
+            <if test="status!=0 ">
+            movie_status = #{status}
+            </if>
+            <if test="tId!='' and tId!=0 and tId!=null">
+            and t.type_id = #{tId}
             </if>
             <if test="area!=''">
             and m.movie_area like '%${area}%'
@@ -118,78 +118,88 @@
             <if test="year!=''">
             and m.movie_release_time like '%${year}%'
             </if>
+            GROUP BY m.movie_id
+            <if test="paixu==1">
+            ORDER BY movie_box_office DESC
+            </if>
+            <if test="paixu==2">
+                ORDER BY movie_release_time DESC
+            </if>
+            <if test="paixu==3">
+                ORDER BY movie_score DESC
+            </if>
+
 
         </where>
 
-        GROUP BY m.`movie_id`
 
 
     </select>
 
 
-    <select id="selectAllComingSoonMovie" resultMap="BaseResultMap">
-        SELECT m.*
-        FROM
-        (movie_tpye_mid i
-        LEFT JOIN
-        movie_tpye t
-        ON
-        i.type_id = t.type_id
-        )
-        LEFT JOIN
-        movie m
-        ON
-        i.movie_id = m.`movie_id`
-        <where>
-            movie_count=0
-            and
-            movie_status=2
-            <if test="typeId!=0">
-                and t.type_id = #{typeId}
-            </if>
-            <if test="area!=''">
-                and m.movie_area like '%${area}%'
-            </if>
-            <if test="year!=''">
-                and m.movie_release_time like '%${year}%'
-            </if>
+<!--    <select id="selectAllComingSoonMovie" resultMap="BaseResultMap">-->
+<!--        SELECT m.*-->
+<!--        FROM-->
+<!--        (movie_tpye_mid i-->
+<!--        LEFT JOIN-->
+<!--        movie_tpye t-->
+<!--        ON-->
+<!--        i.type_id = t.type_id-->
+<!--        )-->
+<!--        LEFT JOIN-->
+<!--        movie m-->
+<!--        ON-->
+<!--        i.movie_id = m.`movie_id`-->
+<!--        <where>-->
+<!--            movie_count=0-->
+<!--            and-->
+<!--            movie_status=2-->
+<!--            <if test="typeId!=0">-->
+<!--                and t.type_id = #{typeId}-->
+<!--            </if>-->
+<!--            <if test="area!=''">-->
+<!--                and m.movie_area like '%${area}%'-->
+<!--            </if>-->
+<!--            <if test="year!=''">-->
+<!--                and m.movie_release_time like '%${year}%'-->
+<!--            </if>-->
 
-        </where>
-        GROUP BY m.`movie_id`
-    </select>
+<!--        </where>-->
+<!--        GROUP BY m.`movie_id`-->
+<!--    </select>-->
 
 
-    <select id="selectAllOfflineMovie" resultMap="BaseResultMap">
-        SELECT m.*
-        FROM
-        (movie_tpye_mid i
-        LEFT JOIN
-        movie_tpye t
-        ON
-        i.type_id = t.type_id
-        )
-        LEFT JOIN
-        movie m
-        ON
-        i.movie_id = m.`movie_id`
-        <where>
-            movie_count=0
-            and
-            movie_status=0
-            <if test="typeId!=0">
-                and t.type_id = #{typeId}
-            </if>
-            <if test="area!=''">
-                and m.movie_area like '%${area}%'
-            </if>
-            <if test="year!=''">
-                and m.movie_release_time like '%${year}%'
-            </if>
+<!--    <select id="selectAllOfflineMovie" resultMap="BaseResultMap">-->
+<!--        SELECT m.*-->
+<!--        FROM-->
+<!--        (movie_tpye_mid i-->
+<!--        LEFT JOIN-->
+<!--        movie_tpye t-->
+<!--        ON-->
+<!--        i.type_id = t.type_id-->
+<!--        )-->
+<!--        LEFT JOIN-->
+<!--        movie m-->
+<!--        ON-->
+<!--        i.movie_id = m.`movie_id`-->
+<!--        <where>-->
+<!--            movie_count=0-->
+<!--            and-->
+<!--            movie_status=0-->
+<!--            <if test="typeId!=0">-->
+<!--                and t.type_id = #{typeId}-->
+<!--            </if>-->
+<!--            <if test="area!=''">-->
+<!--                and m.movie_area like '%${area}%'-->
+<!--            </if>-->
+<!--            <if test="year!=''">-->
+<!--                and m.movie_release_time like '%${year}%'-->
+<!--            </if>-->
 
-        </where>
-        GROUP BY m.`movie_id`
+<!--        </where>-->
+<!--        GROUP BY m.`movie_id`-->
 
-    </select>
+<!--    </select>-->
 
 
 </mapper>
