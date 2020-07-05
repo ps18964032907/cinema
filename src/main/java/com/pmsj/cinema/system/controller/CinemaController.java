@@ -81,8 +81,13 @@ public class CinemaController {
 
     @RequestMapping("getAllCinemaByAll")
     @ResponseBody
-    public List<CinemaVo> getAllCinemaByAll(String brand, String hallType, String area, String province, String city) {
-        return cinemaService.getAllCinemaByAll(brand, hallType, area, province, city);
+    public PageInfo<CinemaVo> getAllCinemaByAll(String brand, String hallType, String area, String province, String city, Integer page) {
+
+        if (page == null || page == 0) {
+            page = 3;
+        }
+
+        return cinemaService.getAllCinemaByAll(brand, hallType, area, province, city, page);
 
     }
 

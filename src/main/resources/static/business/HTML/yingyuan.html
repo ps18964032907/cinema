@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="../CSS/yingyuan.css">
     <link rel="shortcut icon" href="../IMG/Blogo.png" type="image/x-icon">
     <script src="../../js/vue.js"></script>
+    <style>
+        .check {
+            border: 1px solid #f00;
+            background-color: #f00;
+            color: white;
+        }
+    </style>
 
 </head>
 
@@ -737,6 +744,7 @@
         <article>
             <!-- 电影详细分类 -->
             <div class="lei" id="app">
+                <input type="hidden" name="page" value="1" id="page">
                 <input type="hidden" name="province" :value="province">
                 <input type="hidden" name="city" :value="city">
                 <ul class="lei_1">
@@ -850,43 +858,78 @@
 </div>
 
 <!-- 页 -->
-<div class="ye">
-    <ul>
-        <li>
-            <input type="radio" id="1" name="ye" checked>
-            <label for="1">
-                <a>1</a>
-            </label>
-            <input type="radio" id="2" name="ye">
-            <label for="2">
-                <a>2</a>
-            </label>
-            <input type="radio" id="3" name="ye">
-            <label for="3">
-                <a>3</a>
-            </label>
-            <input type="radio" id="4" name="ye">
-            <label for="4">
-                <a>4</a>
-            </label>
-            <input type="radio" id="5" name="ye">
-            <label for="5">
-                <a>5</a>
-            </label>
-            <input type="radio" id="dian" name="ye">
-            <label for="dian">
-                <a>···</a>
-            </label>
-            <input type="radio" id="17" name="ye">
-            <label for="17">
-                <a>17</a>
-            </label>
-            <input type="radio" id="xia" name="ye">
-            <label for="xia">
-                <a>下一页</a>
-            </label>
-        </li>
-    </ul>
+<div class="ye" id="vuePage">
+    <form>
+        <ul>
+            <li>
+                <span v-show="prePage != 0">
+                    <input type="radio" name="ye">
+                    <label v-on:click="goPage(prePage)" :for="prePage">
+                        <a>上一页</a>
+                    </label>
+                </span>
+                <span>
+                    <input type="radio" name="ye">
+                    <label v-if="pageNum == 1" class="check" v-on:click="goPage(1)" style="border-color:red ">
+                        <a style="color: white">1</a>
+                    </label>
+                     <label v-else v-on:click="goPage(1)" >
+                        <a>1</a>
+                    </label>
+                 </span>
+
+                <span v-show="hasBefor">
+                    <input type="radio">
+                    <label>
+                        <a>...</a>
+                    </label>
+                 </span>
+
+
+                <span v-for="index in page">
+                    <input v-on:click="goPage(index + startPage - 1)" type="radio"
+                           name="ye">
+                    <label v-if="pageNum == (index + startPage - 1)" class="check" sty
+                           v-on:click="goPage(index + startPage- 1)" style="border-color:red "
+                    >
+                        <a style="color: white">{{(index + startPage- 1)}}</a>
+                    </label>
+                    <label v-else v-on:click="goPage(index + startPage- 1)">
+                        <a>{{(index + startPage- 1)}}</a>
+                    </label>
+                 </span>
+
+
+                <span v-show="hasEnd">
+                    <input type="radio">
+                    <label>
+                        <a>...</a>
+                    </label>
+                 </span>
+
+                <span>
+                    <input type="radio" name="ye">
+                    <label v-if="pageNum == endPage" class="check" v-on:click="goPage(endPage)" style="border-color:red ">
+
+                        <a style="color: white">{{endPage}}</a>
+                    </label>
+                     <label v-else v-on:click="goPage(endPage)">
+                        <a>{{endPage}}</a>
+                    </label>
+                 </span>
+
+
+                <span v-if="nextPage != 0">
+                    <input type="radio" name="ye">
+                    <label v-on:click="goPage(nextPage)">
+                        <a>下一页</a>
+                    </label>
+                 </span>
+
+            </li>
+        </ul>
+    </form>
+
 </div>
 <!-- 底部 -->
 <footer>
@@ -940,7 +983,6 @@
 
         methods: {
             getAllMoive: function () {
-                console.log($("#form").serialize());
                 getAllCinema($("#form").serialize())
             }
 
@@ -964,7 +1006,7 @@
                         _this.city = result.city;
                         _this.province = result.province;
                         console.log(_this.province)
-                        
+
                         var cityCode = null;
                         $.get("https://restapi.amap.com/v3/config/district?key=815ea338cd645cc5e60a7feed7a5cf04&keywords=" + result.city + "&subdistrict=0&extensions=base", function (data) {
                             cityCode = data.districts[0].citycode
@@ -1004,9 +1046,70 @@
         },
     });
 
+
+    var page = new Vue({
+        el: '#vuePage',
+        data: {
+            pageNum: 0,
+            endPage: 0,
+            prePage: 0,
+            nextPage: 0,
+            page: 0,
+            hasBefor: false,
+            hasEnd: false,
+            startPage: 2,
+        },
+        methods: {
+            goPage: function (page) {
+                console.log("aaaaaaaaaaaaa")
+                $("#page").val(page);
+                getAllCinema($("#form").serialize())
+            }
+
+        }
+    });
+
     function getAllCinema(data) {
         $.get("/cinema/getAllCinemaByAll", data, function (data2) {
-            vueCinema.cinemas = data2
+            console.log(data2);
+            vueCinema.cinemas = data2.list;
+            page.pageNum = data2.pageNum - 0;
+            page.endPage = data2.pages - 0;
+            page.prePage = data2.prePage - 0;
+            page.nextPage = data2.nextPage - 0;
+            page.page = data2.pages - 2;
+            page.hasBefor = false;
+            page.hasEnd = false;
+
+            page.startPage = 2;
+
+
+            if (data2.pages > 6) {
+                page.page = 4;
+            }
+
+            if (data2.pageNum >= 5) {
+                page.startPage = data2.pageNum - 2;
+            }
+
+
+            if (data2.pageNum >= 5) {
+                page.hasBefor = true;
+            }
+
+            if (data2.pageNum > 5 && data2.pageNum + 5 > data2.pages) {
+                // data2.pageNum
+                page.page = data2.pages - data2.pageNum + 2;
+
+            }
+
+
+            if (data2.pageNum + 4 <= data2.pages) {
+                page.hasEnd = true;
+
+            }
+
+
         })
 
     }
