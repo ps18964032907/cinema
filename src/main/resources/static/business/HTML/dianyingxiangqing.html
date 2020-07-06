@@ -785,8 +785,11 @@
                         <span>评分</span>
                     </a>
                 </div>
-                <div class="beijing1_2_2_3">
+                <div class="beijing1_2_2_3" v-if="movieInfoUp.movieStatus==1">
                     <a href="#">特惠购票</a>
+                </div>
+                <div class="beijing1_2_2_3" v-if="movieInfoUp.movieStatus==2">
+                    <a href="#">预售购票</a>
                 </div>
             </div>
         </div>
