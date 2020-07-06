@@ -76,7 +76,7 @@ public class CinemaService {
     public PageInfo<CinemaVo> getAllCinemaByAll(String brand, String hallType, String area, String province, String city, Integer page) {
 
 
-        PageHelper.startPage(page, 1);
+        PageHelper.startPage(page, 6);
         List<CinemaVo> allCinemaByAll = cinemaMapper.getAllCinemaByAll(brand, hallType, area, province, city);
 
 

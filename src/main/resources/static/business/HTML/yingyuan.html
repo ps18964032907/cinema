@@ -859,7 +859,7 @@
 
 <!-- 页 -->
 <div class="ye" id="vuePage">
-    <form>
+    <form v-if="endPage > 0">
         <ul>
             <li>
                 <span v-show="prePage != 0">
@@ -873,7 +873,7 @@
                     <label v-if="pageNum == 1" class="check" v-on:click="goPage(1)" style="border-color:red ">
                         <a style="color: white">1</a>
                     </label>
-                     <label v-else v-on:click="goPage(1)" >
+                     <label v-else v-on:click="goPage(1)">
                         <a>1</a>
                     </label>
                  </span>
@@ -886,7 +886,7 @@
                  </span>
 
 
-                <span v-for="index in page">
+                <span v-if="endPage > 0" v-for="index in page">
                     <input v-on:click="goPage(index + startPage - 1)" type="radio"
                            name="ye">
                     <label v-if="pageNum == (index + startPage - 1)" class="check" sty
@@ -907,9 +907,10 @@
                     </label>
                  </span>
 
-                <span>
+                <span v-if="endPage > 1">
                     <input type="radio" name="ye">
-                    <label v-if="pageNum == endPage" class="check" v-on:click="goPage(endPage)" style="border-color:red ">
+                    <label v-if="pageNum == endPage" class="check" v-on:click="goPage(endPage)"
+                           style="border-color:red ">
 
                         <a style="color: white">{{endPage}}</a>
                     </label>
@@ -1061,7 +1062,6 @@
         },
         methods: {
             goPage: function (page) {
-                console.log("aaaaaaaaaaaaa")
                 $("#page").val(page);
                 getAllCinema($("#form").serialize())
             }
@@ -1081,6 +1081,12 @@
             page.hasBefor = false;
             page.hasEnd = false;
 
+            console.log(data2.pages - 2);
+
+            if (data2.pages - 2 < 0) {
+                page.page = 0;
+            }
+
             page.startPage = 2;
 
 
@@ -1099,7 +1105,8 @@
 
             if (data2.pageNum > 5 && data2.pageNum + 5 > data2.pages) {
                 // data2.pageNum
-                page.page = data2.pages - data2.pageNum + 2;
+                page.page = 4;
+                page.startPage = data2.pages - 4;
 
             }
 
