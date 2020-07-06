@@ -952,7 +952,7 @@
                             <a :href="'./dianyingxiangqing.html?movieId='+allmovie.movieId">
                                 <img :src="allmovie.movieImg" alt="" style="width: 160px; height: 220px">
                             </a>
-                            <a href="./dianyingxiangqing.html">购票</a>
+                            <a href="./dianyingxiangqing.html" v-if="allmovie.movieStatus==1||allmovie.movieStatus==2">购票</a>
                         </div>
                         <div>
                             <a :href="'./dianyingxiangqing.html?movieId='+allmovie.movieId">{{allmovie.movieName}}</a>
