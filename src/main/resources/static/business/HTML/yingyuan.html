@@ -964,7 +964,6 @@
                         _this.city = result.city;
                         _this.province = result.province;
                         console.log(_this.province)
-                        
                         var cityCode = null;
                         $.get("https://restapi.amap.com/v3/config/district?key=815ea338cd645cc5e60a7feed7a5cf04&keywords=" + result.city + "&subdistrict=0&extensions=base", function (data) {
                             cityCode = data.districts[0].citycode
