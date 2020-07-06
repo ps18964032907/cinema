@@ -842,7 +842,7 @@
         <!-- 1 -->
         <li v-for="cinema in cinemas">
             <div>
-                <a href="#">{{cinema.cinemaName}}</a>
+                <a :href="'cinemaDetails.html?cinemaId='+cinema.cinemaId">{{cinema.cinemaName}}</a>
                 <p>地址：{{cinema.cinemaLocation}}</p>
             </div>
             <div>
@@ -1006,7 +1006,8 @@
                         // 查询成功，result即为当前所在城市信息
                         _this.city = result.city;
                         _this.province = result.province;
-                        console.log(_this.province);                                           var cityCode = null;
+                        console.log(_this.province);
+                        var cityCode = null;
                         $.get("https://restapi.amap.com/v3/config/district?key=815ea338cd645cc5e60a7feed7a5cf04&keywords=" + result.city + "&subdistrict=0&extensions=base", function (data) {
                             cityCode = data.districts[0].citycode
 
@@ -1094,6 +1095,7 @@
 
             if (data2.pageNum >= 5) {
                 page.startPage = data2.pageNum - 2;
+
             }
 
 
@@ -1106,6 +1108,11 @@
                 page.page = 4;
                 page.startPage = data2.pages - 4;
 
+            }
+
+            if (data2.pageNum >= 5 && data2.pageNum + 1 == data2.pages) {
+                page.page = 3;
+                page.startPage = data2.pageNum - 2
             }
 
 

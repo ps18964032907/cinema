@@ -7,18 +7,18 @@ package com.pmsj.cinema.system.controller;
  **/
 
 import com.github.pagehelper.PageInfo;
-import com.pmsj.cinema.common.entity.Brand;
-import com.pmsj.cinema.common.entity.Cinema;
-import com.pmsj.cinema.common.entity.HallTpye;
-import com.pmsj.cinema.common.entity.Result;
+import com.pmsj.cinema.common.entity.*;
 import com.pmsj.cinema.common.vo.CinemaVo;
+import com.pmsj.cinema.common.vo.HallMovieVo;
 import com.pmsj.cinema.system.service.CinemaService;
 import com.pmsj.cinema.system.util.ReturnUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -114,6 +114,19 @@ public class CinemaController {
         }
         return new Result().success("删除成功", null);
 
+    }
+
+    @RequestMapping("cinemaDetails")
+    @ResponseBody
+    public Cinema cinemaDetails(Integer cinemaId) {
+        return cinemaService.getCinemaById(cinemaId);
+    }
+
+    @RequestMapping("getHallMovies")
+    @ResponseBody
+    public List<HallMovieVo> getHallMovies(Integer cinemaId, @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+
+        return cinemaService.getHallMovies(cinemaId,date);
     }
 }
 

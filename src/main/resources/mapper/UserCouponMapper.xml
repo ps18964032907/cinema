@@ -47,9 +47,9 @@
     LEFT JOIN cinema cinema
     on cinema.cinema_id = con.cinema_id
     where uc.user_id = #{userId}
-    and uc.coupon_date &gt; #{date}
+    and uc.coupon_date &gt;= #{date}
     </select>
-    <select id="getAllOverCoupon" resultType="com.pmsj.cinema.common.vo.UserCouponVo">
+    <select id="getAllOverCoupon" resultMap="BaseResultMap2">
         select *
         from user_coupon uc
         LEFT JOIN coupon c

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0044)https://maoyan.com/cinema/13237?poi=51904564 -->
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--<![endif]-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,10 +29,11 @@
     <meta name="format-detection" content="email=no">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
 
 
-    <script async="" src="../CSS/saved_resource"></script>
-    <script src="../CSS/hm.js.下载"></script>
+    <script async="" src="../CSS/saved_resource" th:src="@{business/CSS/saved_resource}"></script>
+    <script src="../CSS/hm.js.下载" th:src="@{business/CSS/hm.js.下载}"></script>
     <script>"use strict";
     !function () {
         var i = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : "_Owl_", n = window;
@@ -77,8 +78,11 @@
     </script>
     <link rel="stylesheet" href="../CSS/common.d1d257d3.css">
     <link rel="stylesheet" href="../CSS/cinemas-cinema.b26baff1.css">
-    <script crossorigin="anonymous" src="../CSS/stat.88d57c80.js.下载"></script>
-    <script async="" defer="" charset="utf-8" src="../CSS/web.js.下载"></script>
+    <script crossorigin="anonymous" src="../CSS/stat.88d57c80.js.下载"
+            th:src="@{business/CSS/stat.88d57c80.js.下载}"></script>
+    <script src="../../js/jquery.min.js"></script>
+
+    <script async="" defer="" charset="utf-8" src="../CSS/web.js.下载" th:src="@{business/CSS/web.js.下载}"></script>
     <script>if (window.devicePixelRatio >= 2) {
         document.write('<link rel="stylesheet" href="//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:5788b470/image-2x.8ba7074d.css"/>')
     }</script>
@@ -120,6 +124,26 @@
 
     }
 
+    .demo-input {
+        padding-left: 10px;
+        height: 38px;
+        min-width: 262px;
+        line-height: 38px;
+        border: 1px solid #e6e6e6;
+        background-color: #fff;
+        border-radius: 2px;
+    }
+
+    .demo-footer {
+        padding: 50px 0;
+        color: #999;
+        font-size: 14px;
+    }
+
+    .demo-footer a {
+        padding: 0 5px;
+        color: #01AAED;
+    }
 
     .conditionTime {
         background-color: #b3b1b1;
@@ -156,7 +180,7 @@
         width: 100%;
         clear: both;
         border-bottom: 1px solid #cccccc;
-        height: 180px;
+        height: 160px;
         padding-left: 50px;
     }
 
@@ -188,7 +212,7 @@
     }
 
     .moiveTitle {
-        font-size: 18px;
+        font-size: 15px;
         font-weight: bold;
         color: orangered;
     }
@@ -199,7 +223,7 @@
 
     .price {
         margin-left: 400px;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: bold;
         color: orange;
     }
@@ -212,7 +236,7 @@
     .buy a {
         display: inline-block;
         height: 40px;
-        width: 100px;
+        width: 80px;
         background-color: #ff4500;
         text-align: center;
         color: white;
@@ -2582,7 +2606,8 @@
 
         <div class="user-info">
             <div class="user-avatar J-login">
-                <img src="../CSS/7dd82a16316ab32c8359debdb04396ef2897.png">
+                <img src="../CSS/7dd82a16316ab32c8359debdb04396ef2897.png"
+                     th:src="@{business/CSS/7dd82a16316ab32c8359debdb04396ef2897.png}">
                 <span class="caret"></span>
                 <ul class="user-menu no-login-menu">
                     <li><a href="javascript:void 0">登录</a></li>
@@ -2611,22 +2636,24 @@
 </div>
 <div class="header-placeholder"></div>
 
-
-<div class="banner cinema-banner">
+<span id="appVue">
+    <div class="banner cinema-banner">
     <div class="wrapper clearfix">
         <div class="cinema-left">
             <div class="avatar-shadow">
-                <img class="avatar" src="../CSS/a63489de34a41fc04e01d1518df437ab58254.jpg@292w_292h_1e_1c"
-                     alt="万达影城（金山万达广场店）">
+
+                <img class="avatar"
+                     :src="cinema.cinemaImg"
+                     :alt="cinema.cinemaName">
                 <div class="avatar-num">查看全部2张图片</div>
             </div>
         </div>
 
         <div class="cinema-main clearfix">
             <div class="cinema-brief-container">
-                <h1 class="name text-ellipsis">万达影城（金山万达广场店）</h1>
-                <div class="address text-ellipsis">金山区龙皓路1088号万达广场四楼（蒙山北路）</div>
-                <div class="telphone">电话：021-31022888</div>
+                <h1 class="name text-ellipsis">{{cinema.cinemaName}}</h1>
+                <div class="address text-ellipsis">{{cinema.cinemaLocation}}</div>
+                <div class="telphone">电话：{{cinema.cinemaPhone}}</div>
 
                 <div class="features-group">
                     <div class="group-title">影院服务</div>
@@ -2649,226 +2676,8 @@
             </div>
         </div>
 
-        <div class="cinema-map" data-lat="30.754242" data-lng="121.33563"
+        <div class="cinema-map" data-lat="30.754242" id="container" data-lng="121.33563"
              style="position: relative; background-color: rgb(229, 227, 223); overflow: hidden; transform: translateZ(0px);">
-            <span class="show-map"></span>
-            <div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;">
-                <div n="targetElement"
-                     style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;">
-                    <div n="moveElement"
-                         style="position: absolute; left: 0px; top: 0px; z-index: 1; cursor: url(&quot;https://open.map.qq.com/apifiles/2/4/73/theme/grab.cur&quot;) 10 10, default; transform-origin: 0px 0px; transform: matrix(1, 0, 0, 1, -56, -38);">
-                        <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 200;">
-                            <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 101;"></div>
-                        </div>
-                        <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 201;">
-                            <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 102;">
-                                <div style="position: absolute; left: 81px; top: 65px; width: 50px; height: 39px; border: 0px none; overflow: hidden; transform-origin: 19px 35px; transform: rotate(0deg); z-index: 0; cursor: default;">
-                                    <img draggable="false" class="csssprite" dn="2"
-                                         style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: 0px; left: -24px; user-select: none; width: 73px; height: 39px; min-width: 73px; max-width: 73px; min-height: 39px; max-height: 39px;"
-                                         src="../CSS/marker.png"></div>
-                            </div>
-                            <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 103;"></div>
-                        </div>
-                        <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 202;">
-                            <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 104;"></div>
-                            <div draggable="false"
-                                 style="transform: translateZ(0px); position: absolute; left: -200px; top: -200px; z-index: 105; background-color: transparent; background-image: url(&quot;data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAQAIBRAA7&quot;); margin: 0px; padding: 0px; user-select: none; width: 600px; height: 600px;"></div>
-                            <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 106; cursor: default;">
-                                <div style="position: absolute; left: 88px; top: 64px; width: 24px; height: 37px; border: 0px none; overflow: hidden; transform-origin: 12px 36px; transform: rotate(0deg); z-index: 0;">
-                                    <img draggable="false" class="csssprite" dn="2"
-                                         style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: 1px; left: 0px; user-select: none; width: 73px; height: 39px; min-width: 73px; max-width: 73px; min-height: 39px; max-height: 39px;"
-                                         src="../CSS/marker.png" usemap="#smimap1">
-                                    <map name="smimap1" id="smimap1">
-                                        <area href="javascript:void(0);" shape="poly"
-                                              coords="7,-1,13,-1,17,0,22,6,22,7,22,13,21,15,20,17,18,18,15,21,13,24,12,25,12,27,11,30,11,32,10,32,10,28,9,27,9,25,8,24,0,14,0,6"
-                                              title="" style="cursor: pointer;">
-                                    </map>
-                                </div>
-                            </div>
-                            <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 107; cursor: default;"></div>
-                        </div>
-                        <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 99;"></div>
-                        <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 101;">
-                            <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
-                                <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
-                                    <div style="position: absolute; left: -171px; top: -136px; transition: opacity 200ms ease-out 0s;">
-                                        <canvas width="256" height="256" draggable="false"
-                                                style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                    </div>
-                                    <div style="position: absolute; left: -171px; top: 120px; transition: opacity 200ms ease-out 0s;">
-                                        <canvas width="256" height="256" draggable="false"
-                                                style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                    </div>
-                                    <div style="position: absolute; left: 85px; top: -136px; transition: opacity 200ms ease-out 0s;">
-                                        <canvas width="256" height="256" draggable="false"
-                                                style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                    </div>
-                                    <div style="position: absolute; left: 85px; top: 120px; transition: opacity 200ms ease-out 0s;">
-                                        <canvas width="256" height="256" draggable="false"
-                                                style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
-                            <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
-                                <div style="transform: translateZ(0px); position: absolute; left: -171px; top: -136px; transition: opacity 200ms ease-out 0s;">
-                                    <canvas width="256" height="256" draggable="false"
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; background: rgb(247, 245, 245); user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                </div>
-                                <div style="transform: translateZ(0px); position: absolute; left: -171px; top: 120px; transition: opacity 200ms ease-out 0s;">
-                                    <canvas width="256" height="256" draggable="false"
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; background: rgb(247, 245, 245); user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                </div>
-                                <div style="transform: translateZ(0px); position: absolute; left: 85px; top: -136px; transition: opacity 200ms ease-out 0s;">
-                                    <canvas width="256" height="256" draggable="false"
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; background: rgb(247, 245, 245); user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                </div>
-                                <div style="transform: translateZ(0px); position: absolute; left: 85px; top: 120px; transition: opacity 200ms ease-out 0s;">
-                                    <canvas width="256" height="256" draggable="false"
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; background: rgb(247, 245, 245); user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div onpositionupdate="return;"
-                     style="position: absolute; z-index: 1000000; margin: 2px 5px 0px 2px; left: 0px; bottom: 0px;"><a
-                        title="到腾讯地图查看此区域" target="_blank"
-                        href="https://map.qq.com/?center=121.345243%2C30.748636&amp;l=13"
-                        style="position: static; overflow: visible; float: none; display: inline;">
-                    <div style="cursor: pointer; position: relative; overflow: hidden; width: 80px; height: 18px;"><img
-                            draggable="false" class="csssprite" dn="2"
-                            style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: 0px; left: 0px; user-select: none; width: 80px; height: 18px; min-width: 80px; max-width: 80px; min-height: 18px; max-height: 18px;"
-                            src="../CSS/logo.png"></div>
-                </a></div>
-                <div draggable="false" onresize="return;"
-                     style="position: absolute; z-index: 1000000; user-select: none; left: 87px; bottom: 0px;">
-                    <div style="position: absolute; width: 100%; height: 100%; opacity: 0.7;">
-                        <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div>
-                    </div>
-                    <div style="font-family: Arial, sans-serif; white-space: nowrap; font-size: 10px; color: rgb(34, 34, 34); line-height: 16px; direction: ltr; text-align: right; font-weight: normal; font-style: normal; background-color: transparent; position: relative; padding: 0px 5px;">
-                        <span style="font-family: Arial, sans-serif; white-space: nowrap; font-size: 10px; color: rgb(34, 34, 34); line-height: 16px; direction: ltr; text-align: right; font-weight: normal; font-style: normal; background-color: transparent; display: none;">©2017 Tencent - GS(2016)930号 - Data© NavInfo</span><a
-                            style="font-family: Arial, sans-serif; white-space: nowrap; font-size: 10px; color: rgb(34, 34, 34); line-height: 16px; direction: ltr; text-align: right; font-weight: normal; font-style: normal; background-color: transparent; text-decoration: underline; cursor: pointer;">地图数据</a>
-                    </div>
-                </div>
-                <div draggable="false" class="smnoprint" controlwidth="64" controlheight="113"
-                     style="user-select: none; position: absolute; left: 0px; top: 0px;" onpositionupdate="return;">
-                    <div onresize="return;" style="position: absolute; left: 0px; top: 0px;">
-                        <div>
-                            <div style="position: relative; margin-bottom: 0px; margin-top: 5px; width: 64px; height: 64px;">
-                                <div style="position: absolute; z-index: 0; width: 64px; height: 64px; overflow: hidden;">
-                                    <img draggable="false" class="csssprite" dn="2"
-                                         style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -58px; left: -230px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                         src="../CSS/ctrls.png">
-                                    <div title="向左平移"
-                                         style="left: 0px; top: 21.3333px; width: 21px; height: 21px; position: absolute; z-index: 100; cursor: pointer;"></div>
-                                    <div title="向右平移"
-                                         style="left: 42.6667px; top: 21.3333px; width: 21px; height: 21px; position: absolute; z-index: 100; cursor: pointer;"></div>
-                                    <div title="向上平移"
-                                         style="left: 21.3333px; top: 0px; width: 21px; height: 21px; position: absolute; z-index: 100; cursor: pointer;"></div>
-                                    <div title="向下平移"
-                                         style="left: 21.3333px; top: 42.6667px; width: 21px; height: 21px; position: absolute; z-index: 100; cursor: pointer;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="position: absolute; left: 0px; top: 69px;">
-                        <div style="visibility: inherit;">
-                            <div title="放大"
-                                 style="position: relative; margin: 0px 19px; cursor: pointer; overflow: hidden; width: 26px; height: 22px;">
-                                <img draggable="false" class="csssprite" dn="2"
-                                     style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -60px; left: -88px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                     src="../CSS/ctrls.png"></div>
-                            <div style="position: relative; cursor: pointer; margin: 0px 19px; width: 0px; height: 101px; display: none;">
-                                <div title="单击缩放" style="position: absolute; margin: 0px; cursor: pointer;">
-                                    <div style="width: 34px; height: 6px; position: relative; overflow: hidden;"><img
-                                            draggable="false" class="csssprite" dn="2"
-                                            style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -70px; left: -188px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                            src="../CSS/ctrls.png"></div>
-                                    <div style="width: 26px; height: 90px; position: relative; overflow: hidden;"><img
-                                            draggable="false" class="csssprite" dn="2"
-                                            style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: 0px; left: -302px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                            src="../CSS/ctrls.png"></div>
-                                    <div style="width: 34px; height: 6px; position: relative; overflow: hidden;"><img
-                                            draggable="false" class="csssprite" dn="2"
-                                            style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -82px; left: -188px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                            src="../CSS/ctrls.png"></div>
-                                </div>
-                                <div style="display: none;">
-                                    <div style="position: absolute; overflow: hidden; padding-left: 9px; width: 25px; height: 15px; left: 25px; bottom: 3px;">
-                                        <img draggable="false" class="csssprite" dn="2"
-                                             style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -41px; left: -258px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                             src="../CSS/ctrls.png"><span
-                                            style="font-family: Arial, sans-serif; white-space: nowrap; font-size: 10px; color: rgb(255, 255, 255); line-height: 16px; direction: ltr; text-align: right; font-weight: normal; font-style: normal; background-color: transparent; position: absolute;">国</span>
-                                    </div>
-                                    <div style="position: absolute; overflow: hidden; padding-left: 9px; width: 25px; height: 15px; left: 25px; bottom: 27px;">
-                                        <img draggable="false" class="csssprite" dn="2"
-                                             style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -41px; left: -258px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                             src="../CSS/ctrls.png"><span
-                                            style="font-family: Arial, sans-serif; white-space: nowrap; font-size: 10px; color: rgb(255, 255, 255); line-height: 16px; direction: ltr; text-align: right; font-weight: normal; font-style: normal; background-color: transparent; position: absolute;">省</span>
-                                    </div>
-                                    <div style="position: absolute; overflow: hidden; padding-left: 9px; width: 25px; height: 15px; left: 25px; bottom: 45px;">
-                                        <img draggable="false" class="csssprite" dn="2"
-                                             style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -41px; left: -258px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                             src="../CSS/ctrls.png"><span
-                                            style="font-family: Arial, sans-serif; white-space: nowrap; font-size: 10px; color: rgb(255, 255, 255); line-height: 16px; direction: ltr; text-align: right; font-weight: normal; font-style: normal; background-color: transparent; position: absolute;">市</span>
-                                    </div>
-                                    <div style="position: absolute; overflow: hidden; padding-left: 9px; width: 25px; height: 15px; left: 25px; bottom: 81px;">
-                                        <img draggable="false" class="csssprite" dn="2"
-                                             style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -41px; left: -258px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                             src="../CSS/ctrls.png"><span
-                                            style="font-family: Arial, sans-serif; white-space: nowrap; font-size: 10px; color: rgb(255, 255, 255); line-height: 16px; direction: ltr; text-align: right; font-weight: normal; font-style: normal; background-color: transparent; position: absolute;">街</span>
-                                    </div>
-                                </div>
-                                <div title="单击缩放"
-                                     style="position: absolute; margin: 0px; cursor: pointer; height: 102px;">
-                                    <div style="width: 34px; height: 63.3333px; position: absolute; overflow: hidden; top: 32.6667px;">
-                                        <img draggable="false" class="csssprite" dn="2"
-                                             style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: 0px; left: -338px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                             src="../CSS/ctrls.png"></div>
-                                    <div style="width: 34px; height: 6px; position: absolute; overflow: hidden; top: 95px;">
-                                        <img draggable="false" class="csssprite" dn="2"
-                                             style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -100px; left: -188px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                             src="../CSS/ctrls.png"></div>
-                                </div>
-                                <div title="拖动缩放"
-                                     style="position: absolute; margin: 0px; z-index: 2; width: 26px; height: 26px; overflow: hidden; left: 3px; top: 26px; cursor: url(&quot;https://open.map.qq.com/apifiles/2/4/73/theme/grab.cur&quot;) 10 10, default;">
-                                    <img draggable="false" class="csssprite" dn="2"
-                                         style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -122px; left: -4px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                         src="../CSS/ctrls.png"></div>
-                            </div>
-                            <div title="缩小"
-                                 style="position: relative; margin: 0px 19px; cursor: pointer; overflow: hidden; width: 26px; height: 22px;">
-                                <img draggable="false" class="csssprite" dn="2"
-                                     style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -87px; left: -88px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                     src="../CSS/ctrls.png"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="smnoprint" onpositionupdate="return;"
-                     style="margin: 5px; cursor: pointer; z-index: 0; position: absolute; right: 0px; top: 0px;">
-                    <div style="float: left;">
-                        <div draggable="false" title="显示街道地图"
-                             style="color: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 13px; background-color: rgb(38, 154, 234); user-select: none; padding: 1px 6px; direction: ltr; overflow: hidden; text-align: center; line-height: 20px; border: 1px solid rgb(113, 123, 135); box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px; font-weight: bold;">
-                            地图
-                        </div>
-                    </div>
-                    <div style="float: left;">
-                        <div draggable="false" title="显示卫星地图"
-                             style="color: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 13px; background-color: rgb(255, 255, 255); user-select: none; padding: 1px 6px; direction: ltr; overflow: hidden; text-align: center; line-height: 20px; border-width: 1px 1px 1px 0px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: initial; border-top-color: rgb(113, 123, 135); border-right-color: rgb(113, 123, 135); border-bottom-color: rgb(113, 123, 135); border-left-color: initial; border-image: initial; box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px; font-weight: normal;">
-                            卫星
-                        </div>
-                        <div style="background-color: rgb(255, 255, 255); z-index: -1; padding-top: 2px; border-width: 0px 1px 1px; border-top-style: initial; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-top-color: initial; border-right-color: rgb(113, 123, 135); border-bottom-color: rgb(113, 123, 135); border-left-color: rgb(113, 123, 135); border-image: initial; text-align: left; position: absolute; right: 0px; top: 24px; display: none;">
-                            <div draggable="false" title="显示带有街道名称的卫星地图"
-                                 style="color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11px; background-color: rgb(255, 255, 255); user-select: none; padding: 1px 5px 3px; direction: ltr; text-align: left; white-space: nowrap; cursor: pointer;">
-                                <input type="checkbox"
-                                       style="vertical-align: middle; margin: 0px 3px 0px 0px; cursor: pointer;"><label
-                                    style="vertical-align: middle; cursor: pointer;">地名</label></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -2880,26 +2689,26 @@
 
     <div class="crumbs-nav-container" style="clear: both;">
         <a href="https://maoyan.com/">猫眼电影</a> &gt; <a href="https://maoyan.com/cinemas">影院</a> &gt;
-        <span>万达影城（金山万达广场店）</span>
+        <span>{{cinema.cinemaName}}</span>
     </div>
 
     <div id="allMoviePage" style="clear: both">
 
         <div class="condition">
-            <a href="111" class="conditionTime conditionTimeOpt">07/04</a>
-            <a href="111" class="conditionTime">07/04</a>
-            <a href="111" class="conditionTime">07/04</a>
+           <input type="text" class="demo-input" placeholder="请选择日期" v-bind="date" id="test1"
+                  v-on:click="getHallMovies">
         </div>
 
         <div id="allMovie">
-            <div class="movie">
+            <div class="movie" v-for="hallMovie in hallMovies">
                 <div class="img">
-                    <img src="https://p0.meituan.net/movie/ecca4f0b95340b2c57006a1bace4c3f91386100.jpg@464w_644h_1e_1c">
+                    <img src="https://p0.meituan.net/movie/ecca4f0b95340b2c57006a1bace4c3f91386100.jpg@464w_644h_1e_1c"
+                         :src="hallMovie.movieImg">
                 </div>
                 <div class="info">
-                    <p class="moiveTitle">天气之子(3d厅)</p>
-                    <p class="time">开始时间: </p>
-                    <p class="time">开始时间: </p>
+                    <p class="moiveTitle">{{hallMovie.movieName}}({{hallMovie.hallName}})</p>
+                    <p class="time">开始时间: {{hallMovie.startTime}}</p>
+                    <p class="time">结束时间: {{hallMovie.endTime}} </p>
                 </div>
                 <div class="price">
                     <p>32.4元</p>
@@ -2909,41 +2718,6 @@
                 </div>
 
             </div>
-            <div class="movie">
-                <div class="img">
-                    <img src="https://p0.meituan.net/movie/ecca4f0b95340b2c57006a1bace4c3f91386100.jpg@464w_644h_1e_1c">
-                </div>
-                <div class="info">
-                    <p class="moiveTitle">天气之子(3d厅)</p>
-                    <p class="time">开始时间: </p>
-                    <p class="time">开始时间: </p>
-                </div>
-                <div class="price">
-                    <p>32.4元</p>
-                </div>
-                <div class="buy" style="float: right">
-                    <p><a>购票</a></p>
-                </div>
-
-            </div>
-            <div class="movie">
-                <div class="img">
-                    <img src="https://p0.meituan.net/movie/ecca4f0b95340b2c57006a1bace4c3f91386100.jpg@464w_644h_1e_1c">
-                </div>
-                <div class="info">
-                    <p class="moiveTitle">天气之子(3d厅)</p>
-                    <p class="time">开始时间: </p>
-                    <p class="time">开始时间: </p>
-                </div>
-                <div class="price">
-                    <p>32.4元</p>
-                </div>
-                <div class="buy" style="float: right">
-                    <p><a>购票</a></p>
-                </div>
-
-            </div>
-
         </div>
 
 
@@ -2968,223 +2742,6 @@
         <div class="close-map"></div>
         <div class="big-map"
              style="background-color: rgb(229, 227, 223); overflow: hidden; transform: translateZ(0px);">
-            <div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;">
-                <div n="targetElement"
-                     style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;">
-                    <div n="moveElement"
-                         style="position: absolute; left: 0px; top: 0px; z-index: 1; cursor: url(&quot;https://open.map.qq.com/apifiles/2/4/73/theme/grab.cur&quot;) 10 10, default; transform-origin: 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0);">
-                        <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 200;">
-                            <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 101;"></div>
-                        </div>
-                        <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 201;">
-                            <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 102;">
-                                <div style="position: absolute; left: -19px; top: -35px; width: 50px; height: 39px; border: 0px none; overflow: hidden; transform-origin: 19px 35px; transform: rotate(0deg); z-index: 0; cursor: default;">
-                                    <img draggable="false" class="csssprite" dn="2"
-                                         style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: 0px; left: -24px; user-select: none; width: 73px; height: 39px; min-width: 73px; max-width: 73px; min-height: 39px; max-height: 39px;"
-                                         src="../CSS/marker.png"></div>
-                            </div>
-                            <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 103;"></div>
-                        </div>
-                        <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 202;">
-                            <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 104;"></div>
-                            <div draggable="false"
-                                 style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 105; background-color: transparent; background-image: url(&quot;data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAQAIBRAA7&quot;); margin: 0px; padding: 0px; user-select: none;"></div>
-                            <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 106; cursor: default;">
-                                <div style="position: absolute; left: -12px; top: -36px; width: 24px; height: 37px; border: 0px none; overflow: hidden; transform-origin: 12px 36px; transform: rotate(0deg); z-index: 0;">
-                                    <img draggable="false" class="csssprite" dn="2"
-                                         style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: 1px; left: 0px; user-select: none; width: 73px; height: 39px; min-width: 73px; max-width: 73px; min-height: 39px; max-height: 39px;"
-                                         src="../CSS/marker.png" usemap="#smimap0">
-                                    <map name="smimap0" id="smimap0">
-                                        <area href="javascript:void(0);" shape="poly"
-                                              coords="7,-1,13,-1,17,0,22,6,22,7,22,13,21,15,20,17,18,18,15,21,13,24,12,25,12,27,11,30,11,32,10,32,10,28,9,27,9,25,8,24,0,14,0,6"
-                                              title="" style="cursor: pointer;">
-                                    </map>
-                                </div>
-                            </div>
-                            <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 107; cursor: default;"></div>
-                        </div>
-                        <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 99;"></div>
-                        <div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 101;">
-                            <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
-                                <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
-                                    <div style="position: absolute; left: -271px; top: -236px; transition: opacity 200ms ease-out 0s;">
-                                        <canvas width="256" height="256" draggable="false"
-                                                style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                    </div>
-                                    <div style="position: absolute; left: -271px; top: 20px; transition: opacity 200ms ease-out 0s;">
-                                        <canvas width="256" height="256" draggable="false"
-                                                style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                    </div>
-                                    <div style="position: absolute; left: -15px; top: -236px; transition: opacity 200ms ease-out 0s;">
-                                        <canvas width="256" height="256" draggable="false"
-                                                style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                    </div>
-                                    <div style="position: absolute; left: -15px; top: 20px; transition: opacity 200ms ease-out 0s;">
-                                        <canvas width="256" height="256" draggable="false"
-                                                style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
-                            <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
-                                <div style="transform: translateZ(0px); position: absolute; left: -271px; top: -236px; transition: opacity 200ms ease-out 0s;">
-                                    <canvas width="256" height="256" draggable="false"
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; background: rgb(247, 245, 245); user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                </div>
-                                <div style="transform: translateZ(0px); position: absolute; left: -271px; top: 20px; transition: opacity 200ms ease-out 0s;">
-                                    <canvas width="256" height="256" draggable="false"
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; background: rgb(247, 245, 245); user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                </div>
-                                <div style="transform: translateZ(0px); position: absolute; left: -15px; top: -236px; transition: opacity 200ms ease-out 0s;">
-                                    <canvas width="256" height="256" draggable="false"
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; background: rgb(247, 245, 245); user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                </div>
-                                <div style="transform: translateZ(0px); position: absolute; left: -15px; top: 20px; transition: opacity 200ms ease-out 0s;">
-                                    <canvas width="256" height="256" draggable="false"
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; background: rgb(247, 245, 245); user-select: none; transform: translateZ(0px); padding: 0px; margin: 0px; border: 0px;"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div onpositionupdate="return;"
-                     style="position: absolute; z-index: 1000000; margin: 2px 5px 0px 2px; left: 0px; bottom: 0px;"><a
-                        title="到腾讯地图查看此区域" target="_blank"
-                        href="https://map.qq.com/?center=121.33563%2C30.754242&amp;l=13"
-                        style="position: static; overflow: visible; float: none; display: inline;">
-                    <div style="cursor: pointer; position: relative; overflow: hidden; width: 80px; height: 18px;"><img
-                            draggable="false" class="csssprite" dn="2"
-                            style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: 0px; left: 0px; user-select: none; width: 80px; height: 18px; min-width: 80px; max-width: 80px; min-height: 18px; max-height: 18px;"
-                            src="../CSS/logo.png"></div>
-                </a></div>
-                <div draggable="false" onresize="return;"
-                     style="position: absolute; z-index: 1000000; user-select: none; left: 7px; bottom: 0px;">
-                    <div style="position: absolute; width: 100%; height: 100%; opacity: 0.7;">
-                        <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div>
-                    </div>
-                    <div style="font-family: Arial, sans-serif; white-space: nowrap; font-size: 10px; color: rgb(34, 34, 34); line-height: 16px; direction: ltr; text-align: right; font-weight: normal; font-style: normal; background-color: transparent; position: relative; padding: 0px 5px;">
-                        <span style="font-family: Arial, sans-serif; white-space: nowrap; font-size: 10px; color: rgb(34, 34, 34); line-height: 16px; direction: ltr; text-align: right; font-weight: normal; font-style: normal; background-color: transparent;">©2017 Tencent - GS(2016)930号 - Data© NavInfo</span><a
-                            style="font-family: Arial, sans-serif; white-space: nowrap; font-size: 10px; color: rgb(34, 34, 34); line-height: 16px; direction: ltr; text-align: right; font-weight: normal; font-style: normal; background-color: transparent; display: none; text-decoration: underline; cursor: pointer;">地图数据</a>
-                    </div>
-                </div>
-                <div draggable="false" class="smnoprint" controlwidth="0" controlheight="0" onpositionupdate="return;"
-                     style="user-select: none; position: absolute; left: 0px; top: 0px; display: none;">
-                    <div onresize="return;" style="position: absolute; left: 0px; top: 0px;">
-                        <div>
-                            <div style="position: relative; margin-bottom: 0px; margin-top: 5px; width: 64px; height: 64px;">
-                                <div style="position: absolute; z-index: 0; width: 64px; height: 64px; overflow: hidden;">
-                                    <img draggable="false" class="csssprite" dn="2"
-                                         style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -58px; left: -230px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                         src="../CSS/ctrls.png">
-                                    <div title="向左平移"
-                                         style="left: 0px; top: 21.3333px; width: 21px; height: 21px; position: absolute; z-index: 100; cursor: pointer;"></div>
-                                    <div title="向右平移"
-                                         style="left: 42.6667px; top: 21.3333px; width: 21px; height: 21px; position: absolute; z-index: 100; cursor: pointer;"></div>
-                                    <div title="向上平移"
-                                         style="left: 21.3333px; top: 0px; width: 21px; height: 21px; position: absolute; z-index: 100; cursor: pointer;"></div>
-                                    <div title="向下平移"
-                                         style="left: 21.3333px; top: 42.6667px; width: 21px; height: 21px; position: absolute; z-index: 100; cursor: pointer;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="position: absolute; left: 0px; top: 0px;">
-                        <div style="visibility: inherit;">
-                            <div title="放大"
-                                 style="position: relative; margin: 0px 19px; cursor: pointer; overflow: hidden; width: 26px; height: 22px;">
-                                <img draggable="false" class="csssprite" dn="2"
-                                     style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -60px; left: -88px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                     src="../CSS/ctrls.png"></div>
-                            <div style="position: relative; cursor: pointer; margin: 0px 19px; width: 0px; height: 101px;">
-                                <div title="单击缩放" style="position: absolute; margin: 0px; cursor: pointer;">
-                                    <div style="width: 34px; height: 6px; position: relative; overflow: hidden;"><img
-                                            draggable="false" class="csssprite" dn="2"
-                                            style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -70px; left: -188px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                            src="../CSS/ctrls.png"></div>
-                                    <div style="width: 26px; height: 90px; position: relative; overflow: hidden;"><img
-                                            draggable="false" class="csssprite" dn="2"
-                                            style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: 0px; left: -302px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                            src="../CSS/ctrls.png"></div>
-                                    <div style="width: 34px; height: 6px; position: relative; overflow: hidden;"><img
-                                            draggable="false" class="csssprite" dn="2"
-                                            style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -82px; left: -188px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                            src="../CSS/ctrls.png"></div>
-                                </div>
-                                <div style="display: none;">
-                                    <div style="position: absolute; overflow: hidden; padding-left: 9px; width: 25px; height: 15px; left: 25px; bottom: 3px;">
-                                        <img draggable="false" class="csssprite" dn="2"
-                                             style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -41px; left: -258px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                             src="../CSS/ctrls.png"><span
-                                            style="font-family: Arial, sans-serif; white-space: nowrap; font-size: 10px; color: rgb(255, 255, 255); line-height: 16px; direction: ltr; text-align: right; font-weight: normal; font-style: normal; background-color: transparent; position: absolute;">国</span>
-                                    </div>
-                                    <div style="position: absolute; overflow: hidden; padding-left: 9px; width: 25px; height: 15px; left: 25px; bottom: 27px;">
-                                        <img draggable="false" class="csssprite" dn="2"
-                                             style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -41px; left: -258px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                             src="../CSS/ctrls.png"><span
-                                            style="font-family: Arial, sans-serif; white-space: nowrap; font-size: 10px; color: rgb(255, 255, 255); line-height: 16px; direction: ltr; text-align: right; font-weight: normal; font-style: normal; background-color: transparent; position: absolute;">省</span>
-                                    </div>
-                                    <div style="position: absolute; overflow: hidden; padding-left: 9px; width: 25px; height: 15px; left: 25px; bottom: 45px;">
-                                        <img draggable="false" class="csssprite" dn="2"
-                                             style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -41px; left: -258px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                             src="../CSS/ctrls.png"><span
-                                            style="font-family: Arial, sans-serif; white-space: nowrap; font-size: 10px; color: rgb(255, 255, 255); line-height: 16px; direction: ltr; text-align: right; font-weight: normal; font-style: normal; background-color: transparent; position: absolute;">市</span>
-                                    </div>
-                                    <div style="position: absolute; overflow: hidden; padding-left: 9px; width: 25px; height: 15px; left: 25px; bottom: 81px;">
-                                        <img draggable="false" class="csssprite" dn="2"
-                                             style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -41px; left: -258px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                             src="../CSS/ctrls.png"><span
-                                            style="font-family: Arial, sans-serif; white-space: nowrap; font-size: 10px; color: rgb(255, 255, 255); line-height: 16px; direction: ltr; text-align: right; font-weight: normal; font-style: normal; background-color: transparent; position: absolute;">街</span>
-                                    </div>
-                                </div>
-                                <div title="单击缩放"
-                                     style="position: absolute; margin: 0px; cursor: pointer; height: 102px;">
-                                    <div style="width: 34px; height: 63.3333px; position: absolute; overflow: hidden; top: 32.6667px;">
-                                        <img draggable="false" class="csssprite" dn="2"
-                                             style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: 0px; left: -338px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                             src="../CSS/ctrls.png"></div>
-                                    <div style="width: 34px; height: 6px; position: absolute; overflow: hidden; top: 95px;">
-                                        <img draggable="false" class="csssprite" dn="2"
-                                             style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -100px; left: -188px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                             src="../CSS/ctrls.png"></div>
-                                </div>
-                                <div title="拖动缩放"
-                                     style="position: absolute; margin: 0px; z-index: 2; width: 26px; height: 26px; overflow: hidden; left: 3px; top: 26px; cursor: url(&quot;https://open.map.qq.com/apifiles/2/4/73/theme/grab.cur&quot;) 10 10, default;">
-                                    <img draggable="false" class="csssprite" dn="2"
-                                         style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -122px; left: -4px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                         src="../CSS/ctrls.png"></div>
-                            </div>
-                            <div title="缩小"
-                                 style="position: relative; margin: 0px 19px; cursor: pointer; overflow: hidden; width: 26px; height: 22px;">
-                                <img draggable="false" class="csssprite" dn="2"
-                                     style="position: absolute; border: 0px; padding: 0px; margin: 0px; top: -87px; left: -88px; user-select: none; width: 360px; height: 255px; min-width: 360px; max-width: 360px; min-height: 255px; max-height: 255px;"
-                                     src="../CSS/ctrls.png"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="smnoprint" onpositionupdate="return;"
-                     style="margin: 5px; cursor: pointer; z-index: 0; position: absolute; right: 0px; top: 0px;">
-                    <div style="float: left;">
-                        <div draggable="false" title="显示街道地图"
-                             style="color: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 13px; background-color: rgb(38, 154, 234); user-select: none; padding: 1px 6px; direction: ltr; overflow: hidden; text-align: center; line-height: 20px; border: 1px solid rgb(113, 123, 135); box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px; font-weight: bold;">
-                            地图
-                        </div>
-                    </div>
-                    <div style="float: left;">
-                        <div draggable="false" title="显示卫星地图"
-                             style="color: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 13px; background-color: rgb(255, 255, 255); user-select: none; padding: 1px 6px; direction: ltr; overflow: hidden; text-align: center; line-height: 20px; border-width: 1px 1px 1px 0px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: initial; border-top-color: rgb(113, 123, 135); border-right-color: rgb(113, 123, 135); border-bottom-color: rgb(113, 123, 135); border-left-color: initial; border-image: initial; box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px; font-weight: normal;">
-                            卫星
-                        </div>
-                        <div style="background-color: rgb(255, 255, 255); z-index: -1; padding-top: 2px; border-width: 0px 1px 1px; border-top-style: initial; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-top-color: initial; border-right-color: rgb(113, 123, 135); border-bottom-color: rgb(113, 123, 135); border-left-color: rgb(113, 123, 135); border-image: initial; text-align: left; position: absolute; right: 0px; top: 0px; display: none;">
-                            <div draggable="false" title="显示带有街道名称的卫星地图"
-                                 style="color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11px; background-color: rgb(255, 255, 255); user-select: none; padding: 1px 5px 3px; direction: ltr; text-align: left; white-space: nowrap; cursor: pointer;">
-                                <input type="checkbox"
-                                       style="vertical-align: middle; margin: 0px 3px 0px 0px; cursor: pointer;"><label
-                                    style="vertical-align: middle; cursor: pointer;">地名</label></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -3243,47 +2800,89 @@
     <p>
         ©<span class="my-footer-year">2020</span>
         猫眼电影 maoyan.com</p>
-    <div class="certificate">
-        <a href="http://sq.ccm.gov.cn/ccnt/sczr/service/business/emark/toDetail/350CF8BCA8416C4FE0530140A8C0957E"
-           target="_blank">
-            <img src="../CSS/e54374ccf134d1f7b2c5b075a74fca525326.png">
-        </a>
-        <a href="https://maoyan.com/about/licence/5" target="_blank">
-            <img src="../CSS/805f605d5cf1b1a02a4e3a5e29df003b8376.png">
-        </a>
-        <a href="https://www.12377.cn/" target="_blank">
-            <img src="../CSS/3cd2a9b7dc179531d20d27a5fd686e783787.png">
-        </a>
-    </div>
 </div>
-
-<script crossorigin="anonymous" src="../CSS/owl_1.7.11.js.下载"></script>
-<script>
-    Owl.start({
-        project: 'com.sankuai.movie.fe.mywww',
-        pageUrl: location.href.split('?')[0].replace(/\/\d+/g, '/:id'),
-        devMode: false
-    })
-</script>
-<script src="../CSS/saved_resource(1)"></script>
-<script>
-    MAInit({
-        appkey: 'com.sankuai.movie.fe.mywww',
-        app_name: 'maoyan-pc-web',
-        app_version: '1.0.0',
-    })
-</script>
-<!--[if IE 8]>
-<script crossorigin="anonymous"
-        src="//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:5788b470/es5-shim.bbad933f.js"></script>
-<![endif]-->
-<!--[if IE 8]>
-<script crossorigin="anonymous"
-        src="//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:5788b470/es5-sham.d6ea26f4.js"></script>
-<![endif]-->
-<script crossorigin="anonymous" src="../CSS/common.00a7ce61.js.下载"></script>
-<script crossorigin="anonymous" src="../CSS/cinemas-cinema.82bb5550.js.下载"></script>
+</span>
 
 
 </body>
+
+<script src="/js/layDate-v5.0.9/laydate/laydate.js"></script>
+<script src="https://webapi.amap.com/maps?v=1.4.15&key=2d48cd6bbd59d166e39880aad4842c1c"></script>
+<script>
+    new Vue({
+        el: '#appVue',
+        data: {
+            cinema: {},
+            hallMovies: {},
+            date: "",
+
+        },
+
+        methods: {
+
+            getHallMovies: function () {
+            }
+        },
+        mounted: function () {
+
+            let _this = this;
+            let queryVariable = getQueryVariable("cinemaId");
+
+            $.get("/cinema/cinemaDetails?cinemaId=" + queryVariable, null, function (data) {
+                _this.cinema = data
+                console.log(data)
+                var map = new AMap.Map('container', {
+                    resizeEnable: true, //是否监控地图容器尺寸变化
+                    zoom: 10, //初始化地图层级
+                    center: [data.cinemaLng, data.cinemaLat] //初始化地图中心点
+                });
+
+                var m1 = new AMap.Marker({
+                    position: [data.cinemaLng, data.cinemaLat]
+                });
+                map.add(m1);
+                map.setFitView([m1]);
+
+            });
+
+
+            lay('#version').html('-v' + laydate.v);
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#test1' //指定元素
+                , min: 0,
+                done: function (value, date) {
+                    //value, date, endDate点击日期、清空、现在、确定均会触发。回调返回三个参数，分别代表：生成的值、日期时间对象、结束的日期时间对象
+                    $.get("/cinema/getHallMovies?cinemaId=" + queryVariable + "&date=" + value, null, function (data) {
+                        _this.hallMovies = data
+                        console.log(_this.hallMovies)
+                    })
+                }
+            });
+
+
+            $.get("/cinema/getHallMovies?cinemaId=" + queryVariable + "&date=" + _this.date, null, function (data) {
+                _this.hallMovies = data
+                console.log(_this.hallMovies)
+            })
+
+
+        }
+    })
+
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) {
+                return pair[1];
+            }
+        }
+        return (false);
+    }
+
+</script>
+
 </html>

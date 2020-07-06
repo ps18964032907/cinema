@@ -21,6 +21,7 @@
         body {
             background-color: #ffffff;
         }
+
     </style>
 
 </head>
@@ -146,6 +147,12 @@
             zoom: 17,//地图显示的缩放级别
             keyboardEnable: false
         });
+
+        var m1 = new AMap.Marker({
+            position: [wei, jin]
+        });
+        map.add(m1);
+        map.setFitView([m1]);
 
 
         AMap.plugin(['AMap.Autocomplete', 'AMap.PlaceSearch'], function () {
