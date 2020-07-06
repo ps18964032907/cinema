@@ -80,6 +80,26 @@
           ]
         },
         {
+          "title": "影片管理",
+          "href": "",
+          "icon": "fa fa-file-text",
+          "target": "_self",
+          "child": [
+            {
+              "title": "排片",
+              "href": "page/brand.html",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            },
+            {
+              "title": "影片操作",
+              "href": "page/movie.html",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            }
+          ]
+        },
+        {
           "title": "表单示例",
           "href": "",
           "icon": "fa fa-calendar",

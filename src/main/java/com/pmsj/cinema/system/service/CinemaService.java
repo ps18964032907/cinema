@@ -54,6 +54,7 @@ public class CinemaService {
 
     public PageInfo<CinemaVo> getAllCinema(Integer page, Integer limit, Cinema cinema) {
 
+
         PageHelper.startPage(page, limit);
 
         List<CinemaVo> allCinemaVo = cinemaMapper.getAllCinemaVo(cinema);
