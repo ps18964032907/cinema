@@ -943,13 +943,13 @@
                     <!-- 1 -->
                     <dd v-for="allmovie in movie">
                         <div>
-                            <a href="./dianyingxiangqing.html">
+                            <a :href="'./dianyingxiangqing.html?movieId='+allmovie.movieId">
                                 <img :src="allmovie.movieImg" alt="" style="width: 160px; height: 220px">
                             </a>
                             <a href="./dianyingxiangqing.html">购票</a>
                         </div>
                         <div>
-                            <a href="./dianyingxiangqing.html">{{allmovie.movieName}}</a>
+                            <a :href="'./dianyingxiangqing.html?movieId='+allmovie.movieId">{{allmovie.movieName}}</a>
                         </div>
                         <div>
                             <i>{{allmovie.movieScore}}</i>
@@ -1028,15 +1028,6 @@
         data:{
             status:1
         },
-        methods: {
-            getMoive: function (index) {
-
-                $("#status").val(index);
-                console.log($("#formbody").serialize());
-                getAllMovie($("#formbody").serialize())
-            }
-
-        },
 
 
     })
@@ -1091,12 +1082,13 @@
    });
    function getAllMovie(data){
        $.get("/AllMovie/Movie",data,function (data2) {
-
+            console.log(movieStatus.status);
+           console.log(headtype.status);
            movieStatus.status=headtype.status;
+
            data=headtype.params;
            movieBody.movie=data2.list;
            console.log(movieBody.movie);
-           console.log(movieBody.movie.movieName);
        })
    }
 
