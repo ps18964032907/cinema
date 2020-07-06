@@ -3,6 +3,8 @@ package com.pmsj.cinema.common.entity;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.List;
+
 /**
  * @author EDZ
  */
@@ -18,6 +20,8 @@ public class Cast {
     private Integer actorTpye;
 
     private String actorImg;
+
+    private List<Movie> movie;
 
     public Integer getActorId() {
         return actorId;
