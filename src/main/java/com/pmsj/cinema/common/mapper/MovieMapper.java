@@ -26,7 +26,7 @@ public interface MovieMapper {
 
     List<Movie> selectOnline();
 
-
+    List<Movie> selectTopTen(Integer status);
 
     List<Movie> selectComingSoon();
 

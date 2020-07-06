@@ -15,6 +15,31 @@
         <result column="movie_box_office" jdbcType="INTEGER" property="movieBoxOffice"/>
         <result column="movie_time" jdbcType="VARCHAR" property="movieTime"/>
     </resultMap>
+    <resultMap id="ActorByMovie" type="com.pmsj.cinema.common.entity.Movie">
+        <id column="movie_id" jdbcType="INTEGER" property="movieId"/>
+        <result column="movie_name" jdbcType="VARCHAR" property="movieName"/>
+        <result column="movie_release_time" jdbcType="DATE" property="movieReleaseTime"/>
+        <result column="movie_area" jdbcType="VARCHAR" property="movieArea"/>
+        <result column="movie_info" jdbcType="VARCHAR" property="movieInfo"/>
+        <result column="movie_img" jdbcType="VARCHAR" property="movieImg"/>
+        <result column="movie_ename" jdbcType="VARCHAR" property="movieEname"/>
+        <result column="movie_score" jdbcType="REAL" property="movieScore"/>
+        <result column="movie_status" jdbcType="INTEGER" property="movieStatus"/>
+        <result column="movie_count" jdbcType="INTEGER" property="movieCount"/>
+        <result column="movie_box_office" jdbcType="INTEGER" property="movieBoxOffice"/>
+        <result column="movie_time" jdbcType="VARCHAR" property="movieTime"/>
+
+        <collection property="actor" ofType="com.pmsj.cinema.common.entity.Cast">
+            <id column="actor_id" property="actorId"/>
+            <result column="actor_name"  property="actorName"/>
+            <result column="actor_img"   property="actorImg"/>
+            <result column="movie_actor_role"  property="actorRole" />
+            <result column="movie_actor_type"  property="actorTpye"/>
+        </collection>
+
+
+    </resultMap>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from movie
     where movie_id = #{movieId,jdbcType=INTEGER}
@@ -137,69 +162,40 @@
     </select>
 
 
-<!--    <select id="selectAllComingSoonMovie" resultMap="BaseResultMap">-->
-<!--        SELECT m.*-->
-<!--        FROM-->
-<!--        (movie_tpye_mid i-->
-<!--        LEFT JOIN-->
-<!--        movie_tpye t-->
-<!--        ON-->
-<!--        i.type_id = t.type_id-->
-<!--        )-->
-<!--        LEFT JOIN-->
-<!--        movie m-->
-<!--        ON-->
-<!--        i.movie_id = m.`movie_id`-->
-<!--        <where>-->
-<!--            movie_count=0-->
-<!--            and-->
-<!--            movie_status=2-->
-<!--            <if test="typeId!=0">-->
-<!--                and t.type_id = #{typeId}-->
-<!--            </if>-->
-<!--            <if test="area!=''">-->
-<!--                and m.movie_area like '%${area}%'-->
-<!--            </if>-->
-<!--            <if test="year!=''">-->
-<!--                and m.movie_release_time like '%${year}%'-->
-<!--            </if>-->
+    <select id="selectTopTen" resultMap="ActorByMovie">
+        SELECT m.*,c.actor_name
+        FROM movie m
+        LEFT JOIN
+        movie_actor a
+        ON
+        m.`movie_id`=a.`movie_id`
+        LEFT JOIN
+        `cast` c
+        ON
+        c.`actor_id`=a.`actor_id`
+        <where>
+        <if test="status==1">
+            movie_status=1
+            order by movie_score desc
+        </if>
+        <if test="status==2">
+            movie_status=2
+            order by movie_want_count desc
+        </if>
+        <if test="status==3">
+            movie_area LIKE '%大陆%'
+            order by movie_box_office desc
+        </if>
+        <if test="status==4">
+            movie_area LIKE '%美国%'
+            order by movie_box_office desc
+        </if>
+        <if test="status==5">
+            order by movie_score desc
+        </if>
+    </where>
 
-<!--        </where>-->
-<!--        GROUP BY m.`movie_id`-->
-<!--    </select>-->
-
-
-<!--    <select id="selectAllOfflineMovie" resultMap="BaseResultMap">-->
-<!--        SELECT m.*-->
-<!--        FROM-->
-<!--        (movie_tpye_mid i-->
-<!--        LEFT JOIN-->
-<!--        movie_tpye t-->
-<!--        ON-->
-<!--        i.type_id = t.type_id-->
-<!--        )-->
-<!--        LEFT JOIN-->
-<!--        movie m-->
-<!--        ON-->
-<!--        i.movie_id = m.`movie_id`-->
-<!--        <where>-->
-<!--            movie_count=0-->
-<!--            and-->
-<!--            movie_status=0-->
-<!--            <if test="typeId!=0">-->
-<!--                and t.type_id = #{typeId}-->
-<!--            </if>-->
-<!--            <if test="area!=''">-->
-<!--                and m.movie_area like '%${area}%'-->
-<!--            </if>-->
-<!--            <if test="year!=''">-->
-<!--                and m.movie_release_time like '%${year}%'-->
-<!--            </if>-->
-
-<!--        </where>-->
-<!--        GROUP BY m.`movie_id`-->
-
-<!--    </select>-->
+  </select>
 
 
 </mapper>

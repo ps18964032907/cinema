@@ -41,6 +41,8 @@ public class Movie {
 
     private Integer paixu;
 
+    private List<Cast> actor;
+
 
 //    private
 
