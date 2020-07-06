@@ -73,7 +73,13 @@ public class CinemaService {
         return hallTpyeMapper.selectAll();
     }
 
-    public List<CinemaVo> getAllCinemaByAll(String brand, String hallType, String area, String province, String city) {
-        return cinemaMapper.getAllCinemaByAll(brand, hallType, area, province, city);
+    public PageInfo<CinemaVo> getAllCinemaByAll(String brand, String hallType, String area, String province, String city, Integer page) {
+
+
+        PageHelper.startPage(page, 1);
+        List<CinemaVo> allCinemaByAll = cinemaMapper.getAllCinemaByAll(brand, hallType, area, province, city);
+
+
+        return new PageInfo<CinemaVo>(allCinemaByAll);
     }
 }
