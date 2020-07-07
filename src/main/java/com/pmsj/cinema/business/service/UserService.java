@@ -29,8 +29,8 @@ public class UserService {
 
         return (int) a;
     }
-    public User accountExist(String account) {
-       return userMapper.accountExist(account);
+    public User selectUser(String account) {
+       return userMapper.selectUser(account);
     }
     public void register(String userAccount, String password, String email, String phone) {
         userMapper.register(userAccount, password,email, phone);
@@ -42,5 +42,13 @@ public class UserService {
 
     public User emailLogin(String email) {
         return userMapper.emailLogin(email);
+    }
+
+    public Integer updatePass(String email,String password) {
+        return userMapper.updatePass(email,password);
+    }
+
+    public Integer updateUser(User user) {
+        return userMapper.updateUser(user);
     }
 }

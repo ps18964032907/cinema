@@ -1,7 +1,12 @@
 package com.pmsj.cinema.common.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
+@ToString
 public class User {
     private Integer userId;
 
@@ -18,7 +23,8 @@ public class User {
     private String userPhone;
 
     private String userGender;
-
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date userBirthday;
 
     private String userAutograph;

@@ -28,7 +28,7 @@
         <!-- 创建密码 -->
         <div class="zhuche4">
             <label for="password1">密码</label>
-            <input type="password1" name="password1" id="password1" maxlength="16" required>
+            <input type="password1" name="password1" id="password1" minlength="6" maxlength="16" required>
             <div id="intension">
                 <span>弱</span>
                 <span>中</span>
@@ -83,13 +83,13 @@
     var userAccount = document.getElementById('userAccount');
     userAccount.onkeyup = function () {
         var account = userAccount.value;
-        $.post('/user/accountExist', 'account=' + account, function (data) {
-            if (true == data) {
+        $.post('/user/selectUser', 'account=' + account, function (data) {
+            if (data == "") {
                 document.getElementById("tip4").innerHTML = "<font color='green'>用户名可用</font>";
             } else {
                 document.getElementById("tip4").innerHTML = "<font color='red'>用户名已存在</font>";
             }
-        }, 'json');
+        });
     }
     var oPassword = document.getElementById("password1");
     var oDiv = document.getElementById("intension");
@@ -155,7 +155,6 @@
         }
     }
     var wait = 60;
-
     function GetCodemo(o) {
         var e = document.getElementById('email').value;
         //发送验证码
