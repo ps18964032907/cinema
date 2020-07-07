@@ -34,7 +34,7 @@ public interface MovieMapper {
 
     int getMaxId();
 
-    List<Movie> selectAllMovie(@Param(value = "status") Integer status,@Param(value = "tId") Integer typeId,@Param(value = "area")String movieArea,@Param(value = "year") String movieReleaseTime,@Param(value ="paixu" ) Integer paixu);
+    List<Movie> selectAllMovie(@Param(value = "status") Integer status, @Param(value = "tId") Integer typeId, @Param(value = "area") String movieArea, @Param(value = "year") String movieReleaseTime, @Param(value = "paixu") Integer paixu);
 
 //    List<Movie> selectAllComingSoonMovie(@Param(value = "typeId") Integer typeId,@Param(value = "area")String movieArea,@Param(value = "year")Date movieReleaseTime);
 //

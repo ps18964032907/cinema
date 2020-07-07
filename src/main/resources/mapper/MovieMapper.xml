@@ -14,6 +14,10 @@
         <result column="movie_count" jdbcType="INTEGER" property="movieCount"/>
         <result column="movie_box_office" jdbcType="INTEGER" property="movieBoxOffice"/>
         <result column="movie_time" jdbcType="VARCHAR" property="movieTime"/>
+
+        <collection property="movieTpyeList" ofType="com.pmsj.cinema.common.entity.MovieTpye">
+            <result property="typeName" column="type_Name"/>
+        </collection>
     </resultMap>
     <resultMap id="ActorByMovie" type="com.pmsj.cinema.common.entity.Movie">
         <id column="movie_id" jdbcType="INTEGER" property="movieId"/>
@@ -31,10 +35,10 @@
 
         <collection property="actor" ofType="com.pmsj.cinema.common.entity.Cast">
             <id column="actor_id" property="actorId"/>
-            <result column="actor_name"  property="actorName"/>
-            <result column="actor_img"   property="actorImg"/>
-            <result column="movie_actor_role"  property="actorRole" />
-            <result column="movie_actor_type"  property="actorTpye"/>
+            <result column="actor_name" property="actorName"/>
+            <result column="actor_img" property="actorImg"/>
+            <result column="movie_actor_role" property="actorRole"/>
+            <result column="movie_actor_type" property="actorTpye"/>
         </collection>
 
 
@@ -90,9 +94,11 @@
     where movie_id = #{movieId,jdbcType=INTEGER}
   </select>
     <select id="selectAll" resultMap="BaseResultMap">
-    select movie_id, movie_name, movie_release_time, movie_area, movie_info, movie_img, 
-    movie_ename, movie_score, movie_status, movie_count, movie_box_office, movie_time
-    from movie
+        select *  from movie
+        left join movie_tpye_mid
+        on movie_tpye_mid.movie_id = movie.movie_id
+        left join movie_tpye
+        on movie_tpye.type_id = movie_tpye_mid.type_id
   </select>
     <select id="selectOnline" resultMap="BaseResultMap">
     select movie_id, movie_name, movie_release_time, movie_area, movie_info, movie_img,
@@ -132,20 +138,20 @@
         i.movie_id = m.`movie_id`
         <where>
             <if test="status!=0 ">
-            movie_status = #{status}
+                movie_status = #{status}
             </if>
             <if test="tId!='' and tId!=0 and tId!=null">
-            and t.type_id = #{tId}
+                and t.type_id = #{tId}
             </if>
             <if test="area!=''">
-            and m.movie_area like '%${area}%'
+                and m.movie_area like '%${area}%'
             </if>
             <if test="year!=''">
-            and m.movie_release_time like '%${year}%'
+                and m.movie_release_time like '%${year}%'
             </if>
             GROUP BY m.movie_id
             <if test="paixu==1">
-            ORDER BY movie_box_office DESC
+                ORDER BY movie_box_office DESC
             </if>
             <if test="paixu==2">
                 ORDER BY movie_release_time DESC
@@ -156,7 +162,6 @@
 
 
         </where>
-
 
 
     </select>
@@ -174,28 +179,28 @@
         ON
         c.`actor_id`=a.`actor_id`
         <where>
-        <if test="status==1">
-            movie_status=1
-            order by movie_score desc
-        </if>
-        <if test="status==2">
-            movie_status=2
-            order by movie_want_count desc
-        </if>
-        <if test="status==3">
-            movie_area LIKE '%大陆%'
-            order by movie_box_office desc
-        </if>
-        <if test="status==4">
-            movie_area LIKE '%美国%'
-            order by movie_box_office desc
-        </if>
-        <if test="status==5">
-            order by movie_score desc
-        </if>
-    </where>
+            <if test="status==1">
+                movie_status=1
+                order by movie_score desc
+            </if>
+            <if test="status==2">
+                movie_status=2
+                order by movie_want_count desc
+            </if>
+            <if test="status==3">
+                movie_area LIKE '%大陆%'
+                order by movie_box_office desc
+            </if>
+            <if test="status==4">
+                movie_area LIKE '%美国%'
+                order by movie_box_office desc
+            </if>
+            <if test="status==5">
+                order by movie_score desc
+            </if>
+        </where>
 
-  </select>
+    </select>
 
 
 </mapper>

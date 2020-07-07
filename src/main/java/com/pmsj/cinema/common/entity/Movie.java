@@ -37,6 +37,8 @@ public class Movie {
 
     private String types[];
 
+    private List<MovieTpye> movieTpyeList;
+
     private Integer typeId;
 
     private Integer paixu;

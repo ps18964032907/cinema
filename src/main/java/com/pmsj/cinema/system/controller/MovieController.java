@@ -40,7 +40,6 @@ public class MovieController {
         PageInfo<Movie> allMovies = movieService.getAllMovies(page, limit);
 
         ReturnUtil returnUtil = new ReturnUtil(0, "success", allMovies.getTotal(), allMovies.getList());
-
         return returnUtil;
     }
 }

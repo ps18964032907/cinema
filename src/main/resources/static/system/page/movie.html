@@ -75,6 +75,7 @@
             cols: [[
                 {type: "checkbox", width: 80},
                 {type: 'numbers', width: 80, title: '序号', sort: true},
+                {field: 'movieName', width: 140, title: '上映时间'},
                 {field: 'movieReleaseTime', width: 140, title: '上映时间'},
                 {field: 'movieArea', width: 80, title: '地区'},
                 {
@@ -87,7 +88,18 @@
                 {field: 'movieScore', width: 80, title: '评分'},
                 {field: 'movieCount', width: 80, title: '排片量'},
                 {field: 'movieBoxOffice', width: 80, title: '票房'},
-                {field: 'types', width: 80, title: '类型'},
+                {
+                    field: 'movieTpyeList', width: 80, title: '类型',
+                    templet: function (value) {
+                        let abc = "";
+                        value = value.movieTpyeList;
+                        console.log(value)
+                        for (let i = 0; i < value.length; i++) {
+                            abc = abc + "," + value[i].typeName;
+                        }
+                        return abc.replace(",", " ")
+                    }
+                },
                 {title: '操作', minWidth: 80, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
