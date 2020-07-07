@@ -38,4 +38,7 @@ public class MovieIndexService {
         long comingSoon = comingSoonNumber.getTotal();
         return comingSoon;
     }
+    public List<Movie> selectIndexTopMovie(Integer status){
+        return movieMapper.selectIndexTopMovie(status);
+    }
 }
