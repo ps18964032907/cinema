@@ -1,7 +1,6 @@
 package com.pmsj.cinema.common.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.pmsj.cinema.common.entity.OrderSeat;
 import com.pmsj.cinema.common.entity.Seat;
 import lombok.Data;
 import lombok.ToString;

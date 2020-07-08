@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:http="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title id="movieTitle">猫眼电影 - 一网打尽好电影</title>
+    <link rel="stylesheet" href="../CSS/normalize.css">
+    <link rel="stylesheet" href="../CSS/dianyingxiangqing.css">
+    <link rel="shortcut icon" href="../IMG/Blogo.png" type="image/x-icon">
+
+</head>
+
+<style>
+    .wrapper{
+        height:100%;
+        padding: 40px;
+        box-sizing: border-box;
+    }
+    .cinema-wrapper{
+        height:100%;
+    }
+    .title{
+        text-align: left;
+    }
+    .seat-wrapper{
+        height:600px;
+        width:800px;
+        border:1px dotted #c5c5c5;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+    }
+    .screen{
+        margin: 0 auto;
+        height:30px;
+        width:300px;
+        background-color: #e3e3e3;
+        border-radius: 0 0 30px 30px;
+        color: #585858;
+        line-height: 30px;
+        text-align: center;
+    }
+    .inner-seat-wrapper{
+        position: absolute;
+        top:120px;
+        bottom:0;
+        width:100%;
+        box-sizing: border-box;
+    }
+    .seat{
+        float:left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .inner-seat{
+        width:80%;
+        height:80%;
+        cursor: pointer;
+    }
+    .selected-seat{
+        background: url('../IMG/selected.png') center center no-repeat;
+        background-size: 100% 100%;
+    }
+    .unselected-seat{
+        background: url('../IMG/unselected.png') center center no-repeat;
+        background-size: 100% 100%;
+    }
+    .bought-seat{
+        background: url('../IMG/bought.png') center center no-repeat;
+        background-size: 100% 100%;
+    }
+    .screen-center{
+        position: absolute;
+        left:50%;
+        transform: translateX(-50%);
+        padding:5px;
+        font-size: 13px;
+        border-radius: 5px;
+        top:50px;
+        background-color: #f6f6f6;
+        color: #636363;
+        border:1px solid #b1b1b1;
+    }
+    .mid-line{
+        position: absolute;
+        left:50%;
+        transform: translateX(-50%);
+        top:100%;
+        width:1px;
+        height:800px;
+        border-left:1px dashed #919191;
+    }
+    .btn-wrapper{
+        margin: 20px auto;
+        width:1000px;
+        height:30px;
+        text-align: left;
+    }
+    .btn-buy{
+        height:100%;
+        line-height: 30px;
+        font-size: 14px;
+        border-radius: 5px;
+        padding:0 5px;
+        background-color: #ffa349;
+        color: #ffffff;
+        display: inline-block;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+    .smart{
+        background-color: #39ac6a;
+    }
+    .illustration{
+        position: absolute;
+        left:0;
+        top:0;
+        height:35px;
+        width:300px;
+    }
+    .illustration-img-wrapper{
+        width:25px;
+        height:25px;
+        position: relative;
+        top:50%;
+        display: inline-block;
+        transform: translateY(-50%);
+        margin-left: 10px;
+    }
+    .illustration-text{
+        display: inline-block;
+        height:100%;
+        line-height: 35px;
+        font-size: 14px;
+        position: relative;
+        top:-2px;
+    }
+    </style>
+
+<body>
+
+<script src="/js/vue.js"></script>
+<script src="/js/axios.min.js"></script>
+
+<!-- 顶部 -->
+<header class="dingbu">
+    <nav>
+        <a href="#" class="logo"></a>
+        <div class="xiala1 bian">
+            <div class="xiala1_1">
+                <a href="#" class="cd">成都</a>
+                <span class="sanjiao"></span>
+                <ul>
+                    <div class="xiala1_1_d">
+                        定位城市：
+                        <a href="#">成都</a>
+                    </div>
+                    <li>
+                        <span>A</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>B</span>
+                        <div>
+                            <a href="#">北京</a>
+                            <a href="#">保定</a>
+                            <a href="#">蚌埠</a>
+                            <a href="#">包头</a>
+                            <a href="#">本溪</a>
+                            <a href="#">巴彦淖尔</a>
+                            <a href="#">白城</a>
+                            <a href="#">白山</a>
+                            <a href="#">毫州</a>
+                            <a href="#">滨州</a>
+                            <a href="#">巴中</a>
+                            <a href="#">北海</a>
+                            <a href="#">百色</a>
+                            <a href="#">毕节</a>
+                            <a href="#">保山</a>
+                            <a href="#">宝鸡</a>
+                            <a href="#">白银</a>
+                            <a href="#">巴州</a>
+                            <a href="#">博尔塔拉</a>
+                            <a href="#">滨海</a>
+                            <a href="#">宝应</a>
+                            <a href="#">北流</a>
+                            <a href="#">博爱</a>
+                            <a href="#">北碚</a>
+                            <a href="#">宝丰</a>
+                            <a href="#">洣阳</a>
+                            <a href="#">博兴</a>
+                            <a href="#">博山</a>
+                            <a href="#">璧山</a>
+                            <a href="#">彬县</a>
+                            <a href="#">宾阳</a>
+                            <a href="#">博白县</a>
+                            <a href="#">博罗县</a>
+                            <a href="#">北镇市</a>
+                            <a href="#">泊头市</a>
+                            <a href="#">北京市</a>
+                            <a href="#">巴彦县</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>C</span>
+                        <div>
+                            <a href="#">重庆</a>
+                            <a href="#">成都</a>
+                            <a href="#">长沙</a>
+                            <a href="#">常州</a>
+                            <a href="#">长春</a>
+                            <a href="#">沧州</a>
+                            <a href="#">承德</a>
+                            <a href="#">赤峰</a>
+                            <a href="#">长治</a>
+                            <a href="#">朝阳</a>
+                            <a href="#">池州</a>
+                            <a href="#">巢湖</a>
+                            <a href="#">滁州</a>
+                            <a href="#">潮州</a>
+                            <a href="#">郴州</a>
+                            <a href="#">常德</a>
+                            <a href="#">崇左</a>
+                            <a href="#">楚雄</a>
+                            <a href="#">昌吉</a>
+                            <a href="#">从化</a>
+                            <a href="#">常熟</a>
+                            <a href="#">长乐</a>
+                            <a href="#">长兴</a>
+                            <a href="#">慈溪</a>
+                            <a href="#">昌邑</a>
+                            <a href="#">长葛</a>
+                            <a href="#">苍南</a>
+                            <a href="#">承德县</a>
+                            <a href="#">赤壁</a>
+                            <a href="#">崇州</a>
+                            <a href="#">淳安</a>
+                            <a href="#">曹妃甸</a>
+                            <a href="#">昌乐</a>
+                            <a href="#">磁县</a>
+                            <a href="#">昌黎</a>
+                            <a href="#">岑溪</a>
+                            <a href="#">成安</a>
+                            <a href="#">长垣</a>
+                            <a href="#">曹县</a>
+                            <a href="#">城阳</a>
+                            <a href="#">茌平</a>
+                            <a href="#">长汀</a>
+                            <a href="#">城固</a>
+                            <a href="#">赤水</a>
+                            <a href="#">常山</a>
+                            <a href="#">长寿</a>
+                            <a href="#">潮安</a>
+                            <a href="#">潮阳</a>
+                            <a href="#">澄海</a>
+                            <a href="#">长丰县</a>
+                            <a href="#">茶陵</a>
+                            <a href="#">常宁市</a>
+                            <a href="#">苍溪县</a>
+                            <a href="#">慈利</a>
+                            <a href="#">长清区</a>
+                            <a href="#">崇明区</a>
+                            <a href="#">成武县</a>
+                            <a href="#">澄江县</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>D</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>E</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>F</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>G</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>H</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>I</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>J</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>K</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>L</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>M</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>N</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>O</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>P</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>Q</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>R</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>S</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>T</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>U</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>V</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>W</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>X</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>Y</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span>Z</span>
+                        <div>
+                            <a href="#">阿拉善盟</a>
+                            <a href="#">鞍山</a>
+                            <a href="#">安庆</a>
+                            <a href="#">安阳</a>
+                            <a href="#">阿坝</a>
+                            <a href="#">安顺</a>
+                            <a href="#">安康</a>
+                            <a href="#">阿勒泰</a>
+                            <a href="#">阿克苏</a>
+                            <a href="#">安吉</a>
+                            <a href="#">安丘</a>
+                            <a href="#">安岳</a>
+                            <a href="#">安平</a>
+                            <a href="#">安宁</a>
+                            <a href="#">安溪</a>
+                            <a href="#">安化</a>
+                            <a href="#">阿勒泰市</a>
+                            <a href="#">安福</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul class="navbar">
+            <li>
+                <a href="./index.html">首页</a>
+            </li>
+            <li>
+                <a href="./dianying.html">电影</a>
+            </li>
+            <li>
+                <a href="./yingyuan.html">影院</a>
+            </li>
+            <li>
+                <a href="./bangdan.html">榜单</a>
+            </li>
+            <li>
+                <a href="#">热点</a>
+            </li>
+        </ul>
+        <div class="shouji bian">
+            <span class="shouji_1"></span>
+            <span>APP下载</span>
+            <span class="sanjiao"></span>
+            <div class="shouji1">
+                <div>
+                    <div></div>
+                </div>
+                <p>扫码下载APP</p>
+                <p>选座更优惠</p>
+            </div>
+        </div>
+        <div class="sousuo">
+            <input class="sousuo_1" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off">
+            <input class="sousuo_2" type="submit" value="">
+        </div>
+        <div class="denglu bian">
+            <a href="#">
+                <img src="../IMG/avatar.png" alt="">
+            </a>
+            <span class="sanjiao"></span>
+            <div>
+                <a href="./denglu.html" target="blank">登录</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- 选座部分 -->
+<div class="content">
+    <article id="xuanzuo">
+        <div class="wrapper">
+            <div class="cinema-wrapper">
+                <div class="title">{{movieName}}</div>
+                <div class="title">{{startPlayTime}}</div>
+                <div class="btn-wrapper">
+                    <div class="btn-buy" @click="buySeat">
+                        选定座位
+                    </div>
+                    <div class="btn-buy" @click="resetSeat">
+                        重置座位
+                    </div>
+                    <!--智能选择-->
+                    <template v-for="(item,index) in smartChooseMaxNum">
+                        <div class="btn-buy smart" @click="smartChoose(index+1)">
+                            推荐选座{{index+1}}人
+                        </div>
+                    </template>
+                </div>
+                <div class="seat-wrapper">
+                    <div class="illustration">
+                        <div class="illustration-img-wrapper unselected-seat">
+                        </div>
+                        <span class="illustration-text">可选</span>
+                        <div class="illustration-img-wrapper selected-seat">
+                        </div>
+                        <span class="illustration-text">已选</span>
+                        <div class="illustration-img-wrapper bought-seat">
+                        </div>
+                        <span class="illustration-text">不可选</span>
+                    </div>
+                    <div class="screen">
+                        {{hallName}}银幕
+                    </div>
+                    <div class="screen-center">
+                        银幕中央
+                        <div class="mid-line"></div>
+                    </div>
+                    <div class="inner-seat-wrapper" ref="innerSeatWrapper" >
+                        <div v-for="row in seatRow">
+                            <!--这里的v-if很重要，如果没有则会导致报错，因为seatArray初始状态为空-->
+                            <div v-for="col in seatCol"
+                                 v-if="seatArray.length>0"
+                                 class="seat"
+                                 :style="{width:seatSize+'px',height:seatSize+'px'}">
+                                <div class="inner-seat"
+                                     @click="handleChooseSeat(row-1,col-1)"
+                                     v-if="seatArray[row-1][col-1]!==-1"
+                                     :class="seatArray[row-1][col-1]===2?'bought-seat':(seatArray[row-1][col-1]===1?'selected-seat':'unselected-seat')">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <aside>
+        <div style="width: 500px;height: 100%";>
+            adasdasdd
+        </div>
+    </aside>
+</div>
+
+<!-- 底部 -->
+<footer>
+    <p>
+        商务合作邮箱：v@maoyan.com 客服电话：10105335 违法和不良信息举报电话：4006018900
+    </p>
+    <p>
+        投诉举报邮箱：tousujubao@meituan.com 舞弊线索举报邮箱：wubijubao@maoyan.com
+    </p>
+    <p>
+        友情链接 :
+        <a href="#">美团网</a>
+        <span></span>
+        <a href="#">美团下载</a>
+        <span></span>
+        <a href="#">欢喜首映</a>
+    </p>
+    <p>
+        ©2016猫眼电影 maoyan.com
+        <a href="#">京ICP证160733号</a>
+        <a href="#">京ICP备16022489号-1</a>
+        <a href="#">京公网安备 11010102003232号</a>
+        <a href="#">网络文化经营许可证</a>
+        <a href="#">电子公告服务规则</a>
+    </p>
+    <p>
+        北京猫眼文化传媒有限公司
+    </p>
+</footer>
+<!-- 喵 -->
+<a class="miao" href="./zajindan.html" target="blank">
+</a>
+
+
+<script>
+    function getQueryString(hallMovieId) {
+        var reg = new RegExp("(^|&)" + hallMovieId + "=([^&]*)(&|$)", "i");
+        var r = decodeURI(window.location.search).substr(1).match(reg);
+        if (r != null)
+            return unescape(r[2]);
+        return null;
+    }
+
+    var id = getQueryString("hallMovieId");
+
+    new Vue({
+        el: '#xuanzuo',
+        data: {
+            //影院座位的二维数组,-1为非座位，0为未购座位，1为已选座位(绿色),2为已购座位(红色)
+            seatArray:[],
+            //影院座位行数seatRow:10
+            seatRow:'',
+            //影院座位列数seatCol:20,
+            seatCol:'',
+            //座位尺寸
+            seatSize:'',
+            //推荐选座最大数量
+            smartChooseMaxNum:4,
+            //选中座位
+            selectedSeat:[],
+            //厅名
+            hallName:'',
+            //放映时间
+            startPlayTime:'',
+            //电影名称
+            movieName:'',
+            nonSeatPlace:'',
+        },
+        computed:{
+        },
+        methods:{
+            //向前后某个方向进行搜索的函数,参数是起始行，终止行,推荐座位个数
+            searchSeatByDirection: function(fromRow,toRow,num){
+                /*
+                 * 推荐座位规则
+                 * (1)初始状态从座位行数的一半处的后一排的中间开始向左右分别搜索，取离中间最近的，如果满足条件，
+                 *    记录下该结果离座位中轴线的距离，后排搜索完成后取距离最小的那个结果座位最终结果，优先向后排进行搜索，
+                 *    后排都没有才往前排搜，前排逻辑同上
+                 *
+                 * (2)只考虑并排且连续的座位，不能不在一排或者一排中间有分隔
+                 *
+                 * */
+
+                /*
+                 * 保存当前方向搜索结果的数组,元素是对象,result是结果数组，offset代表与中轴线的偏移距离
+                 * {
+                 *   result:Array([x,y])
+                 *   offset:Number
+                 * }
+                 *
+                 */
+                let currentDirectionSearchResult = [];
+
+                let largeRow = fromRow>toRow?fromRow:toRow,
+                    smallRow = fromRow>toRow?toRow:fromRow;
+
+                for(let i=smallRow;i<=largeRow;i++){
+                    //每一排的搜索,找出该排里中轴线最近的一组座位
+                    let tempRowResult = [],
+                        minDistanceToMidLine=Infinity;
+                    for(let j=0;j<=this.seatCol - num;j++){
+                        //如果有合法位置
+                        if(this.checkRowSeatContinusAndEmpty(i,j,j+num-1)){
+                            //计算该组位置距离中轴线的距离:该组位置的中间位置到中轴线的距离
+                            let resultMidPos = parseInt((j+num/2),10);
+                            let distance = Math.abs(parseInt(this.seatCol/2) - resultMidPos);
+                            //如果距离较短则更新
+                            if(distance<minDistanceToMidLine){
+                                minDistanceToMidLine = distance;
+                                //该行的最终结果
+                                tempRowResult = this.generateRowResult(i,j,j+num-1)
+                            }
+                        }
+                    }
+                    //保存该行的最终结果
+                    currentDirectionSearchResult.push({
+                        result:tempRowResult,
+                        offset:minDistanceToMidLine
+                    })
+                }
+
+                //处理后排的搜索结果:找到距离中轴线最短的一个
+                //注意这里的逻辑需要区分前后排，对于后排是从前往后，前排则是从后往前找
+                let isBackDir = fromRow < toRow;
+                let finalReuslt = [],minDistanceToMid = Infinity;
+                if(isBackDir){
+                    //后排情况,从前往后
+                    currentDirectionSearchResult.forEach((item)=>{
+                        if(item.offset < minDistanceToMid){
+                            finalReuslt = item.result;
+                            minDistanceToMid = item.offset;
+                        }
+                    });
+                }else{
+                    //前排情况，从后往前找
+                    currentDirectionSearchResult.reverse().forEach((item)=>{
+                        if(item.offset < minDistanceToMid){
+                            finalReuslt = item.result;
+                            minDistanceToMid = item.offset;
+                        }
+                    })
+                }
+
+                //直接返回结果
+                return finalReuslt
+            },
+
+
+            //推荐选座,参数是推荐座位数目
+            smartChoose: function(num){
+                //找到影院座位水平垂直中间位置的后一排
+                let rowStart = parseInt((this.seatRow-1)/2,10)+1;
+                //先从中间排往后排搜索
+                let backResult = this.searchSeatByDirection(rowStart,this.seatRow-1,num);
+                if(backResult.length>0){
+                    this.chooseSeat(backResult);
+                    return
+                }
+                //再从中间排往前排搜索
+                let forwardResult = this.searchSeatByDirection(rowStart-1,0,num);
+                if(forwardResult.length>0) {
+                    this.chooseSeat(forwardResult);
+                    return
+                }
+                //提示用户无合法位置可选
+                alert('无合法位置可选!')
+
+            },
+
+            /*辅助函数，判断每一行座位从i列到j列是否全部空余且连续
+             *
+             */
+            checkRowSeatContinusAndEmpty: function(rowNum,startPos,endPos){
+                let isValid = true;
+                for(let i=startPos;i<=endPos;i++){
+                    if(this.seatArray[rowNum][i]!==0){
+                        isValid=false;
+                        break;
+                    }
+                }
+                return isValid
+            },
+            //辅助函数：返回每一行的某个合理位置的座位数组
+            generateRowResult: function(row,startPos,endPos){
+                let result = [];
+                for(let i=startPos;i<=endPos;i++){
+                    result.push([row,i])
+                }
+                return result
+            },
+            //辅助函数:智能推荐的选座操作
+            chooseSeat: function(result){
+                let oldArray = this.seatArray.slice();
+                for(let i=0;i<result.length;i++){
+                    //选定座位
+                    oldArray[result[i][0]][result[i][1]] = 1
+                }
+                this.seatArray = oldArray;
+            },
+
+
+            //重置座位
+            resetSeat: function(){
+                //将所有座位的值变为0
+                let oldArray = this.seatArray.slice();
+                for(let i=0;i<this.seatRow;i++){
+                    for(let j=0;j<this.seatCol;j++){
+                        if(oldArray[i][j]!==-1){
+                            oldArray[i][j]=0
+                        }
+                    }
+                }
+                this.seatArray = oldArray;
+            },
+            //选定且购买座位
+            buySeat: function(){
+                //遍历seatArray，将值为1的座位变为2
+                let oldArray = this.seatArray.slice();
+                for(let i=0;i<this.seatRow;i++){
+                    for(let j=0;j<this.seatCol;j++){
+                        if(oldArray[i][j]===1){
+                            oldArray[i][j]=2
+                        }
+                    }
+                }
+                this.seatArray = oldArray;
+            },
+            //处理座位选择逻辑
+            handleChooseSeat: function(row,col){
+                let seatValue = this.seatArray[row][col];
+                let newArray = this.seatArray;
+                //如果是已购座位，直接返回
+                if(seatValue===2) return
+                //如果是已选座位点击后变未选
+                if(seatValue === 1){
+                    newArray[row][col]=0
+                }else if(seatValue === 0){
+                    newArray[row][col]=1
+                }
+                //必须整体更新二维数组，Vue无法检测到数组某一项更新,必须slice复制一个数组才行
+                this.seatArray = newArray.slice();
+
+            },
+            //初始座位数组
+            initSeatArray: function(){
+
+                let seatArray = Array(this.seatRow).fill(0).map(()=>Array(this.seatCol).fill(0));
+                this.seatArray = seatArray;
+                this.seatSize = this.$refs.innerSeatWrapper
+                    ? parseInt(parseInt(window.getComputedStyle(this.$refs.innerSeatWrapper).width,10) / this.seatCol,10)
+                    :0;
+                //初始化不是座位的地方
+               // this.initNonSeatPlace();
+            },
+            //初始化不是座位的地方
+            // initNonSeatPlace: function(){
+                // for(let i=0;i<9;i++){
+                //     this.seatArray[i][0]=-1;
+                // }
+                // for(let i=0;i<8;i++){
+                //     this.seatArray[i][this.seatArray[0].length-1]=-1;
+                //     this.seatArray[i][this.seatArray[0].length-2]=-1;
+                // }
+                // for(let i=0;i<9;i++){
+                //     this.seatArray[i][this.seatArray[0].length-3]=-1;
+                // }
+                // for(let i=0;i<this.seatArray[0].length;i++){
+                //     this.seatArray[2][i]=-1;
+                // }
+
+            //},
+
+            //初始化参数
+            initRowAndCol:function(){
+                let Url ='/HallMovie/initSelectSeat';
+                 axios({
+                    method: 'post',
+                    url: Url,
+                    data: {
+                        hallMovieId: id
+                    }
+                }).then((response)=>{
+                    this.seatRow= response.data.seatRow;
+                    this.seatCol = response.data.seatCol;
+                    this.movieName = response.data.movieName;
+                    this.hallName = response.data.hallName;
+                    this.startPlayTime = response.data.startTime;
+                    this.nonSeatPlace = response.data.nonSeatPlace;
+                    //初始座位数组
+                    this.initSeatArray();
+                    //初始化不是座位的地方
+                     for (let seat of this.nonSeatPlace){
+                         this.seatArray[seat.seatY][seat.seatX]=seat.seatTpye;
+                     }
+                     // for (let i=0;i<this.nonSeatPlace.size();i++) {
+                     //     this.seatArray[this.nonSeatPlace[i].seatY][this.nonSeatPlace[i].seatX]=this.nonSeatPlace[i].seatTpye;
+                     // }
+                })
+
+
+            }
+        },
+
+        beforeMount:function(){
+            this.initRowAndCol()
+
+        },
+
+
+
+
+    });
+
+
+
+
+</script>
+
+</body>
+
+</html>
