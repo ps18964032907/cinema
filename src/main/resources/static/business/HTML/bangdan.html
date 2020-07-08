@@ -748,7 +748,7 @@
                 <a v-on:click="getStatus(4)">北美票房榜</a>
             </li>
             <li>
-                <a v-on:click="getStatus(5)">TOP100榜</a>
+                <a v-on:click="getStatus(5)">TOP10榜</a>
             </li>
         </ul>
     </div>
@@ -762,13 +762,13 @@
                 <p>榜单规则：将昨日国内热映的影片，按照评分从高到低排列取前10名，每天上午10点更新。相关数据来源于“猫眼专业版”及“猫眼电影库”。</p>
             </div>
             <dl>
-                <dd v-for="(top,index) in movie">
+                <dd v-for="(top,index) in movie.slice(0,10)">
 
                     <div>
                         <i v-if="index==0" class="No1"></i>
                         <i v-if="index==1" class="No2">2</i>
                         <i v-if="index==2" class="No3">3</i>
-                        <i v-if="index>2"></i>
+                        <i v-if="index>2">{{index+1}}</i>
                     </div>
                     <div class="img">
                          <a :href="'./dianyingxiangqing.html?movieId='+top.movieId">
@@ -785,8 +785,14 @@
                             </p>
                             <p>上映时间：{{top.movieReleaseTime}}</p>
                         </div>
-                        <div>
+                        <div v-if="status==1||status==5">
                             <i>{{top.movieScore}}</i>
+                        </div>
+                        <div v-if="status==2">
+                            <span>{{top.movieWantCount}}</span>
+                        </div>
+                        <div v-if="status==3||status==4">
+                            <span>{{top.movieBoxOffice}}</span>
                         </div>
                     </div>
 
@@ -885,6 +891,7 @@
         $.get("/MovieTop/top", "status=" + data, function (data2) {
             data = movieStatus.status;
             movieStatus.movie = data2;
+            console.log(movieStatus.movie);
         })
 
     }

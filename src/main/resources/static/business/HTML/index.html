@@ -747,19 +747,19 @@
         <a id="a4" class="lun">4</a>
         <a id="a5" class="lun">5</a>
         <div id="photos" class="lunbo1_lun .photos">
-            <a href="#">
+            <a href="https://www.iqiyi.com/v_19rr3tw7ig.html">
                 <img src="../IMG/LUN_bo1.jpg">
             </a>
-            <a href="#">
+            <a href="https://www.iqiyi.com/v_19rr3yebes.html?vfm=2008_aldbd&fv=p_02_01">
                 <img src="../IMG/LUN_bo2.jpg">
             </a>
-            <a href="#">
+            <a href="https://haokan.baidu.com/v?pd=wisenatural&vid=2663760276790254392">
                 <img src="../IMG/LUN_bo3.jpg">
             </a>
-            <a href="#">
+            <a href="https://v.qq.com/x/page/m080044lg9q.html">
                 <img src="../IMG/LUN_bo4.jpg">
             </a>
-            <a href="#">
+            <a href="https://www.iqiyi.com/v_19rr3pmhq4.html">
                 <img src="../IMG/LUN_bo5.jpg">
             </a>
         </div>
@@ -772,22 +772,22 @@
                 <a href="#"></a>
             </div>
             <div>
-                <a href="#">
+                <a href="https://www.sohu.com/a/110329025_162150">
                     <img src="../IMG/banner_01.png" alt="">
                 </a>
-                <a href="#">
+                <a href="https://www.bilibili.com/video/av10917132">
                     <img src="../IMG/banner_02.png" alt="">
                 </a>
-                <a href="#">
+                <a href="https://haokan.baidu.com/v?vid=12920168431139344181&pd=bjh&fr=bjhauthor&type=video">
                     <img src="../IMG/banner_03.png" alt="">
                 </a>
-                <a href="#">
+                <a href="https://www.jianshu.com/p/324d411a944f?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation">
                     <img src="../IMG/banner_04.png" alt="">
                 </a>
-                <a href="#">
+                <a href="https://www.sohu.com/a/118183088_105715">
                     <img src="../IMG/banner_05.png" alt="">
                 </a>
-                <a href="#">
+                <a href="http://phtv.ifeng.com/a/20161011/44466795_0.shtml">
                     <img src="../IMG/banner_06.png" alt="">
                 </a>
             </div>
@@ -807,7 +807,7 @@
                 <div class="zhuL1_1">
                     <span class="zhuL1_1_1">正在热映（{{onlineTotalNumber}}）</span>
                     <span class="zhuL1_1_2">
-                            <a href="#">全部</a>
+                            <a href="../HTML/dianying.html">全部</a>
                             <span class="zhuL1_1_2_2"></span>
                         </span>
                 </div>
@@ -846,7 +846,7 @@
                 <div class="zhuL2_1">
                     <span class="zhuL2_1_1">即将上映（{{comingSoonTotal}}）</span>
                     <span class="zhuL2_1_2">
-                            <a href="#">全部</a>
+                            <a href="../HTML/dianying.html">全部</a>
                             <span class="zhuL2_1_2_2"></span>
                         </span>
                 </div>
@@ -862,7 +862,7 @@
                                 </div>
                             </a>
                             <div class="zhuL2_2_2">
-                                <span>16358</span>
+                                <span>{{comingSoon.movieWantCount}}</span>
                                 人想看
                             </div>
                             <div class="zhuL2_2_3">
@@ -881,129 +881,57 @@
             <!--                    -->
             <!--                </div>-->
         </article>
-        <aside>
+        <aside id="MovieTop">
             <div class="zhuR1">
                 <div class="zhuR1_1">
                     <span>今日票房</span>
                 </div>
                 <div class="zhuR1_2">
                     <ul>
-                        <li>
+                        <li >
                             <div>
-                                <img src="../IMG/shouye_zhuti _R1.jpg" alt="">
+                                <img :src="TodayBoxMovie[0].movieImg" alt="" style="width: 120px; height: 80px">
                                 <i></i>
                             </div>
                             <div>
-                                <span class="zhuR1_2_h2">无名之辈</span>
+                                <span class="zhuR1_2_h2">{{TodayBoxMovie[0].movieName}}</span>
                                 <p>
-                                    <span>2448.68</span>万</p>
+                                    <span>{{TodayBoxMovie[0].movieBoxOffice}}</span>元</p>
                             </div>
                         </li>
                         <li>
-                            <a href="#">
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+TodayBoxMovie[1].movieId" >
                                     <span class="zhuR1_2_2">
                                         <i class="qian23">2</i>
-                                        <span class="zhuR1_2_2_1">毒液：致命守护者</span>
+                                        <span class="zhuR1_2_2_1">{{TodayBoxMovie[1].movieName}}</span>
                                     </span>
                                 <span class="zhuR1_2_3">
-                                        1091.69
-                                        <span class="zhuR1_2_3_1">万</span>
+                                        {{TodayBoxMovie[1].movieBoxOffice}}
+                                        <span class="zhuR1_2_3_1">元</span>
                                     </span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+TodayBoxMovie[2].movieId" >
                                     <span class="zhuR1_2_2">
                                         <i class="qian23">3</i>
-                                        <span class="zhuR1_2_2_1">无敌破坏王2：大闹互联网</span>
+                                        <span class="zhuR1_2_2_1">{{TodayBoxMovie[2].movieName}}</span>
                                     </span>
                                 <span class="zhuR1_2_3">
-                                        751.18
-                                        <span class="zhuR1_2_3_1">万</span>
+                                        {{TodayBoxMovie[2].movieBoxOffice}}
+                                        <span class="zhuR1_2_3_1">元</span>
                                     </span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
+                        <li v-for="(TodayTop,index) in TodayBoxMovie.slice(3,10)">
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+TodayTop.movieId" >
                                     <span class="zhuR1_2_2">
-                                        <i>4</i>
-                                        <span class="zhuR1_2_2_1">憨豆特工3</span>
+                                        <i>{{index+4}}</i>
+                                        <span class="zhuR1_2_2_1">{{TodayTop.movieName}}</span>
                                     </span>
                                 <span class="zhuR1_2_3">
-                                        629.11
-                                        <span class="zhuR1_2_3_1">万</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR1_2_2">
-                                        <i>5</i>
-                                        <span class="zhuR1_2_2_1">神奇动物：格林德沃之罪</span>
-                                    </span>
-                                <span class="zhuR1_2_3">
-                                        308.55
-                                        <span class="zhuR1_2_3_1">万</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR1_2_2">
-                                        <i>6</i>
-                                        <span class="zhuR1_2_2_1">中国蓝盔</span>
-                                    </span>
-                                <span class="zhuR1_2_3">
-                                        84.41
-                                        <span class="zhuR1_2_3_1">万</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR1_2_2">
-                                        <i>7</i>
-                                        <span class="zhuR1_2_2_1">生活万岁</span>
-                                    </span>
-                                <span class="zhuR1_2_3">
-                                        48.44
-                                        <span class="zhuR1_2_3_1">万</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR1_2_2">
-                                        <i>8</i>
-                                        <span class="zhuR1_2_2_1">克隆人</span>
-                                    </span>
-                                <span class="zhuR1_2_3">
-                                        43.14
-                                        <span class="zhuR1_2_3_1">万</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR1_2_2">
-                                        <i>9</i>
-                                        <span class="zhuR1_2_2_1">名侦探柯南：零的执行人</span>
-                                    </span>
-                                <span class="zhuR1_2_3">
-                                        13.66
-                                        <span class="zhuR1_2_3_1">万</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR1_2_2">
-                                        <i>10</i>
-                                        <span class="zhuR1_2_2_1">浴血广昌</span>
-                                    </span>
-                                <span class="zhuR1_2_3">
-                                        12.88
-                                        <span class="zhuR1_2_3_1">万</span>
+                                        {{TodayTop.movieBoxOffice}}
+                                        <span class="zhuR1_2_3_1">元</span>
                                     </span>
                             </a>
                         </li>
@@ -1038,24 +966,24 @@
                 <div class="zhuR3_1">
                     <span class="zhuR3_1_1">最受期待</span>
                     <span class="zhuR3_1_2">
-                            <a href="#">查看完整榜单</a>
+                            <a href="../HTML/bangdan.html">查看完整榜单</a>
                             <i></i>
                         </span>
                 </div>
                 <div class="zhuR3_2">
                     <ul>
                         <li class="zhuR3_21">
-                            <a href="#">
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+SoonMovie[0].movieId" >
                                 <div class="zhuR3_21_1">
                                     <i></i>
-                                    <img src="../IMG/shouye_zhuti _R2.jpg" alt="">
+                                    <img :src="SoonMovie[0].movieImg" alt="" style="width: 140px; height: 194px">
                                 </div>
                                 <div class="zhuR3_21_2">
                                     <div>
-                                        <span class="zhuR3_21_21">人间·喜剧</span>
-                                        <p>上映时间：2018-12-07</p>
+                                        <span class="zhuR3_21_21">{{SoonMovie[0].movieName}}</span>
+                                        <p>上映时间：{{SoonMovie[0].movieReleaseTime}}</p>
                                         <p>
-                                            <span>159270</span>
+                                            <span>{{SoonMovie[0].movieWantCount}}</span>
                                             人想看
                                         </p>
                                     </div>
@@ -1063,128 +991,69 @@
                             </a>
                         </li>
                         <li class="zhuR3_22">
-                            <a href="#">
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+SoonMovie[1].movieId" >
                                 <div class="zhuR3_22_1">
-                                    <img src="../IMG/shouye_zhuti _R3.jpg" alt="">
+                                    <img :src="SoonMovie[1].movieImg" alt="" style="width: 170px; height: 180px">
                                     <i>2</i>
                                 </div>
                                 <div class="zhuR3_22_2">
-                                    <p>龙猫</p>
+                                    <p>{{SoonMovie[1].movieName}}</p>
                                     <p>
-                                        <span>159270</span>
+                                        <span>{{SoonMovie[1].movieWantCount}}</span>
                                         人想看
                                     </p>
                                 </div>
                             </a>
                         </li>
                         <li class="zhuR3_22">
-                            <a href="#">
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+SoonMovie[2].movieId" >
                                 <div class="zhuR3_22_1">
-                                    <img src="../IMG/shouye_zhuti _R4.jpg" alt="">
+                                    <img :src="SoonMovie[2].movieImg" alt="" style="width: 170px; height: 180px">
                                     <i>3</i>
                                 </div>
                                 <div class="zhuR3_22_2">
-                                    <p>飞驰人生</p>
+                                    <p>{{SoonMovie[2].movieName}}</p>
                                     <p>
-                                        <span>134545</span>
+                                        <span>{{SoonMovie[2].movieWantCount}}</span>
                                         人想看
                                     </p>
                                 </div>
                             </a>
                         </li>
                         <li class="zhuR3_23">
-                            <a href="#">
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+SoonMovie[3].movieId" >
                                     <span class="zhuR3_2_2">
                                         <i>4</i>
-                                        <span class="zhuR3_2_2_1">疯狂的外星人</span>
+                                        <span class="zhuR3_2_2_1">{{SoonMovie[3].movieName}}</span>
                                     </span>
                                 <span class="zhuR3_2_3">
-                                        102315
+                                       {{SoonMovie[3].movieWantCount}}
                                         <span class="zhuR3_2_3_1">人想看</span>
                                     </span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
+                        <li v-for="(soon,index) in SoonMovie.slice(4,10)">
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+soon.movieId" >
                                     <span class="zhuR3_2_2">
-                                        <i>5</i>
-                                        <span class="zhuR3_2_2_1">情圣2</span>
+                                        <i>{{index+5}}</i>
+                                        <span class="zhuR3_2_2_1">{{soon.movieName}}</span>
                                     </span>
                                 <span class="zhuR3_2_3">
-                                        30266
+                                        {{soon.movieWantCount}}
                                         <span class="zhuR3_2_3_1">人想看</span>
                                     </span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR3_2_2">
-                                        <i>6</i>
-                                        <span class="zhuR3_2_2_1">蜘蛛侠：平行宇宙</span>
-                                    </span>
-                                <span class="zhuR3_2_3">
-                                        19797
-                                        <span class="zhuR3_2_3_1">人想看</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR3_2_2">
-                                        <i>7</i>
-                                        <span class="zhuR3_2_2_1">流浪地球</span>
-                                    </span>
-                                <span class="zhuR3_2_3">
-                                        48902
-                                        <span class="zhuR3_2_3_1">人想看</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR3_2_2">
-                                        <i>8</i>
-                                        <span class="zhuR3_2_2_1">武林怪兽</span>
-                                    </span>
-                                <span class="zhuR3_2_3">
-                                        66333
-                                        <span class="zhuR3_2_3_1">人想看</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR3_2_2">
-                                        <i>9</i>
-                                        <span class="zhuR3_2_2_1">老爸102岁</span>
-                                    </span>
-                                <span class="zhuR3_2_3">
-                                        13068
-                                        <span class="zhuR3_2_3_1">人想看</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR3_2_2">
-                                        <i>10</i>
-                                        <span class="zhuR3_2_2_1">神探蒲松龄</span>
-                                    </span>
-                                <span class="zhuR3_2_3">
-                                        49927
-                                        <span class="zhuR3_2_3_1">人想看</span>
-                                    </span>
-                            </a>
-                        </li>
+
                     </ul>
                 </div>
             </div>
             <div class="zhuR4">
                 <div class="zhuR4_1">
                     <div class="zhuR4_1">
-                        <span class="zhuR4_1_1">TOP 100</span>
+                        <span class="zhuR4_1_1">TOP 10</span>
                         <span class="zhuR4_1_2">
-                                <a href="#">查看完整榜单</a>
+                                <a href="../HTML/bangdan.html">查看完整榜单</a>
                                 <i></i>
                             </span>
                     </div>
@@ -1194,124 +1063,39 @@
                     <ul>
                         <li>
                             <div>
-                                <img src="../IMG/shouye_zhuti _R6.jpg" alt="">
+                                <img :src="Top10Movie[0].movieImg" alt=""style="width: 120px; height: 80px">
                                 <i></i>
                             </div>
                             <div>
-                                <span class="zhuR4_2_h2">霸王别姬</span>
+                                <span class="zhuR4_2_h2">{{Top10Movie[0].movieName}}</span>
                                 <p>
-                                    <span>9.6</span>分</p>
+                                    <span>{{Top10Movie[0].movieScore}}</span>分</p>
                             </div>
                         </li>
                         <li>
-                            <a href="#">
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+Top10Movie[1].movieId" >
                                     <span class="zhuR4_2_2">
                                         <i class="qian23">2</i>
-                                        <span class="zhuR4_2_2_1">肖申克的救赎</span>
+                                        <span class="zhuR4_2_2_1">{{Top10Movie[1].movieName}}</span>
                                     </span>
                                 <span class="zhuR4_2_3">
-                                        9.5
+                                        {{Top10Movie[1].movieScore}}
                                         <span class="zhuR4_2_3_1">分</span>
                                     </span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
+                        <li v-for="(top10,index) in Top10Movie.slice(3,10)">
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+top10.movieId" >
                                     <span class="zhuR4_2_2">
-                                        <i class="qian23">3</i>
-                                        <span class="zhuR4_2_2_1">罗马假日</span>
+                                        <i class="qian23">{{index+2}}</i>
+                                        <span class="zhuR4_2_2_1">{{top10.movieName}}</span>
                                     </span>
                                 <span class="zhuR4_2_3">
-                                        9.1
+                                        {{top10.movieScore}}
                                         <span class="zhuR4_2_3_1">分</span>
                                     </span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR4_2_2">
-                                        <i>4</i>
-                                        <span class="zhuR4_2_2_1">这个杀手不太冷</span>
-                                    </span>
-                                <span class="zhuR4_2_3">
-                                        9.5
-                                        <span class="zhuR4_2_3_1">分</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR4_2_2">
-                                        <i>5</i>
-                                        <span class="zhuR4_2_2_1">教父</span>
-                                    </span>
-                                <span class="zhuR4_2_3">
-                                        9.3
-                                        <span class="zhuR4_2_3_1">分</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR4_2_2">
-                                        <i>6</i>
-                                        <span class="zhuR4_2_2_1">泰坦尼克号</span>
-                                    </span>
-                                <span class="zhuR4_2_3">
-                                        9.5
-                                        <span class="zhuR4_2_3_1">分</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR4_2_2">
-                                        <i>7</i>
-                                        <span class="zhuR4_2_2_1">唐伯虎点秋香</span>
-                                    </span>
-                                <span class="zhuR4_2_3">
-                                        9.2
-                                        <span class="zhuR4_2_3_1">分</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR4_2_2">
-                                        <i>8</i>
-                                        <span class="zhuR4_2_2_1">千与千寻</span>
-                                    </span>
-                                <span class="zhuR4_2_3">
-                                        9.3
-                                        <span class="zhuR4_2_3_1">分</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR4_2_2">
-                                        <i>9</i>
-                                        <span class="zhuR4_2_2_1">魂断蓝桥</span>
-                                    </span>
-                                <span class="zhuR4_2_3">
-                                        9.2
-                                        <span class="zhuR4_2_3_1">分</span>
-                                    </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                    <span class="zhuR4_2_2">
-                                        <i>10</i>
-                                        <span class="zhuR4_2_2_1">乱世佳人</span>
-                                    </span>
-                                <span class="zhuR4_2_3">
-                                        9.1
-                                        <span class="zhuR4_2_3_1">分</span>
-                                    </span>
-                            </a>
-                        </li>
-
                     </ul>
                 </div>
             </div>
@@ -1402,6 +1186,32 @@
         }
 
 
+    })
+
+
+    var movieTop = new Vue({
+        el: "#MovieTop",
+        data: {
+            TodayBoxMovie: [],
+            SoonMovie:[],
+            Top10Movie:[]
+
+
+        },
+        beforeMount: function () {
+            $.get("/index/TopMovie", "status=" + 1, function (data) {
+                movieTop.TodayBoxMovie = data;
+                console.log(movieTop.TodayBoxMovie);
+            })
+            $.get("/index/TopMovie", "status=" + 2, function (data) {
+                movieTop.SoonMovie = data;
+                console.log(movieTop.SoonMovie);
+            })
+            $.get("/index/TopMovie", "status=" + 3, function (data) {
+                movieTop.Top10Movie = data;
+                console.log(movieTop.Top10Movie);
+            })
+        },
     })
 
 </script>

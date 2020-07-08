@@ -24,6 +24,8 @@ public interface MovieMapper {
 
     int updateByPrimaryKey(Movie record);
 
+    List<Movie> selectIndexTopMovie(Integer status);
+
     List<Movie> selectOnline();
 
     List<Movie> selectTopTen(Integer status);
