@@ -6,6 +6,7 @@
     <result column="seat_x" jdbcType="INTEGER" property="seatX" />
     <result column="seat_y" jdbcType="INTEGER" property="seatY" />
     <result column="seat_tpye" jdbcType="INTEGER" property="seatTpye" />
+    <result column="hall_id" jdbcType="INTEGER" property="hallId" />
     <result column="hall_movie_id" jdbcType="INTEGER" property="hallMovieId" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -14,25 +15,38 @@
   </delete>
   <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Seat">
     insert into seat (seat_id, seat_x, seat_y, 
-      seat_tpye, hall_movie_id)
+      seat_tpye, hall_id, hall_movie_id
+      )
     values (#{seatId,jdbcType=INTEGER}, #{seatX,jdbcType=INTEGER}, #{seatY,jdbcType=INTEGER}, 
-      #{seatTpye,jdbcType=INTEGER}, #{hallMovieId,jdbcType=INTEGER})
+      #{seatTpye,jdbcType=INTEGER}, #{hallId,jdbcType=INTEGER}, #{hallMovieId,jdbcType=INTEGER}
+      )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.pmsj.cinema.common.entity.Seat">
     update seat
     set seat_x = #{seatX,jdbcType=INTEGER},
       seat_y = #{seatY,jdbcType=INTEGER},
       seat_tpye = #{seatTpye,jdbcType=INTEGER},
+      hall_id = #{hallId,jdbcType=INTEGER},
       hall_movie_id = #{hallMovieId,jdbcType=INTEGER}
     where seat_id = #{seatId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select seat_id, seat_x, seat_y, seat_tpye, hall_movie_id
+    select seat_id, seat_x, seat_y, seat_tpye, hall_id, hall_movie_id
     from seat
     where seat_id = #{seatId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select seat_id, seat_x, seat_y, seat_tpye, hall_movie_id
+    select seat_id, seat_x, seat_y, seat_tpye, hall_id, hall_movie_id
     from seat
+  </select>
+  <select id="selectByHallId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select seat_id, seat_x, seat_y, seat_tpye, hall_id, hall_movie_id
+    from seat
+    where hall_id = #{hallId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByHallMovieId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select seat_id, seat_x, seat_y, seat_tpye, hall_id, hall_movie_id
+    from seat
+    where hall_movie_id = #{hallMovieId,jdbcType=INTEGER}
   </select>
 </mapper>

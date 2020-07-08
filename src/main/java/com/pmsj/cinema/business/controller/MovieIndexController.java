@@ -37,5 +37,9 @@ public class MovieIndexController {
     public long comingSoonTotal(){
         return movieIndexService.comingSoonTotal();
     }
+    @RequestMapping("/TopMovie")
+    public List<Movie> selectIndexTopMovie(Integer status){
+        return movieIndexService.selectIndexTopMovie(status);
+    }
 
 }

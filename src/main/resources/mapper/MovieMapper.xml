@@ -14,6 +14,7 @@
         <result column="movie_count" jdbcType="INTEGER" property="movieCount"/>
         <result column="movie_box_office" jdbcType="INTEGER" property="movieBoxOffice"/>
         <result column="movie_time" jdbcType="VARCHAR" property="movieTime"/>
+        <result column="movie_want_count" property="movieWantCount" />
 
         <collection property="movieTpyeList" ofType="com.pmsj.cinema.common.entity.MovieTpye">
             <result property="typeName" column="type_Name"/>
@@ -32,7 +33,7 @@
         <result column="movie_count" jdbcType="INTEGER" property="movieCount"/>
         <result column="movie_box_office" jdbcType="INTEGER" property="movieBoxOffice"/>
         <result column="movie_time" jdbcType="VARCHAR" property="movieTime"/>
-
+        <result column="movie_want_count" property="movieWantCount" />
         <collection property="actor" ofType="com.pmsj.cinema.common.entity.Cast">
             <id column="actor_id" property="actorId"/>
             <result column="actor_name" property="actorName"/>
@@ -88,8 +89,7 @@
     where movie_id = #{movieId,jdbcType=INTEGER}
   </update>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select movie_id, movie_name, movie_release_time, movie_area, movie_info, movie_img, 
-    movie_ename, movie_score, movie_status, movie_count, movie_box_office, movie_time
+    select *
     from movie
     where movie_id = #{movieId,jdbcType=INTEGER}
   </select>
@@ -101,8 +101,7 @@
         on movie_tpye.type_id = movie_tpye_mid.type_id
   </select>
     <select id="selectOnline" resultMap="BaseResultMap">
-    select movie_id, movie_name, movie_release_time, movie_area, movie_info, movie_img,
-    movie_ename, movie_score, movie_status, movie_count, movie_box_office, movie_time
+    select *
     from movie
     where
     movie_count>0
@@ -111,8 +110,7 @@
   </select>
 
     <select id="selectComingSoon" resultMap="BaseResultMap">
-    select movie_id, movie_name, movie_release_time, movie_area, movie_info, movie_img,
-    movie_ename, movie_score, movie_status, movie_count, movie_box_office, movie_time
+    select *
     from movie
     where
     movie_count=0
@@ -196,7 +194,32 @@
                 order by movie_box_office desc
             </if>
             <if test="status==5">
+                movie_status>0
                 order by movie_score desc
+            </if>
+            <if test="status==6">
+                movie_status=1
+                order by movie_box_office desc
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectIndexTopMovie" resultMap="BaseResultMap">
+        SELECT *
+        FROM movie
+        <where>
+            <if test="status==1">
+                movie_status=1
+                order by movie_box_office desc limit 10
+            </if>
+            <if test="status==2">
+                movie_status=2
+                order by movie_want_count desc limit 10
+            </if>
+            <if test="status==3">
+                movie_status>0
+                order by movie_score desc limit 10
             </if>
         </where>
 

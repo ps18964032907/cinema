@@ -12,6 +12,8 @@ public class Seat {
 
     private Integer seatTpye;
 
+    private Integer hallId;
+
     private Integer hallMovieId;
 
     public Integer getSeatId() {
@@ -44,6 +46,14 @@ public class Seat {
 
     public void setSeatTpye(Integer seatTpye) {
         this.seatTpye = seatTpye;
+    }
+
+    public Integer getHallId() {
+        return hallId;
+    }
+
+    public void setHallId(Integer hallId) {
+        this.hallId = hallId;
     }
 
     public Integer getHallMovieId() {

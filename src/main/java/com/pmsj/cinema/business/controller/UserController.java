@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 /*
  * @author jiangshuai
  * @date 2020/7/1 0001 19:59
@@ -23,20 +25,20 @@ public class UserController {
 
     Long code;
 
-    @RequestMapping("/accountExist")
+    @RequestMapping("/selectUser")
     @ResponseBody
-    public String accountExist(String account) {
-        User user = userService.accountExist(account);
-        if (user == null) {
-            return "true";
+    public User selectUser(String account, HttpSession session) {
+        User user;
+        if (account == null) {
+            user = (User) session.getAttribute("user");
         } else {
-            return "false";
+            user = userService.selectUser(account);
         }
+        return user;
     }
 
     @RequestMapping("/getCode")
-    public void getCode(HttpServletRequest request) {
-        String email = request.getParameter("email");
+    public void getCode(String email) {
         code = EmailUtil.sendMail(email);
     }
 
@@ -51,24 +53,53 @@ public class UserController {
     }
 
     @RequestMapping("/accountLogin")
-    public String accountLogin(String account, String password) {
+    public String accountLogin(String account, String password, HttpSession session) {
         User user = userService.accountLogin(account, password);
-        if (user == null) {
-            return "redirect:/business/HTML/index.html";
+        if (user != null) {
+            session.setAttribute("user", user);
+            return "redirect:/jifen/account.html";
+            //return "redirect:/business/HTML/index.html";
         }
         return "redirect:/business/HTML/login.html";
     }
 
     @RequestMapping("/emailLogin")
-    public String emailLogin(String email, String verifycode) {
+    public String emailLogin(String email, String verifycode, HttpSession session) {
         int vcode = Integer.parseInt(verifycode);
-        System.out.println(vcode);
-        if (code==vcode) {
+        if (code == vcode) {
             User user = userService.emailLogin(email);
-            if (user == null) {
+            if (user != null) {
+                session.setAttribute("user", user);
                 return "redirect:/business/HTML/index.html";
             }
         }
         return "redirect:/business/HTML/denglu.html";
+    }
+
+    @RequestMapping("/updatePass")
+    @ResponseBody
+    public String updatePass(String email, String verifycode, String password) {
+        System.out.println(password);
+        System.out.println(email);
+        System.out.println(verifycode);
+        int vcode = Integer.parseInt(verifycode);
+        if (code == vcode) {
+            Integer num = userService.updatePass(email, password);
+            if (num > 0) {
+                return "true";
+            }
+        }
+        return "false";
+    }
+
+    @RequestMapping("/updateUser")
+    @ResponseBody
+    public String updateUser(User user) {
+        System.out.println(user);
+        Integer num = userService.updateUser(user);
+        if (num > 0) {
+            return "true";
+        }
+        return "false";
     }
 }

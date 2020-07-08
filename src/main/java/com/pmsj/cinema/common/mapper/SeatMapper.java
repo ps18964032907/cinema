@@ -13,4 +13,8 @@ public interface SeatMapper {
     List<Seat> selectAll();
 
     int updateByPrimaryKey(Seat record);
+
+    List<Seat> selectByHallId(Integer hallMovieId);
+
+    List<Seat> selectByHallMovieId(Integer hallMovieId);
 }

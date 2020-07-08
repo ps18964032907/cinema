@@ -37,6 +37,8 @@ public class Movie {
 
     private String movieTime;
 
+    private Integer movieWantCount;
+
     private String types[];
 
     private List<MovieTpye> movieTpyeList;
