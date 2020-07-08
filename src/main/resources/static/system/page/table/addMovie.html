@@ -27,6 +27,17 @@
                 <tip>填写影片的名称。</tip>
             </div>
         </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label required">外文名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="movieEname" placeholder="请输入外文名称"
+                       value=""
+                       class="layui-input">
+                <tip>填写影片的名称。</tip>
+            </div>
+        </div>
+
         <div class="layui-form-item">
             <label class="layui-form-label required">类别</label>
             <div class="layui-input-block" id="movieTypes">
@@ -44,7 +55,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">封面图片</label>
             <div class="layui-input-block">
-                <input type="file" name="img" class="layui-input" onchange="show(this)">
+                <input type="file" name="image" required id="image" class="layui-input" onchange="show(this)">
             </div>
             <br>
             <div class="layui-input-block">
@@ -54,30 +65,46 @@
 
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">职业</label>
+            <label class="layui-form-label">时长/分钟</label>
             <div class="layui-input-block">
-                <input type="text" name="work" placeholder="请输入职业" value="" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">备注信息</label>
-            <div class="layui-input-block">
-                <textarea name="remark" class="layui-textarea" placeholder="请输入备注信息"></textarea>
+                <input type="number" name="movieTime" required placeholder="请输入时长" value="" class="layui-input">
             </div>
         </div>
 
+        <div class="layui-form-item">
+            <label class="layui-form-label">影片地区</label>
+            <div class="layui-input-block">
+                <input type="text" name="movieArea" required placeholder="请输入地区" value="" class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">简介</label>
+            <div class="layui-input-block">
+                <textarea name="movieInfo" class="layui-textarea" placeholder="简介信息"></textarea>
+            </div>
+        </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">
                 <button type="button" class="layui-btn" id="addCast0">增加导演</button>
-                <button type="button" class="layui-btn">删除导演</button>
+                <button type="button" class="layui-btn" id="delCast0">删除导演</button>
             </label>
 
             <div class="layui-input-block" id="cast0">
             </div>
         </div>
 
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <button type="button" class="layui-btn" id="addCast1">增加演员</button>
+                <button type="button" class="layui-btn" id="delCast1">删除演员</button>
+            </label>
 
+            <div class="layui-input-block" id="cast1">
+            </div>
+        </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
@@ -100,7 +127,7 @@
             console.log(data);
 
             for (let i = 0; i < data.length; i++) {
-                $("#movieTypes").append("<input type=\"checkbox\" name=\"movieTypes[]\" value=\"" + data[i].typeId + "\" title=\"" + data[i].typeName + "\">")
+                $("#movieTypes").append("<input type=\"checkbox\" name=\"movieTypes\" value=\"" + data[i].typeId + "\" title=\"" + data[i].typeName + "\">")
                 form.render();
             }
         });
@@ -113,47 +140,93 @@
         $.get("/Cast/getAllCast", function (data) {
 
             data = data.data;
-            cast0s = "<select name = 'cast0[]'>";
+            cast0s = "<div>"
+            cast0s += "<select name = 'cast0'>";
             for (let i = 0; i < data.length; i++) {
                 cast0s += "<option value='" + data[i].actorId + "'>" + data[i].actorName + "</option>"
             }
-            cast0s += "</select>";
+            cast0s += "</select><br>";
+            cast0s += "</div>"
+            /*-----------------导演初始添加----------------*/
+
+            $(cast0s).appendTo($('#cast0'));
+            form.render();
         });
+
 
         //获取所有演员列表
         $.get("/Cast/getAllCast", function (data) {
             data = data.data;
-            cast1s = "<select name = 'cast1[]'>";
+            cast1s = "<div>"
+            cast1s += "<select name = 'cast1'>";
             for (let i = 0; i < data.length; i++) {
                 cast1s += "<option value='" + data[i].actorId + "'>" + data[i].actorName + "</option>"
-                cast1s += "<input type=\"text\" name=\"cast1Role[]\" placeholder=\"请输入职业\" value=\"\" class=\"layui-input\">\n"
             }
             cast1s += "</select>";
+            cast1s += "<input type=\"text\" name=\"cast1Role\" lay-verify=\"required\" lay-reqtext=\"演员角色名不能为空\" placeholder=\"角色\" value=\"\" class=\"layui-input\"><br>\n"
+            cast1s += "</div>";
+
+            /*-----------------演员初始添加----------------*/
+            $(cast1s).appendTo($('#cast1'));
+            form.render();
         });
 
 
         /*-----------------导演的添加----------------*/
         //因为动态添加的元素class属性是无效的，所以不能用$('.add').click(function(){});
         $('body').on('click', '#addCast0', function () {
-            console.log(cast0s);
             $(cast0s).appendTo($('#cast0'));
+            form.render();
+        });
+        /*-----------------导演的删除----------------*/
+        $('body').on('click', '#delCast0', function () {
+            $("#cast0").children(":last").remove();
             form.render();
         });
 
 
+        /*-----------------演员的增加----------------*/
+        //因为动态添加的元素class属性是无效的，所以不能用$('.add').click(function(){});
+        $('body').on('click', '#addCast1', function () {
+            $(cast1s).appendTo($('#cast1'));
+            form.render();
+        });
+
+        /*-----------------演员的删除----------------*/
+        $('body').on('click', '#delCast1', function () {
+            $("#cast1").children(":last").remove();
+            form.render();
+        });
+
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-            var index = layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            }, function () {
 
-                // 关闭弹出层
-                layer.close(index);
+            console.log(data.field.movieName);
+            var fields = $(data.form).serialize()
+            let formData = new FormData($("#form")[0]);
+            formData.append("image", $("#image")[0].files[0]);
 
-                var iframeIndex = parent.layer.getFrameIndex(window.name);
-                parent.layer.close(iframeIndex);
+            $.ajax({
+                url: '/movie/addMovie?' + fields, /*接口域名地址*/
+                type: 'post',
+                data: formData,   //发送的数据，使用的是JSON
+                dataType: 'json',//服务器端返回的数据类型
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    layui.msg(res.msg);
 
+                    setTimeout(function () {
+                        var iframeIndex = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(iframeIndex);
+                        //刷新父页面
+                        window.parent.location.reload();
+                    }, 1000);
+                }
             });
+
 
             return false;
         });

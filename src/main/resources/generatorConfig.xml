@@ -111,13 +111,14 @@
         <!--        <table tableName="hall" domainObjectName="Hall"/>-->
         <!--        <table tableName="hall_movie" domainObjectName="HallMovie"/>-->
         <!--        <table tableName="hall_tpye" domainObjectName="HallTpye"/>-->
-        <table tableName="movie" domainObjectName="Movie"/>
+        <!--        <table tableName="condition" domainObjectName="Condition"/>-->
         <!--        <table tableName="movie_actor" domainObjectName="MovieActor"/>-->
         <!--        <table tableName="movie_tpye" domainObjectName="MovieTpye"/>-->
         <!--        <table tableName="order" domainObjectName="Order"/>-->
         <!--        <table tableName="seat" domainObjectName="Seat"/>-->
         <!--        <table tableName="user" domainObjectName="User"/>-->
-        <!--        <table tableName="user_coupon" domainObjectName="UserCoupon"/>-->
+<!--        <table tableName="order" domainObjectName="Order"/>-->
+        <table tableName="cinema" domainObjectName="Cinema"/>
 
 
     </context>
