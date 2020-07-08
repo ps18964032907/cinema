@@ -3,6 +3,7 @@ package com.pmsj.cinema.common.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ public class Movie {
 
     private String movieName;
     @JsonFormat(pattern = "yyyy年MM月dd日")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date movieReleaseTime;
 
     private String movieArea;

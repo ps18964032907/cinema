@@ -126,7 +126,7 @@ public class CinemaController {
     @ResponseBody
     public List<HallMovieVo> getHallMovies(Integer cinemaId, @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
 
-        return cinemaService.getHallMovies(cinemaId,date);
+        return cinemaService.getHallMovies(cinemaId, date);
     }
 }
 
