@@ -21,4 +21,5 @@ public interface CastMapper {
     Cast selectByCastName(String actorName);
 
     int getMaxId();
+
 }

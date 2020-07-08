@@ -20,4 +20,10 @@ public interface MovieActorMapper {
     List<MovieActor> selectActor(Integer movieId);
 
     List<MovieActor> selectDirector(Integer movieId);
+
+    List<MovieActor> getCast0AllByMovieId(Integer movieId);
+
+    List<MovieActor> getCast1AllByMovieId(Integer movieId);
+
+    void delByMovie(Integer movieMapperMaxId);
 }

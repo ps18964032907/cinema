@@ -19,6 +19,7 @@
         <collection property="movieTpyeList" ofType="com.pmsj.cinema.common.entity.MovieTpye">
             <result property="typeName" column="type_Name"/>
         </collection>
+
     </resultMap>
     <resultMap id="ActorByMovie" type="com.pmsj.cinema.common.entity.Movie">
         <id column="movie_id" jdbcType="INTEGER" property="movieId"/>

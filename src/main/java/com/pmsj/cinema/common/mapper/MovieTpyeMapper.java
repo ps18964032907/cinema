@@ -26,4 +26,9 @@ public interface MovieTpyeMapper {
 
     void addMovieTypeMid(@Param("movieId") Integer movieId, @Param("maxId") int maxId);
 
+    List<MovieTpye> selectNoMovieType(Integer movieId);
+
+    List<MovieTpye> selectCheckedTpyes(Integer movieId);
+
+    void deleteByMovie(Integer movieId);
 }

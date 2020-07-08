@@ -194,13 +194,13 @@
 
             if (obj.event === 'edit') {
                 var index = layer.open({
-                    title: '编辑品牌',
+                    title: '编辑影片',
                     type: 2,
                     shade: 0.2,
                     maxmin: true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '/brand/editInit?brandId=' + data.brandId,
+                    content: '/movie/editMovie?movieId=' + data.movieId,
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -209,22 +209,9 @@
             } else if (obj.event === 'delete') {
                 layer.confirm('真的删除吗？', function (index) {
 
-
-                    $.ajax({
-                        type: "POST",
-                        url: '/brand/del',
-                        data: JSON.stringify(data.brandId),
-                        contentType: 'application/json',
-                        success: function (data) {
-                            if (data === "SUCCESS") {
-                                layer.msg("删除成功");
-                                setTimeout(function () {
-                                    obj.del();
-                                }, 1000);
-                            } else {
-                                layer.msg("删除失败")
-                            }
-                        }
+                    let movieId = data.movieId + "".replace(":", "");
+                    $.post("/movie/delMovie", "movieId=" + movieId, function (data) {
+                        layer.msg(data)
                     });
 
                     layer.close(index);

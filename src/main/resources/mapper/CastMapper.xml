@@ -39,4 +39,5 @@
     select max(actor_id)
       from cast
   </select>
+
 </mapper>

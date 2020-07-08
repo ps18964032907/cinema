@@ -5,11 +5,15 @@
         <id column="type_id" jdbcType="INTEGER" property="typeId"/>
         <result column="type_name" jdbcType="VARCHAR" property="typeName"/>
         <result column="tpye_status" jdbcType="INTEGER" property="tpyeStatus"/>
-        <result column="movie_id" jdbcType="INTEGER" property="movieId" />
+        <result column="movie_id" jdbcType="INTEGER" property="movieId"/>
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from movie_tpye
     where type_id = #{typeId,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByMovie">
+       delete from movie_tpye_mid
+        where movie_id = #{movieId}
   </delete>
     <insert id="insert" parameterType="com.pmsj.cinema.common.entity.MovieTpye">
     insert into movie_tpye (type_id, type_name, tpye_status
@@ -20,7 +24,6 @@
     <insert id="addMovieTypeMid">
       insert into movie_tpye_mid (type_id,movie_id)
       value (#{maxId},#{movieId})
-
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.pmsj.cinema.common.entity.MovieTpye">
     update movie_tpye
@@ -38,7 +41,7 @@
     from movie_tpye
   </select>
 
-    <select id="selectByMovieId"  resultMap="BaseResultMap">
+    <select id="selectByMovieId" resultMap="BaseResultMap">
     SELECT i.movie_id,t.*
     FROM
     (movie_tpye_mid i
@@ -56,8 +59,6 @@
   </select>
 
 
-
-
     <select id="selectByName" resultMap="BaseResultMap">
 
     select type_id, type_name, tpye_status
@@ -68,4 +69,20 @@
         select max(type_id)
         from movie_tpye
   </select>
+    <select id="selectNoMovieType" resultMap="BaseResultMap">
+        select  *
+        from movie_tpye_mid
+        LEFT JOIN movie_tpye
+        on movie_tpye_mid.type_id =  movie_tpye.type_id
+        where  movie_id != #{movieId}
+        GROUP BY movie_tpye.type_id
+    </select>
+    <select id="selectCheckedTpyes" resultMap="BaseResultMap">
+         select  *
+        from movie_tpye_mid
+        LEFT JOIN movie_tpye
+        on movie_tpye_mid.type_id =  movie_tpye.type_id
+        where  movie_id = #{movieId}
+        GROUP BY movie_tpye.type_id
+    </select>
 </mapper>
