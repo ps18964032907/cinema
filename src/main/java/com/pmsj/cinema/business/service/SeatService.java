@@ -20,10 +20,17 @@ public class SeatService {
     @Autowired(required = false)
     SeatMapper seatMapper;
 
-    public List<Seat> getSeat(Integer hallId) {
+    public List<Seat> getNonSeat(Integer hallId) {
         if (hallId==null){
-            throw new NullParametersException("HallMovieId is null");
+            throw new NullParametersException("HallId is null");
         }
         return seatMapper.selectByHallId(hallId);
+    }
+
+    public List<Seat> getSelectedSeat(Integer hallMovieId) {
+        if (hallMovieId==null){
+            throw new NullParametersException("HallMovieId is null");
+        }
+        return seatMapper.selectByHallMovieId(hallMovieId);
     }
 }

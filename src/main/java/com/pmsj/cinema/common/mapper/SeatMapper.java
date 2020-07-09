@@ -14,7 +14,7 @@ public interface SeatMapper {
 
     int updateByPrimaryKey(Seat record);
 
-    List<Seat> selectByHallId(Integer hallMovieId);
+    List<Seat> selectByHallId(Integer hallId);
 
     List<Seat> selectByHallMovieId(Integer hallMovieId);
 }

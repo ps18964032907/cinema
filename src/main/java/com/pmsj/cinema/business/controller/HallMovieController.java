@@ -55,11 +55,10 @@ public class HallMovieController {
         String hallName = hall.getHallName()+hallTypeService.selectById(hall.getHallType()).getHtName();
         //电影id
         Integer movieId = thisHallMovie.getMovieId();
-        //影厅座位
-        List<Seat> seats = seatService.getSeat(hallId);
-
-
-
+        //影厅不是座位地方
+        List<Seat> seats = seatService.getNonSeat(hallId);
+        //已被选择地方
+        List<Seat> selectedSeat = seatService.getSelectedSeat(id);
         Map map = new HashMap();
 
         map.put("seatRow",hall.getHallY());
@@ -68,6 +67,18 @@ public class HallMovieController {
         map.put("hallName",hallName);
         map.put("movieName",movieDetailsService.selectByPrimaryKey(movieId).getMovieName());
         map.put("nonSeatPlace",seats);
+        map.put("selectedSeat",selectedSeat);
         return map;
+    }
+
+    /**
+     * 选座购票
+     * @param hallMovie
+     * @return
+     */
+    @RequestMapping("/buyTicket")
+    public String buyTicket(HallMovie hallMovie){
+
+        return null;
     }
 }
