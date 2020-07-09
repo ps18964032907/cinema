@@ -8,9 +8,12 @@ package com.pmsj.cinema.system.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.pmsj.cinema.common.entity.*;
+import com.pmsj.cinema.common.mapper.CinemaMapper;
+import com.pmsj.cinema.common.vo.AutocompleteVo;
 import com.pmsj.cinema.common.vo.CinemaVo;
 import com.pmsj.cinema.common.vo.HallMovieVo;
 import com.pmsj.cinema.system.service.CinemaService;
+import com.pmsj.cinema.system.service.MovieService;
 import com.pmsj.cinema.system.util.ReturnUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,6 +31,9 @@ public class CinemaController {
 
     @Autowired
     CinemaService cinemaService;
+
+    @Autowired
+    MovieService movieService;
 
     @RequestMapping("getAllCinameType")
     @ResponseBody
@@ -68,7 +74,7 @@ public class CinemaController {
     public String getCinemaById(Integer cinemaId, Map map) {
         Cinema cinema = cinemaService.getCinemaById(cinemaId);
         map.put("cinema", cinema);
-        return "system/page/table/editCinema.html";
+        return "system/page/table/editCinema";
 
     }
 
@@ -128,6 +134,41 @@ public class CinemaController {
 
         return cinemaService.getHallMovies(cinemaId, date);
     }
+
+
+    @RequestMapping("sortMoviePageByMoiveId")
+    public String sortMoviePageByMoiveId(Integer cinemaId, Map map) {
+
+        Cinema cinema = cinemaService.getCinemaById(cinemaId);
+        List<Hall> hallList = cinemaService.getAllHallByCinemaId(cinemaId);
+        map.put("cinema", cinema);
+        map.put("hallList", hallList);
+
+
+        return "system/page/table/sortMovie";
+
+    }
+
+    @RequestMapping("/movieName")
+    @ResponseBody
+    public AutocompleteVo getMovieByMovieName(String movieName) {
+        List<Movie> movieByMovieName = movieService.getMovieByMovieName(movieName);
+
+        AutocompleteVo autocompleteVo = new AutocompleteVo();
+        autocompleteVo.setData(movieByMovieName);
+        autocompleteVo.setCode(200);
+        autocompleteVo.setMsg("");
+        return autocompleteVo;
+
+    }
+
+    @RequestMapping("addHallMovie")
+    public void addHallMovie(HallMovie hallMovie, Integer integer) {
+
+
+    }
+
+
 }
 
 

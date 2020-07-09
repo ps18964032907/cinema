@@ -6,6 +6,7 @@ import com.pmsj.cinema.common.entity.*;
 import com.pmsj.cinema.common.mapper.MovieActorMapper;
 import com.pmsj.cinema.common.vo.AutocompleteVo;
 import com.pmsj.cinema.system.service.CastService;
+import com.pmsj.cinema.system.service.CinemaService;
 import com.pmsj.cinema.system.service.MovieService;
 import com.pmsj.cinema.system.util.ReturnUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,9 @@ public class MovieController {
 
     @Autowired
     MovieActorMapper movieActorMapper;
+
+    @Autowired
+    CinemaService cinemaService;
 
 
     @RequestMapping("getAllMovie")
@@ -134,8 +138,6 @@ public class MovieController {
 
     @RequestMapping("editMovie")
     public String editMovie(Integer movieId, Map map) {
-
-
         //
         Movie movie = movieService.getMoiveById(movieId);
         map.put("movie", movie);

@@ -14,7 +14,7 @@
         <result column="movie_count" jdbcType="INTEGER" property="movieCount"/>
         <result column="movie_box_office" jdbcType="INTEGER" property="movieBoxOffice"/>
         <result column="movie_time" jdbcType="VARCHAR" property="movieTime"/>
-        <result column="movie_want_count" property="movieWantCount" />
+        <result column="movie_want_count" property="movieWantCount"/>
 
         <collection property="movieTpyeList" ofType="com.pmsj.cinema.common.entity.MovieTpye">
             <result property="typeName" column="type_Name"/>
@@ -34,7 +34,7 @@
         <result column="movie_count" jdbcType="INTEGER" property="movieCount"/>
         <result column="movie_box_office" jdbcType="INTEGER" property="movieBoxOffice"/>
         <result column="movie_time" jdbcType="VARCHAR" property="movieTime"/>
-        <result column="movie_want_count" property="movieWantCount" />
+        <result column="movie_want_count" property="movieWantCount"/>
         <collection property="actor" ofType="com.pmsj.cinema.common.entity.Cast">
             <id column="actor_id" property="actorId"/>
             <result column="actor_name" property="actorName"/>
@@ -224,6 +224,9 @@
             </if>
         </where>
 
+    </select>
+    <select id="getMovieByMovieName" resultMap="BaseResultMap">
+        select * from movie where movie_name like '%${movieName}%'
     </select>
 
 

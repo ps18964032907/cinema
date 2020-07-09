@@ -1,6 +1,7 @@
 package com.pmsj.cinema.common.mapper;
 
 import com.pmsj.cinema.common.entity.Hall;
+
 import java.util.List;
 
 public interface HallMapper {
@@ -13,4 +14,6 @@ public interface HallMapper {
     List<Hall> selectAll();
 
     int updateByPrimaryKey(Hall record);
+
+    List<Hall> getAllHallByCinemaId(Integer cinemaId);
 }

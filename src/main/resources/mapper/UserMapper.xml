@@ -13,6 +13,7 @@
         <result column="user_birthday" jdbcType="DATE" property="userBirthday"/>
         <result column="user_autograph" jdbcType="VARCHAR" property="userAutograph"/>
         <result column="user_points" jdbcType="INTEGER" property="userPoints"/>
+        <result column="user_photo" jdbcType="VARCHAR" property="userPhoto"/>
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
@@ -29,9 +30,9 @@
       #{userAutograph,jdbcType=VARCHAR}, #{userPoints,jdbcType=INTEGER})
   </insert>
     <insert id="register">
-    insert into user (user_account,user_password, user_email,user_phone, user_points)
+    insert into user (user_account,user_password, user_email,user_phone, user_points,user_photo)
     values (#{userAccount,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR},
-      #{userPhone,jdbcType=VARCHAR},0)
+      #{userPhone,jdbcType=VARCHAR},0,#{userPhoto,jdbcType=VARCHAR})
     </insert>
     <update id="updateByPrimaryKey" parameterType="com.pmsj.cinema.common.entity.User">
     update user
@@ -47,7 +48,7 @@
       user_points = #{userPoints,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-    <update id="updatePass" >
+    <update id="updatePass">
     update user set user_password = #{userPassword,jdbcType=VARCHAR} where user_email = #{userEmail,jdbcType=VARCHAR}
     </update>
     <update id="updateUser">
@@ -60,6 +61,9 @@
       user_autograph = #{userAutograph,jdbcType=VARCHAR}
     where  user_account = #{userAccount,jdbcType=VARCHAR}
 </update>
+    <update id="updatePhoto">
+         update user set user_photo = #{userPhoto,jdbcType=VARCHAR} where user_account = #{userAccount,jdbcType=VARCHAR}
+    </update>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select user_id, user_name, user_account, user_password, user_email, user_status, 
     user_phone, user_gender, user_birthday, user_autograph, user_points

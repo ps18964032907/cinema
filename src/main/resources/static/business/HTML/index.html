@@ -13,9 +13,6 @@
 </head>
 
 
-
-
-
 <body>
 
 <script src="/js/vue.js"></script>
@@ -727,13 +724,13 @@
             <input class="sousuo_1" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off">
             <input class="sousuo_2" type="submit" value="">
         </div>
-        <div class="denglu bian">
-            <a href="#">
-                <img src="../IMG/avatar.png" alt="">
+        <div class="denglu bian" id="user">
+            <a href="/jifen/index.html">
+                <img :src="photo" alt="" style="width:50px; height:50px;border-radius: 50%">
             </a>
             <span class="sanjiao"></span>
             <div>
-                <a href="./login.html" target="blank">登录</a>
+                <a href="/user/logout" target="blank">注销</a>
             </div>
         </div>
     </nav>
@@ -826,7 +823,7 @@
                                         <!--                                                <i>3</i>-->
                                         <!--                                            </span>-->
                                     </div>
-<!--                                    <i class="DIMAX3"></i>-->
+                                    <!--                                    <i class="DIMAX3"></i>-->
                                 </a>
                             </div>
                             <div class="zhuL1_2_2">
@@ -888,7 +885,7 @@
                 </div>
                 <div class="zhuR1_2">
                     <ul>
-                        <li >
+                        <li>
                             <div>
                                 <img :src="TodayBoxMovie[0].movieImg" alt="" style="width: 120px; height: 80px">
                                 <i></i>
@@ -900,7 +897,7 @@
                             </div>
                         </li>
                         <li>
-                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+TodayBoxMovie[1].movieId" >
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+TodayBoxMovie[1].movieId">
                                     <span class="zhuR1_2_2">
                                         <i class="qian23">2</i>
                                         <span class="zhuR1_2_2_1">{{TodayBoxMovie[1].movieName}}</span>
@@ -912,7 +909,7 @@
                             </a>
                         </li>
                         <li>
-                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+TodayBoxMovie[2].movieId" >
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+TodayBoxMovie[2].movieId">
                                     <span class="zhuR1_2_2">
                                         <i class="qian23">3</i>
                                         <span class="zhuR1_2_2_1">{{TodayBoxMovie[2].movieName}}</span>
@@ -924,7 +921,7 @@
                             </a>
                         </li>
                         <li v-for="(TodayTop,index) in TodayBoxMovie.slice(3,10)">
-                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+TodayTop.movieId" >
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+TodayTop.movieId">
                                     <span class="zhuR1_2_2">
                                         <i>{{index+4}}</i>
                                         <span class="zhuR1_2_2_1">{{TodayTop.movieName}}</span>
@@ -973,7 +970,7 @@
                 <div class="zhuR3_2">
                     <ul>
                         <li class="zhuR3_21">
-                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+SoonMovie[0].movieId" >
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+SoonMovie[0].movieId">
                                 <div class="zhuR3_21_1">
                                     <i></i>
                                     <img :src="SoonMovie[0].movieImg" alt="" style="width: 140px; height: 194px">
@@ -991,7 +988,7 @@
                             </a>
                         </li>
                         <li class="zhuR3_22">
-                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+SoonMovie[1].movieId" >
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+SoonMovie[1].movieId">
                                 <div class="zhuR3_22_1">
                                     <img :src="SoonMovie[1].movieImg" alt="" style="width: 170px; height: 180px">
                                     <i>2</i>
@@ -1006,7 +1003,7 @@
                             </a>
                         </li>
                         <li class="zhuR3_22">
-                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+SoonMovie[2].movieId" >
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+SoonMovie[2].movieId">
                                 <div class="zhuR3_22_1">
                                     <img :src="SoonMovie[2].movieImg" alt="" style="width: 170px; height: 180px">
                                     <i>3</i>
@@ -1021,7 +1018,7 @@
                             </a>
                         </li>
                         <li class="zhuR3_23">
-                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+SoonMovie[3].movieId" >
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+SoonMovie[3].movieId">
                                     <span class="zhuR3_2_2">
                                         <i>4</i>
                                         <span class="zhuR3_2_2_1">{{SoonMovie[3].movieName}}</span>
@@ -1033,7 +1030,7 @@
                             </a>
                         </li>
                         <li v-for="(soon,index) in SoonMovie.slice(4,10)">
-                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+soon.movieId" >
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+soon.movieId">
                                     <span class="zhuR3_2_2">
                                         <i>{{index+5}}</i>
                                         <span class="zhuR3_2_2_1">{{soon.movieName}}</span>
@@ -1063,7 +1060,7 @@
                     <ul>
                         <li>
                             <div>
-                                <img :src="Top10Movie[0].movieImg" alt=""style="width: 120px; height: 80px">
+                                <img :src="Top10Movie[0].movieImg" alt="" style="width: 120px; height: 80px">
                                 <i></i>
                             </div>
                             <div>
@@ -1073,7 +1070,7 @@
                             </div>
                         </li>
                         <li>
-                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+Top10Movie[1].movieId" >
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+Top10Movie[1].movieId">
                                     <span class="zhuR4_2_2">
                                         <i class="qian23">2</i>
                                         <span class="zhuR4_2_2_1">{{Top10Movie[1].movieName}}</span>
@@ -1085,7 +1082,7 @@
                             </a>
                         </li>
                         <li v-for="(top10,index) in Top10Movie.slice(3,10)">
-                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+top10.movieId" >
+                            <a :href="'../HTML/dianyingxiangqing.html?movieId='+top10.movieId">
                                     <span class="zhuR4_2_2">
                                         <i class="qian23">{{index+2}}</i>
                                         <span class="zhuR4_2_2_1">{{top10.movieName}}</span>
@@ -1148,7 +1145,7 @@
                 data.size = 6;
 
                 _this.movieOnline = data;
-                if(_this.movieOnline.length>8) {
+                if (_this.movieOnline.length > 8) {
                     _this.movieOnline.length = 8;
                 }
                 console.log(data);
@@ -1171,7 +1168,7 @@
             $.get("/index/comingSoon", null, function (data) {
 
                 _this.comingSoonMovie = data;
-                if(_this.comingSoonMovie.length>8) {
+                if (_this.comingSoonMovie.length > 8) {
                     _this.comingSoonMovie.length = 8;
                 }
                 console.log(data);
@@ -1193,8 +1190,8 @@
         el: "#MovieTop",
         data: {
             TodayBoxMovie: [],
-            SoonMovie:[],
-            Top10Movie:[]
+            SoonMovie: [],
+            Top10Movie: []
 
 
         },
@@ -1213,7 +1210,17 @@
             })
         },
     })
-
+    var user = new Vue({
+        el: "#user",
+        data: {
+            photo: '',
+        },
+        beforeMount: function () {
+            $.get("/user/selectUser", null, function (data) {
+                user.photo = data.userPhoto
+            })
+        },
+    })
 </script>
 
 </html>

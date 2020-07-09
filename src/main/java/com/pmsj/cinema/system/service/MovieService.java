@@ -38,6 +38,10 @@ public class MovieService {
 
     }
 
+    public List<Movie> getAllMovies() {
+        return movieMapper.selectAll();
+    }
+
 
     @Transactional
     public void addMovie(Movie movie, String[] movieTypes, String[] cast0, String[] cast1, String[] cast1Role) {
@@ -66,7 +70,7 @@ public class MovieService {
             movieActor.setActorId(Integer.parseInt(cast1[i]));
             movieActor.setMovieId(movieMapperMaxId);
             movieActor.setMovieActorType(1);
-            movieActor.setMovieActorRole("饰：" + cast1Role[i]);
+            movieActor.setMovieActorRole("饰：" + cast1Role[i].replaceAll("饰：", ""));
             movieActorMapper.insert(movieActor);
         }
     }
@@ -112,10 +116,14 @@ public class MovieService {
             movieActor.setActorId(Integer.parseInt(cast1[i]));
             movieActor.setMovieId(movieMapperMaxId);
             movieActor.setMovieActorType(1);
-            movieActor.setMovieActorRole("饰：" + cast1Role[i]);
+            movieActor.setMovieActorRole("饰：" + cast1Role[i].replaceAll("饰：", ""));
             movieActorMapper.insert(movieActor);
         }
 
 
+    }
+
+    public List<Movie> getMovieByMovieName(String movieName) {
+        return movieMapper.getMovieByMovieName(movieName);
     }
 }

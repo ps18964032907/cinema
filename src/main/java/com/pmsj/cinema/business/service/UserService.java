@@ -29,26 +29,32 @@ public class UserService {
 
         return (int) a;
     }
+
     public User selectUser(String account) {
-       return userMapper.selectUser(account);
+        return userMapper.selectUser(account);
     }
-    public void register(String userAccount, String password, String email, String phone) {
-        userMapper.register(userAccount, password,email, phone);
+
+    public void register(String photo, String userAccount, String password, String email, String phone) {
+        userMapper.register(userAccount, password, email, phone, photo);
     }
 
     public User accountLogin(String account, String password) {
-        return userMapper.accountLogin(account,password);
+        return userMapper.accountLogin(account, password);
     }
 
     public User emailLogin(String email) {
         return userMapper.emailLogin(email);
     }
 
-    public Integer updatePass(String email,String password) {
-        return userMapper.updatePass(email,password);
+    public Integer updatePass(String email, String password) {
+        return userMapper.updatePass(email, password);
     }
 
     public Integer updateUser(User user) {
         return userMapper.updateUser(user);
+    }
+
+    public int updatePhoto(User user) {
+        return userMapper.updatePhoto(user);
     }
 }
