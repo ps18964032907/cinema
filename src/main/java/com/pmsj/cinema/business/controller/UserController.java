@@ -187,7 +187,7 @@ public class UserController {
      * @since 1.0.0
      * @return java.lang.String
      **/
-    @RequestMapping("/updatePhoto")
+  /*  @RequestMapping("/updatePhoto")
     @ResponseBody
     public String updatePhoto(HttpServletRequest request, @RequestParam(value = "image", required = false) MultipartFile image, HttpSession session) {
         System.out.println(image);
@@ -234,5 +234,5 @@ public class UserController {
             return "true";
         }
         return "false";
-    }
+    }*/
 }
