@@ -20,4 +20,5 @@ public interface HallMovieMapper {
 
     int updateByPrimaryKey(HallMovie record);
 
+    int getHallMoviesByTime(@Param("hallid") Integer hallid, @Param("startTime") Date startTime, @Param("endTime") Date endTime);
 }

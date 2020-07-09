@@ -7,8 +7,10 @@ package com.pmsj.cinema.system.controller;
  **/
 
 import com.github.pagehelper.PageInfo;
+import com.pmsj.cinema.business.service.HallMovieService;
 import com.pmsj.cinema.common.entity.*;
 import com.pmsj.cinema.common.mapper.CinemaMapper;
+import com.pmsj.cinema.common.mapper.HallMovieMapper;
 import com.pmsj.cinema.common.vo.AutocompleteVo;
 import com.pmsj.cinema.common.vo.CinemaVo;
 import com.pmsj.cinema.common.vo.HallMovieVo;
@@ -34,6 +36,9 @@ public class CinemaController {
 
     @Autowired
     MovieService movieService;
+
+    @Autowired
+    HallMovieService hallMovieService;
 
     @RequestMapping("getAllCinameType")
     @ResponseBody
@@ -163,13 +168,32 @@ public class CinemaController {
     }
 
     @RequestMapping("addHallMovie")
-    public void addHallMovie(HallMovie hallMovie, Integer integer) {
+    @ResponseBody
+    public String addHallMovie(HallMovie hallMovie, Integer time) {
+        System.out.println(hallMovie);
+
+        System.out.println(time);
+        if (hallMovie.getHallId() == null) {
+            return "请选择影厅";
+        }
+        if (hallMovie.getMovieId() == null) {
+            return "没有这样的影片";
+        }
 
 
+        Long dateTime = 1000L * time * 60 + hallMovie.getStartTime().getTime();
+        hallMovie.setEndTime(new Date(dateTime));
+
+
+        int add = hallMovieService.add(hallMovie);
+        if (add != 0) {
+            return "影厅该时间端被占用";
+        }
+
+        return "200";
     }
 
 
 }
-
 
 

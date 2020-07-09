@@ -72,6 +72,12 @@
             and hall_movie.start_time &gt;= #{date}
         </if>
     </select>
+    <select id="getHallMoviesByTime" resultType="java.lang.Integer">
+            select count(*) from hall_movie where hall_id = #{hallid}
+            and
+            /* 已有的开始时间 小于等于 当前的结束时间 并且 已有的结束时间 大于等于 当前的开始时间*/
+            start_time &lt;= #{endTime} and end_time &gt;= #{startTime}
+    </select>
 
 
 </mapper>
