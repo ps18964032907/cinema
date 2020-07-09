@@ -8,14 +8,8 @@ package com.pmsj.cinema.system.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.pmsj.cinema.common.entity.Brand;
-import com.pmsj.cinema.common.entity.Cinema;
-import com.pmsj.cinema.common.entity.HallMovie;
-import com.pmsj.cinema.common.entity.HallTpye;
-import com.pmsj.cinema.common.mapper.BrandMapper;
-import com.pmsj.cinema.common.mapper.CinemaMapper;
-import com.pmsj.cinema.common.mapper.HallMovieMapper;
-import com.pmsj.cinema.common.mapper.HallTpyeMapper;
+import com.pmsj.cinema.common.entity.*;
+import com.pmsj.cinema.common.mapper.*;
 import com.pmsj.cinema.common.vo.CinemaVo;
 import com.pmsj.cinema.common.vo.HallMovieVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +24,9 @@ public class CinemaService {
 
     @Autowired
     BrandMapper brandMapper;
+
+    @Autowired
+    HallMapper hallMapper;
 
     @Autowired
     HallTpyeMapper hallTpyeMapper;
@@ -60,6 +57,10 @@ public class CinemaService {
         List<CinemaVo> allCinemaVo = cinemaMapper.getAllCinemaVo(cinema);
 
         return new PageInfo<CinemaVo>(allCinemaVo);
+    }
+
+    public List<Cinema> getAllCinema() {
+        return cinemaMapper.selectAll();
     }
 
     public Cinema getCinemaById(Integer cinemaId) {
@@ -93,5 +94,10 @@ public class CinemaService {
     public List<HallMovieVo> getHallMovies(Integer cinemaId, Date date) {
         System.out.println(date);
         return hallMovieMapper.getHallMovies(cinemaId, date);
+    }
+
+    public List<Hall> getAllHallByCinemaId(Integer cinemaId) {
+        return hallMapper.getAllHallByCinemaId(cinemaId);
+
     }
 }

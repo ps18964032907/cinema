@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pmsj.cinema.common.mapper.HallMapper">
-  <resultMap id="BaseResultMap" type="com.pmsj.cinema.common.entity.Hall">
-    <id column="hall_id" jdbcType="INTEGER" property="hallId" />
-    <result column="hall_name" jdbcType="VARCHAR" property="hallName" />
-    <result column="hall_type" jdbcType="INTEGER" property="hallType" />
-    <result column="hall_status" jdbcType="INTEGER" property="hallStatus" />
-    <result column="hall_x" jdbcType="INTEGER" property="hallX" />
-    <result column="hall_y" jdbcType="INTEGER" property="hallY" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <resultMap id="BaseResultMap" type="com.pmsj.cinema.common.entity.Hall">
+        <id column="hall_id" jdbcType="INTEGER" property="hallId"/>
+        <result column="hall_name" jdbcType="VARCHAR" property="hallName"/>
+        <result column="hall_type" jdbcType="INTEGER" property="hallType"/>
+        <result column="hall_status" jdbcType="INTEGER" property="hallStatus"/>
+        <result column="hall_x" jdbcType="INTEGER" property="hallX"/>
+        <result column="hall_y" jdbcType="INTEGER" property="hallY"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from hall
     where hall_id = #{hallId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Hall">
+    <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Hall">
     insert into hall (hall_id, hall_name, hall_type, 
       hall_status, hall_x, hall_y
       )
@@ -21,7 +21,7 @@
       #{hallStatus,jdbcType=INTEGER}, #{hallX,jdbcType=INTEGER}, #{hallY,jdbcType=INTEGER}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.pmsj.cinema.common.entity.Hall">
+    <update id="updateByPrimaryKey" parameterType="com.pmsj.cinema.common.entity.Hall">
     update hall
     set hall_name = #{hallName,jdbcType=VARCHAR},
       hall_type = #{hallType,jdbcType=INTEGER},
@@ -30,13 +30,17 @@
       hall_y = #{hallY,jdbcType=INTEGER}
     where hall_id = #{hallId,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select hall_id, hall_name, hall_type, hall_status, hall_x, hall_y
     from hall
     where hall_id = #{hallId,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectAll" resultMap="BaseResultMap">
     select hall_id, hall_name, hall_type, hall_status, hall_x, hall_y
     from hall
   </select>
+    <select id="getAllHallByCinemaId" resultMap="BaseResultMap">
+        select * from hall
+        where cinema_id = #{cinemaId}
+    </select>
 </mapper>

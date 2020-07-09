@@ -15,7 +15,7 @@ import java.util.List;
  * @Date 2020/7/2 16:44
  **/
 @Service
-public class OderService {
+public class OrderService {
 
     @Autowired
     OrderMapper orderMapper;

@@ -70,12 +70,13 @@
         from movie_tpye
   </select>
     <select id="selectNoMovieType" resultMap="BaseResultMap">
-        select  *
+		select  *
         from movie_tpye_mid
         LEFT JOIN movie_tpye
         on movie_tpye_mid.type_id =  movie_tpye.type_id
-        where  movie_id != #{movieId}
-        GROUP BY movie_tpye.type_id
+		where movie_tpye_mid.type_id not in (
+        select type_id from movie_tpye_mid where movie_id = #{movieId})
+        GROUP BY movie_tpye_mid.type_id
     </select>
     <select id="selectCheckedTpyes" resultMap="BaseResultMap">
          select  *
