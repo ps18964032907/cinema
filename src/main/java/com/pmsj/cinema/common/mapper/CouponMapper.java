@@ -1,6 +1,7 @@
 package com.pmsj.cinema.common.mapper;
 
 import com.pmsj.cinema.common.entity.Coupon;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface CouponMapper {
     List<Coupon> selectAll();
 
     int updateByPrimaryKey(Coupon record);
+
+    List<Coupon> getUserAvailableCoupon(@Param("userId") Integer userId, @Param("cinemaId") Integer cinemaId, @Param("movieId")Integer movieId);
 }

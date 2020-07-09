@@ -10,12 +10,17 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pmsj.cinema.common.entity.*;
 import com.pmsj.cinema.common.mapper.*;
+import com.pmsj.cinema.common.util.TimeUitl;
 import com.pmsj.cinema.common.vo.CinemaVo;
 import com.pmsj.cinema.common.vo.HallMovieVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Service
@@ -83,21 +88,39 @@ public class CinemaService {
 
     public PageInfo<CinemaVo> getAllCinemaByAll(String brand, String hallType, String area, String province, String city, Integer page) {
 
-
         PageHelper.startPage(page, 8);
         List<CinemaVo> allCinemaByAll = cinemaMapper.getAllCinemaByAll(brand, hallType, area, province, city);
+        return new PageInfo<CinemaVo>(allCinemaByAll);
+    }
 
+    public PageInfo<CinemaVo> getAllCinemaByAll(String brand, String hallType, String area, String province, String city, Integer page, Integer movieId) {
+        PageHelper.startPage(page, 8);
+
+        List<CinemaVo> allCinemaByAll = cinemaMapper.getAllCinemaByMovie(brand, hallType, area, province, city, movieId, new Date());
 
         return new PageInfo<CinemaVo>(allCinemaByAll);
     }
 
-    public List<HallMovieVo> getHallMovies(Integer cinemaId, Date date) {
-        System.out.println(date);
-        return hallMovieMapper.getHallMovies(cinemaId, date);
+
+    public List<HallMovieVo> getHallMovies(Integer cinemaId, Date date, Integer movieId) throws ParseException {
+
+        if (date == null) {
+            date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            date = sdf.parse(sdf.format(date));
+        }
+        Date startTime = TimeUitl.getStartTime(date);
+        Date endTime = TimeUitl.getEndTime(date);
+
+
+        return hallMovieMapper.getHallMovies(cinemaId, startTime, endTime, movieId);
     }
 
     public List<Hall> getAllHallByCinemaId(Integer cinemaId) {
         return hallMapper.getAllHallByCinemaId(cinemaId);
 
     }
+
+
 }

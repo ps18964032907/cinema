@@ -5,6 +5,7 @@ import com.pmsj.cinema.common.entity.HallMovie;
 import com.pmsj.cinema.common.vo.CinemaVo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface CinemaMapper {
@@ -21,6 +22,9 @@ public interface CinemaMapper {
     List<CinemaVo> getAllCinemaVo(Cinema cinema);   /* String brand, String hallType, String area, String province, String city*/
 
     List<CinemaVo> getAllCinemaByAll(@Param("brand") String brand, @Param("hallType") String hallType, @Param("area") String area, @Param("province") String province, @Param("city") String city);
+
+
+    List<CinemaVo> getAllCinemaByMovie(@Param("brand") String brand, @Param("hallType") String hallType, @Param("area") String area, @Param("province") String province, @Param("city") String city, @Param("movieId") Integer movieId, @Param("date") Date date);
 
 
 }

@@ -116,5 +116,29 @@
             </if>
         </where>
     </select>
+    <select id="getAllCinemaByMovie" resultMap="BaseResultMap">
+        select * from hall_movie
+        left join hall
+        on hall_movie.hall_id = hall.hall_id
+        left join cinema
+        on hall.cinema_id = cinema.cinema_id
+        <where>
+            hall_movie.movie_id = #{movieId}
+            and hall_movie.start_time &gt;= #{date}
+
+            <if test="area != '' and area != null">
+                and cinema.cinema_area = #{area}
+            </if>
+            <if test="brand != '' and brand != null">
+                and cinema.cinema_brand = #{brand}
+            </if>
+            <if test="province != '' and province != null">
+                and cinema.cinema_province = #{province}
+            </if>
+            <if test="hallType != '' and hallType != null">
+                and hall.hall_type = #{hallType}
+            </if>
+        </where>
+    </select>
 
 </mapper>

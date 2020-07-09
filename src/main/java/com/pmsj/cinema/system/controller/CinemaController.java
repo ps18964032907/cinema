@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -95,12 +96,25 @@ public class CinemaController {
     public PageInfo<CinemaVo> getAllCinemaByAll(String brand, String hallType, String area, String province, String city, Integer page) {
 
         if (page == null || page == 0) {
-            page = 3;
+            page = 1;
         }
-
         return cinemaService.getAllCinemaByAll(brand, hallType, area, province, city, page);
 
     }
+
+
+    @RequestMapping("getAllCinemaByMovie")
+    @ResponseBody
+    public PageInfo<CinemaVo> getAllCinemaByMovie(String brand, String hallType, String area, String province, Integer movieId, String city, Integer page) {
+
+        if (page == null || page == 0) {
+            page = 1;
+        }
+
+        return cinemaService.getAllCinemaByAll(brand, hallType, area, province, city, page, movieId);
+
+    }
+
 
     @RequestMapping("editCinema")
     @ResponseBody
@@ -135,9 +149,9 @@ public class CinemaController {
 
     @RequestMapping("getHallMovies")
     @ResponseBody
-    public List<HallMovieVo> getHallMovies(Integer cinemaId, @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+    public List<HallMovieVo> getHallMovies(Integer cinemaId, @DateTimeFormat(pattern = "yyyy-MM-dd") Date date, Integer movieId) throws ParseException {
 
-        return cinemaService.getHallMovies(cinemaId, date);
+        return cinemaService.getHallMovies(cinemaId, date, movieId);
     }
 
 

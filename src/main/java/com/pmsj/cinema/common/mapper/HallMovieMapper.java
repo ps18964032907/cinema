@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface HallMovieMapper {
-    List<HallMovieVo> getHallMovies(@Param("cinemaId") Integer cinemaId, @Param("date") Date date);
+    List<HallMovieVo> getHallMovies(@Param("cinemaId") Integer cinemaId, @Param("startTime") Date startTime, @Param("endTime") Date endTime, @Param("movieId") Integer movieId);
 
     int deleteByPrimaryKey(Integer hallMovieId);
 

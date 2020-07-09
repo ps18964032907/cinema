@@ -68,9 +68,14 @@
         LEFT JOIN hall_tpye
         on hall_tpye.ht_id = hall.hall_type
         where cinema.cinema_id = #{cinemaId}
-        <if test="date != null">
-            and hall_movie.start_time &gt;= #{date}
+
+        and hall_movie.start_time &gt;= #{startTime}
+        and hall_movie.start_time &lt;= #{endTime}
+        <if test="cinemaId != '' and  movieId != null">
+            and movie.movie_id = #{movieId}
         </if>
+
+        order by hall_movie.start_time
     </select>
     <select id="getHallMoviesByTime" resultType="java.lang.Integer">
             select count(*) from hall_movie where hall_id = #{hallid}
