@@ -156,7 +156,8 @@
         position: relative;
         top: -2px;
     }
-    .seatInfo{
+
+    .seatInfo {
         margin-top: 150px;
         position: relative;
         left: 20px;
@@ -889,7 +890,7 @@
 
 <!-- 选座部分 -->
 <div id="xuanzuo" class="content">
-    <article >
+    <article>
         <div class="wrapper">
             <div class="cinema-wrapper">
                 <div class="title">{{movieName}}</div>
@@ -948,11 +949,13 @@
     <aside class="seatInfo">
         <div v-if="tickets.length>0"
              v-for="ticket in tickets">
-                {{ticket[2]}}
+            <div> {{ticket.seatInfo}}</div>
+            <div>价格：{{seatPrice}}元</div>
         </div>
         <div class="btn-wrapper">
             <div class="btn-buy" @click="buySeat">
                 选定座位
+                总价:{{seatPrice*tickets.length}}
             </div>
         </div>
     </aside>
@@ -1027,6 +1030,8 @@
             selectedSeat: '',
             //选中座位
             tickets: [],
+            //座位单价
+            seatPrice:''
 
         },
         computed: {},
@@ -1153,9 +1158,19 @@
             //辅助函数:智能推荐的选座操作
             chooseSeat: function (result) {
                 let oldArray = this.seatArray.slice();
-                for (let i = 0; i < result.length; i++) {
-                    //选定座位
-                    oldArray[result[i][0]][result[i][1]] = 1
+                if (this.tickets.length == 4) {
+                    alert("已选4个座位不能继续选择");
+                }else if ((this.tickets.length+result.length)>4){
+                    alert("不能选超出四个座位数量的座位");
+                }
+                else {
+                    for (let i = 0; i < result.length; i++) {
+                        //选定座位
+                        oldArray[result[i][0]][result[i][1]] = 1;
+                        //存入选座数组
+                        //this.tickets.push([result[i][0], result[i][1], this.getSeatName(result[i][0], result[i][1])]);
+                        this.tickets.push({"row":result[i][0],"col":result[i][1],"seatInfo":this.getSeatName(result[i][0], result[i][1])});
+                    }
                 }
                 this.seatArray = oldArray;
             },
@@ -1174,36 +1189,27 @@
             //     }
             //     this.seatArray = oldArray;
             // },
+
             //选定且购买座位
             buySeat: function () {
-                // let tickets = [];
-                // let temp = 0;
-                // let oldArray = this.seatArray.slice();
-                // for (let i = 0; i < this.seatRow; i++) {
-                //     for (let j = 0; j < this.seatCol; j++) {
-                //         if (oldArray[i][j] === 1) {
-                //             tickets[temp++] = [i, j];
-                //         }
-                //     }
-                // }
-                // console.log(tickets);
-                // let Url ='/HallMovie/initSelectSeat';
-                // axios({
-                //     method: 'post',
-                //     url: Url,
-                //     data: {
-                //         hallMovieId: id
-                //     }
-                // }).then((response)=>{
-                //
-                // })
+                let Url ='/HallMovie/buyTicket';
+                axios({
+                    method: 'post',
+                    url: Url,
+                    data: {
+                        tickets: this.tickets,
+                        hallMovieId: id
+                    }
+                }).then((response)=>{
+
+                })
 
                 //遍历seatArray，将值为1的座位变为2
                 let oldArray = this.seatArray.slice();
-                for(let i=0;i<this.seatRow;i++){
-                    for(let j=0;j<this.seatCol;j++){
-                        if(oldArray[i][j]===1){
-                            oldArray[i][j]=2
+                for (let i = 0; i < this.seatRow; i++) {
+                    for (let j = 0; j < this.seatCol; j++) {
+                        if (oldArray[i][j] === 1) {
+                            oldArray[i][j] = 2
                         }
                     }
                 }
@@ -1218,15 +1224,18 @@
                 //如果是已选座位点击后变未选
                 if (seatValue === 1) {
                     newArray[row][col] = 0;
-                    let newTickets = this.tickets.filter((item)=> {
-                        return item[2]!=this.getSeatName(row, col);
+                    let newTickets = this.tickets.filter((item) => {
+                        return item[2] != this.getSeatName(row, col);
                     });
-                    this.tickets=newTickets.slice();
+                    this.tickets = newTickets.slice();
                 } else if (seatValue === 0) {
-                    this.tickets.push([row,col,this.getSeatName(row, col)]);
-                    newArray[row][col] = 1
+                    if (this.tickets.length == 4) {
+                        alert("已选4个座位不能继续选择");
+                    } else {
+                        this.tickets.push({"row":row,"col":col,"seatInfo":this.getSeatName(row, col)});
+                        newArray[row][col] = 1;
+                    }
                 }
-                console.log(this.tickets);
 
                 // console.log(this.getSeatName(row, col));
                 //必须整体更新二维数组，Vue无法检测到数组某一项更新,必须slice复制一个数组才行
@@ -1279,6 +1288,7 @@
                     this.startPlayTime = response.data.startTime;
                     this.nonSeatPlace = response.data.nonSeatPlace;
                     this.selectedSeat = response.data.selectedSeat;
+                    this.seatPrice = response.data.seatPrice;
                     //初始座位数组
                     this.initSeatArray();
                     //初始化不是座位的地方
@@ -1297,30 +1307,30 @@
 
             },
             //根据xy坐标确定第几排第几列
-            getSeatName: function (row, col){
-                let x=row;
-                let y=col;
-                let flag=true ;
+            getSeatName: function (row, col) {
+                let x = row;
+                let y = col;
+                let flag = true;
                 //确定第几行
-                for (let i=0;i<row;i++){
-                   for (let j=0;j<this.seatArray[0].length;j++){
-                        if (this.seatArray[i][j]!=-1){
+                for (let i = 0; i < row; i++) {
+                    for (let j = 0; j < this.seatArray[0].length; j++) {
+                        if (this.seatArray[i][j] != -1) {
                             flag = false
                         }
                     }
-                   if(flag){
-                       x--;
-                   }
-                   flag = true;
+                    if (flag) {
+                        x--;
+                    }
+                    flag = true;
                 }
                 //确定第几列
-                for (let i=0;i<col;i++){
-                    if (this.seatArray[row][i]==-1){
+                for (let i = 0; i < col; i++) {
+                    if (this.seatArray[row][i] == -1) {
                         y--;
                     }
                 }
 
-                return "第"+(x+1)+"排第"+(y+1)+"座";
+                return "第" + (x + 1) + "排第" + (y + 1) + "座";
             }
 
 

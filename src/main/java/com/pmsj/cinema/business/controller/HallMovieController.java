@@ -5,6 +5,7 @@ import com.pmsj.cinema.business.util.DateUtil;
 import com.pmsj.cinema.common.entity.Hall;
 import com.pmsj.cinema.common.entity.HallMovie;
 import com.pmsj.cinema.common.entity.Seat;
+import com.pmsj.cinema.common.vo.TicketsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,17 +69,19 @@ public class HallMovieController {
         map.put("movieName",movieDetailsService.selectByPrimaryKey(movieId).getMovieName());
         map.put("nonSeatPlace",seats);
         map.put("selectedSeat",selectedSeat);
+        map.put("seatPrice",thisHallMovie.getFareMoney());
         return map;
     }
 
     /**
      * 选座购票
-     * @param hallMovie
+     * @param
      * @return
      */
     @RequestMapping("/buyTicket")
-    public String buyTicket(HallMovie hallMovie){
-
+    public String buyTicket(@RequestBody TicketsVo tickets){
+        System.out.println(tickets.getHallMovieId());
+        System.out.println(tickets.getTickets().get(0).getSeatInfo());
         return null;
     }
 }
