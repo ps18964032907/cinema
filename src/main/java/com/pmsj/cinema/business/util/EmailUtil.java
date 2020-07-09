@@ -23,7 +23,7 @@ public class EmailUtil {
             Message msg = new MimeMessage(mailSession);
             msg.setFrom(new InternetAddress("1594578345@qq.com"));  //发件人
             msg.addRecipients(Message.RecipientType.TO, InternetAddress.parse(email)); //收件人
-            msg.setSubject("用户注册验证码-天堂影院"); //主题
+            msg.setSubject("用户注册验证码-猫眼影院"); //主题
             msg.setContent("<h1>此邮件为天堂影院影视平台注册验证码</h1><br />"
                     + "注册验证码:" + code, "text/html;charset=UTF-8");
             msg.saveChanges();

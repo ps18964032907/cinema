@@ -187,15 +187,13 @@ public class UserController {
      * @since 1.0.0
      * @return java.lang.String
      **/
-  /*  @RequestMapping("/updatePhoto")
+    @RequestMapping("/updatePhoto")
     @ResponseBody
     public String updatePhoto(HttpServletRequest request, @RequestParam(value = "image", required = false) MultipartFile image, HttpSession session) {
-        System.out.println(image);
         User user = (User) session.getAttribute("user");
         //判断用户是否选择图片
         if (image.getOriginalFilename() == null || image.getOriginalFilename().length() <= 0) {
         } else {
-//        image
             String fileName = image.getOriginalFilename();
             String substring = "";
             if (fileName.lastIndexOf(".") != -1) {
@@ -206,12 +204,8 @@ public class UserController {
             String property = System.getProperty("user.dir");
             String realPath = property + "\\src\\main\\resources\\static\\img";
             user.setUserPhoto("/img/" + name);
-            System.out.println(realPath);
-//            image.getInputStream. (realPath + "/" + name);
-//            goods.setImage("/images/goods/" + name);
             try {
                 File fileMkdir = new File(realPath);
-
                 if (!fileMkdir.exists()) {
                     fileMkdir.mkdir();
                 }
@@ -226,7 +220,6 @@ public class UserController {
                 os.close();
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("上传失败！");
             }
         }
         int num = userService.updatePhoto(user);
@@ -234,5 +227,5 @@ public class UserController {
             return "true";
         }
         return "false";
-    }*/
+    }
 }
