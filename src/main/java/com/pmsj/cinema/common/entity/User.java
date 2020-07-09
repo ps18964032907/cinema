@@ -31,6 +31,8 @@ public class User {
 
     private Integer userPoints;
 
+    private String userPhoto;
+
     public Integer getUserId() {
         return userId;
     }
@@ -117,5 +119,13 @@ public class User {
 
     public void setUserPoints(Integer userPoints) {
         this.userPoints = userPoints;
+    }
+
+    public String getUserPhoto() {
+        return userPhoto;
+    }
+
+    public void setUserPhoto(String userPhoto) {
+        this.userPhoto = userPhoto;
     }
 }

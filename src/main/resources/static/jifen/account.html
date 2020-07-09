@@ -201,7 +201,7 @@
                                                                                                     type="radio"
                                                                                                     name="userGender"
                                                                                                     value="女"> 女<br>
-                    个性签名：<input type="text" v-model="user.sig" value=" " name="userAutograph">
+                    个性签名：<input type="text" v-model="user.sig" value="" name="userAutograph">
                     <p></p>
                     <input type="hidden" name="userAccount" :value="user.accountname">
                     <button @click="updateUser" type="button">提交</button>
@@ -209,15 +209,36 @@
                 <div class="li">
                     邮箱：<input v-model="user.email" value="" name="userEmail" id="userEmail"><span id="tip1"></span><br>
                     手机：<input v-model="user.phone" value="" name="userPhone" id="userPhone"><span id="tip2"></span><br>
-                    出生日期：<input v-model="user.birthday" value="" type="date" name="userBirthday">
-                    <br>
-
+                    出生日期：<input v-model="user.birthday" value="" type="date" name="userBirthday"><br>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
+<div class="height18">
+</div>
+<div class="layout member" id="userP">
+    <div class="clearfix borderGray bgWhite">
+        <form id="photo">
+            <div class="title" style="width: 100%">
+                <h4>头像修改</h4>
+            </div>
+            <div class="height18">
+            </div>
+            <div class="tableC clearfix">
+                <input type="file" name="image" id="image" class="layui-input" onchange="show(this)">
+                <div class="layui-input-block">
+                    <img id="img" style="height: 80px;width: 80px;border-radius: 100%">
+                </div>
+            </div>
+            <div class="passLeft" style="margin-left: 70px">
+                <button @click="updatePhoto" type="button" class="updatePhoto">提交</button>
+            </div>
+            <div class="height18">
+            </div>
+        </form>
+    </div>
+</div>
 
 <div class="height18">
 </div>
@@ -410,7 +431,8 @@
                 sig: '',
                 email: '',
                 phone: '',
-                birthday: ''
+                birthday: '',
+                photo: ''
             },
         },
         beforeMount: function () {
@@ -422,6 +444,7 @@
                 app4.user.email = data.userEmail;
                 app4.user.phone = data.userPhone;
                 app4.user.birthday = data.userBirthday;
+                app4.user.photo = data.userPhoto;
                 app1.accountName = data.userAccount;
                 app2.accountName = data.userAccount;
                 app2.points = data.userPoints;
@@ -437,7 +460,7 @@
                 }, function () {
                     if (reg.test(app4.user.email)) {
                         if (/^1[3456789]\d{9}$/.test(app4.user.phone)) {
-                            $.post("/user/updateUser", $("#update").serialize(), function (data) {
+                            $.post("/user/updateUser?" + $("#update").serialize(), "photo=" + app4.user.photo, function (data) {
                                 if (true == data) {
                                     layer.msg("修改成功!")
                                 } else {
@@ -474,7 +497,34 @@
             document.getElementById("tip2").innerHTML = "<font color='red'>手机格式不正确</font>";
         }
     }
+    $(".updatePhoto").click(function (data) {
+        var fields = $(data.form).serialize()
+        let formData = new FormData($("#photo")[0]);
+        formData.append("image", $("#image")[0].files[0]);
+        layer.confirm('确认购修改？', {
+            btn: ['确认', '取消'], //按钮
+            title: '修改用户头像'
+        }, function () {
+            $.ajax({
+                url: '/user/updatePhoto?' + fields, /*接口域名地址*/
+                type: 'post',
+                data: formData,   //发送的数据，使用的是JSON
+                dataType: 'json',//服务器端返回的数据类型
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    layer.msg("修改成功!")
+                },
+                error: function (data) {
+                    layer.msg("修改失败!")
+                }
+            });
+        })
+    })
     var wait = 60;
+
     function getCode(o) {
         var e = document.getElementById('userEmail').value;
         //发送验证码
@@ -497,6 +547,21 @@
                 }, 1000);
             }
         }
+    }
+</script>
+<!--//图片的回显-->
+<script>
+    function show(file) {
+        var reader = new FileReader();	// 实例化一个FileReader对象，用于读取文件
+        var img = document.getElementById('img'); 	// 获取要显示图片的标签
+
+        //读取File对象的数据
+        reader.onload = function (evt) {
+            img.width = "50px";
+            img.height = "50px";
+            img.src = evt.target.result;
+        }
+        reader.readAsDataURL(file.files[0]);
     }
 </script>
 </body>

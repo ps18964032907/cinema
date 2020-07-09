@@ -24,7 +24,7 @@ public interface UserMapper {
 
     User selectUser(@Param("userAccount") String account);
 
-    void register(@Param("userAccount") String userAccount, @Param("userPassword") String password, @Param("userEmail") String email, @Param("userPhone") String phone);
+    void register(@Param("userAccount") String userAccount, @Param("userPassword") String password, @Param("userEmail") String email, @Param("userPhone") String phone, @Param("userPhoto") String photo);
 
     User accountLogin(@Param("userAccount") String account, @Param("userPassword") String password);
 
@@ -33,4 +33,6 @@ public interface UserMapper {
     int updatePass(@Param("userEmail") String email, @Param("userPassword") String password);
 
     Integer updateUser(User user);
+
+    int updatePhoto(User user);
 }
