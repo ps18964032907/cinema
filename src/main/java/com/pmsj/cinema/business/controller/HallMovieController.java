@@ -2,18 +2,16 @@ package com.pmsj.cinema.business.controller;
 
 import com.pmsj.cinema.business.service.*;
 import com.pmsj.cinema.business.util.DateUtil;
-import com.pmsj.cinema.common.entity.Hall;
-import com.pmsj.cinema.common.entity.HallMovie;
-import com.pmsj.cinema.common.entity.Seat;
+import com.pmsj.cinema.common.entity.*;
 import com.pmsj.cinema.common.vo.TicketsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * @author mhd
@@ -36,6 +34,8 @@ public class HallMovieController {
     HallTypeService hallTypeService;
     @Autowired
     SeatService seatService;
+    @Autowired
+    OrderService orderService;
     /**
      * 选座页面数据初始化
      * @return
@@ -79,9 +79,46 @@ public class HallMovieController {
      * @return
      */
     @RequestMapping("/buyTicket")
-    public String buyTicket(@RequestBody TicketsVo tickets){
-        System.out.println(tickets.getHallMovieId());
-        System.out.println(tickets.getTickets().get(0).getSeatInfo());
+    public String buyTicket(@RequestBody TicketsVo tickets, HttpSession session){
+        HallMovie hallMovie = hallMovieService.selectById(tickets.getHallMovieId());
+        Order order = new Order();
+
+        String orderNo = UUID.randomUUID().toString();
+        order.setOrderNo(orderNo);
+
+        order.setMovieId(hallMovie.getMovieId());
+
+        //影厅信息
+        Integer hallId = hallMovie.getHallId();
+        Hall hall = hallService.selectById(hallId);
+        order.setCinemaId(hall.getCinemaId());
+        order.setHallId(hallId);
+
+        //消费金额
+        order.setOrderUnitprice(new BigDecimal(hallMovie.getFareMoney()));
+        Long money = hallMovie.getFareMoney()*tickets.getTickets().size();
+        order.setOrderTotalDiscountsCash(new BigDecimal(money));
+        order.setOrderTotalInitialCash(new BigDecimal(money));
+        //优惠卷
+        order.setCouponId(0);
+
+        //session中用户信息
+        User user = (User) session.getAttribute("user");
+        order.setUserId(user.getUserId());
+
+        //订单状态 未支付:1
+        order.setOrderStatus(1);
+        //票数
+        order.setOrderCount(tickets.getTickets().size());
+
+        order.setOrderTime(new Date());
+
+
+        try {
+            orderService.buyTickets(order);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
         return null;
     }
 }

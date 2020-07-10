@@ -1225,7 +1225,7 @@
                 if (seatValue === 1) {
                     newArray[row][col] = 0;
                     let newTickets = this.tickets.filter((item) => {
-                        return item[2] != this.getSeatName(row, col);
+                        return item.seatInfo != this.getSeatName(row, col);
                     });
                     this.tickets = newTickets.slice();
                 } else if (seatValue === 0) {

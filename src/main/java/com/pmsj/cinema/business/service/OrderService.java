@@ -2,6 +2,9 @@ package com.pmsj.cinema.business.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.pmsj.cinema.business.exception.NullParametersException;
+import com.pmsj.cinema.business.util.ReflectUtil;
+import com.pmsj.cinema.common.entity.Order;
 import com.pmsj.cinema.common.mapper.OrderMapper;
 import com.pmsj.cinema.common.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +31,16 @@ public class OrderService {
 
         PageInfo<OrderVo> orderVoPageInfo = new PageInfo<>(allOrderByUser);
         return orderVoPageInfo;
+    }
+
+
+    public int buyTickets(Order order){
+        if (order==null){
+            throw new NullParametersException("Order is null");
+        }else{
+           new ReflectUtil<Order>().throwNullParametersException(order);
+            }
+
+        return orderMapper.insert(order);
     }
 }
