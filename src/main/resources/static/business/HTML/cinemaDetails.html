@@ -2809,7 +2809,7 @@
 <script src="/js/layDate-v5.0.9/laydate/laydate.js"></script>
 <script src="https://webapi.amap.com/maps?v=1.4.15&key=2d48cd6bbd59d166e39880aad4842c1c"></script>
 <script>
-    new Vue({
+    let vue = new Vue({
         el: '#appVue',
         data: {
             cinema: {},
@@ -2827,7 +2827,6 @@
 
             let _this = this;
             let queryVariable = getQueryVariable("cinemaId");
-
             $.get("/cinema/cinemaDetails?cinemaId=" + queryVariable, null, function (data) {
                 _this.cinema = data
                 console.log(data)
@@ -2851,25 +2850,34 @@
             //执行一个laydate实例
             laydate.render({
                 elem: '#test1' //指定元素
-                , min: 0,
+                ,
+                value: new Date(),
+                min: 0,
+
                 done: function (value, date) {
                     //value, date, endDate点击日期、清空、现在、确定均会触发。回调返回三个参数，分别代表：生成的值、日期时间对象、结束的日期时间对象
-                    $.get("/cinema/getHallMovies?cinemaId=" + queryVariable + "&date=" + value, null, function (data) {
-                        _this.hallMovies = data
-                        console.log(_this.hallMovies)
-                    })
+                    getHallMovies(value);
                 }
             });
 
-
-            $.get("/cinema/getHallMovies?cinemaId=" + queryVariable + "&date=" + _this.date, null, function (data) {
-                _this.hallMovies = data
-                console.log(_this.hallMovies)
-            })
-
-
+            getHallMovies("");
         }
-    })
+    });
+
+    function getHallMovies(date) {
+        let queryVariable = getQueryVariable("cinemaId");
+        let movieId = getQueryVariable("movieId");
+
+        let url = "/cinema/getHallMovies?cinemaId=" + queryVariable + "&date=" + date + "&movieId=" + movieId;
+
+        if (movieId == false) {
+            url = "/cinema/getHallMovies?cinemaId=" + queryVariable + "&date=" + date;
+        }
+
+        $.get(url, function (data) {
+            vue.hallMovies = data;
+        })
+    }
 
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);

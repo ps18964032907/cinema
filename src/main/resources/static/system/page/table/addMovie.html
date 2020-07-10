@@ -218,10 +218,9 @@
                 success: function (res) {
                 }
             });
-
+            layer.msg('添加成功');
             var iframeIndex = parent.layer.getFrameIndex(window.name);
             parent.layer.close(iframeIndex);
-            layer.msg('添加成功');
             //刷新父页面
             window.parent.location.reload();
 

@@ -19,9 +19,20 @@ public class HallMovieService {
     HallMovieMapper hallMoviemapper;
 
     public HallMovie selectById(Integer id) {
-        if (id==null){
+        if (id == null) {
             throw new NullParametersException("HallMovieId is null");
         }
         return hallMoviemapper.selectByPrimaryKey(id);
+    }
+
+    public synchronized int add(HallMovie hallMovie) {
+        int hallMoviesByTime = hallMoviemapper.getHallMoviesByTime(hallMovie.getHallId(), hallMovie.getStartTime(), hallMovie.getEndTime());
+        if (hallMoviesByTime == 0) {
+            hallMoviemapper.insert(hallMovie);
+            return 0;
+        } else {
+            return 1;
+        }
+
     }
 }

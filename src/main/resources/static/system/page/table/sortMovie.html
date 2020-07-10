@@ -29,7 +29,7 @@
         <div class="layui-input-block">
             <input type="text" name="username" th:value="${cinema.cinemaName}" disabled readonly lay-verify="required"
                    class="layui-input">
-            <input name="movieId" type="hidden" th:value="${cinema.cinemaId}">
+            <input name="cinemaId" type="hidden" th:value="${cinema.cinemaId}">
         </div>
     </div>
 
@@ -42,9 +42,9 @@
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">影厅</label>
+        <label class="layui-form-label" required>影厅</label>
         <div class="layui-input-block">
-            <select name="hallId">
+            <select name="hallId" required>
                 <option th:each="hall : ${hallList}" th:value="${hall.hallId}">[[${hall.hallName}]]</option>
             </select>
         </div>
@@ -52,7 +52,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">开始时间</label>
         <div class="layui-input-block">
-            <input name="movieReleaseTime" id="test1"
+            <input name="startTime" id="test1"
                    placeholder="请输入时间"
                    class="layui-input">
         </div>
@@ -71,7 +71,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label required">电影时长</label>
         <div class="layui-input-block">
-            <input type="number" name="" id="time" lay-verify="required" min="122" lay-reqtext="请选择电影"
+            <input type="number" name="time" id="time" lay-verify="required" min="122" lay-reqtext="请选择电影"
                    class="layui-input">
         </div>
     </div>
@@ -129,8 +129,10 @@
                     let a = "" + resp.movieTime.replace("分钟", "");
                     console.log(a);
                     $('#time').val(parseInt(a));
+                    $('#movieId').val(resp.movieId);
                     minTime = parseInt(a);
                     form.render();
+
                 }
             })
 
@@ -143,24 +145,27 @@
         form.on('submit(saveBtn)', function (data) {
 
             console.log(data.field.time);
-            let number = parseInt($('#time').val();
-
+            let number = parseInt($('#time').val());
+            console.log(number);
 
             if (parseInt($('#time').val()) < minTime) {
-
                 layer.msg('放映时长必须大于电影时长')
             } else {
-                var index = layer.alert(JSON.stringify(data.field), {
-                    title: '最终的提交信息'
-                }, function () {
 
-                    // 关闭弹出层
-                    layer.close(index);
+                $.post("/cinema/addHallMovie", data.field, function (data) {
+                    if (data != '200') {
+                        layer.msg(data);
+                    } else {
+                        layer.msg('添加成功');
+                        setTimeout(function () {
+                            var iframeIndex = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(iframeIndex);
+                        }, 1000);
+                    }
 
-                    var iframeIndex = parent.layer.getFrameIndex(window.name);
-                    parent.layer.close(iframeIndex);
 
                 });
+
             }
 
 

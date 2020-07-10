@@ -72,7 +72,21 @@ public class CouponService {
     }
 
     public List<UserCouponVo> getAllOverCoupon(int userId) {
-
         return userCouponMapper.getAllOverCoupon(userId, new Date());
     }
+
+
+    /**
+     * @return void
+     * @Author 潘升
+     * @Description //TODO
+     * @Date 17:48 2020/7/9
+     * @Param [userId, cinemaId, movieId]
+     * @since 1.0.0
+     */
+    public void getUserAvailableCoupon(Integer userId, Integer cinemaId, Integer movieId) {
+        couponMapper.getUserAvailableCoupon(userId, cinemaId, movieId);
+    }
+
+
 }

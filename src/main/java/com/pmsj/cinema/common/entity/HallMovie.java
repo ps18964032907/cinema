@@ -1,5 +1,7 @@
 package com.pmsj.cinema.common.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class HallMovie {
@@ -8,7 +10,7 @@ public class HallMovie {
     private Integer movieId;
 
     private Integer hallId;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
     private Date endTime;
