@@ -735,13 +735,13 @@
 <div class="header" id="MovieStatus">
     <ul>
         <li>
-            <a v-on:click="getStatus(1)" >正在热映</a>
+            <a v-on:click="getStatus(1)">正在热映</a>
         </li>
         <li>
-            <a v-on:click="getStatus(2)" >即将上映</a>
+            <a v-on:click="getStatus(2)">即将上映</a>
         </li>
         <li>
-            <a v-on:click="getStatus(3)" >经典影片</a>
+            <a v-on:click="getStatus(3)">经典影片</a>
         </li>
     </ul>
 </div>
@@ -947,12 +947,14 @@
             <div class="yingpian" id="bodyMovie">
                 <dl>
                     <!-- 1 -->
-                    <dd v-for="allmovie in movie">
-                        <div>
+
+                    <span v-for="(allmovie,index) in movie">
+                        <dd v-if="(index + 1) % 6 == 0" style="margin-right: 0;margin-left: 3px;">
+                       <div>
                             <a :href="'./dianyingxiangqing.html?movieId='+allmovie.movieId">
                                 <img :src="allmovie.movieImg" alt="" style="width: 160px; height: 220px">
                             </a>
-                            <a href="./dianyingxiangqing.html" v-if="allmovie.movieStatus==1||allmovie.movieStatus==2">购票</a>
+                            <a :href="'./yingyuanShop.html?movieId='+allmovie.movieId" v-if="allmovie.movieStatus==1||allmovie.movieStatus==2">购票</a>
                         </div>
                         <div>
                             <a :href="'./dianyingxiangqing.html?movieId='+allmovie.movieId">{{allmovie.movieName}}</a>
@@ -960,7 +962,24 @@
                         <div>
                             <i>{{allmovie.movieScore}}</i>
                         </div>
-                    </dd>
+                             </dd>
+                         <dd v-else>
+                       <div>
+                            <a :href="'./dianyingxiangqing.html?movieId='+allmovie.movieId">
+                                <img :src="allmovie.movieImg" alt="" style="width: 160px; height: 220px">
+                            </a>
+                            <a :href="'./yingyuanShop.html?movieId='+allmovie.movieId" v-if="allmovie.movieStatus==1||allmovie.movieStatus==2">购票</a>
+                        </div>
+                        <div>
+                            <a :href="'./dianyingxiangqing.html?movieId='+allmovie.movieId">{{allmovie.movieName}}</a>
+                        </div>
+                        <div>
+                            <i>{{allmovie.movieScore}}</i>
+                        </div>
+                             </dd>
+                        </span>
+
+
                     <!-- 2 -->
 
                 </dl>
@@ -1034,7 +1053,7 @@
         data: {
             status: 1
         },
-        methods:{
+        methods: {
             getStatus: function (index) {
                 console.log(index)
                 $("#status").val(index);

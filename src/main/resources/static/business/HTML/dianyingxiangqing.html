@@ -740,7 +740,7 @@
     <div class="beijing1" id="moviedetail">
         <div class="beijing1_1">
             <div>
-<!--                <i></i>-->
+                <!--                <i></i>-->
                 <a href="#">
                     <img :src="movieInfoUp.movieImg" alt="" style="width: 240px; height: 330px">
                 </a>
@@ -756,7 +756,7 @@
                     <li>
                         <p>{{movieInfoUp.movieEname}}</p>
                     </li>
-                    <li >
+                    <li>
                         <span v-for="mt in movieTypeByMovieId">
                             {{mt.typeName}}
                         </span>
@@ -786,10 +786,10 @@
                     </a>
                 </div>
                 <div class="beijing1_2_2_3" v-if="movieInfoUp.movieStatus==1">
-                    <a href="#">特惠购票</a>
+                    <a :href="'yingyuanShop.html?movieId='+movieInfoUp.movieId">特惠购票</a>
                 </div>
                 <div class="beijing1_2_2_3" v-if="movieInfoUp.movieStatus==2">
-                    <a href="#">预售购票</a>
+                    <a :href="'yingyuanShop.html?movieId='+movieInfoUp.movieId">预售购票</a>
                 </div>
             </div>
         </div>
