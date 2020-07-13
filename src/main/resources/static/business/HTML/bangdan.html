@@ -718,7 +718,7 @@
         </div>
         <div class="sousuo">
             <form method="get" action="../HTML/Search.html">
-                <input class="sousuo_1" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off" name="keyWord">
+                <input class="sousuo_1" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off" name="keyWord" onblur="if(this.value.replace(/^ +| +$/g,'')=='')alert('不能为空!')">
                 <input class="sousuo_2" type="submit" value="" >
             </form>
         </div>

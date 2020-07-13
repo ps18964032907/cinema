@@ -140,7 +140,7 @@ li {
 .dingbu nav .navbar li a {
   font-size: 18px;
   color: #333;
-  padding: 28px 22px;
+  /*padding: 28px 22px;*/
 }
 .dingbu nav .navbar li:hover > a {
   color: #f00;
