@@ -63,13 +63,9 @@ public class HallMovieService {
         String orderNo = UUID.randomUUID().toString().replace("-", "");
         order.setOrderNo(orderNo);
 
-        order.setMovieId(hallMovie.getMovieId());
 
-        //影厅信息
-        Integer hallId = hallMovie.getHallId();
-        Hall hall = hallService.selectById(hallId);
-        order.setCinemaId(hall.getCinemaId());
-        order.setHallId(hallId);
+        //场次信息
+        order.setHallMovieId(tickets.getHallMovieId());
 
         //消费金额
         order.setOrderUnitprice(new BigDecimal(hallMovie.getFareMoney()));

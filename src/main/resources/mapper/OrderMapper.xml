@@ -53,10 +53,11 @@
     order_count, order_total_initial_cash, order_unitprice, order_time, hall_movie_id
     from order
   </select>
-    <select id="getAllOrderByUser" resultMap="BaseResultMap">
-        select
-    </select>
-    <select id="selectByOrderNo" resultMap="BaseResultMap">
 
+    <select id="selectByOrderNo" resultMap="BaseResultMap">
+        select order_id, order_no, order_total_discounts_cash, coupon_id, user_id, order_status,
+               order_count, order_total_initial_cash, order_unitprice, order_time, hall_movie_id
+        from order
+        where order_no = #{orderNo,jdbcType=INTEGER}
     </select>
 </mapper>
