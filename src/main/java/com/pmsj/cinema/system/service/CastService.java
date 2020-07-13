@@ -1,5 +1,7 @@
 package com.pmsj.cinema.system.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.pmsj.cinema.common.entity.Cast;
 import com.pmsj.cinema.common.entity.MovieActor;
 import com.pmsj.cinema.common.entity.MovieTpye;
@@ -43,5 +45,14 @@ public class CastService {
 
     public List<MovieActor> getCast1AllByMovieId(Integer movieId) {
         return movieActorMapper.getCast1AllByMovieId(movieId);
+    }
+
+    public PageInfo<Cast> getAllCastByPage(Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
+        List<Cast> castList = castMapper.selectAll();
+        return new PageInfo<Cast>(castList);
+    }
+
+    public void add(Cast cast) {
     }
 }

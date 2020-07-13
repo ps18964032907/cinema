@@ -97,6 +97,13 @@
               "icon": "fa fa-tachometer",
               "target": "_self"
             }
+          ,
+            {
+              "title": "演员操作",
+              "href": "page/actor.html",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            }
           ]
         },
         {
