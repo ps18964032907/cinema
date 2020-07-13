@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.pmsj.cinema.common.entity.Coupon">
         <id column="coupon_id" jdbcType="INTEGER" property="couponId"/>
         <result column="coupon_name" jdbcType="VARCHAR" property="couponName"/>
+        <result column="user_coupon_id" property="userCouponId"></result>
         <result column="coupon_moeny" jdbcType="DECIMAL" property="couponMoeny"/>
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

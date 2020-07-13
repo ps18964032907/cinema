@@ -71,6 +71,7 @@ public class HallMovieController {
 
         List<Coupon> coupons = couponService.getUserAvailableCoupon(user.getUserId(), hall.getCinemaId(), movieId);
 
+        System.out.println(coupons);
 
         Map map = new HashMap();
 

@@ -8,7 +8,9 @@ public class Coupon {
 
     private String couponName;
 
-    private Long couponMoeny;
+    private Double couponMoeny;
+
+    private Integer userCouponId;
 
     public Integer getCouponId() {
         return couponId;
@@ -26,11 +28,11 @@ public class Coupon {
         this.couponName = couponName == null ? null : couponName.trim();
     }
 
-    public Long getCouponMoeny() {
+    public Double getCouponMoeny() {
         return couponMoeny;
     }
 
-    public void setCouponMoeny(Long couponMoeny) {
+    public void setCouponMoeny(Double couponMoeny) {
         this.couponMoeny = couponMoeny;
     }
 }
