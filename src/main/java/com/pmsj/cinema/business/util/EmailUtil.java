@@ -23,8 +23,8 @@ public class EmailUtil {
             Message msg = new MimeMessage(mailSession);
             msg.setFrom(new InternetAddress("1594578345@qq.com"));  //发件人
             msg.addRecipients(Message.RecipientType.TO, InternetAddress.parse(email)); //收件人
-            msg.setSubject("用户注册验证码-猫眼影院"); //主题
-            msg.setContent("<h1>此邮件为猫眼影院影视平台验证码</h1><br />"
+            msg.setSubject("验证码-猫眼影院"); //主题
+            msg.setContent("<h1>此邮件为猫眼影院影视平台专用验证码</h1><br />"
                     + "验证码:" + code, "text/html;charset=UTF-8");
             msg.saveChanges();
             Transport transport = mailSession.getTransport("smtp");
