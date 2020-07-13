@@ -97,7 +97,7 @@
 .explosion .areaType { width: 375px; }
 .explosion .areaType .notice { padding-right: 0; width: 140px;}
 .explosion .areaType .rate { font-size: 26px;}
-.explosion .areaType .rate em { font-size: 50px; font-weight: bold;}
+.explosion .areaType .rate em { font-size: 30px; font-weight: bold;}
 .explosion .areaType .detail { margin-right: 30px; font-size: 14px;}
 .explosion .areaType .rateInfo { padding-bottom: 0; text-align: center;}
 .explosion .areaType .detail p { padding: 25px 0 0; }

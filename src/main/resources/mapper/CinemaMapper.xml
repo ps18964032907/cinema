@@ -97,7 +97,7 @@
 
         </where>
     </select>
-    <select id="getAllCinemaByAll" resultMap="BaseResultMap">
+    <select id="getAllCinemaByAll" resultMap="BaseResultMapVo">
         select * from cinema
         left join hall
         on hall.cinema_id = cinema.cinema_id
@@ -116,7 +116,7 @@
             </if>
         </where>
     </select>
-    <select id="getAllCinemaByMovie" resultMap="BaseResultMap">
+    <select id="getAllCinemaByMovie" resultMap="BaseResultMapVo">
         select * from hall_movie
         left join hall
         on hall_movie.hall_id = hall.hall_id
@@ -139,6 +139,16 @@
                 and hall.hall_type = #{hallType}
             </if>
         </where>
+    </select>
+    <select id="getMinMoneyByCinemaId" resultType="java.lang.Double">
+        select min(hall_movie.fare_money) from hall_movie
+        LEFT JOIN hall
+        on hall.hall_id = hall_movie.hall_id
+        left join cinema
+        ON cinema.cinema_id = hall.cinema_id
+        where cinema.cinema_id = #{cinemaId}
+        and hall_movie.start_time >= CURDATE()
+
     </select>
 
 </mapper>

@@ -27,4 +27,5 @@ public interface CinemaMapper {
     List<CinemaVo> getAllCinemaByMovie(@Param("brand") String brand, @Param("hallType") String hallType, @Param("area") String area, @Param("province") String province, @Param("city") String city, @Param("movieId") Integer movieId, @Param("date") Date date);
 
 
+    Double getMinMoneyByCinemaId(Integer cinemaId);
 }

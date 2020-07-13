@@ -31,6 +31,7 @@ public class CinemaVo {
 
     private String brandName;
 
+    private double minMoney;
 
     public Integer getCinemaId() {
         return cinemaId;

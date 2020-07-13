@@ -126,6 +126,7 @@
             color: white;
             text-align: center;
             background-color: #7c898e;
+            margin-left: 4px;
 
         }
     </style>
@@ -234,7 +235,7 @@
                                 <ii style="margin-left: 10px"></ii>
                                 {{order.hallName}}
                                 <span v-for="seat in order.seatList">
-                                    {{seat.seatX}}排{{seat.seatY}}座
+                                    {{seat.seatName}}
                                 </span>
                                 <p></p>
                             </div>
@@ -253,8 +254,8 @@
                     <div id="limit">
                         <button @click="goPage(orders.prePage)">上一页</button>
 
-                        <span v-for="num in orders.pageNum" @click="goPage(num)">
-                            <num v-if="num == orders.pages" style="color: #35ff02">{{num}}</num>
+                        <span v-for="num in orders.pages" @click="goPage(num)">
+                            <num v-if="num == orders.pageNum" style="color: #35ff02">{{num}} </num>
                             <num v-else>
                                 {{num}}
                             </num>
