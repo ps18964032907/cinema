@@ -54,7 +54,7 @@
     from order
   </select>
     <select id="getAllOrderByUser" resultMap="BaseResultMap">
-
+        select
     </select>
     <select id="selectByOrderNo" resultMap="BaseResultMap">
 
