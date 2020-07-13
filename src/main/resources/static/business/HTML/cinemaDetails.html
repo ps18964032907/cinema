@@ -2711,10 +2711,10 @@
                     <p class="time">结束时间: {{hallMovie.endTime}} </p>
                 </div>
                 <div class="price">
-                    <p>32.4元</p>
+                    <p>{{hallMovie.fareMoney}}元</p>
                 </div>
                 <div class="buy" style="float: right">
-                    <p><a>购票</a></p>
+                    <p><a :href="'http://localhost:8080/business/HTML/xuanzuo.html?hallMovieId='+hallMovie.hallMovieId">购票</a></p>
                 </div>
 
             </div>
