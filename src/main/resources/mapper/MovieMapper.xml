@@ -108,6 +108,23 @@
     movie_count>0
     and
     movie_status=1
+--
+--
+--
+--
+--     SELECT m.*
+--     FROM movie m
+-- LEFT JOIN
+-- hall_movie h
+-- ON
+-- m.`movie_id`=h.`movie_id`
+--
+--     WHERE
+--     movie_count>0
+--     AND
+--     movie_status=1
+--     AND
+--     h.`start_time` > CURTIME()
   </select>
 
     <select id="selectComingSoon" resultMap="BaseResultMap">
@@ -229,6 +246,15 @@
         select * from movie where movie_name like '%${movieName}%'
     </select>
 
+
+    <select id="getMovieByKeyWord" resultMap="BaseResultMap">
+        select * from movie
+        <where>
+            <if test="keyword!=null and keyword!=''">
+                movie_name like '%${keyword}%'
+            </if>
+        </where>
+    </select>
 
 </mapper>
 

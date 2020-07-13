@@ -15,7 +15,7 @@ public class HallMovie {
 
     private Date endTime;
 
-    private Long fareMoney;
+    private double fareMoney;
 
     public Integer getHallMovieId() {
         return hallMovieId;
@@ -57,11 +57,11 @@ public class HallMovie {
         this.endTime = endTime;
     }
 
-    public Long getFareMoney() {
+    public double getFareMoney() {
         return fareMoney;
     }
 
-    public void setFareMoney(Long fareMoney) {
+    public void setFareMoney(double fareMoney) {
         this.fareMoney = fareMoney;
     }
 }

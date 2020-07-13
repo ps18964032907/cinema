@@ -1,29 +1,30 @@
 package com.pmsj.cinema.common.entity;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import lombok.ToString;
 
+import java.util.Date;
+@Data
+@ToString
 public class Comment {
-    private Integer comment;
+    private Integer commentId;
 
     private Integer userId;
 
     private Float userSocre;
-
-    private Integer fatherId;
-
+    @JsonFormat(pattern = "MM-dd")
     private Date commentCreateTime;
 
     private Integer movieId;
 
     private String userComment;
 
-    public Integer getComment() {
-        return comment;
-    }
+    private Integer likeCount;
 
-    public void setComment(Integer comment) {
-        this.comment = comment;
-    }
+    private String userName;
+
+    private String userPhoto;
 
     public Integer getUserId() {
         return userId;
@@ -41,13 +42,6 @@ public class Comment {
         this.userSocre = userSocre;
     }
 
-    public Integer getFatherId() {
-        return fatherId;
-    }
-
-    public void setFatherId(Integer fatherId) {
-        this.fatherId = fatherId;
-    }
 
     public Date getCommentCreateTime() {
         return commentCreateTime;

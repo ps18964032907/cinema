@@ -721,8 +721,10 @@
             </div>
         </div>
         <div class="sousuo">
-            <input class="sousuo_1" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off">
-            <input class="sousuo_2" type="submit" value="">
+            <form method="get" action="../HTML/Search.html">
+            <input class="sousuo_1" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off" name="keyWord">
+            <input class="sousuo_2" type="submit" value="" >
+            </form>
         </div>
         <div class="denglu bian" id="user">
             <a href="/jifen/index.html">
@@ -827,7 +829,7 @@
                                 </a>
                             </div>
                             <div class="zhuL1_2_2">
-                                <a href="#">
+                                <a :href="'../HTML/yingyuanShop.html?movieId='+onlineMovie.movieId">
                                     购票
                                 </a>
                             </div>
@@ -864,7 +866,7 @@
                             </div>
                             <div class="zhuL2_2_3">
                                 <a>预告片</a>
-                                <a href="#">预售</a>
+                                <a :href="'../HTML/yingyuanShop.html?movieId='+comingSoon.movieId">预售</a>
                             </div>
                         </div>
                         <div class="zhuL2_3">
