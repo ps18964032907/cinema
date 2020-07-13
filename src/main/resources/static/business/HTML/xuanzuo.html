@@ -954,7 +954,9 @@
         </div>
         <div>
             <select>
-                <option v-for="coupon in coupons" :value="coupon.couponName"></option>
+                <option v-for="coupon in coupons" :value="coupon.couponId">
+                    {{coupon.couponName}}
+                </option>
             </select>
         </div>
         <div class="btn-wrapper">
@@ -1036,9 +1038,9 @@
             //选中座位
             tickets: [],
             //座位单价
-            seatPrice:'',
+            seatPrice: '',
             //优惠卷选择
-            coupons:''
+            coupons: ''
 
 
         },
@@ -1168,16 +1170,19 @@
                 let oldArray = this.seatArray.slice();
                 if (this.tickets.length == 4) {
                     alert("已选4个座位不能继续选择");
-                }else if ((this.tickets.length+result.length)>4){
+                } else if ((this.tickets.length + result.length) > 4) {
                     alert("不能选超出四个座位数量的座位");
-                }
-                else {
+                } else {
                     for (let i = 0; i < result.length; i++) {
                         //选定座位
                         oldArray[result[i][0]][result[i][1]] = 1;
                         //存入选座数组
                         //this.tickets.push([result[i][0], result[i][1], this.getSeatName(result[i][0], result[i][1])]);
-                        this.tickets.push({"row":result[i][0],"col":result[i][1],"seatInfo":this.getSeatName(result[i][0], result[i][1])});
+                        this.tickets.push({
+                            "row": result[i][0],
+                            "col": result[i][1],
+                            "seatInfo": this.getSeatName(result[i][0], result[i][1])
+                        });
                     }
                 }
                 this.seatArray = oldArray;
@@ -1200,7 +1205,7 @@
 
             //选定且购买座位
             buySeat: function () {
-                let Url ='/HallMovie/buyTicket';
+                let Url = '/HallMovie/buyTicket';
                 axios({
                     method: 'post',
                     url: Url,
@@ -1208,7 +1213,7 @@
                         tickets: this.tickets,
                         hallMovieId: id
                     }
-                }).then((response)=>{
+                }).then((response) => {
                     alert(response.data);
                 }).catch(function (error) {
                     console.log(error);
@@ -1242,7 +1247,7 @@
                     if (this.tickets.length == 4) {
                         alert("已选4个座位不能继续选择");
                     } else {
-                        this.tickets.push({"row":row,"col":col,"seatInfo":this.getSeatName(row, col)});
+                        this.tickets.push({"row": row, "col": col, "seatInfo": this.getSeatName(row, col)});
                         newArray[row][col] = 1;
                     }
                 }
