@@ -20,7 +20,7 @@
     delete from `order`
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Order">
+    <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Order" useGeneratedKeys="true" keyProperty="orderId">
     insert into `order` (order_id, order_no, order_total_discounts_cash,
       coupon_id, user_id, order_status, 
       order_count, order_total_initial_cash, order_unitprice, 

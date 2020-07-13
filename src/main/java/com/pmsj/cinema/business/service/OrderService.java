@@ -43,10 +43,11 @@ public class OrderService {
      * @return
      */
     public int buyTickets(Order order) {
+        String[] params = {"orderId","couponId"};
         if (order == null) {
             throw new NullParametersException("Order is null");
         } else {
-            new ReflectUtil<Order>().throwNullParametersException(order, null);
+            new ReflectUtil<Order>().throwNullParametersException(order,params);
         }
 
         return orderMapper.insert(order);

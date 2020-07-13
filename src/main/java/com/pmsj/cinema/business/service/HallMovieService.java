@@ -2,7 +2,10 @@ package com.pmsj.cinema.business.service;
 
 import com.pmsj.cinema.business.exception.NullParametersException;
 import com.pmsj.cinema.common.entity.*;
+import com.pmsj.cinema.common.mapper.CouponMapper;
 import com.pmsj.cinema.common.mapper.HallMovieMapper;
+import com.pmsj.cinema.common.mapper.OrderSeatMapper;
+import com.pmsj.cinema.common.mapper.UserCouponMapper;
 import com.pmsj.cinema.common.vo.TicketVo;
 import com.pmsj.cinema.common.vo.TicketsVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +35,12 @@ public class HallMovieService {
     OrderService orderService;
     @Autowired
     HallService hallService;
-
+    @Autowired
+    UserCouponMapper userCouponMapper;
+    @Autowired
+    CouponMapper couponMapper;
+    @Autowired
+    OrderSeatMapper orderSeatMapper;
     public HallMovie selectById(Integer id) {
         if (id == null) {
             throw new NullParametersException("HallMovieId is null");
@@ -56,7 +64,7 @@ public class HallMovieService {
      * @param tickets
      * @param session
      */
-    private void addOrder(TicketsVo tickets, HttpSession session) {
+    private int addOrder(TicketsVo tickets, HttpSession session) {
         HallMovie hallMovie = this.selectById(tickets.getHallMovieId());
         Order order = new Order();
 
@@ -70,20 +78,27 @@ public class HallMovieService {
         //消费金额
         order.setOrderUnitprice(new BigDecimal(hallMovie.getFareMoney()));
         double money = hallMovie.getFareMoney() * tickets.getTickets().size();
-        order.setOrderTotalDiscountsCash(new BigDecimal(money));
         order.setOrderTotalInitialCash(new BigDecimal(money));
         //优惠卷
-        order.setCouponId(0);
+        UserCoupon userCoupon = userCouponMapper.selectByPrimaryKey(tickets.getUserCouponId());
+        if(userCoupon!=null){
+        Integer couponId=userCoupon.getCouponId();
+            order.setCouponId(couponId);
+            order.setOrderTotalDiscountsCash(new BigDecimal(money-couponMapper.selectByPrimaryKey(couponId).getCouponMoeny()));
+        }else {
+            order.setOrderTotalDiscountsCash(new BigDecimal(money));
+        }
+
 
         //session中用户信息
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            System.out.println("USER IS NULL");
+            throw new NullParametersException("User is null");
         } else {
             order.setUserId(user.getUserId());
         }
 
-        //订单状态 未支付:1
+        //订单状态 未支付:1 已支付：2 已取消 0
         order.setOrderStatus(1);
         //票数
         order.setOrderCount(tickets.getTickets().size());
@@ -93,6 +108,7 @@ public class HallMovieService {
         orderService.buyTickets(order);
         //将订单编号存储到session中
         session.setAttribute("orderNo", orderNo);
+        return order.getOrderId();
     }
 
     /**
@@ -100,9 +116,11 @@ public class HallMovieService {
      *
      * @param tickets
      */
-    private void addSeat(TicketsVo tickets) {
+    private int[] addSeat(TicketsVo tickets) {
         Integer hallMovieId = tickets.getHallMovieId();
         List<TicketVo> list = tickets.getTickets();
+        int[] seatIds = new int[tickets.getTickets().size()];
+        int i = 0;
         for (TicketVo ticket : list) {
             Seat seat = new Seat();
             seat.setHallMovieId(hallMovieId);
@@ -115,13 +133,24 @@ public class HallMovieService {
             seat.setSeatName(ticket.getSeatInfo());
             seatService.isAvailable(ticket);
             seatService.addSeat(seat);
+            seatIds[i++]=seat.getSeatId();
         }
+        return seatIds;
     }
 
     @Transactional
     public void buyTicket(TicketsVo tickets, HttpSession session) {
-        addSeat(tickets);
-        addOrder(tickets, session);
+        if (tickets.getTickets().size()==0){
+            throw new NullParametersException("未选座");
+        }
+        int[] seatIds = addSeat(tickets);
+        int orderid = addOrder(tickets, session);
+        for (int seatId : seatIds) {
+            OrderSeat orderSeat = new OrderSeat();
+            orderSeat.setOrderId(orderid);
+            orderSeat.setSeatId(seatId);
+            orderSeatMapper.insert(orderSeat);
+        }
     }
 
 

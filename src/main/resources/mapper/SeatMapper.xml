@@ -14,7 +14,7 @@
     delete from seat
     where seat_id = #{seatId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Seat">
+  <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Seat" useGeneratedKeys="true" keyProperty="seatId">
     insert into seat (seat_id, seat_x, seat_y, 
       seat_tpye, hall_id, hall_movie_id, 
       seat_name)

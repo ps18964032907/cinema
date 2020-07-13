@@ -12,6 +12,15 @@ import java.util.List;
 public class TicketsVo {
     private Integer hallMovieId;
     private List<TicketVo> tickets;
+    private Integer userCouponId;
+
+    public Integer getUserCouponId() {
+        return userCouponId;
+    }
+
+    public void setUserCouponId(Integer userCouponId) {
+        this.userCouponId = userCouponId;
+    }
 
     public Integer getHallMovieId() {
         return hallMovieId;

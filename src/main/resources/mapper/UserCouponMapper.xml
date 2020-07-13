@@ -36,6 +36,7 @@
     from user_coupon
   </select>
 
+
   <resultMap id="BaseResultMap2" type="com.pmsj.cinema.common.vo.UserCouponVo">
 
     <result column="user_id" jdbcType="INTEGER" property="userId"/>

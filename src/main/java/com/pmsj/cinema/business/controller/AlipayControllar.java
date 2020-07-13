@@ -53,17 +53,16 @@ public class AlipayControllar {
 
         //商品名称
 
-        String subject = new String("123");
+        String subject = new String("购票");
 
         //商品描述，可以为空
-        String body = "";
+        String body = "猫眼电影购票";
 
         //填充业务参数
         AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
         model.setBody(body);
-        model.setGoodsType("1");
-        model.setOutTradeNo("1231223232");
-        model.setTotalAmount("123");
+        model.setOutTradeNo(orderNo);
+        model.setTotalAmount(String.valueOf(order.getOrderTotalDiscountsCash()));
         model.setSubject(subject);
         model.setProductCode("FAST_INSTANT_TRADE_PAY");
 
