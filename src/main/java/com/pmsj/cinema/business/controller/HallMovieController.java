@@ -47,7 +47,7 @@ public class HallMovieController {
      * @return
      */
     @RequestMapping("/initSelectSeat")
-    public Map initSelectSeat(@RequestBody HallMovie hallMovie,HttpSession session) {
+    public Map initSelectSeat(@RequestBody HallMovie hallMovie, HttpSession session) {
         //影片场次id
         Integer id = hallMovie.getHallMovieId();
         //场次信息
@@ -68,7 +68,10 @@ public class HallMovieController {
         List<Seat> selectedSeat = seatService.getSelectedSeat(id);
         //可选优惠卷
         User user = (User) session.getAttribute("user");
-        List<Coupon> coupons =couponService.getUserAvailableCoupon(user.getUserId(),hall.getCinemaId(),movieId);
+        System.out.println(user);
+        List<Coupon> coupons = couponService.getUserAvailableCoupon(user.getUserId(), hall.getCinemaId(), movieId);
+        System.out.println(coupons);
+
         Map map = new HashMap();
 
         map.put("seatRow", hall.getHallY());
@@ -79,7 +82,7 @@ public class HallMovieController {
         map.put("nonSeatPlace", seats);
         map.put("selectedSeat", selectedSeat);
         map.put("seatPrice", thisHallMovie.getFareMoney());
-        map.put("coupons",coupons);
+        map.put("coupons", coupons);
         return map;
     }
 

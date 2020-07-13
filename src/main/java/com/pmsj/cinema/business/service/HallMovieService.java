@@ -73,7 +73,7 @@ public class HallMovieService {
 
         //消费金额
         order.setOrderUnitprice(new BigDecimal(hallMovie.getFareMoney()));
-        Long money = hallMovie.getFareMoney() * tickets.getTickets().size();
+        double money = hallMovie.getFareMoney() * tickets.getTickets().size();
         order.setOrderTotalDiscountsCash(new BigDecimal(money));
         order.setOrderTotalInitialCash(new BigDecimal(money));
         //优惠卷
@@ -96,15 +96,15 @@ public class HallMovieService {
         //添加订单
         orderService.buyTickets(order);
         //将订单编号存储到session中
-        session.setAttribute("orderNo",orderNo);
+        session.setAttribute("orderNo", orderNo);
     }
 
     /**
      * 添加座位
-     * @param tickets
      *
+     * @param tickets
      */
-    private void addSeat(TicketsVo tickets){
+    private void addSeat(TicketsVo tickets) {
         Integer hallMovieId = tickets.getHallMovieId();
         List<TicketVo> list = tickets.getTickets();
         for (TicketVo ticket : list) {
@@ -123,11 +123,10 @@ public class HallMovieService {
     }
 
     @Transactional
-    public void buyTicket(TicketsVo tickets, HttpSession session){
+    public void buyTicket(TicketsVo tickets, HttpSession session) {
         addSeat(tickets);
         addOrder(tickets, session);
     }
-
 
 
 }

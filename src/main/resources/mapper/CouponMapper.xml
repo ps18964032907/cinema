@@ -39,7 +39,8 @@
         on  `condition`.coupon_id = coupon.coupon_id
         where
         user_coupon.user_id = #{userId}
-        and (`condition`.movie_id = #{movieId} or `condition`.movie_id = null or `condition`.movie_id = 0)
-        and (`condition`.cinema_id = #{cinemaId} or `condition`.cinema_id = null or `condition`.cinema_id = 0)
+        and user_coupon.coupon_date > CURTIME()
+        and (`condition`.movie_id = #{movieId} or `condition`.movie_id is null or `condition`.movie_id = 0)
+        and (`condition`.cinema_id = #{cinemaId} or `condition`.cinema_id is null or `condition`.cinema_id = 0)
     </select>
 </mapper>
