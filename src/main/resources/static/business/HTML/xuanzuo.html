@@ -957,11 +957,11 @@
             <div>价格：{{seatPrice}}元</div>
         </div>
         <div>
-            <select>
-                <option>
+            <select v-model="current" @change="getMoney">
+                <option value="0">
                     请选择
                 </option>
-                <option v-for="coupon in coupons" :value="coupon.couponId">
+                <option v-for="coupon in coupons" :value="coupon.couponId" :data-money="coupon.couponMoeny" >
                     {{coupon.couponName}}
                 </option>
             </select>
@@ -969,7 +969,7 @@
         <div class="btn-wrapper">
             <div class="btn-buy" @click="buySeat">
                 选定座位
-                总价:{{seatPrice*tickets.length}}
+                总价:{{(seatPrice*tickets.length-preferentialAmount)>=0?(seatPrice*tickets.length-preferentialAmount):0}}
             </div>
         </div>
     </aside>
@@ -1060,11 +1060,19 @@
             //座位单价
             seatPrice: '',
             //优惠卷选择
-            coupons: ''
+            coupons: '',
+            //当前选项id,
+            current:'',
+            //优惠金额
+            preferentialAmount:''
+
 
 
         },
-        computed: {},
+        created(){
+            //如果没有这句代码，select中初始化会是空白的，默认选中就无法实现
+            this.current = 0;
+        },
         methods: {
             //向前后某个方向进行搜索的函数,参数是起始行，终止行,推荐座位个数
             searchSeatByDirection: function (fromRow, toRow, num) {
@@ -1367,10 +1375,24 @@
                 }
 
                 return "第" + (x + 1) + "排第" + (y + 1) + "座";
+            },
+            getMoney:function(event) {
+                //获取当前选中的值，并重新赋值
+                var that = this
+                var hh = that.coupons.filter(function (c, i, a) {//第一个参数为当前项,第二个参数为索引,第三个为原值
+                    console.log(c.couponId)
+                    if (c.couponId == that.current) {
+
+                        return c
+                    }
+                })
+                that.preferentialAmount = hh[0].money //获取当前option的money的值
+                console.log(that.coupons)
             }
 
 
         },
+
 
         beforeMount: function () {
             this.initRowAndCol()
