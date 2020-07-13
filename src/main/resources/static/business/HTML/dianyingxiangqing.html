@@ -936,7 +936,7 @@
                 </div>
             </div>
         </div>
-        <div class="content_L5">
+        <div class="content_L5" id="movieComment">
             <div class="content_L5_1">
                 <h3>热门短评</h3>
                 <div class="content_L5_11">
@@ -946,229 +946,30 @@
             <div class="content_L5_2">
                 <ul>
                     <!-- 1 -->
-                    <li>
+                    <li v-for="comment in Top10Comment">
                         <div class="content_L5_2_1">
-                            <img src="../IMG/duye_reping_1.jpg" alt="">
+                            <img :src="comment.userPhoto" alt="" style="width:50px; height:50px">
                             <i class="v1"></i>
                         </div>
                         <div class="content_L5_2_2">
                             <div class="content_L5_2_2_1">
-                                <span class="content_L5_2_2_11">Monster6697</span>
-                                <span class="content_L5_2_2_12">购</span>
+                                <span class="content_L5_2_2_11">{{comment.userName}}</span>
+<!--                                <span class="content_L5_2_2_12">购</span>-->
                             </div>
                             <div class="content_L5_2_2_2">
                                 <div>
-                                    <span>11-09</span>
+                                    <span>{{comment.commentCreateTime}}</span>
                                     <i class="xin5"></i>
                                 </div>
                                 <div>
                                     <a href="./login.html" target="blank"></a>
-                                    <span>13690</span>
+                                    <span>{{comment.likeCount}}</span>
                                 </div>
                             </div>
-                            <p>电影很好看，但是开场验票才告诉我自带3D眼镜？？？搞得我裸眼看3D看了一个多小时，真的是弟弟行为！</p>
+                            <p>{{comment.userComment}}</p>
                         </div>
                     </li>
                     <!-- 2 -->
-                    <li>
-                        <div class="content_L5_2_1">
-                            <img src="../IMG/duye_reping_2.jpg" alt="">
-                            <i class="v4"></i>
-                        </div>
-                        <div class="content_L5_2_2">
-                            <div class="content_L5_2_2_1">
-                                <span class="content_L5_2_2_11">A名犬乐园 （定金选狗）款到发货</span>
-                                <span class="content_L5_2_2_12">购</span>
-                            </div>
-                            <div class="content_L5_2_2_2">
-                                <div>
-                                    <span>11-09</span>
-                                    <i class="xin5"></i>
-                                </div>
-                                <div>
-                                    <a href="./login.html" target="blank"></a>
-                                    <span>7792</span>
-                                </div>
-                            </div>
-                            <p>
-                                真的太震撼了，漫威从来没有让我失望，虽然好多地方我感觉像是被删减过许多吓人的画面，但是真的还是太好看，好多地方从头到尾一直在笑，最后还有一点小感人。一直都是震撼幽默的画面。真希望可以能有第二部的上映。这个毒液系列希望像蜘蛛侠钢铁侠一样出一个系列有续集，真的没有看过瘾啊。（人生第一次评价话有点多）总之，大家可以去观看，我是电影迷这一部我给11分，强烈大家去观看！</p>
-                        </div>
-                    </li>
-                    <!-- 3 -->
-                    <li>
-                        <div class="content_L5_2_1">
-                            <img src="../IMG/duye_reping_3.jpg" alt="">
-                            <i class="v5"></i>
-                        </div>
-                        <div class="content_L5_2_2">
-                            <div class="content_L5_2_2_1">
-                                <span class="content_L5_2_2_11">草木灰011</span>
-                                <span class="content_L5_2_2_12">购</span>
-                            </div>
-                            <div class="content_L5_2_2_2">
-                                <div>
-                                    <span>11-09</span>
-                                    <i class="xin5"></i>
-                                </div>
-                                <div>
-                                    <a href="./login.html" target="blank"></a>
-                                    <span>5726</span>
-                                </div>
-                            </div>
-                            <p>毫无疑问，《毒液》是索尼出品年度最炫酷的(漫威）超级英雄电影之一，还是原来搞笑的配方、无敌的撩妹技能，可爱的汤老师，萌萌的毒液，简直绝配！！！</p>
-                        </div>
-                    </li>
-                    <!-- 4 -->
-                    <li>
-                        <div class="content_L5_2_1">
-                            <img src="../IMG/duye_reping_4.jpg" alt="">
-                            <i class="v3"></i>
-                        </div>
-                        <div class="content_L5_2_2">
-                            <div class="content_L5_2_2_1">
-                                <span class="content_L5_2_2_11">宝贝</span>
-                                <span class="content_L5_2_2_12">购</span>
-                            </div>
-                            <div class="content_L5_2_2_2">
-                                <div>
-                                    <span>11-09</span>
-                                    <i class="xin5"></i>
-                                </div>
-                                <div>
-                                    <a href="./login.html" target="blank"></a>
-                                    <span>1401</span>
-                                </div>
-                            </div>
-                            <p>很好看，不错，可惜了买了两张票，自己一个人看完😌 </p>
-                        </div>
-                    </li>
-                    <!-- 5 -->
-                    <li>
-                        <div class="content_L5_2_1">
-                            <img src="../IMG/duye_reping_5.jpg" alt="">
-                            <i class="v3"></i>
-                        </div>
-                        <div class="content_L5_2_2">
-                            <div class="content_L5_2_2_1">
-                                <span class="content_L5_2_2_11">洋洋</span>
-                                <span class="content_L5_2_2_12">购</span>
-                            </div>
-                            <div class="content_L5_2_2_2">
-                                <div>
-                                    <span>11-12</span>
-                                    <i class="xin5"></i>
-                                </div>
-                                <div>
-                                    <a href="./login.html" target="blank"></a>
-                                    <span>1301</span>
-                                </div>
-                            </div>
-                            <p>
-                                是真的好看 完全看不过瘾啊 我感觉删减了 真的烦 后面结局真的有点看不懂 说再见了 怎么莫名其妙毒液又回来了 完全看不过瘾啊啊啊啊啊 我不知道最后有没有彩蛋 时间比较急
-                                看完就走了 不知道后面有没有彩蛋 求哪位大神告诉一下谢谢 跳吗? 怂包
-                            </p>
-                        </div>
-                    </li>
-                    <!-- 6 -->
-                    <li>
-                        <div class="content_L5_2_1">
-                            <img src="../IMG/duye_reping_6.jpg" alt="">
-                            <i class="v2"></i>
-                        </div>
-                        <div class="content_L5_2_2">
-                            <div class="content_L5_2_2_1">
-                                <span class="content_L5_2_2_11">这爱有何不可</span>
-                                <span class="content_L5_2_2_12">购</span>
-                            </div>
-                            <div class="content_L5_2_2_2">
-                                <div>
-                                    <span>11-09</span>
-                                    <i class="xin5"></i>
-                                </div>
-                                <div>
-                                    <a href="./login.html" target="blank"></a>
-                                    <span>1443</span>
-                                </div>
-                            </div>
-                            <p>强烈推荐[强]，漫威第一部反派为主的电影，有笑点，有泪点，有刺激，有炫酷，有励志，不愧是“致命守护者”。人家两人看的是情怀，我一人看的是人生。</p>
-                        </div>
-                    </li>
-                    <!-- 7 -->
-                    <li>
-                        <div class="content_L5_2_1">
-                            <img src="../IMG/duye_reping_7.jpg" alt="">
-                            <i class="v5"></i>
-                        </div>
-                        <div class="content_L5_2_2">
-                            <div class="content_L5_2_2_1">
-                                <span class="content_L5_2_2_11">JuliaFanl</span>
-                                <i></i>
-                                <span class="content_L5_2_2_12">购</span>
-                            </div>
-                            <div class="content_L5_2_2_2">
-                                <div>
-                                    <span>11-11</span>
-                                    <i class="xin5"></i>
-                                </div>
-                                <div>
-                                    <a href="./login.html" target="blank"></a>
-                                    <span>582</span>
-                                </div>
-                            </div>
-                            <p>
-                                感觉毒液总是微笑的，有个性，很喜欢。埃迪+毒液，两个loser蜕变成一个winner，特别刺激，尤其是肚子饿那会儿。画面后半部分感官性强，也搞笑，前半部分没有立刻揭秘，节奏有点慢，片尾曲(英文)好听，开始期待第二部了，也期待埃迪与屠杀的打斗。</p>
-                        </div>
-                    </li>
-                    <!-- 8 -->
-                    <li>
-                        <div class="content_L5_2_1">
-                            <img src="../IMG/duye_reping_8.jpg" alt="">
-                            <i class="v4"></i>
-                        </div>
-                        <div class="content_L5_2_2">
-                            <div class="content_L5_2_2_1">
-                                <span class="content_L5_2_2_11">Misterlonely</span>
-                                <span class="content_L5_2_2_12">购</span>
-                            </div>
-                            <div class="content_L5_2_2_2">
-                                <div>
-                                    <span>11-09</span>
-                                    <i class="xin5"></i>
-                                </div>
-                                <div>
-                                    <a href="./login.html" target="blank"></a>
-                                    <span>1526</span>
-                                </div>
-                            </div>
-                            <p>
-                                大眼睛的生物都自带萌的属性，奶凶奶凶的😂
-                            </p>
-                        </div>
-                    </li>
-                    <!-- 9 -->
-                    <li>
-                        <div class="content_L5_2_1">
-                            <img src="../IMG/duye_reping_9.jpg" alt="">
-                            <i class="v3"></i>
-                        </div>
-                        <div class="content_L5_2_2">
-                            <div class="content_L5_2_2_1">
-                                <span class="content_L5_2_2_11">生活樂趣</span>
-                                <span class="content_L5_2_2_12">购</span>
-                            </div>
-                            <div class="content_L5_2_2_2">
-                                <div>
-                                    <span>11-09</span>
-                                    <i class="xin3"></i>
-                                </div>
-                                <div>
-                                    <a href="./login.html" target="blank"></a>
-                                    <span>1052</span>
-                                </div>
-                            </div>
-                            <p>非常奈斯，喜欢毒液突如其来的骚</p>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -1447,6 +1248,25 @@
         }
     })
 
+    new Vue({
+        el:"#movieComment",
+        data:{
+            Top10Comment:[]
+        },
+        beforeMount:function(){
+            let _this = this;
+            $.get("/comment/getComment","movieId="+id,function(data){
+                _this.Top10Comment =data;
+                console.log(data);
+            })
+        },
+        method:function () {
+            let _this = this;
+            $.post("/comment/like",data,function (data2) {
+
+            })
+        }
+    })
 
 </script>
 
