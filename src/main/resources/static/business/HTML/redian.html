@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../CSS/normalize.css">
     <link rel="stylesheet" href="../CSS/redian.css">
     <link rel="shortcut icon" href="../IMG/Blogo.png" type="image/x-icon">
+    <script src="/js/vue.js"></script>
+    <script src="/business/JS/jquery-1.11.0.min.js"></script>
 </head>
 
 <body>
@@ -719,13 +721,13 @@
                 <input class="sousuo_1" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off">
                 <input class="sousuo_2" type="submit" value="">
             </div>
-            <div class="denglu bian">
-                <a href="#">
-                    <img src="../IMG/avatar.png" alt="">
+            <div class="denglu bian" id="user">
+                <a href="/jifen/index.html">
+                    <img :src="photo" alt="" style="width:50px; height:50px;border-radius: 50%">
                 </a>
                 <span class="sanjiao"></span>
                 <div>
-                    <a href="./login.html" target="blank">登录</a>
+                    <a href="/user/logout" target="blank">注销</a>
                 </div>
             </div>
         </nav>
@@ -1266,5 +1268,17 @@
     <a class="miao" href="./zajindan.html" target="blank">
     </a>
 </body>
-
+<script>
+    var user = new Vue({
+        el: "#user",
+        data: {
+            photo: '',
+        },
+        beforeMount: function () {
+            $.get("/user/selectUser", null, function (data) {
+                user.photo = data.userPhoto
+            })
+        },
+    })
+</script>
 </html>

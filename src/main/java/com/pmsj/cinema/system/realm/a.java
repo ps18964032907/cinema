@@ -1,9 +1,8 @@
 package com.pmsj.cinema.system.realm;
 
-/*
- * @Author 潘升
- * @Description //TODO $
- * @Date 2020/7/1 10:15
- **/
+/**
+ * @author jiangshuai
+ * @date 2020/7/13 0013 16:13
+ */
 public class a {
 }
