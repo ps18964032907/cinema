@@ -38,32 +38,32 @@ public class OrderService {
 
     /**
      * 产生订单
+     *
      * @param order
      * @return
      */
-    public int buyTickets(Order order){
-        if (order==null){
+    public int buyTickets(Order order) {
+        if (order == null) {
             throw new NullParametersException("Order is null");
-        }else{
-           new ReflectUtil<Order>().throwNullParametersException(order,null);
-            }
+        } else {
+            new ReflectUtil<Order>().throwNullParametersException(order, null);
+        }
 
         return orderMapper.insert(order);
     }
 
     /**
      * 根据订单编号查询订单
+     *
      * @param orderNo
      * @return
      */
-    public Order getOrderByNo(String orderNo){
-        if (orderNo==null){
+    public Order getOrderByNo(String orderNo) {
+        if (orderNo == null) {
             throw new NullParametersException("OrderNo is null");
         }
         return orderMapper.selectByOrderNo(orderNo);
     }
-
-
 
 
 //    public void buy2(TicketsVo tickets, HttpSession session){

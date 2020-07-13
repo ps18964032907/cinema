@@ -8,12 +8,6 @@ public class Order {
 
     private String orderNo;
 
-    private Integer movieId;
-
-    private Integer cinemaId;
-
-    private Integer hallId;
-
     private BigDecimal orderTotalDiscountsCash;
 
     private Integer couponId;
@@ -30,6 +24,8 @@ public class Order {
 
     private Date orderTime;
 
+    private Integer hallMovieId;
+
     public Integer getOrderId() {
         return orderId;
     }
@@ -44,30 +40,6 @@ public class Order {
 
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo == null ? null : orderNo.trim();
-    }
-
-    public Integer getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(Integer movieId) {
-        this.movieId = movieId;
-    }
-
-    public Integer getCinemaId() {
-        return cinemaId;
-    }
-
-    public void setCinemaId(Integer cinemaId) {
-        this.cinemaId = cinemaId;
-    }
-
-    public Integer getHallId() {
-        return hallId;
-    }
-
-    public void setHallId(Integer hallId) {
-        this.hallId = hallId;
     }
 
     public BigDecimal getOrderTotalDiscountsCash() {
@@ -132,5 +104,13 @@ public class Order {
 
     public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
+    }
+
+    public Integer getHallMovieId() {
+        return hallMovieId;
+    }
+
+    public void setHallMovieId(Integer hallMovieId) {
+        this.hallMovieId = hallMovieId;
     }
 }

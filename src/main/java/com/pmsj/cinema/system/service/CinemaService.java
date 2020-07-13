@@ -90,6 +90,15 @@ public class CinemaService {
 
         PageHelper.startPage(page, 8);
         List<CinemaVo> allCinemaByAll = cinemaMapper.getAllCinemaByAll(brand, hallType, area, province, city);
+        for (CinemaVo cinemaVo : allCinemaByAll) {
+            Double minMoneyByCinemaId = cinemaMapper.getMinMoneyByCinemaId(cinemaVo.getCinemaId());
+            if (minMoneyByCinemaId == null) {
+                minMoneyByCinemaId = 0D;
+            }
+
+            cinemaVo.setMinMoney(minMoneyByCinemaId);
+        }
+
         return new PageInfo<CinemaVo>(allCinemaByAll);
     }
 
@@ -97,7 +106,13 @@ public class CinemaService {
         PageHelper.startPage(page, 8);
 
         List<CinemaVo> allCinemaByAll = cinemaMapper.getAllCinemaByMovie(brand, hallType, area, province, city, movieId, new Date());
-
+        for (CinemaVo cinemaVo : allCinemaByAll) {
+            Double minMoneyByCinemaId = cinemaMapper.getMinMoneyByCinemaId(cinemaVo.getCinemaId());
+            if (minMoneyByCinemaId == null) {
+                minMoneyByCinemaId = 0D;
+            }
+            cinemaVo.setMinMoney(minMoneyByCinemaId);
+        }
         return new PageInfo<CinemaVo>(allCinemaByAll);
     }
 

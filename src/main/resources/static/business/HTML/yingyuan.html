@@ -725,8 +725,9 @@
         </div>
         <div class="sousuo">
             <form method="get" action="../HTML/Search.html">
-                <input class="sousuo_1" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off" name="keyWord">
-                <input class="sousuo_2" type="submit" value="" >
+                <input class="sousuo_1" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off"
+                       name="keyWord">
+                <input class="sousuo_2" type="submit" value="">
             </form>
         </div>
         <div class="denglu bian" id="user">
@@ -848,9 +849,15 @@
                 <p>地址：{{cinema.cinemaLocation}}</p>
             </div>
             <div>
-                <p>
+                <p v-if="cinema.minMoney == 0">
+                    <!--                    <span>￥</span>-->
+                    <!--                    <span>{{cinema.minMoney}}</span>-->
+                    <span>暂无排片</span>
+                </p>
+
+                <p v-else>
                     <span>￥</span>
-                    <span>24</span>
+                    <span>{{cinema.minMoney}}</span>
                     <span>起</span>
                 </p>
                 <a href="#">选座购票</a>
@@ -1138,8 +1145,6 @@
         })
 
     }
-
-
 
 
 </script>
