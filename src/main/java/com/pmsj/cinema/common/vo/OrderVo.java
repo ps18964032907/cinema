@@ -23,14 +23,6 @@ public class OrderVo {
 
     private String orderNo;
 
-    private Integer movieId;
-
-    private Integer cinemaId;
-
-    private Integer hallId;
-
-    private Integer seatId;
-
     private BigDecimal orderTotalDiscountsCash;
 
     private Integer couponId;
@@ -38,6 +30,8 @@ public class OrderVo {
     private Integer userId;
 
     private Integer orderStatus;
+
+    private Integer hallMovieId;
 
     private Integer orderCount;
 
@@ -47,13 +41,12 @@ public class OrderVo {
 
     private String movieName;
 
+    private String movieId;
+
     private String couponName;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date orderTime;
-
-    //详细的影院影厅座位
-    private String cinemaNameHallNameXY;
 
     private List<Seat> seatList;
 

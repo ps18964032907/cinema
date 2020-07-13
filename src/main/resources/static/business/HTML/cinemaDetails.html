@@ -206,6 +206,7 @@
     .info {
         margin-left: 20px;
         padding: 10px;
+        width: 300px;
     }
 
     .price, .buy {
@@ -224,10 +225,12 @@
     }
 
     .price {
-        margin-left: 400px;
+        margin-left: 280px;
         font-size: 18px;
         font-weight: bold;
         color: orange;
+        text-align: right;
+        float: right;
     }
 
     .buy {
@@ -2619,7 +2622,8 @@
         </div>
 
         <form action="https://maoyan.com/query" target="_blank" class="search-form" data-actform="search-click">
-            <input name="kw" class="search" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off" onblur="if(this.value.replace(/^ +| +$/g,'')=='')alert('不能为空!')">
+            <input name="kw" class="search" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off"
+                   onblur="if(this.value.replace(/^ +| +$/g,'')=='')alert('不能为空!')">
             <input class="submit" type="submit" value="">
         </form>
 
@@ -2714,7 +2718,7 @@
                     <p class="time">结束时间: {{hallMovie.endTime}} </p>
                 </div>
                 <div class="price">
-                    <p>{{hallMovie.fareMoney}}元</p>
+                   {{hallMovie.fareMoney}}元
                 </div>
                 <div class="buy" style="float: right">
                     <p><a :href="'http://localhost:8080/business/HTML/xuanzuo.html?hallMovieId='+hallMovie.hallMovieId">购票</a></p>
@@ -2893,6 +2897,7 @@
         }
         return (false);
     }
+
     var user = new Vue({
         el: "#user",
         data: {
