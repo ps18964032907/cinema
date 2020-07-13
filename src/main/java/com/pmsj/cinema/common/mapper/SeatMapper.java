@@ -1,6 +1,8 @@
 package com.pmsj.cinema.common.mapper;
 
 import com.pmsj.cinema.common.entity.Seat;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface SeatMapper {
@@ -17,4 +19,6 @@ public interface SeatMapper {
     List<Seat> selectByHallId(Integer hallId);
 
     List<Seat> selectByHallMovieId(Integer hallMovieId);
+
+    Seat selectByRowAndCol(@Param("col") Integer col,@Param("row") Integer row);
 }

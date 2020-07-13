@@ -18,10 +18,13 @@ import java.util.List;
  * @Date 2020/7/2 16:44
  **/
 @Service
+
 public class OrderService {
 
-    @Autowired
+    @Autowired(required = false)
     OrderMapper orderMapper;
+//    @Autowired
+//    HallMovieService hallMovieService;
 
     public PageInfo<OrderVo> getAllOrderByUser(int i, int currentPage, int pageSize) {
 
@@ -33,14 +36,38 @@ public class OrderService {
         return orderVoPageInfo;
     }
 
-
+    /**
+     * 产生订单
+     * @param order
+     * @return
+     */
     public int buyTickets(Order order){
         if (order==null){
             throw new NullParametersException("Order is null");
         }else{
-           new ReflectUtil<Order>().throwNullParametersException(order);
+           new ReflectUtil<Order>().throwNullParametersException(order,null);
             }
 
         return orderMapper.insert(order);
     }
+
+    /**
+     * 根据订单编号查询订单
+     * @param orderNo
+     * @return
+     */
+    public Order getOrderByNo(String orderNo){
+        if (orderNo==null){
+            throw new NullParametersException("OrderNo is null");
+        }
+        return orderMapper.selectByOrderNo(orderNo);
+    }
+
+
+
+
+//    public void buy2(TicketsVo tickets, HttpSession session){
+//        hallMovieService.buyTicket( tickets, session);
+//    }
+
 }

@@ -17,4 +17,6 @@ public interface OrderMapper {
     int updateByPrimaryKey(Order record);
 
     List<OrderVo> getAllOrderByUser(int i);
+
+    Order selectByOrderNo(String orderNo);
 }

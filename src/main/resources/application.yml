@@ -1,14 +1,19 @@
 spring:
-  thymeleaf:
-    prefix: classpath:/static/
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql:///cinema
+    url: jdbc:mysql://localhost:3309/cinema?useTimezone=true&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
-  jackson:
-    time-zone: GMT+8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    prefix: classpath:/static/
+
+
+
+
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+pagehelper:
+  helper-dialect: mysql
+  params: count=countSql
+  reasonable: true
+  support-methods-arguments: true

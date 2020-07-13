@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author mhd
@@ -22,6 +23,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/HallMovie")
+
 public class HallMovieController {
 
     @Autowired
@@ -36,12 +38,16 @@ public class HallMovieController {
     SeatService seatService;
     @Autowired
     OrderService orderService;
+    @Autowired
+    CouponService couponService;
+
     /**
      * 选座页面数据初始化
+     *
      * @return
      */
     @RequestMapping("/initSelectSeat")
-    public Map initSelectSeat(@RequestBody HallMovie hallMovie){
+    public Map initSelectSeat(@RequestBody HallMovie hallMovie,HttpSession session) {
         //影片场次id
         Integer id = hallMovie.getHallMovieId();
         //场次信息
@@ -53,72 +59,43 @@ public class HallMovieController {
         //影厅信息
         Hall hall = hallService.selectById(hallId);
         //影厅名称
-        String hallName = hall.getHallName()+hallTypeService.selectById(hall.getHallType()).getHtName();
+        String hallName = hall.getHallName() + hallTypeService.selectById(hall.getHallType()).getHtName();
         //电影id
         Integer movieId = thisHallMovie.getMovieId();
         //影厅不是座位地方
         List<Seat> seats = seatService.getNonSeat(hallId);
         //已被选择地方
         List<Seat> selectedSeat = seatService.getSelectedSeat(id);
+        //可选优惠卷
+        User user = (User) session.getAttribute("user");
+        List<Coupon> coupons =couponService.getUserAvailableCoupon(user.getUserId(),hall.getCinemaId(),movieId);
         Map map = new HashMap();
 
-        map.put("seatRow",hall.getHallY());
-        map.put("seatCol",hall.getHallX());
-        map.put("startTime",time);
-        map.put("hallName",hallName);
-        map.put("movieName",movieDetailsService.selectByPrimaryKey(movieId).getMovieName());
-        map.put("nonSeatPlace",seats);
-        map.put("selectedSeat",selectedSeat);
-        map.put("seatPrice",thisHallMovie.getFareMoney());
+        map.put("seatRow", hall.getHallY());
+        map.put("seatCol", hall.getHallX());
+        map.put("startTime", time);
+        map.put("hallName", hallName);
+        map.put("movieName", movieDetailsService.selectByPrimaryKey(movieId).getMovieName());
+        map.put("nonSeatPlace", seats);
+        map.put("selectedSeat", selectedSeat);
+        map.put("seatPrice", thisHallMovie.getFareMoney());
+        map.put("coupons",coupons);
         return map;
     }
 
     /**
      * 选座购票
+     *
      * @param
      * @return
      */
     @RequestMapping("/buyTicket")
-    public String buyTicket(@RequestBody TicketsVo tickets, HttpSession session){
-        HallMovie hallMovie = hallMovieService.selectById(tickets.getHallMovieId());
-        Order order = new Order();
-
-        String orderNo = UUID.randomUUID().toString();
-        order.setOrderNo(orderNo);
-
-        order.setMovieId(hallMovie.getMovieId());
-
-        //影厅信息
-        Integer hallId = hallMovie.getHallId();
-        Hall hall = hallService.selectById(hallId);
-        order.setCinemaId(hall.getCinemaId());
-        order.setHallId(hallId);
-
-        //消费金额
-        order.setOrderUnitprice(new BigDecimal(hallMovie.getFareMoney()));
-        Long money = hallMovie.getFareMoney()*tickets.getTickets().size();
-        order.setOrderTotalDiscountsCash(new BigDecimal(money));
-        order.setOrderTotalInitialCash(new BigDecimal(money));
-        //优惠卷
-        order.setCouponId(0);
-
-        //session中用户信息
-        User user = (User) session.getAttribute("user");
-        order.setUserId(user.getUserId());
-
-        //订单状态 未支付:1
-        order.setOrderStatus(1);
-        //票数
-        order.setOrderCount(tickets.getTickets().size());
-
-        order.setOrderTime(new Date());
-
-
-        try {
-            orderService.buyTickets(order);
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }
-        return null;
+    public String buyTicket(@RequestBody TicketsVo tickets, HttpSession session) {
+        hallMovieService.buyTicket(tickets, session);
+        //orderService.buy2(tickets,session);
+        return "Success";
     }
+
+
 }
+

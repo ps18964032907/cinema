@@ -28,8 +28,9 @@ public class ReflectUtil<T> {
 
     /**
      * 判断对象中属性是否为空
+     * strings为null时默认id为空不抛出异常
      */
-    public void throwNullParametersException(T obj) {
+    public void throwNullParametersException(T obj,String[] strings) {
         Class<?> class1 = obj.getClass();
         String name =  class1.getName().substring(class1.getName().lastIndexOf(".")+1);
         Field[] fields = class1.getDeclaredFields();
@@ -40,18 +41,47 @@ public class ReflectUtil<T> {
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
-            Object val = null;// 调用getter方法获取属性值
+            Object val = null;
             try {
-                val = m.invoke(obj);
+                val = m.invoke(obj);// 调用getter方法获取属性值
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
             }
-            if (val == null && !getMethodName(field.getName()).equals(name+"Id")) {
-                throw new NullParametersException(getMethodName(field.getName()) + " is null");
+
+            if (strings==null){
+                if (val == null&& !getMethodName(field.getName()).equals(name+"Id")) {
+                    throw new NullParametersException(getMethodName(field.getName()) + " is null");
+                }
+            }else{
+                if (val == null&&isAllowed(field,strings) ) {
+                    throw new NullParametersException(getMethodName(field.getName()) + " is null");
+                }
             }
+
+
+
+
         }
 
+    }
+
+
+
+    /**
+     * 抛出条件是否允许
+     * @param field
+     * @param strings
+     * @return
+     */
+    private Boolean isAllowed(Field field,String[] strings){
+        Boolean b = true;
+        for (String string : strings) {
+            if (field.getName().equals(string)){
+                return false;
+            }
+        }
+        return b;
     }
 }

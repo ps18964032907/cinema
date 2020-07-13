@@ -84,8 +84,9 @@ public class CouponService {
      * @Param [userId, cinemaId, movieId]
      * @since 1.0.0
      */
-    public void getUserAvailableCoupon(Integer userId, Integer cinemaId, Integer movieId) {
-        couponMapper.getUserAvailableCoupon(userId, cinemaId, movieId);
+    public List<Coupon> getUserAvailableCoupon(Integer userId, Integer cinemaId, Integer movieId) {
+
+        return couponMapper.getUserAvailableCoupon(userId, cinemaId, movieId);
     }
 
 

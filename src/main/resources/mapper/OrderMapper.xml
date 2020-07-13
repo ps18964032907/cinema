@@ -62,6 +62,14 @@
     from `order`
   </select>
 
+    <select id="selectByOrderNo" parameterType="string" resultMap="BaseResultMap">
+        select order_id, order_no, movie_id, cinema_id, hall_id, order_total_discounts_cash,
+               coupon_id, user_id, order_status, order_count, order_total_initial_cash, order_unitprice,
+               order_time
+        from `order`
+        where order_no = #{orderNo,jdbcType=INTEGER}
+    </select>
+
 
     <resultMap id="VoResultMap" type="com.pmsj.cinema.common.vo.OrderVo">
         <id column="order_id" jdbcType="INTEGER" property="orderId"/>
