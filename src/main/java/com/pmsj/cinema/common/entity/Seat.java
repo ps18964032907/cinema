@@ -1,8 +1,5 @@
 package com.pmsj.cinema.common.entity;
 
-import lombok.ToString;
-
-@ToString
 public class Seat {
     private Integer seatId;
 
@@ -15,6 +12,8 @@ public class Seat {
     private Integer hallId;
 
     private Integer hallMovieId;
+
+    private String seatName;
 
     public Integer getSeatId() {
         return seatId;
@@ -62,5 +61,13 @@ public class Seat {
 
     public void setHallMovieId(Integer hallMovieId) {
         this.hallMovieId = hallMovieId;
+    }
+
+    public String getSeatName() {
+        return seatName;
+    }
+
+    public void setSeatName(String seatName) {
+        this.seatName = seatName == null ? null : seatName.trim();
     }
 }

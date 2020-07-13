@@ -13,6 +13,8 @@ public class Hall {
 
     private Integer hallY;
 
+    private Integer cinemaId;
+
     public Integer getHallId() {
         return hallId;
     }
@@ -59,5 +61,13 @@ public class Hall {
 
     public void setHallY(Integer hallY) {
         this.hallY = hallY;
+    }
+
+    public Integer getCinemaId() {
+        return cinemaId;
+    }
+
+    public void setCinemaId(Integer cinemaId) {
+        this.cinemaId = cinemaId;
     }
 }

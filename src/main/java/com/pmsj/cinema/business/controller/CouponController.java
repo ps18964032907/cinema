@@ -7,10 +7,7 @@ package com.pmsj.cinema.business.controller;
  **/
 
 import com.pmsj.cinema.business.service.CouponService;
-import com.pmsj.cinema.common.entity.Coupon;
 import com.pmsj.cinema.common.entity.Result;
-import com.pmsj.cinema.common.entity.User;
-import com.pmsj.cinema.common.entity.UserCoupon;
 import com.pmsj.cinema.common.vo.UserCouponVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
