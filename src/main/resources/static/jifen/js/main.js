@@ -41,7 +41,7 @@ Vue.component('button-counter', {
     template: "    <header id=\"topHeader\">\n" +
         "        <div class=\"layout clearfix\">\n" +
         "            <a class=\"logo\" href=\"#\">\n" +
-        "                <img class=\"fl\" id=\"topLogo\" src=\"unpan/blue/src/logo.png\" style=\"height: 74px;width: 328px\"\n" +
+        "                <img class=\"fl\" id=\"topLogo\" src=\"http://img.iishk.com/uploadfile/allimg/170629/02001064O_0.png\n\" style=\"height: 74px\"\n" +
         "                     alt=\"让投资实现梦想\">\n" +
         "            </a>\n" +
         "\n" +
@@ -57,14 +57,7 @@ Vue.component('button-counter', {
         "                        <a href=\"index.html\" rel=\"nofollow\">首&nbsp;&nbsp;&nbsp;页</a>\n" +
         "                    </li>\n" +
         "\n" +
-        "\n" +
-        "                    <li v-if=\"flag === '2'\" class=\"curr\">\n" +
-        "                        <a href=\"shop.html\" rel=\"nofollow\">积分商城</a>\n" +
-        "                    </li>\n" +
-        "                    <li v-else>\n" +
-        "                        <a href=\"shop.html\" rel=\"nofollow\">积分商城</a>\n" +
-        "                    </li>\n" +
-        "\n" +
+       
         "                    <li class=\"curr\" v-if=\"flag === '3'\">\n" +
         "                        <a href=\"transaction.html\" rel=\"nofollow\">交易管理</a>\n" +
         "                    </li>\n" +
