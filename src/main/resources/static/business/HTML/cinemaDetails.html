@@ -33,6 +33,8 @@
 
 
     <script async="" src="../CSS/saved_resource" th:src="@{business/CSS/saved_resource}"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/business/JS/jquery-1.11.0.min.js"></script>
     <script src="../CSS/hm.js.下载" th:src="@{business/CSS/hm.js.下载}"></script>
     <script>"use strict";
     !function () {
@@ -2605,12 +2607,13 @@
         </div>
 
         <div class="user-info">
-            <div class="user-avatar J-login">
-                <img src="../CSS/7dd82a16316ab32c8359debdb04396ef2897.png"
-                     th:src="@{business/CSS/7dd82a16316ab32c8359debdb04396ef2897.png}">
+            <div class="user-avatar J-login" id="user">
+                <a href="/jifen/index.html">
+                    <img :src="photo" alt="" style="width:50px; height:50px;border-radius: 50%">
+                </a>
                 <span class="caret"></span>
                 <ul class="user-menu no-login-menu">
-                    <li><a href="javascript:void 0">登录</a></li>
+                    <a href="/user/logout" target="blank">注销</a>
                 </ul>
             </div>
         </div>
@@ -2890,7 +2893,17 @@
         }
         return (false);
     }
-
+    var user = new Vue({
+        el: "#user",
+        data: {
+            photo: '',
+        },
+        beforeMount: function () {
+            $.get("/user/selectUser", null, function (data) {
+                user.photo = data.userPhoto
+            })
+        },
+    })
 </script>
 
 </html>
