@@ -721,16 +721,18 @@
             </div>
         </div>
         <div class="sousuo">
-            <input class="sousuo_1" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off">
-            <input class="sousuo_2" type="submit" value="">
+            <form method="get" action="../HTML/Search.html">
+                <input class="sousuo_1" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off" name="keyWord">
+                <input class="sousuo_2" type="submit" value="" >
+            </form>
         </div>
-        <div class="denglu bian">
-            <a href="#">
-                <img src="../IMG/avatar.png" alt="">
+        <div class="denglu bian" id="user">
+            <a href="/jifen/index.html">
+                <img :src="photo" alt="" style="width:50px; height:50px;border-radius: 50%">
             </a>
             <span class="sanjiao"></span>
             <div>
-                <a href="./denglu.html" target="blank">登录</a>
+                <a href="/user/logout" target="blank">注销</a>
             </div>
         </div>
     </nav>
@@ -829,18 +831,18 @@
                         <label for="jieshao">
                             <a>介绍</a>
                         </label>
-                        <input type="radio" id="yanzhirenyuan" name="lei">
-                        <label for="yanzhirenyuan">
-                            <a>演职人员</a>
-                        </label>
-                        <input type="radio" id="jiangxiang" name="lei">
-                        <label for="jiangxiang">
-                            <a>奖项</a>
-                        </label>
-                        <input type="radio" id="tuji" name="lei">
-                        <label for="tuji">
-                            <a>图集</a>
-                        </label>
+<!--                        <input type="radio" id="yanzhirenyuan" name="lei">-->
+<!--                        <label for="yanzhirenyuan">-->
+<!--                            <a>演职人员</a>-->
+<!--                        </label>-->
+<!--                        <input type="radio" id="jiangxiang" name="lei">-->
+<!--                        <label for="jiangxiang">-->
+<!--                            <a>奖项</a>-->
+<!--                        </label>-->
+<!--                        <input type="radio" id="tuji" name="lei">-->
+<!--                        <label for="tuji">-->
+<!--                            <a>图集</a>-->
+<!--                        </label>-->
                     </li>
                 </ul>
             </section>
@@ -853,7 +855,7 @@
             <div class="content_L3_1">
                 <h3>演职人员</h3>
                 <div class="content_L3_11">
-                    <a href="#">全部</a>
+<!--                    <a href="#">全部</a>-->
                     <i></i>
                 </div>
             </div>
@@ -1267,7 +1269,17 @@
             })
         }
     })
-
+    var user = new Vue({
+        el: "#user",
+        data: {
+            photo: '',
+        },
+        beforeMount: function () {
+            $.get("/user/selectUser", null, function (data) {
+                user.photo = data.userPhoto
+            })
+        },
+    })
 </script>
 
 </body>
