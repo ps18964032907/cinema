@@ -1053,7 +1053,7 @@
                                     <i class="xin1" v-if="comment.userSocre==1"></i>
                                 </div>
                                 <div>
-                                    <a href="./login.html" target="blank"></a>
+                                    <a v-on:click="like(comment.likeCount,comment.commentId)"></a>
                                     <span>{{comment.likeCount}}</span>
                                 </div>
                             </div>
@@ -1371,6 +1371,11 @@
                 movieId: 0,
                 userComment: "",
                 likeCount: 0
+            },
+            loveCount:{
+                commentId:0,
+                likeCount: 0
+
             }
         },
         beforeMount:function(){
@@ -1395,6 +1400,17 @@
                 $.post("/comment/addComment",_this.commment,function(data2){
                     confirm("评论成功");
                     location.reload()
+                })
+
+            },
+            like:function (data,data2) {
+                let _this = this;
+                _this.loveCount.commentId=data2;
+                _this.loveCount.likeCount=data+1;
+                console.log(_this.loveCount.commentId);
+                console.log(_this.loveCount.likeCount);
+                $.post("/comment/like",_this.loveCount,function (data) {
+                    location.reload();
                 })
 
             }
