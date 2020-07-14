@@ -24,4 +24,6 @@ public interface CommentMapper {
     List<Comment> selectAllByMovie(Integer movieId);
 
     int updateLikeCount(@Param(value = "likeCount") Integer likeCount, @Param(value = "commentId") Integer commentId);
+
+    Integer getHasComment(@Param("userId") Integer userId, @Param("movieId") Integer movieId);
 }

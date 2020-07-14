@@ -45,4 +45,10 @@
     ORDER BY like_count DESC
     LIMIT 10
   </select>
+    <select id="getHasComment" resultType="java.lang.Integer">
+
+      SELECT COUNT(*) FROM COMMENT
+    WHERE user_id = #{userId}
+    AND movie_id = #{movieId}
+    </select>
 </mapper>

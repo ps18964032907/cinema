@@ -18,18 +18,25 @@ import java.util.List;
 public class CommentService {
     @Autowired
     CommentMapper commentMapper;
+
     @Transactional
-    public int insert( Integer userId, Integer userSocre,
-                      Date commentCreateTime,Integer movieId,
-                      String userComment,Integer likeCount){
-        return commentMapper.insert(userId,userSocre,commentCreateTime,movieId,userComment,likeCount);
-    }
-    @Transactional
-    public int updateLikeCount(Integer likeCount,Integer commentId){
-        return commentMapper.updateLikeCount(likeCount,commentId);
+    public int insert(Integer userId, Integer userSocre,
+                      Date commentCreateTime, Integer movieId,
+                      String userComment, Integer likeCount) {
+
+        Integer hasComment = commentMapper.getHasComment(userId, movieId);
+        if (hasComment == 0 || hasComment == null) {
+            return commentMapper.insert(userId, userSocre, commentCreateTime, movieId, userComment, likeCount);
+        }
+        return 0;
     }
 
-    public List<Comment> selectAllByMovie(Integer movieId){
+    @Transactional
+    public int updateLikeCount(Integer likeCount, Integer commentId) {
+        return commentMapper.updateLikeCount(likeCount, commentId);
+    }
+
+    public List<Comment> selectAllByMovie(Integer movieId) {
         return commentMapper.selectAllByMovie(movieId);
     }
 }

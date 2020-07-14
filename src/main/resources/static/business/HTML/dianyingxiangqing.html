@@ -1398,7 +1398,11 @@
                 console.log(_this.commment.userId);
                 console.log(_this.commment);
                 $.post("/comment/addComment",_this.commment,function(data2){
-                    confirm("评论成功");
+                    if(data2==0){
+                        alert("每个用户只能评论一次，你想干嘛？！");}
+                    else {
+                        alert("评论成功");
+                    }
                     location.reload()
                 })
 
