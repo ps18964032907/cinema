@@ -66,6 +66,16 @@ public class OrderService {
         return orderMapper.selectByOrderNo(orderNo);
     }
 
+    public int updateOrderStatues(Order order){
+        String[] params = {"couponId"};
+        if (order == null) {
+            throw new NullParametersException("Order is null");
+        }else {
+            new ReflectUtil<Order>().throwNullParametersException(order,params);
+        }
+        return orderMapper.updateByPrimaryKey(order);
+
+    }
 
 //    public void buy2(TicketsVo tickets, HttpSession session){
 //        hallMovieService.buyTicket( tickets, session);

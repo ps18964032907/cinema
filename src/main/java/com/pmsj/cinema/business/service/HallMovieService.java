@@ -29,18 +29,20 @@ import java.util.UUID;
 public class HallMovieService {
     @Autowired(required = false)
     HallMovieMapper hallMoviemapper;
+    @Autowired(required = false)
+    UserCouponMapper userCouponMapper;
+    @Autowired(required = false)
+    OrderSeatMapper orderSeatMapper;
+    @Autowired
+    CouponMapper couponMapper;
     @Autowired
     SeatService seatService;
     @Autowired
     OrderService orderService;
     @Autowired
     HallService hallService;
-    @Autowired
-    UserCouponMapper userCouponMapper;
-    @Autowired
-    CouponMapper couponMapper;
-    @Autowired
-    OrderSeatMapper orderSeatMapper;
+
+
     public HallMovie selectById(Integer id) {
         if (id == null) {
             throw new NullParametersException("HallMovieId is null");
@@ -151,6 +153,8 @@ public class HallMovieService {
             orderSeat.setSeatId(seatId);
             orderSeatMapper.insert(orderSeat);
         }
+        userCouponMapper.deleteByPrimaryKey(tickets.getUserCouponId());
+
     }
 
 
