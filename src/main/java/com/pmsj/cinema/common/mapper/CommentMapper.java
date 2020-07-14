@@ -4,12 +4,20 @@ import com.pmsj.cinema.common.entity.Comment;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 @Repository
 public interface CommentMapper {
     int deleteByPrimaryKey(Integer commentId);
 
-    int insert(Comment record);
+    int insert(
+            @Param(value = "userId") Integer userId,
+            @Param(value = "userSocre")  Integer userSocre,
+            @Param(value = "commentCreateTime")     Date commentCreateTime,
+            @Param(value = "movieId")   Integer movieId,
+            @Param(value = "userComment")  String userComment,
+            @Param(value = "likeCount")    Integer likeCount
+               );
 
     Comment selectByPrimaryKey(Integer commentId);
 

@@ -67,6 +67,8 @@ public class AlipayControllar {
         model.setProductCode("FAST_INSTANT_TRADE_PAY");
 
         alipayRequest.setBizModel(model);
+        alipayRequest.setReturnUrl(AlipayConfig.return_url);
+        alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
 
 
         String form = "";
@@ -80,6 +82,18 @@ public class AlipayControllar {
         httpResponse.getWriter().write(form);//直接将完整的表单html输出到页面
         httpResponse.getWriter().flush();
         httpResponse.getWriter().close();
+    }
+
+    @RequestMapping("/notify")
+    public void doNotify(String out_trade_no){
+        Order order = orderService.getOrderByNo(out_trade_no);
+        order.setOrderStatus(2);
+        orderService.updateOrderStatues(order);
+    }
+
+    @RequestMapping("/return")
+    public String doReturn(String out_trade_no){
+        return "business/HTML/zhifu.html";
     }
 
 }

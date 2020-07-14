@@ -12,7 +12,7 @@ public class Comment {
 
     private Integer userId;
 
-    private Float userSocre;
+    private Integer userSocre;
     @JsonFormat(pattern = "MM-dd")
     private Date commentCreateTime;
 
@@ -32,14 +32,6 @@ public class Comment {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public Float getUserSocre() {
-        return userSocre;
-    }
-
-    public void setUserSocre(Float userSocre) {
-        this.userSocre = userSocre;
     }
 
 

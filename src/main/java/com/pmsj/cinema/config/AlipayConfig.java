@@ -1,7 +1,5 @@
 package com.pmsj.cinema.config;
 
-import org.springframework.context.annotation.Configuration;
-
 /**
  * @author mhd
  * @className ApplyConfig
@@ -9,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
  * @create 2020/7/10
  * @since 1.0.0
  */
-@Configuration
+
 public class AlipayConfig{
     public static String app_id = "2016102800772685";
     // 商户私钥，您的PKCS8格式RSA2私钥
@@ -18,10 +16,10 @@ public class AlipayConfig{
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlfFe0u0kYrctrQd0IfvhJbAd7eT4aCs0b4q8sE4hPC52rO1kbGbHy0tJ+BmIRMyaQso1E1bg0Mgpv9hJ6gg/gUSoZC6PfEd6/0Z6DE0cii2+pruhNdKk1ka03lcn8XXHITjGNcfwU4xw75dH5synO9PqS6QlVCgzHT+2v/9YtC42T7N/nP0PcaTgiMTvA2HAx2fTDp8zL+rvxtsTjhtF6zCN7O4lJapwRlpQVms+j9H4fNBBE1Zc10BnEiz42HIBeYBGO86JHj3ztlwScYZ3eKtfkt1NBUz/dahhSOU0DIHVXNVPyULnSAVMsYOBACRpgJE0k+owCDJy4OrGLsrEzQIDAQAB";
 
     // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String notify_url = "http://localhost:8080/rechargeMoney";
+    public static String notify_url = "http://localhost:8080/alipay/notify";
 
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String   return_url = "http://localhost:8080/rechargeMoney";
+    public static String   return_url = "http://localhost:8080/alipay/return";
 
     // 签名方式
     public static String sign_type = "RSA2";
