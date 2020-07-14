@@ -1246,21 +1246,24 @@
                         userCouponId:this.current
                     }
                 }).then((response) => {
+                    //遍历seatArray，将值为1的座位变为2
+                    let oldArray = this.seatArray.slice();
+                    for (let i = 0; i < this.seatRow; i++) {
+                        for (let j = 0; j < this.seatCol; j++) {
+                            if (oldArray[i][j] === 1) {
+                                oldArray[i][j] = 2
+                            }
+                        }
+                    }
+                    //支付
                     location.href="/alipay/pay"
+
+                    this.seatArray = oldArray;
                 }).catch(function (error) {
                     console.log(error);
                 });
 
-                //遍历seatArray，将值为1的座位变为2
-                let oldArray = this.seatArray.slice();
-                for (let i = 0; i < this.seatRow; i++) {
-                    for (let j = 0; j < this.seatCol; j++) {
-                        if (oldArray[i][j] === 1) {
-                            oldArray[i][j] = 2
-                        }
-                    }
-                }
-                this.seatArray = oldArray;
+
                 }
             },
             //处理座位选择逻辑
