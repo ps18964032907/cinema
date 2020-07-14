@@ -19,27 +19,25 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">影院品牌</label>
+                            <label class="layui-form-label">影厅名称</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="cinema_brand" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">影院名称</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="cinema_name" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">影院区域</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="city" autocomplete="off" class="layui-input">
+                                <input type="text" name="hallName" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">影厅类型</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="classify" autocomplete="off" class="layui-input">
+                            <div class="layui-input-block">
+                                <select id="hallType" name="hallType">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">所属影院</label>
+                            <div class="layui-input-block">
+                                <select id="hallCinema" name="cinemaId">
+                                    <option value=""></option>
+                                </select>
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -75,7 +73,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '../api/table.json',
+            url: '/hall/getAll',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
@@ -84,11 +82,11 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'numbers', width: 80, title: '序号', sort: true},
+                {type: 'numbers', width: 80, title: '序号', sort: true},
                 {field: 'hallName', width: 100, title: '影厅名'},
-                {field: 'hallType', width: 100, title: '影厅类型', sort: true},
-                {field: 'hallX', width: 80, title: ''},
-                {field: 'hallY', width: 80, title: '评分'},
+                {field: 'htName', minwidth: 100, title: '影厅类型', sort: true},
+                {field: 'hallX', width: 80, title: '列数'},
+                {field: 'hallY', width: 80, title: '行数'},
                 {field: 'cinemaName', minWidth: 150, title: '所属影院'},
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
@@ -100,10 +98,9 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            var result = JSON.stringify(data.field);
-            layer.alert(result, {
-                title: '最终的搜索信息'
-            });
+            // layer.alert(result, {
+            //     title: '最终的搜索信息'
+            // });
 
             //执行搜索重载
             table.reload('currentTableId', {
@@ -111,7 +108,9 @@
                     curr: 1
                 }
                 , where: {
-                    searchParams: result
+                    hallName: data.field.hallName,
+                    hallType: data.field.hallType,
+                    cinemaId: data.field.cinemaId
                 }
             }, 'data');
 
@@ -124,13 +123,13 @@
         table.on('toolbar(currentTableFilter)', function (obj) {
             if (obj.event === 'add') {  // 监听添加操作
                 var index = layer.open({
-                    title: '添加用户',
+                    title: '添加影厅',
                     type: 2,
                     shade: 0.2,
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/table/add.html',
+                    content: '../page/table/addHall.html',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -140,6 +139,22 @@
                     , data = checkStatus.data;
                 layer.alert(JSON.stringify(data));
             }
+        });
+
+        $.get("/hall/getAllHallType", null, function (data) {
+            $.each(data, function (index, item) {
+                $("#hallType").append(new Option(item.htName, item.htId));// 下拉菜单里添加元素
+            });
+
+            form.render('select'); //刷新select选择框渲染
+        });
+
+        $.get("/hall/getAllCinema", null, function (data) {
+            $.each(data, function (index, item) {
+                $("#hallCinema").append(new Option(item.cinemaName, item.cinemaId));// 下拉菜单里添加元素
+            });
+
+            form.render('select'); //刷新select选择框渲染
         });
 
         //监听表格复选框选择

@@ -47,5 +47,54 @@
     where cinema_id = #{cinemaId,jdbcType=INTEGER}
   </select>
 
+  <select id="isExist" resultMap="BaseResultMap">
+    select hall_id, hall_name, hall_type, hall_status, hall_x, hall_y, cinema_id
+    from hall
+    where hall_name = #{hallName} and hall_type = #{hallType,jdbcType=INTEGER} and cinema_id = #{cinemaId,jdbcType=INTEGER}
+  </select>
+
+
+
+  <resultMap id="HallVotMap" type="com.pmsj.cinema.common.vo.HallVo">
+    <id column="hall_id" jdbcType="INTEGER" property="hallId" />
+    <result column="hall_name" jdbcType="VARCHAR" property="hallName" />
+    <result column="hall_status" jdbcType="INTEGER" property="hallStatus" />
+    <result column="hall_x" jdbcType="INTEGER" property="hallX" />
+    <result column="hall_y" jdbcType="INTEGER" property="hallY" />
+    <result column="hall_type" jdbcType="INTEGER" property="htId" />
+    <result column="ht_name" jdbcType="INTEGER" property="htName" />
+    <result column="cinema_id" jdbcType="INTEGER" property="cinemaId" />
+    <result column="cinema_name" jdbcType="INTEGER" property="cinemaName" />
+  </resultMap>
+
+  <select id="getAllHall" parameterType="com.pmsj.cinema.common.entity.Hall" resultMap="HallVotMap">
+    select hall_id, hall_name, hall_type,ht.ht_name, hall_status, hall_x, hall_y, h.cinema_id,c.cinema_name
+    from `hall` h
+           left join
+         `hall_tpye` ht on h.hall_type =ht.ht_id
+           left join `cinema` c on h.cinema_id = c.cinema_id
+    <where>
+      <if test="hallName!=null">
+        hall_name like '%${hallName}%'
+      </if>
+      <if test="hallType!=null">
+       and hall_type = #{hallType}
+      </if>
+      <if test="cinemaId!=null">
+       and h.cinema_id = #{cinemaId}
+      </if>
+    </where>
+  </select>
+
+  <select id="getHallByHallId" parameterType="java.lang.Integer" resultMap="HallVotMap">
+    select hall_id, hall_name, hall_type,ht.ht_name, hall_status, hall_x, hall_y, h.cinema_id,c.cinema_name
+    from `hall` h
+           left join
+         `hall_tpye` ht on h.hall_type =ht.ht_id
+           left join `cinema` c on h.cinema_id = c.cinema_id
+    where h.hall_id = #{hallId,jdbcType=INTEGER}
+  </select>
+
+
 
 </mapper>
