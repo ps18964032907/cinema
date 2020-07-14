@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 
 @RestController
 @RequestMapping("PersonalCentreController")
@@ -32,34 +34,35 @@ public class PersonalCentreController {
 
 
     @RequestMapping("getUser")
-    public User getUser() {
-        User user = userMapper.selectByPrimaryKey(1);
-        return user;
+    public User getUser(HttpSession session) {
+        return (User) session.getAttribute("user");
     }
 
 
     @RequestMapping("getUserAllMoney")
-    public double getUserAllMoney() {
-        Double userAllMoney = userService.getUserAllMoney(1);
+    public double getUserAllMoney(HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+        Double userAllMoney = userService.getUserAllMoney(user.getUserId());
         return userAllMoney;
     }
 
     @RequestMapping("getAllOrderByUser")
-    public PageInfo<OrderVo> getAllOrderByUser(Integer currentPage, Integer pageSize) {
+    public PageInfo<OrderVo> getAllOrderByUser(Integer currentPage, Integer pageSize, HttpSession session) {
 
         if (currentPage == null) {
             currentPage = 1;
         }
-
         pageSize = 5;
-        return oderService.getAllOrderByUser(1, currentPage, pageSize);
+        User user = (User) session.getAttribute("user");
+        return oderService.getAllOrderByUser(user.getUserId(), currentPage, pageSize);
     }
 
 
     @RequestMapping("getUserAllOrderCount")
-    public int getUserAllOrderCount() {
+    public int getUserAllOrderCount(HttpSession session) {
 
-
-        return userService.getUserAllOrderCount(1);
+        User user = (User) session.getAttribute("user");
+        return userService.getUserAllOrderCount(user.getUserId());
     }
 }
