@@ -133,7 +133,7 @@ public class HallMovieService {
             //设置状态
             seat.setSeatTpye(2);
             seat.setSeatName(ticket.getSeatInfo());
-            seatService.isAvailable(ticket);
+            seatService.isAvailable(ticket,hallMovieId);
             seatService.addSeat(seat);
             seatIds[i++]=seat.getSeatId();
         }

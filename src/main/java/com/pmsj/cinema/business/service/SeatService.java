@@ -65,13 +65,13 @@ public class SeatService {
     /**
      * 判断座位是否可用
      */
-    public Boolean isAvailable(TicketVo ticket){
+    public Boolean isAvailable(TicketVo ticket,Integer hallMovieId){
         if (ticket==null){
             throw new NullParametersException("Ticket is null");
         }else {
             new ReflectUtil<TicketVo>().throwNullParametersException(ticket,null);
         }
-        Seat seat = seatMapper.selectByRowAndCol(ticket.getCol(),ticket.getRow());
+        Seat seat = seatMapper.selectByRowAndCol(ticket.getCol(),ticket.getRow(),hallMovieId);
         if (seat==null){
             return true;
         }else {

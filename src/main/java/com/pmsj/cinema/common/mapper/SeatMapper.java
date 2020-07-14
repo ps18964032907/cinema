@@ -20,5 +20,5 @@ public interface SeatMapper {
 
     List<Seat> selectByHallMovieId(Integer hallMovieId);
 
-    Seat selectByRowAndCol(@Param("col") Integer col,@Param("row") Integer row);
+    Seat selectByRowAndCol(@Param("col") Integer col,@Param("row") Integer row,@Param("hallMovieId") Integer hallMovieId);
 }

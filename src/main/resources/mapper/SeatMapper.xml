@@ -55,7 +55,7 @@
   <select id="selectByRowAndCol" resultMap="BaseResultMap">
     select seat_id, seat_x, seat_y, seat_tpye, hall_id, hall_movie_id, seat_name
     from seat
-    where seat_x = #{col,jdbcType=INTEGER} and seat_y = #{row,jdbcType=INTEGER}
+    where seat_x = #{col,jdbcType=INTEGER} and seat_y = #{row,jdbcType=INTEGER} and hall_movie_id = #{hallMovieId,jdbcType=INTEGER}
   </select>
 
 </mapper>
