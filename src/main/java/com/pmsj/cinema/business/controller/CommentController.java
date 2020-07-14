@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,8 +20,10 @@ public class CommentController {
     CommentService commentService;
 
     @RequestMapping("/addComment")
-    public int insert(Comment record) {
-        return commentService.insert(record);
+    public int insert(Integer userId, Integer userSocre,
+                      Date commentCreateTime, Integer movieId,
+                      String userComment, Integer likeCount) {
+        return commentService.insert(userId,userSocre,commentCreateTime,movieId,userComment,likeCount);
     }
 
     @RequestMapping("/like")

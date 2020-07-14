@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.pmsj.cinema.common.entity.Comment">
     <id column="comment_id" jdbcType="INTEGER" property="commentId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="user_socre" jdbcType="REAL" property="userSocre" />
+    <result column="user_socre" jdbcType="INTEGER" property="userSocre" />
     <result column="comment_create_time" jdbcType="TIMESTAMP" property="commentCreateTime" />
     <result column="movie_id" jdbcType="INTEGER" property="movieId" />
     <result column="user_comment" jdbcType="LONGVARCHAR" property="userComment" />
@@ -17,12 +17,12 @@
     where comment_id = #{commentId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Comment">
-    insert into comment (comment_id, user_id, user_socre,
+    insert into comment ( user_id, user_socre,
     comment_create_time, movie_id,
       user_comment,like_count)
-    values (#{comment,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userSocre,jdbcType=REAL}, #{commentCreateTime,jdbcType=TIMESTAMP}, #{movieId,jdbcType=INTEGER},
-      #{userComment,jdbcType=LONGVARCHAR}),
-      #{likeCount,jdbcType=INTEGER}
+    values (#{userId,jdbcType=INTEGER}, #{userSocre,jdbcType=INTEGER}, #{commentCreateTime,jdbcType=TIMESTAMP}, #{movieId,jdbcType=INTEGER},
+      #{userComment,jdbcType=LONGVARCHAR},
+      #{likeCount,jdbcType=INTEGER})
   </insert>
   <update id="updateLikeCount" parameterType="com.pmsj.cinema.common.entity.Comment">
     update comment

@@ -727,7 +727,17 @@
                 <img :src="photo" alt="" style="width:50px; height:50px;border-radius: 50%">
             </a>
             <span class="sanjiao"></span>
-            <div>
+
+            <div  v-if="userId==0">
+                <a href="/user/accountLogin" target="blank">登陆</a>
+            </div>
+            <div  v-if="userId==''">
+                <a href="/user/accountLogin" target="blank">登陆</a>
+            </div>
+            <div  v-if="userId==null">
+                <a href="/user/accountLogin" target="blank">登陆</a>
+            </div>
+            <div  v-else>
                 <a href="/user/logout" target="blank">注销</a>
             </div>
         </div>
@@ -878,10 +888,13 @@
         el: "#user",
         data: {
             photo: '',
+            userId:0,
         },
         beforeMount: function () {
             $.get("/user/selectUser", null, function (data) {
                 user.photo = data.userPhoto
+                user.userId=data.userId;
+                console.log(user.userId);
             })
         },
     })
