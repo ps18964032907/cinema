@@ -3,13 +3,17 @@ package com.pmsj.cinema.system.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pmsj.cinema.common.entity.Hall;
+import com.pmsj.cinema.common.entity.Seat;
 import com.pmsj.cinema.common.mapper.HallMapper;
+import com.pmsj.cinema.common.vo.HallBlankVo;
 import com.pmsj.cinema.common.vo.HallVo;
+import com.pmsj.cinema.common.vo.TicketVo;
 import com.pmsj.cinema.system.exception.DataExistException;
 import com.pmsj.cinema.system.exception.NullParametersException;
 import com.pmsj.cinema.system.exception.PageInfoErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,7 +28,8 @@ import java.util.List;
 public class HallSystemService {
     @Autowired(required = false)
     HallMapper hallMapper;
-
+    @Autowired
+    SeatSystemService seatService;
     /**
      * 分页查询所有影厅
      * @param pageNum
@@ -60,14 +65,37 @@ public class HallSystemService {
      * @param hall
      * @return
      */
-    public int addHall(Hall hall){
-        if (hall ==null) {
-            throw new NullParametersException("Brand is null");
+    @Transactional
+    public void addHall(HallBlankVo hallBlankVo){
+        if (hallBlankVo ==null) {
+            throw new NullParametersException("hallOrBlank is null");
         }
 
         else {
+            Hall hall = new Hall();
+            hall.setHallName(hallBlankVo.getHallName());
+            hall.setHallType(hallBlankVo.getHallType());
+            hall.setHallX(hallBlankVo.getHallX());
+            hall.setHallY(hallBlankVo.getHallY());
+            hall.setCinemaId(hallBlankVo.getCinemaId());
             hallIsExist(hall);
-            return hallMapper.insert(hall);
+            hall.setHallStatus(1);
+            hallMapper.insert(hall);
+            Integer hallid = hall.getHallId();
+            for (TicketVo ticket : hallBlankVo.getTickets()) {
+                Seat seat = new Seat();
+                seat.setHallId(hallid);
+                //设置行
+                seat.setSeatX(ticket.getCol());
+                //设置列
+                seat.setSeatY(ticket.getRow());
+                //设置状态
+                seat.setSeatTpye(-1);
+
+                seatService.isAvailable(ticket,hallid);
+                seatService.addBlank(seat);
+            }
+
         }
     }
 
@@ -78,9 +106,11 @@ public class HallSystemService {
      */
     private void hallIsExist(Hall hall){
         Hall existHall = hallMapper.isExist(hall.getHallName(),hall.getHallType(),hall.getCinemaId());
-        if (existHall==null){
+        if (existHall!=null){
             throw new DataExistException("Hall is existed");
         }
     }
+
+
 
 }

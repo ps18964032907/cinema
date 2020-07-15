@@ -911,7 +911,7 @@
                         </div>
                     </template>
                 </div>
-                <div class="seat-wrapper">
+                <div class="seat-wrapper" ref="seatWrapper">
                     <div class="illustration">
                         <div class="illustration-img-wrapper unselected-seat">
                         </div>
@@ -931,16 +931,16 @@
                         <div class="mid-line"></div>
                     </div>
                     <div class="inner-seat-wrapper" ref="innerSeatWrapper">
-                        <div v-for="row in seatRow">
+                        <div v-for="(row,index) in seatArray" :key="index">
                             <!--这里的v-if很重要，如果没有则会导致报错，因为seatArray初始状态为空-->
-                            <div v-for="col in seatCol"
+                            <div v-for="(col,cindex) in row" :key="cindex"
                                  v-if="seatArray.length>0"
                                  class="seat"
                                  :style="{width:seatSize+'px',height:seatSize+'px'}">
                                 <div class="inner-seat"
-                                     @click="handleChooseSeat(row-1,col-1)"
-                                     v-if="seatArray[row-1][col-1]!==-1"
-                                     :class="seatArray[row-1][col-1]===2?'bought-seat':(seatArray[row-1][col-1]===1?'selected-seat':'unselected-seat')">
+                                     @click="handleChooseSeat(index,cindex)"
+                                     v-if="seatArray[index][cindex]!==-1"
+                                     :class="seatArray[index][cindex]===2?'bought-seat':(seatArray[index][cindex]===1?'selected-seat':'unselected-seat')">
                                 </div>
                             </div>
                         </div>
@@ -1301,6 +1301,8 @@
                 this.seatSize = this.$refs.innerSeatWrapper
                     ? parseInt(parseInt(window.getComputedStyle(this.$refs.innerSeatWrapper).width, 10) / this.seatCol, 10)
                     : 0;
+
+                this.$refs.seatWrapper.style.height=this.seatSize*this.seatRow+200+'px';
                 //初始化不是座位的地方
                 // this.initNonSeatPlace();
             },

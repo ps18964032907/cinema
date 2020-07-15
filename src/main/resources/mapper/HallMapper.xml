@@ -14,7 +14,7 @@
     delete from hall
     where hall_id = #{hallId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Hall">
+  <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Hall" useGeneratedKeys="true" keyProperty="hallId">
     insert into hall (hall_id, hall_name, hall_type, 
       hall_status, hall_x, hall_y, 
       cinema_id)
