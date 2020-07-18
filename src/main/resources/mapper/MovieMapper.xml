@@ -132,8 +132,6 @@ select m.*
     SELECT m.*
     FROM movie m
 	WHERE
-        m.`movie_status` &lt; 3
-        AND
 	NOT
 	EXISTS
 	(SELECT movie_id
@@ -171,8 +169,6 @@ select m.*
         </if>
         <if test="status==2 ">
             where
-            movie.`movie_status` &lt; 3
-            AND
             NOT
             EXISTS
             (SELECT movie_id
@@ -184,7 +180,7 @@ select m.*
         </if>
         <if test="status==3 ">
             where
-            movie.movie_status =3
+            movie.movie_status &gt;0
         </if>
 
         <where>
