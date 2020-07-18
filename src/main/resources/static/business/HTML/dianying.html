@@ -985,7 +985,8 @@
                             <a :href="'./dianyingxiangqing.html?movieId='+allmovie.movieId">{{allmovie.movieName}}</a>
                         </div>
                         <div>
-                            <i>{{allmovie.movieScore}}</i>
+                            <i v-if="allmovie.movieScore!=null">{{allmovie.movieScore}}</i>
+                            <i v-else>{{allmovie.movieScore}}</i>
                         </div>
                              </dd>
                         </span>
