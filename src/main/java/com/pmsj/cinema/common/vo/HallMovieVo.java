@@ -26,7 +26,7 @@ public class HallMovieVo {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date endTime;
 
-    private Long fareMoney;
+    private Double fareMoney;
 
     private String movieName;
 

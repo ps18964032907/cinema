@@ -59,7 +59,7 @@ public class GithubRepoPageProcessor implements PageProcessor {
 
 
     public List<MovieBugAddVo> getPaChong() {
-        Spider.create(new GithubRepoPageProcessor()).addUrl("https://maoyan.com/films?showType=3").thread(1).run();
+        Spider.create(new GithubRepoPageProcessor()).addUrl("https://www.iqiyi.com/").thread(1).run();
         return movies;
     }
 

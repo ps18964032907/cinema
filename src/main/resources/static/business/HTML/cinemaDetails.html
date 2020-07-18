@@ -2621,10 +2621,10 @@
             </div>
 
 
-
         </div>
         <form action="https://maoyan.com/query" target="_blank" class="search-form" data-actform="search-click">
-            <input name="kw" class="search" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off" onblur="if(this.value.replace(/^ +| +$/g,'')=='')alert('不能为空!')">
+            <input name="kw" class="search" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off"
+                   onblur="if(this.value.replace(/^ +| +$/g,'')=='')alert('不能为空!')">
             <input class="submit" type="submit" value="">
         </form>
 
@@ -2723,7 +2723,14 @@
                    {{hallMovie.fareMoney}}元
                 </div>
                 <div class="buy" style="float: right">
-                    <p><a :href="'http://localhost:8080/business/HTML/xuanzuo.html?hallMovieId='+hallMovie.hallMovieId">购票</a></p>
+                    <p v-if="Date.parse(hallMovie.startTime) < newDate">
+                        <a style="background-color: #dad7d6">已结束</a>
+                    </p>
+
+                    <p v-else>
+                        <a :href="'http://localhost:8080/business/HTML/xuanzuo.html?hallMovieId='+hallMovie.hallMovieId">购票</a>
+                    </p>
+
                 </div>
 
             </div>
@@ -2750,7 +2757,7 @@
     <div class="big-map-modal" style="display: none">
         <div class="close-map"></div>
         <div class="big-map"
-             style="background-color: rgb(229, 227, 223); overflow: hidden; transform: translateZ(0px);">
+             style="x   background-color: rgb(229, 227, 223); overflow: hidden; transform: translateZ(0px);">
         </div>
     </div>
 </div>
@@ -2824,6 +2831,7 @@
             cinema: {},
             hallMovies: {},
             date: "",
+            newDate: new Date(),
 
         },
 
@@ -2904,12 +2912,12 @@
         el: "#user",
         data: {
             photo: '',
-            userId:0,
+            userId: 0,
         },
         beforeMount: function () {
             $.get("/user/selectUser", null, function (data) {
                 user.photo = data.userPhoto
-                user.userId=data.userId;
+                user.userId = data.userId;
                 console.log(user.userId);
             })
         },

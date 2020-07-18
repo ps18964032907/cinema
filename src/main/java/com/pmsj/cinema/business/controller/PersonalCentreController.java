@@ -35,7 +35,8 @@ public class PersonalCentreController {
 
     @RequestMapping("getUser")
     public User getUser(HttpSession session) {
-        return (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
+        return userMapper.selectByPrimaryKey(user.getUserId());
     }
 
 

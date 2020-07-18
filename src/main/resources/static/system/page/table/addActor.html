@@ -85,15 +85,7 @@
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-            var index = layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            }, function () {
-
-                // 关闭弹出层
-                layer.close(index);
-
-
-            });
+            var index = layer.alert("太简单，懒得做");
 
             $.post("/actor/addAcotr", data.field, function (data) {
 
