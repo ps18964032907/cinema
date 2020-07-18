@@ -102,12 +102,13 @@
         on movie_tpye.type_id = movie_tpye_mid.type_id
   </select>
     <select id="selectOnline" resultMap="BaseResultMap">
-    select *
-    from movie
-    where
-    movie_count>0
-    and
-    movie_status=1
+select m.*
+    from movie m
+    INNER JOIN
+        hall_movie h
+        ON
+        m.movie_id = h.movie_id
+        where h.start_time &gt; CURRENT_TIME
 --
 --
 --
@@ -128,57 +129,88 @@
   </select>
 
     <select id="selectComingSoon" resultMap="BaseResultMap">
-    select *
-    from movie
-    where
-    movie_count=0
-    and
-    movie_status=2
+    SELECT m.*
+    FROM movie m
+	WHERE
+        m.`movie_status` &lt; 3
+        AND
+	NOT
+	EXISTS
+	(SELECT movie_id
+	FROM
+	hall_movie h
+	WHERE
+	h.`movie_id`=m.`movie_id`
+	)
   </select>
     <select id="getMaxId" resultType="java.lang.Integer">
         select max(movie_id)
         from movie
     </select>
     <select id="selectAllMovie" resultMap="BaseResultMap">
-        SELECT m.*
+        SELECT
+        DISTINCT
+        movie.*
         FROM
-        (movie_tpye_mid i
-        LEFT JOIN
-        movie_tpye t
+        movie
+        INNER JOIN
+        movie_tpye_mid
         ON
-        i.type_id = t.type_id
-        )
-        LEFT JOIN
-        movie m
+        movie.movie_id = movie_tpye_mid.movie_id
+        INNER JOIN
+        movie_tpye
         ON
-        i.movie_id = m.`movie_id`
+        movie_tpye_mid.type_id = movie_tpye.type_id
+
+        <if test="status==1 ">
+            INNER JOIN
+            hall_movie
+            ON
+            movie.movie_id = hall_movie.movie_id
+            where hall_movie.start_time &gt; CURRENT_TIME
+        </if>
+        <if test="status==2 ">
+            where
+            movie.`movie_status` &lt; 3
+            AND
+            NOT
+            EXISTS
+            (SELECT movie_id
+            FROM
+            hall_movie
+            WHERE
+            hall_movie.`movie_id`=movie.`movie_id`
+            )
+        </if>
+        <if test="status==3 ">
+            where
+            movie.movie_status =3
+        </if>
+
         <where>
-            <if test="status!=0 ">
-                movie_status = #{status}
-            </if>
+
             <if test="tId!='' and tId!=0 and tId!=null">
-                and t.type_id = #{tId}
+                and movie_tpye.type_id = #{tId}
             </if>
             <if test="area!=''">
-                and m.movie_area like '%${area}%'
+                and movie.movie_area like '%${area}%'
             </if>
             <if test="year!=''">
-                and m.movie_release_time like '%${year}%'
+                and movie.movie_release_time like '%${year}%'
             </if>
-            GROUP BY m.movie_id
-            <if test="paixu==1">
-                ORDER BY movie_box_office DESC
-            </if>
-            <if test="paixu==2">
-                ORDER BY movie_release_time DESC
-            </if>
-            <if test="paixu==3">
-                ORDER BY movie_score DESC
-            </if>
+
 
 
         </where>
-
+        <if test="paixu==1">
+            ORDER BY movie.movie_box_office DESC
+        </if>
+        <if test="paixu==2">
+            ORDER BY movie.movie_release_time DESC
+        </if>
+        <if test="paixu==3">
+            ORDER BY movie.movie_score DESC
+        </if>
 
     </select>
 
