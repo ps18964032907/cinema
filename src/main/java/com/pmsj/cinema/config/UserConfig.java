@@ -27,16 +27,11 @@ public class UserConfig implements HandlerInterceptor {
             if (user != null) {
                 return true;
             }
-            System.out.println("request.getServletPath():" + request.getServletPath());
-            System.out.println("request.getRequestURI():" + request.getRequestURI());
-            System.out.println("request.getRequestURL():" + request.getRequestURL());
             HttpSession session = request.getSession();
-
             String referer = request.getHeader("Referer");
-            System.out.println("referer:" + referer);
 
             if (referer != null && referer.length() > 0) {
-                session.setAttribute("url", referer.replaceAll("http://localhost:8080", ""));
+                session.setAttribute("url", referer.split("" + request.getServerPort())[1]);
             }
 
             response.sendRedirect(request.getContextPath() + "/business/HTML/login.html");

@@ -119,7 +119,7 @@
 
     </select>
     <select id="getAllCinemaByMovie" resultMap="BaseResultMapVo">
-        select * from hall_movie
+        select DISTINCT cinema.* from hall_movie
         left join hall
         on hall_movie.hall_id = hall.hall_id
         left join cinema

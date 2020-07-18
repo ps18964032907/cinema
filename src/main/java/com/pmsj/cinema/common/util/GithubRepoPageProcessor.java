@@ -37,7 +37,7 @@ public class GithubRepoPageProcessor implements PageProcessor {
 
         System.out.println(paths);
         for (String path : paths) {
-            MovieBugAddVo movie = new MovieDetails().getMovie("https://maoyan.com/" + path);
+            MovieBugAddVo movie = new MovieDetails().getMovie("https://maoyan.com" + path);
 
             System.out.println(movie);
             if (movie.getMovieName() != null && !movies.contains(movie)) {
@@ -59,7 +59,7 @@ public class GithubRepoPageProcessor implements PageProcessor {
 
 
     public List<MovieBugAddVo> getPaChong() {
-        Spider.create(new GithubRepoPageProcessor()).addUrl("https://www.iqiyi.com/").thread(1).run();
+        Spider.create(new GithubRepoPageProcessor()).addUrl("https://maoyan.com/films?showType=2").thread(1).run();
         return movies;
     }
 

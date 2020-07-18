@@ -127,7 +127,7 @@ public class CinemaService {
         }
         Date startTime = TimeUitl.getStartTime(date);
         Date endTime = TimeUitl.getEndTime(date);
-
+        System.out.println(startTime);
 
         return hallMovieMapper.getHallMovies(cinemaId, startTime, endTime, movieId);
     }

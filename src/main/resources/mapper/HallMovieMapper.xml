@@ -68,7 +68,6 @@
         LEFT JOIN hall_tpye
         on hall_tpye.ht_id = hall.hall_type
         where cinema.cinema_id = #{cinemaId}
-
         and hall_movie.start_time &gt;= #{startTime}
         and hall_movie.start_time &lt;= #{endTime}
         <if test="cinemaId != '' and  movieId != null">

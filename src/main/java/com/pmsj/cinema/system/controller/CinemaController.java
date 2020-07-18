@@ -194,6 +194,10 @@ public class CinemaController {
             return "没有这样的影片";
         }
 
+        if (hallMovie.getStartTime().getTime() < new Date().getTime()) {
+            return "影片开始时间已过";
+        }
+
 
         Long dateTime = 1000L * time * 60 + hallMovie.getStartTime().getTime();
         hallMovie.setEndTime(new Date(dateTime));
