@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /*
@@ -26,6 +27,18 @@ public class UserConfig implements HandlerInterceptor {
             if (user != null) {
                 return true;
             }
+            System.out.println("request.getServletPath():" + request.getServletPath());
+            System.out.println("request.getRequestURI():" + request.getRequestURI());
+            System.out.println("request.getRequestURL():" + request.getRequestURL());
+            HttpSession session = request.getSession();
+
+            String referer = request.getHeader("Referer");
+            System.out.println("referer:" + referer);
+
+            if (referer != null && referer.length() > 0) {
+                session.setAttribute("url", referer.replaceAll("http://localhost:8080", ""));
+            }
+
             response.sendRedirect(request.getContextPath() + "/business/HTML/login.html");
         } catch (IOException e) {
             e.printStackTrace();

@@ -98,7 +98,7 @@
         </where>
     </select>
     <select id="getAllCinemaByAll" resultMap="BaseResultMapVo">
-        select * from cinema
+        select DISTINCT cinema.* from cinema
         left join hall
         on hall.cinema_id = cinema.cinema_id
         <where>
@@ -114,7 +114,9 @@
             <if test="hallType != '' and hallType != null">
                 and hall.hall_type = #{hallType}
             </if>
+
         </where>
+
     </select>
     <select id="getAllCinemaByMovie" resultMap="BaseResultMapVo">
         select * from hall_movie
@@ -139,6 +141,7 @@
                 and hall.hall_type = #{hallType}
             </if>
         </where>
+
     </select>
     <select id="getMinMoneyByCinemaId" resultType="java.lang.Double">
         select min(hall_movie.fare_money) from hall_movie

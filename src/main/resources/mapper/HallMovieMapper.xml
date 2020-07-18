@@ -74,8 +74,7 @@
         <if test="cinemaId != '' and  movieId != null">
             and movie.movie_id = #{movieId}
         </if>
-
-        order by hall_movie.start_time
+        order by hall_movie.start_time desc
     </select>
     <select id="getHallMoviesByTime" resultType="java.lang.Integer">
             select count(*) from hall_movie where hall_id = #{hallid}

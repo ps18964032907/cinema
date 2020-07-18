@@ -24,7 +24,7 @@ public class Timer {
 //    }
 //
 //
-//    //每隔2秒执行一次
+//    //每隔1秒执行一次
 //    @Scheduled(fixedRate = 1000)
 //    public void testTasks() {
 //        System.out.println("定时任务执行时间：" + dateFormat.format(new Date()));

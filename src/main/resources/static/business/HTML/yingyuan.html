@@ -734,16 +734,16 @@
             <a href="/jifen/index.html">
                 <img :src="photo" alt="" style="width:50px; height:50px;border-radius: 50%">
             </a>
-            <div  v-if="userId==0">
+            <div v-if="userId==0">
                 <a href="/user/accountLogin">登陆</a>
             </div>
-            <div  v-if="userId==''">
+            <div v-if="userId==''">
                 <a href="/user/accountLogin">登陆</a>
             </div>
-            <div  v-if="userId==null">
+            <div v-if="userId==null">
                 <a href="/user/accountLogin">登陆</a>
             </div>
-            <div  v-else>
+            <div v-else>
                 <a href="/user/logout">注销</a>
             </div>
         </div>
@@ -866,7 +866,7 @@
 
                 <p v-else>
                     <span>￥</span>
-                    <span>24</span>
+                    <span>{{cinema.minMoney}}</span>
                     <span>起</span>
                 </p>
                 <a href="#">选座购票</a>
@@ -991,12 +991,12 @@
         el: "#user",
         data: {
             photo: '',
-            userId:0,
+            userId: 0,
         },
         beforeMount: function () {
             $.get("/user/selectUser", null, function (data) {
                 user.photo = data.userPhoto
-                user.userId=data.userId;
+                user.userId = data.userId;
                 console.log(user.userId);
             })
         },

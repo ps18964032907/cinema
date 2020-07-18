@@ -47,11 +47,16 @@ public class UserController {
     @ResponseBody
     public User selectUser(String account, HttpSession session) {
         User user;
-        if (account == null) {
-            user = (User) session.getAttribute("user");
-        } else {
-            user = userService.selectUser(account);
+
+        User user1 = (User) session.getAttribute("user");
+
+        if (user1 != null) {
+            user = userService.selectUser(user1.getUserAccount());
+            session.setAttribute("user", user);
+            return user;
         }
+
+        user = userService.selectUser(account);
         return user;
     }
 
@@ -100,8 +105,16 @@ public class UserController {
         User user = userService.accountLogin(account, password);
         if (user != null) {
             session.setAttribute("user", user);
+
+            String url = (String) session.getAttribute("url");
+            if (url != null && url.length() > 0) {
+                session.removeAttribute("url");
+                return "redirect:" + url;
+            }
+            System.out.println("=====================");
             return "redirect:/business/HTML/index.html";
         }
+
         return "redirect:/business/HTML/login.html";
     }
 
