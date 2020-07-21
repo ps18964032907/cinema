@@ -11,7 +11,7 @@ spring:
     password: 1234   #连接密码p
 
 server:
-  port: 9090
+  port: 80
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
