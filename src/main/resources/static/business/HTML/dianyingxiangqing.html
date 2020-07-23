@@ -833,9 +833,9 @@
                         <span>评分</span>
                     </a>
                 </div>
-<!--                <div class="beijing1_2_2_3" v-if="movieInfoUp.movieStatus==1">-->
-<!--                    <a :href="'yingyuanShop.html?movieId='+movieInfoUp.movieId">特惠购票</a>-->
-<!--                </div>-->
+                <div class="beijing1_2_2_3" v-if="onlineStatus==1">
+                    <a :href="'yingyuanShop.html?movieId='+movieInfoUp.movieId">特惠购票</a>
+                </div>
 <!--                <div class="beijing1_2_2_3" v-if="movieInfoUp.movieStatus==2">-->
 <!--                    <a :href="'yingyuanShop.html?movieId='+movieInfoUp.movieId">预售购票</a>-->
 <!--                </div>-->
@@ -1286,7 +1286,8 @@
         el: '#moviedetail',
         data: {
             movieInfoUp: [],
-            movieTypeByMovieId: []
+            movieTypeByMovieId: [],
+            onlineStatus:0,
         },
         beforeMount: function () {
             let _this = this;
@@ -1298,6 +1299,15 @@
             $.get("/movieDetails/movieType/" + id, null, function (data) {
                 _this.movieTypeByMovieId = data;
                 console.log(data);
+            })
+            $.get("/movieDetails/movieIsOnline","movieId="+id,function(data){
+                if (data==0){
+                    _this.onlineStatus=0;
+                }
+                else{
+                    _this.onlineStatus=1;
+                }
+                console.log(_this.onlineStatus);
             })
         }
 

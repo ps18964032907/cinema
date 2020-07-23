@@ -27,4 +27,11 @@ public class MovieDetailsService {
     public List<MovieTpye> selectByMovieId(Integer movieId){
         return movieTpyeMapper.selectByMovieId(movieId);
     }
+    public int getMovieIsOnline(Integer movieId){
+        System.out.println(movieMapper.getMovieIsOnline(movieId));
+        if(movieMapper.getMovieIsOnline(movieId) == null || movieMapper.getMovieIsOnline(movieId).size() == 0){
+            return 0;
+        }
+        else{return 1;}
+    }
 }
