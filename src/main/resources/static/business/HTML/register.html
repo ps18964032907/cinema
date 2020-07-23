@@ -21,7 +21,7 @@
 </header>
 <!-- 注册部分 -->
 <div class="zhuche">
-    <form action="/user/register" method="post" style="margin-left: 300px">
+    <form method="get" action="/user/register" style="margin-left: 300px" id="form">
         <div class="zhuche1">
             <label for="userAccount">用户名</label>
             <input type="text" name="userAccount" id="userAccount" required><span id="tip4"></span>
@@ -62,7 +62,7 @@
             </div>
 
             <div class="zhuche6">
-                <input type="submit" name="commit" value="同意以下协议并注册">
+                <input type="button" name="commit" onclick="register()" value="同意以下协议并注册">
             </div>
             <div class="zhuche7">
                 <a href="https://rules-center.meituan.com/rules-detail/4">《美团网用户协议》</a>
@@ -88,16 +88,21 @@
     }
 </script>
 <script type="text/javascript">
+
     var userAccount = document.getElementById('userAccount');
     userAccount.onkeyup = function () {
         var account = userAccount.value;
-        $.post('/user/selectUser', 'account=' + account, function (data) {
-            if (data == "") {
-                document.getElementById("tip4").innerHTML = "<font color='green'>用户名可用</font>";
-            } else {
-                document.getElementById("tip4").innerHTML = "<font color='red'>用户名已存在</font>";
-            }
-        });
+        if (account!="") {
+            $.post('/user/selectUser', 'account=' + account, function (data) {
+                if (data == "") {
+                    document.getElementById("tip4").innerHTML = "<font color='green'>用户名可用</font>";
+                } else {
+                    document.getElementById("tip4").innerHTML = "<font color='red'>用户名已存在</font>";
+                }
+            });
+        }else{
+            document.getElementById("tip4").innerHTML = "<font color='red'>用户名不能为空</font>";
+        }
     }
     var oPassword = document.getElementById("password1");
     var oDiv = document.getElementById("intension");
@@ -150,7 +155,7 @@
                 if (data == "") {
                     document.getElementById("tip2").innerHTML = "<font color='green'>手机号格式正确</font>";
                 } else {
-                    document.getElementById("tip2").innerHTML = "<font color='red'>手机号不可用</font>";
+                    document.getElementById("tip2").innerHTML = "<font color='red'>手机号已被注册</font>";
                 }
             });
         } else {
@@ -167,7 +172,7 @@
                 if (data == "") {
                     document.getElementById("tip3").innerHTML = "<font color='green'>邮箱格式正确</font>";
                 } else {
-                    document.getElementById("tip3").innerHTML = "<font color='red'>邮箱不可用</font>";
+                    document.getElementById("tip3").innerHTML = "<font color='red'>邮箱已被注册</font>";
                 }
             });
         } else {
@@ -175,7 +180,6 @@
         }
     }
     var wait = 60;
-
     function GetCodemo(o) {
         var e = document.getElementById('email').value;
         //发送验证码
@@ -199,6 +203,19 @@
             }
         } else {
             document.getElementById("tip3").innerHTML = "<font color='red'>请输入邮箱号</font>";
+        }
+    }
+    var code = document.getElementById('duanxin');
+    function register() {
+        event.preventDefault();
+        var tip1 = document.getElementById('tip1').innerHTML;
+        var tip2 = document.getElementById('tip2').innerHTML;
+        var tip3 = document.getElementById('tip3').innerHTML;
+        var tip4 = document.getElementById('tip4').innerHTML;
+        if (tip1.includes("green")&&tip2.includes("green")&&tip3.includes("green")&&tip4.includes("green")){
+            $("#form").submit();
+        }else{
+            layer.msg("注册失败,请修改!")
         }
     }
 </script>

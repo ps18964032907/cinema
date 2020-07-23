@@ -3,6 +3,7 @@ package com.pmsj.cinema.business.controller;
 import com.pmsj.cinema.business.service.UserService;
 import com.pmsj.cinema.business.util.EmailUtil;
 import com.pmsj.cinema.common.entity.User;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +26,13 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+    private static final String DELAY_EXCHANGE = "js_cinema_delay_exchange";
+    public static final String DELAY_ROUTING_KEY = "js_cinema_delay_routing_key";
+    @Autowired
+    RabbitTemplate rabbitTemplate;
+
     @Autowired
     UserService userService;
-
-    Long code;
 
     /*
      * @Author jiangshuai
@@ -42,7 +46,6 @@ public class UserController {
     @ResponseBody
     public User selectUser(String account, HttpSession session) {
         User user = (User) session.getAttribute("user");
-
         if (user != null) {
             user = userService.selectUser(user.getUserAccount());
             session.setAttribute("user", user);
@@ -93,8 +96,14 @@ public class UserController {
      * @return
      **/
     @RequestMapping("/getCode")
-    public void getCode(String email) {
-        code = EmailUtil.sendMail(email);
+    @ResponseBody
+    public void getCode(String email,HttpSession session) {
+//        rabbitTemplate.convertAndSend(DELAY_EXCHANGE, DELAY_ROUTING_KEY,session);
+        EmailUtil emailUtil = new EmailUtil();
+        Integer code = emailUtil.sendMail(email);
+        session.setAttribute("code",code);
+        session.setAttribute("email",email);
+
     }
 
     /*
@@ -106,17 +115,28 @@ public class UserController {
      * @return java.lang.String
      **/
     @RequestMapping("/register")
-    public String register(Map map, String verifycode, String userAccount, String password1, String email, String phone) {
+    public String register(Map map, String verifycode,HttpSession session, String userAccount, String password1, String email, String phone) {
         String photo = "../IMG/Bangdan_2.jpg";
         int vcode = Integer.parseInt(verifycode);
-        if (vcode == code) {
-            userService.register(userAccount, password1, email, phone, photo);
-            return "redirect:/business/HTML/login.html";
+        Integer code = (Integer) session.getAttribute("code");
+        String ema = (String) session.getAttribute("email");
+        if (email.equals(ema)) {
+            if (code != 0) {
+                if (vcode == code) {
+                    userService.register(userAccount, password1, email, phone, photo);
+                    return "redirect:/business/HTML/login.html";
+                }
+                map.put("error", "验证码错误");
+                return "/business/HTML/register.html";
+            } else {
+                map.put("error", "验证码失效");
+                return "/business/HTML/register.html";
+            }
+        }else{
+            map.put("error", "邮箱号与注册邮箱号不一样");
+            return "/business/HTML/register.html";
         }
-        map.put("error", "验证码错误");
-        return "/business/HTML/register.html";
     }
-
     /*
      * @Author jiangshuai
      * @Description // TODO 使用账户登录
@@ -130,13 +150,11 @@ public class UserController {
         User user = userService.accountLogin(account, password);
         if (user != null) {
             session.setAttribute("user", user);
-
             String url = (String) session.getAttribute("url");
             if (url != null && url.length() > 0) {
                 session.removeAttribute("url");
                 return "redirect:" + url;
             }
-            System.out.println("=====================");
             return "redirect:/business/HTML/index.html";
         }
         return "redirect:/business/HTML/login.html";
@@ -153,6 +171,7 @@ public class UserController {
     @RequestMapping("/emailLogin")
     public String emailLogin(String email, String verifycode, HttpSession session) {
         int vcode = Integer.parseInt(verifycode);
+        Integer code = (Integer) session.getAttribute("code");
         if (code == vcode) {
             User user = userService.emailLogin(email);
             if (user != null) {
@@ -187,8 +206,9 @@ public class UserController {
      **/
     @RequestMapping("/updatePass")
     @ResponseBody
-    public String updatePass(String email, String verifycode, String password) {
+    public String updatePass(String email, String verifycode, String password,HttpSession session) {
         int vcode = Integer.parseInt(verifycode);
+        Integer code = (Integer) session.getAttribute("code");
         if (code == vcode) {
             Integer num = userService.updatePass(email, password);
             if (num > 0) {
@@ -265,4 +285,5 @@ public class UserController {
         }
         return "false";
     }
+
 }

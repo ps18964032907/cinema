@@ -9,9 +9,9 @@ import javax.mail.internet.MimeMessage;
 
 public class EmailUtil {
 
-    public static long sendMail(String email) {
+    public int sendMail(String email) {
         try {
-            long code = (long) (Math.random() * 900000 + 100000);
+            int code = (int) (Math.random() * 900000 + 100000);
             final Properties props = new Properties();
             props.put("mail.user", "1594578345@qq.com");
             props.put("mail.password", "xoqnwlrubqnzbaeg"); // 授权码duduzzqqujlzfgbb,xoqnwlrubqnzbaeg
@@ -25,6 +25,7 @@ public class EmailUtil {
             msg.addRecipients(Message.RecipientType.TO, InternetAddress.parse(email)); //收件人
             msg.setSubject("验证码-猫眼影院"); //主题
             msg.setContent("<h1>此邮件为猫眼影院影视平台专用验证码</h1><br />"
+                    +"<h3>验证码在一分钟之内有效!</h3><br />"
                     + "验证码:" + code, "text/html;charset=UTF-8");
             msg.saveChanges();
             Transport transport = mailSession.getTransport("smtp");
@@ -36,6 +37,6 @@ public class EmailUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return 0;
+        return 1;
     }
 }

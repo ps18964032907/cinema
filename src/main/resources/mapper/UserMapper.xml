@@ -35,8 +35,7 @@
       #{userPhone,jdbcType=VARCHAR},0,#{userPhoto,jdbcType=VARCHAR})
     </insert>
     <update id="updateByPrimaryKey" parameterType="com.pmsj.cinema.common.entity.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
+    update user set user_name = #{userName,jdbcType=VARCHAR},
       user_account = #{userAccount,jdbcType=VARCHAR},
       user_password = #{userPassword,jdbcType=VARCHAR},
       user_email = #{userEmail,jdbcType=VARCHAR},
@@ -92,7 +91,7 @@
     </select>
     <select id="selectEmail" resultMap="BaseResultMap">
         select * from user
-        where user_email = #{userEmail,jdbcType=VARCHAR}
+        where user_email = #{userEmail}
     </select>
     <select id="accountLogin" resultMap="BaseResultMap">
     select * from user
@@ -104,5 +103,4 @@
     select * from user
     where user_email = #{userEmail,jdbcType=VARCHAR}
     </select>
-
 </mapper>
