@@ -111,4 +111,31 @@
             `user`.user_id = #{i}
 
     </select>
+
+
+    <select id="getOnlyOrderIdByUserId" resultType="java.lang.Integer">
+         	 select order_id from `order` WHERE user_id = #{i}
+    </select>
+    <select id="getAllOrderByOrderId" resultMap="BaseResultMap2">
+        select * from `order` o
+        left JOIN hall_movie
+        on hall_movie.hall_movie_id = o.hall_movie_id
+        left join movie
+        on movie.movie_id = hall_movie.movie_id
+        left join order_seat
+        on order_seat.order_id = o.order_id
+        left join `user`
+        on `user`.user_id = o.user_id
+        left join hall
+        on hall.hall_id = hall_movie.hall_id
+        left join cinema
+        on cinema.cinema_id = hall.cinema_id
+        left join seat
+        on order_seat.seat_id = seat.seat_id
+        where o.order_id in
+        <foreach collection="onlyOrderIdByUserId" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+
+    </select>
 </mapper>
