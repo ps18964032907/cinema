@@ -3,6 +3,16 @@ package com.pmsj.cinema.common.vo;
 import java.util.List;
 
 public class HallBlankVo {
+    private Integer hallId;
+
+    public Integer getHallId() {
+        return hallId;
+    }
+
+    public void setHallId(Integer hallId) {
+        this.hallId = hallId;
+    }
+
     private String hallName;
 
     private Integer hallType;

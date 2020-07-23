@@ -54,7 +54,7 @@ public class OrderService {
      * @return
      */
     public int buyTickets(Order order) {
-        String[] params = {"orderId", "couponId"};
+        String[] params = {"orderId", "couponId","userCouponId"};
         if (order == null) {
             throw new NullParametersException("Order is null");
         } else {
@@ -78,7 +78,7 @@ public class OrderService {
     }
 
     public int updateOrderStatues(Order order) {
-        String[] params = {"couponId"};
+        String[] params = {"couponId","userCouponId"};
         if (order == null) {
             throw new NullParametersException("Order is null");
         } else {

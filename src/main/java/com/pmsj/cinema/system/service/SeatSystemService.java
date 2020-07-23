@@ -49,7 +49,15 @@ public class SeatSystemService {
         }
         return seatMapper.insert(seat);
     }
-
+    /**
+     *
+     */
+    public int delByHallid(Integer hallId){
+        if (hallId==null){
+            throw new NullParametersException("hallId is null");
+        }
+        return seatMapper.deleteByHallId(hallId);
+    }
 
 
 }

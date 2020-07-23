@@ -65,4 +65,9 @@
     where seat_x = #{col,jdbcType=INTEGER} and seat_y = #{row,jdbcType=INTEGER} and hall_id = #{hallId,jdbcType=INTEGER}
   </select>
 
+
+  <delete id="deleteByHallId" parameterType="java.lang.Integer">
+    delete from seat
+    where hall_id = #{hallId,jdbcType=INTEGER}
+  </delete>
 </mapper>

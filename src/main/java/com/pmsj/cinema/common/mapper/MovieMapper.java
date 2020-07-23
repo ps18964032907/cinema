@@ -37,6 +37,8 @@ public interface MovieMapper {
 
     List<Movie> getMovieByMovieName(String movieName);
 
+    List getMovieIsOnline(Integer movieId);
+
 //    List<Movie> selectAllComingSoonMovie(@Param(value = "typeId") Integer typeId,@Param(value = "area")String movieArea,@Param(value = "year")Date movieReleaseTime);
 //
 //    List<Movie> selectAllOfflineMovie(@Param(value = "typeId") Integer typeId,@Param(value = "area")String movieArea,@Param(value = "year")Date movieReleaseTime);

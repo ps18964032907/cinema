@@ -47,7 +47,8 @@ public class RabbitMqConfig {
     @Bean("delayQueue")
     public Queue delayQueue(){
         Map<String,Object> arguments = new HashMap<>();
-        arguments.put("x-message-ttl",900000);
+        //两分钟
+        arguments.put("x-message-ttl",120000);
         arguments.put("x-dead-letter-exchange",DEAD_LETTER_EXCHANGE);
         arguments.put("x-dead-letter-routing-key",DEAD_LETTER_ROUTING_KEY);
 

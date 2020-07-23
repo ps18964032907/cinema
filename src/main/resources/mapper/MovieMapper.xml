@@ -296,6 +296,21 @@ select m.*
             </if>
         </where>
     </select>
+    <select id="getMovieIsOnline" resultMap="BaseResultMap">
+    SELECT
+	movie.movie_id
+    FROM
+	movie
+	INNER JOIN
+	hall_movie
+	ON
+		movie.movie_id = hall_movie.movie_id
+    WHERE
+	hall_movie.start_time > CURRENT_TIME
+    and
+    movie.movie_id=#{movieId}
+
+    </select>
 
 </mapper>
 

@@ -165,11 +165,13 @@ public class HallMovieService {
             }
             //修改优惠卷状态 0 不可用 1 可用
             UserCoupon userCoupon = userCouponMapper.selectByPrimaryKey(tickets.getUserCouponId());
-            if (userCoupon.getCouponStatus()==1){
-                userCoupon.setCouponStatus(0);
-                userCouponMapper.updateByPrimaryKey(userCoupon);
-            }else {
-                throw new CouponIllegalException("Coupon is not available");
+            if(userCoupon!=null) {
+                if (userCoupon.getCouponStatus() == 1) {
+                    userCoupon.setCouponStatus(0);
+                    userCouponMapper.updateByPrimaryKey(userCoupon);
+                } else {
+                    throw new CouponIllegalException("Coupon is not available");
+                }
             }
             return orderMapper.selectByPrimaryKey(orderid).getOrderNo();
 

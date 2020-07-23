@@ -38,6 +38,7 @@ import java.util.List;
         @Transactional
         @RabbitListener(queues = DEAD_LETTER_QUEUE)
         public void recv(String orderNo){
+
            Order order =  orderService.getOrderByNo(orderNo);
            //修改订单状态
             if (order.getOrderStatus()==1){
@@ -51,11 +52,13 @@ import java.util.List;
             }
             //退回优惠卷
             UserCoupon userCoupon =  userCouponMapper.selectByPrimaryKey(order.getUserCouponId());
+            if(userCoupon!=null) {
             if (userCoupon.getCouponStatus()==0){
                 userCoupon.setCouponStatus(1);
                 userCouponMapper.updateByPrimaryKey(userCoupon);
             }else {
                 throw new CouponIllegalException("Coupon is available");
+            }
             }
         }
     }

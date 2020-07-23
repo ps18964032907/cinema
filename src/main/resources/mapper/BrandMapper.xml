@@ -32,4 +32,10 @@
       </if>
     </where>
   </select>
+
+  <select id="selectByName" parameterType="string" resultMap="BaseResultMap">
+    select brand_id, brand_name
+    from brand
+    where brand_name = #{brandName,jdbcType=INTEGER}
+  </select>
 </mapper>

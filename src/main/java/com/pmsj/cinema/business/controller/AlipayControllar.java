@@ -92,6 +92,9 @@ public class AlipayControllar {
 
     @RequestMapping("/return")
     public String doReturn(String out_trade_no){
+        Order order = orderService.getOrderByNo(out_trade_no);
+        order.setOrderStatus(2);
+        orderService.updateOrderStatues(order);
         return "business/HTML/zhifu.html";
     }
 

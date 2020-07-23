@@ -14,4 +14,6 @@ public interface BrandMapper {
     List<Brand> selectAll(Brand brand);
 
     int updateByPrimaryKey(Brand record);
+
+    Brand selectByName(String brandName);
 }

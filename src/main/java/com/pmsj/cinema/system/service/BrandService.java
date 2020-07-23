@@ -112,4 +112,8 @@ public class BrandService {
     public List<Brand> getAllBrandsJson() {
       return  brandMapper.selectAll(null);
     }
+
+    public Brand getBrandByName(String brandName){
+       return brandMapper.selectByName(brandName);
+    }
 }
