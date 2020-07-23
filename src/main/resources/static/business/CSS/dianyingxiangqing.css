@@ -789,24 +789,73 @@ li {
   color: #999999;
   font-size: 16px;
 }
-.content article .content_L5 .content_L5_2 ul li .content_L5_2_2 .content_L5_2_2_2 div:first-child .xin5 {
+.content article .content_L5 .content_L5_2 ul li .content_L5_2_2 .content_L5_2_2_2 div:first-child .xin10 {
   margin-left: 4px;
   display: inline-block;
-  width: 96px;
+  width: 100px;
   height: 16px;
   background: url("../IMG/star_icon01.png") no-repeat;
 }
-.content article .content_L5 .content_L5_2 ul li .content_L5_2_2 .content_L5_2_2_2 div:first-child .xin3 {
+.content article .content_L5 .content_L5_2 ul li .content_L5_2_2 .content_L5_2_2_2 div:first-child .xin9 {
+  margin-left: 4px;
+  display: inline-block;
+  width: 90px;
+  height: 16px;
+  background: url("../IMG/star_icon01.png") no-repeat;
+}
+.content article .content_L5 .content_L5_2 ul li .content_L5_2_2 .content_L5_2_2_2 div:first-child .xin8 {
+  margin-left: 4px;
+  display: inline-block;
+  width: 80px;
+  height: 16px;
+  background: url("../IMG/star_icon01.png") no-repeat;
+}
+.content article .content_L5 .content_L5_2 ul li .content_L5_2_2 .content_L5_2_2_2 div:first-child .xin7 {
+  margin-left: 4px;
+  display: inline-block;
+  width: 70px;
+  height: 16px;
+  background: url("../IMG/star_icon01.png") no-repeat;
+}
+.content article .content_L5 .content_L5_2 ul li .content_L5_2_2 .content_L5_2_2_2 div:first-child .xin6 {
   margin-left: 4px;
   display: inline-block;
   width: 60px;
   height: 16px;
   background: url("../IMG/star_icon01.png") no-repeat;
 }
+.content article .content_L5 .content_L5_2 ul li .content_L5_2_2 .content_L5_2_2_2 div:first-child .xin5 {
+  margin-left: 4px;
+  display: inline-block;
+  width: 50px;
+  height: 16px;
+  background: url("../IMG/star_icon01.png") no-repeat;
+}
+.content article .content_L5 .content_L5_2 ul li .content_L5_2_2 .content_L5_2_2_2 div:first-child .xin3 {
+  margin-left: 4px;
+  display: inline-block;
+  width: 30px;
+  height: 16px;
+  background: url("../IMG/star_icon01.png") no-repeat;
+}
+.content article .content_L5 .content_L5_2 ul li .content_L5_2_2 .content_L5_2_2_2 div:first-child .xin2 {
+  margin-left: 4px;
+  display: inline-block;
+  width: 20px;
+  height: 16px;
+  background: url("../IMG/star_icon01.png") no-repeat;
+}
+.content article .content_L5 .content_L5_2 ul li .content_L5_2_2 .content_L5_2_2_2 div:first-child .xin1 {
+  margin-left: 4px;
+  display: inline-block;
+  width: 10px;
+  height: 16px;
+  background: url("../IMG/star_icon01.png") no-repeat;
+}
 .content article .content_L5 .content_L5_2 ul li .content_L5_2_2 .content_L5_2_2_2 div:first-child .xin4 {
   margin-left: 4px;
   display: inline-block;
-  width: 80px;
+  width: 40px;
   height: 16px;
   background: url("../IMG/star_icon01.png") no-repeat;
 }
