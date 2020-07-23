@@ -153,5 +153,10 @@
         and hall_movie.start_time >= CURDATE()
 
     </select>
+    <select id="getCountCinemaByLngAndLat" resultType="java.lang.Integer">
+         select count(*) from cinema
+         where cinema_lat = #{cinemaLat}
+         and cinema_lng = #{cinemaLng}
+    </select>
 
 </mapper>

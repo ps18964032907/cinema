@@ -138,4 +138,8 @@ public class CinemaService {
     }
 
 
+    public int getCountCinemaByLngAndLat(String cinemaLat, String cinemaLng) {
+
+        return cinemaMapper.getCountCinemaByLngAndLat(cinemaLat, cinemaLng);
+    }
 }

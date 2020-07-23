@@ -7,7 +7,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver  #
     url: jdbc:mysql://119.45.53.114:3306/cinema?useTimezone=true&serverTimezone=GMT%2B8  #数据库连接信息
-    username: root   #连接账号
+    username: 3306   #连接账号
     password: 1234   #连接密码p
 
 server:

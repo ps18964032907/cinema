@@ -26,9 +26,20 @@ public class LoginConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //注册TestInterceptor拦截器
         InterceptorRegistration registration = registry.addInterceptor(new UserConfig());
+
         registration.addPathPatterns("/**/jifen/**",
                 "/**/yingyuanShop/**",
                 "/**/xuanzuo.html",
+                "/**/transaction.html",
+                "/**/account.html",
+                "/**/updateUser",
+                "/**/updatePhoto",
+                "/**/updatePass",
+                "/**/shopCoupon",
+                "/**/getAllCoupon",
+                "/**/getAllOrderByUser",
+                "/**/addComment",
+                "/**/account.html",
                 "/**/yingyuanShop/**"
 
         );                      //所有路径都被拦截

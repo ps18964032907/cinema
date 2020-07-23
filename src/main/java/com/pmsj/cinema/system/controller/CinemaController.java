@@ -52,6 +52,16 @@ public class CinemaController {
     @ResponseBody
     public Result add(Cinema cinema) {
         int i = 0;
+
+        if (cinema.getCinemaLat() == null || cinema.getCinemaLng() == null || cinema.getCinemaLat() == "" || cinema.getCinemaLng() == "") {
+            return new Result().error("地址不存在，请选择正确的地址", null);
+        }
+        int countCinemaByLngAndLat = cinemaService.getCountCinemaByLngAndLat(cinema.getCinemaLat(), cinema.getCinemaLng());
+        if (countCinemaByLngAndLat > 0) {
+            return new Result().error("当前影院地址已经存在", null);
+        }
+
+
         try {
             cinemaService.addCinema(cinema);
         } catch (Exception e) {
@@ -207,7 +217,6 @@ public class CinemaController {
         if (add != 0) {
             return "影厅该时间端被占用";
         }
-
         return "200";
     }
 
