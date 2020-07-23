@@ -20,7 +20,8 @@
     delete from `order`
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Order" useGeneratedKeys="true" keyProperty="orderId">
+    <insert id="insert" parameterType="com.pmsj.cinema.common.entity.Order" useGeneratedKeys="true"
+            keyProperty="orderId">
     insert into `order` (order_id, order_no, order_total_discounts_cash,
       coupon_id, user_id, order_status, 
       order_count, order_total_initial_cash, order_unitprice, 
@@ -85,9 +86,8 @@
             <result property="seatId" column="seat_id"/>
             <result property="seatName" column="seat_name"/>
         </collection>
-
-
     </resultMap>
+
 
     <select id="getAllOrderByUser" resultMap="BaseResultMap2">
             select * from `order` o
@@ -107,6 +107,31 @@
             on order_seat.seat_id = seat.seat_id
             where
             `user`.user_id = #{i}
+
+    </select>
+    <select id="getOnlyOrderIdByUserId" resultType="java.lang.Integer">
+         	 select order_id from `order` WHERE user_id = #{i}
+    </select>
+    <select id="getAllOrderByOrderId" resultMap="BaseResultMap2">
+        select * from `order` o
+        left JOIN hall_movie
+        on hall_movie.hall_movie_id = o.hall_movie_id
+        left join movie
+        on movie.movie_id = hall_movie.movie_id
+        left join order_seat
+        on order_seat.order_id = o.order_id
+        left join `user`
+        on `user`.user_id = o.user_id
+        left join hall
+        on hall.hall_id = hall_movie.hall_id
+        left join cinema
+        on cinema.cinema_id = hall.cinema_id
+        left join seat
+        on order_seat.seat_id = seat.seat_id
+        where o.order_id in
+        <foreach collection="onlyOrderIdByUserId" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
 
     </select>
 </mapper>

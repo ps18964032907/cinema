@@ -30,9 +30,20 @@ public class OrderService {
 
 
         PageHelper.startPage(currentPage, pageSize);
-        List<OrderVo> allOrderByUser = orderMapper.getAllOrderByUser(i);
-
+        List<Integer> onlyOrderIdByUserId = orderMapper.getOnlyOrderIdByUserId(i);
+        PageInfo<Integer> integerPageInfo = new PageInfo<>(onlyOrderIdByUserId);
+        System.out.println(onlyOrderIdByUserId);
+        List<OrderVo> allOrderByUser = orderMapper.getAllOrderByOrderId(onlyOrderIdByUserId);
         PageInfo<OrderVo> orderVoPageInfo = new PageInfo<>(allOrderByUser);
+        orderVoPageInfo.setEndRow(integerPageInfo.getEndRow());
+        orderVoPageInfo.setNextPage(integerPageInfo.getNextPage());
+        orderVoPageInfo.setPrePage(integerPageInfo.getPrePage());
+        orderVoPageInfo.setSize(integerPageInfo.getSize());
+        orderVoPageInfo.setPageNum(integerPageInfo.getPageNum());
+        orderVoPageInfo.setPages(integerPageInfo.getPages());
+        orderVoPageInfo.setPageSize(integerPageInfo.getPageSize());
+        orderVoPageInfo.setPrePage(integerPageInfo.getPrePage());
+
         return orderVoPageInfo;
     }
 
@@ -43,11 +54,11 @@ public class OrderService {
      * @return
      */
     public int buyTickets(Order order) {
-        String[] params = {"orderId","couponId"};
+        String[] params = {"orderId", "couponId"};
         if (order == null) {
             throw new NullParametersException("Order is null");
         } else {
-            new ReflectUtil<Order>().throwNullParametersException(order,params);
+            new ReflectUtil<Order>().throwNullParametersException(order, params);
         }
 
         return orderMapper.insert(order);
@@ -66,12 +77,12 @@ public class OrderService {
         return orderMapper.selectByOrderNo(orderNo);
     }
 
-    public int updateOrderStatues(Order order){
+    public int updateOrderStatues(Order order) {
         String[] params = {"couponId"};
         if (order == null) {
             throw new NullParametersException("Order is null");
-        }else {
-            new ReflectUtil<Order>().throwNullParametersException(order,params);
+        } else {
+            new ReflectUtil<Order>().throwNullParametersException(order, params);
         }
         return orderMapper.updateByPrimaryKey(order);
 

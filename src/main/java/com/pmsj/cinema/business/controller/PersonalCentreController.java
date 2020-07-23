@@ -54,7 +54,7 @@ public class PersonalCentreController {
         if (currentPage == null) {
             currentPage = 1;
         }
-        pageSize = 5;
+        pageSize = 4;
         User user = (User) session.getAttribute("user");
         return oderService.getAllOrderByUser(user.getUserId(), currentPage, pageSize);
     }
