@@ -207,48 +207,66 @@ select m.*
 
 
     <select id="selectTopTen" resultMap="ActorByMovie">
-        SELECT m.*,c.actor_name
-        FROM movie m
-        LEFT JOIN
-        movie_actor a
+        SELECT
+        movie.*,
+        cast.actor_name
+        FROM
+        movie
+        INNER JOIN
+        movie_actor
         ON
-        m.`movie_id`=a.`movie_id`
-        LEFT JOIN
-        `cast` c
+        movie.movie_id = movie_actor.movie_id
+        INNER JOIN
+        cast
         ON
-        c.`actor_id`=a.`actor_id`
-        <where>
+        movie_actor.actor_id = cast.actor_id
+
             <if test="status==1">
-                movie_status=1
-                order by movie_score desc
+                INNER JOIN
+                hall_movie
+                ON
+                movie.movie_id = hall_movie.movie_id
+                where
+                hall_movie.start_time &gt; CURRENT_TIME
+                order by movie.movie_score desc
             </if>
             <if test="status==2">
+                where
                 movie_status=2
-                order by movie_want_count desc
+                order by movie.movie_want_count desc
             </if>
             <if test="status==3">
+                where
                 movie_area LIKE '%大陆%'
-                order by movie_box_office desc
+                order by movie.movie_box_office desc
             </if>
             <if test="status==4">
+                where
                 movie_area LIKE '%美国%'
-                order by movie_box_office desc
+                order by movie.movie_box_office desc
             </if>
             <if test="status==5">
-                movie_status>0
+                where
+                movie.movie_status>0
                 order by movie_score desc
             </if>
             <if test="status==6">
-                movie_status=1
-                order by movie_box_office desc
+                INNER JOIN
+                hall_movie
+                ON
+                movie.movie_id = hall_movie.movie_id
+                where
+                hall_movie.start_time &gt; CURRENT_TIME
+                order by movie.movie_box_office desc
             </if>
-        </where>
 
     </select>
 
     <select id="selectIndexTopMovie" resultMap="BaseResultMap">
-        SELECT *
-        FROM movie
+        SELECT
+        movie.*
+        FROM
+        movie
         <where>
             <if test="status==1">
                 movie_status=1
