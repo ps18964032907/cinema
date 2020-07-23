@@ -141,6 +141,46 @@ public class HallSystemService {
         return hallMapper.deleteByPrimaryKey(hallId);
     }
 
+    /**
+     * 查询单条数据
+     * @return
+     */
+    public Hall getNormalHallById(Integer hallId){
+        if(hallId==null){
+            throw new NullParametersException("HallId is null");
+        }
+        return hallMapper.selectByPrimaryKey(hallId);
+    }
 
+    public void updateHall(HallBlankVo hallBlankVo){
+        if (hallBlankVo ==null) {
+            throw new NullParametersException("hallOrBlank is null");
+        }
 
+        else {
+            Hall hall = new Hall();
+            hall.setHallId(hallBlankVo.getHallId());
+            hall.setHallName(hallBlankVo.getHallName());
+            hall.setHallType(hallBlankVo.getHallType());
+            hall.setHallX(hallBlankVo.getHallX());
+            hall.setHallY(hallBlankVo.getHallY());
+            hall.setCinemaId(hallBlankVo.getCinemaId());
+            hall.setHallType(1);
+            hallMapper.updateByPrimaryKey(hall);
+            Integer hallid = hall.getHallId();
+            seatService.delByHallid(hallid);
+            for (TicketVo ticket : hallBlankVo.getTickets()) {
+                Seat seat = new Seat();
+                seat.setHallId(hallid);
+                //设置行
+                seat.setSeatX(ticket.getCol());
+                //设置列
+                seat.setSeatY(ticket.getRow());
+                //设置状态
+                seat.setSeatTpye(-1);
+                seatService.addBlank(seat);
+            }
+
+        }
+    }
 }

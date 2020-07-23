@@ -254,15 +254,26 @@
 
 </div>
 <script>
+    function getQueryString(hallId) {
+        var reg = new RegExp("(^|&)" + hallId + "=([^&]*)(&|$)", "i");
+        var r = decodeURI(window.location.search).substr(1).match(reg);
+        if (r != null)
+            return unescape(r[2]);
+        return null;
+    }
+
+    var id = getQueryString("hallId");
+
+
     new Vue({
         el: '#yingting',
         data: {
             //影院座位的二维数组,-1为非座位，0为未购座位，1为已选座位(绿色),2为已购座位(红色)
             seatArray: [],
             //影院座位行数seatRow:10
-            seatRow: 10,
+            seatRow: 0,
             //影院座位列数seatCol:20,
-            seatCol: 20,
+            seatCol: 0,
             //座位尺寸
             seatSize: '',
             //空白位置
@@ -276,7 +287,8 @@
             //影院Id
             cid:'',
             //影院名称
-            hallName:''
+            hallName:'',
+
         },
         watch: {
             seatRow:{
@@ -287,6 +299,7 @@
                     if(val<5){
                         this.seatRow=5;
                     }
+                    this.nonSeatPlace =[];
                 },
                 immediate: true
 
@@ -296,12 +309,11 @@
 
                     if(val>20){
                         this.seatCol=20;
-                        this.nonSeatPlace =[];
                     }
                     if(val<5){
                         this.seatCol=5;
-                        this.nonSeatPlace =[];
                     }
+                    this.nonSeatPlace =[];
                 },
                 immediate: true
             }
@@ -325,18 +337,19 @@
                     }
                 }
                 this.nonSeatPlace = [];
-                console.log(this.nonSeatPlace);
+
                 this.seatArray = oldArray;
             },
             //选定且购买座位
             buySeat: function () {
                 if (this.nonSeatPlace.length>0&&this.hallName!=null&&this.hallTypeId!=0&&this.cid!=0&&this.seatCol>0&&this.seatRow>0)
                 {
-                let Url = '/hall/addHall';
+                let Url = '/hall/updateHall';
                 axios({
                     method: 'post',
                     url: Url,
                     data: {
+                        hallId: id,
                         tickets: this.nonSeatPlace,
                         hallName:this.hallName,
                         hallType:this.hallTypeId,
@@ -382,7 +395,6 @@
                         return item.seatInfo != this.getSeatName(row, col);
                     });
                     this.nonSeatPlace = newNonSeatPlace.slice();
-                    console.log(this.nonSeatPlace)
                 }
                 //必须整体更新二维数组，Vue无法检测到数组某一项更新,必须slice复制一个数组才行
                 this.seatArray = newArray.slice();
@@ -393,7 +405,6 @@
 
                 let tempseatArray = new Array(parseInt(this.seatRow)).fill(0);
                 let seatArray = tempseatArray.map(() => new Array(parseInt(this.seatCol)).fill(0));
-
                 this.seatArray = [];
                 for (let i = 0; i < seatArray.length; i++) {
                     this.seatArray.push(seatArray[i]);
@@ -406,14 +417,27 @@
             },
             //初始数据
             initParams: function () {
-                let Url = '/hall/initParams';
+                let Url = '/hall/editInit'
                 axios({
-                    method: 'post',
+                    method: 'get',
                     url: Url,
+                    params:{
+                        hallId:id
+                    }
                 }).then((response) => {
                     this.cinema = response.data.cinema;
                     this.hallType = response.data.hallType;
-                })
+                    this.seatRow = response.data.seatRow;
+                    this.seatCol = response.data.seatCol;
+                    this.nonSeatPlace = response.data.nonSeatPlace;
+                    this.cid = response.data.cid;
+                    this.hallTypeId = response.data.hallTypeId;
+                    this.hallName = response.data.hallName;
+                    this.initSeatArray();
+                    for (let seat of this.nonSeatPlace) {
+                        this.seatArray[seat.seatY][seat.seatX] = seat.seatTpye;
+                    }
+                });
 
             },
             getSeatName: function (row, col) {
@@ -429,10 +453,6 @@
             this.initParams();
         },
 
-        mounted: function () {
-            this.initSeatArray();
-
-        },
 
 
     });

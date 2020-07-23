@@ -1,9 +1,11 @@
 package com.pmsj.cinema.system.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.pmsj.cinema.business.service.SeatService;
 import com.pmsj.cinema.common.entity.Cinema;
 import com.pmsj.cinema.common.entity.Hall;
 import com.pmsj.cinema.common.entity.HallTpye;
+import com.pmsj.cinema.common.entity.Seat;
 import com.pmsj.cinema.common.vo.HallBlankVo;
 import com.pmsj.cinema.common.vo.HallVo;
 import com.pmsj.cinema.system.exception.NullParametersException;
@@ -16,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -38,6 +41,8 @@ public class HallController {
     HallSystemTypeService hallTypeService;
     @Autowired
     CinemaService cinemaService;
+    @Autowired
+    SeatService seatService;
 
     /**
      * 查询所有影厅
@@ -127,6 +132,38 @@ public class HallController {
             e.printStackTrace();
             return "ERROR";
         }
+    }
+
+    /**
+     * 编辑初始化
+     *
+     * @param hallId
+     * @param
+     * @return
+     */
+    @RequestMapping("/editInit")
+    @ResponseBody
+    public Map editInit(@RequestParam Integer hallId) {
+
+        Hall hall = hallService.getNormalHallById(hallId);
+        //影厅不是座位地方
+        List<Seat> seats = seatService.getNonSeat(hallId);
+        Map map = new HashMap();
+        map.put("hallName", hall.getHallName());
+        map.put("seatRow", hall.getHallY());
+        map.put("seatCol", hall.getHallX());
+        map.put("nonSeatPlace", seats);
+        map.put("cid", hall.getCinemaId());
+        map.put("hallTypeId", hall.getHallType());
+        map.put("cinema",cinemaService.getAllCinema());
+        map.put("hallType",hallTypeService.getAllHallType());
+
+        return map;
+    }
+    @RequestMapping("/updateHall")
+    @ResponseBody
+    public void updateHall(@RequestBody HallBlankVo hallBlankVo){
+        hallService.updateHall(hallBlankVo);
     }
 
 }
