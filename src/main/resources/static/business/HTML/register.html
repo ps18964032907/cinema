@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>注册 | 猫眼电影</title>
-    <link rel="stylesheet" href="../CSS/normalize.css">
-    <link rel="stylesheet" href="../CSS/reg.css">
-    <link rel="shortcut icon" href="../IMG/Blogo.png" type="image/x-icon">
-    <script src="../JS/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="/business/CSS/normalize.css" th:href="@{/business/CSS/normalize.css}">
+    <link rel="stylesheet" href="/business/CSS/reg.css" th:href="@{/business/CSS/reg.css}">
+    <link rel="shortcut icon" href="/business/IMG/Blogo.png" th:href="@{/business/IMG/Blogo.png}" type="image/x-icon">
+    <script src="/js/jquery/jquery-1.11.0.min.js" th:src="@{/js/jquery/jquery-1.11.0.min.js}"></script>
+    <script src="/js/layer/layer.js" th:src="@{/js/layer/layer.js}"></script>
 </head>
 
 <body>
 <!-- 顶部 -->
 <header>
     <div>
-        <a href="#"></a>
+        <a href="index.html"></a>
     </div>
 </header>
 <!-- 注册部分 -->
@@ -64,7 +65,7 @@
                 <input type="submit" name="commit" value="同意以下协议并注册">
             </div>
             <div class="zhuche7">
-                <a href="#">《美团网用户协议》</a>
+                <a href="https://rules-center.meituan.com/rules-detail/4">《美团网用户协议》</a>
             </div>
         </div>
     </form>
@@ -73,12 +74,19 @@
 <!-- 底部 -->
 <footer style="margin-top: 80px">
     <p>
-        <span>&copy;</span>
-        <a href="#">meituan.com</a>
-        <a href="#">京ICP证070791号</a>
+        <span>&copy;2018</span>
+        <span>美团网团购</span>
+        <span>meituan.com</span>
+        <span>京ICP证070791号</span>
         <span>京公网安备11010502025545号</span>
     </p>
 </footer>
+<script type="text/javascript" th:inline="javascript">
+    let aa = [[${error}]];
+    if (aa) {
+        layer.msg(aa);
+    }
+</script>
 <script type="text/javascript">
     var userAccount = document.getElementById('userAccount');
     userAccount.onkeyup = function () {
@@ -138,9 +146,15 @@
     phone.onkeyup = function () {
         var ph = phone.value;
         if (/^1[3456789]\d{9}$/.test(ph)) {
-            document.getElementById("tip2").innerHTML = "<font color='green'>手机格式正确</font>";
+            $.post('/user/selectPhone', 'phone=' + ph, function (data) {
+                if (data == "") {
+                    document.getElementById("tip2").innerHTML = "<font color='green'>手机号格式正确</font>";
+                } else {
+                    document.getElementById("tip2").innerHTML = "<font color='red'>手机号不可用</font>";
+                }
+            });
         } else {
-            document.getElementById("tip2").innerHTML = "<font color='red'>手机格式不正确</font>";
+            document.getElementById("tip2").innerHTML = "<font color='red'>手机号格式不正确</font>";
         }
     }
     var ema = document.getElementById('email');
@@ -149,12 +163,19 @@
         var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
         <!-- 对比两次输入的密码 -->
         if (reg.test(e)) {
-            document.getElementById("tip3").innerHTML = "<font color='green'>邮箱格式正确</font>";
+            $.post('/user/selectEmail', 'email=' + e, function (data) {
+                if (data == "") {
+                    document.getElementById("tip3").innerHTML = "<font color='green'>邮箱格式正确</font>";
+                } else {
+                    document.getElementById("tip3").innerHTML = "<font color='red'>邮箱不可用</font>";
+                }
+            });
         } else {
             document.getElementById("tip3").innerHTML = "<font color='red'>邮箱格式不正确</font>";
         }
     }
     var wait = 60;
+
     function GetCodemo(o) {
         var e = document.getElementById('email').value;
         //发送验证码

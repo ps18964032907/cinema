@@ -2,9 +2,7 @@ package com.pmsj.cinema.business.controller;
 
 import com.pmsj.cinema.business.service.UserService;
 import com.pmsj.cinema.business.util.EmailUtil;
-import com.pmsj.cinema.common.entity.Movie;
 import com.pmsj.cinema.common.entity.User;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,12 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.*;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.UUID;
@@ -46,17 +41,46 @@ public class UserController {
     @RequestMapping("/selectUser")
     @ResponseBody
     public User selectUser(String account, HttpSession session) {
-        User user;
+        User user = (User) session.getAttribute("user");
 
-        User user1 = (User) session.getAttribute("user");
-
-        if (user1 != null) {
-            user = userService.selectUser(user1.getUserAccount());
+        if (user != null) {
+            user = userService.selectUser(user.getUserAccount());
             session.setAttribute("user", user);
             return user;
         }
-
         user = userService.selectUser(account);
+        return user;
+    }
+
+    /*
+     * @Author jiangshuai
+     * @Description // TODO 验证手机号是否被使用，
+     * @Date 18:44 2020/7/8 0008
+     * @Param [account, session]
+     * @since 1.0.0
+     * @return com.pmsj.cinema.common.entity.User
+     **/
+    @RequestMapping("/selectPhone")
+    @ResponseBody
+    public User selectPhone(String phone, HttpSession session) {
+        User user = userService.selectPhone(phone);
+        session.setAttribute("user", user);
+        return user;
+    }
+
+    /*
+     * @Author jiangshuai
+     * @Description // TODO 验证邮箱是否被使用，
+     * @Date 18:44 2020/7/8 0008
+     * @Param [account, session]
+     * @since 1.0.0
+     * @return com.pmsj.cinema.common.entity.User
+     **/
+    @RequestMapping("/selectEmail")
+    @ResponseBody
+    public User selectEmail(String email, HttpSession session) {
+        User user = userService.selectEmail(email);
+        session.setAttribute("user", user);
         return user;
     }
 
@@ -82,14 +106,15 @@ public class UserController {
      * @return java.lang.String
      **/
     @RequestMapping("/register")
-    public String register(String verifycode, String userAccount, String password1, String email, String phone) {
+    public String register(Map map, String verifycode, String userAccount, String password1, String email, String phone) {
         String photo = "../IMG/Bangdan_2.jpg";
         int vcode = Integer.parseInt(verifycode);
         if (vcode == code) {
             userService.register(userAccount, password1, email, phone, photo);
             return "redirect:/business/HTML/login.html";
         }
-        return "redirect:/business/HTML/register.html";
+        map.put("error", "验证码错误");
+        return "/business/HTML/register.html";
     }
 
     /*
@@ -114,7 +139,6 @@ public class UserController {
             System.out.println("=====================");
             return "redirect:/business/HTML/index.html";
         }
-
         return "redirect:/business/HTML/login.html";
     }
 
@@ -150,7 +174,7 @@ public class UserController {
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("user");
-        return "redirect:/business/HTML/login.html";
+        return "redirect:/business/HTML/index.html";
     }
 
     /*

@@ -34,7 +34,15 @@ public class UserService {
         return userMapper.selectUser(account);
     }
 
-    public void register(String photo, String userAccount, String password, String email, String phone) {
+    public User selectPhone(String phone) {
+        return userMapper.selectPhone(phone);
+    }
+
+    public User selectEmail(String email) {
+        return userMapper.selectEmail(email);
+    }
+
+    public void register(String userAccount, String password, String email, String phone, String photo) {
         userMapper.register(userAccount, password, email, phone, photo);
     }
 

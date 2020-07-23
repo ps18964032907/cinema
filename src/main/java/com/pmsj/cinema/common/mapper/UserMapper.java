@@ -24,6 +24,10 @@ public interface UserMapper {
 
     User selectUser(@Param("userAccount") String account);
 
+    User selectPhone(@Param("userPhone") String phone);
+
+    User selectEmail(@Param("userEmail") String email);
+
     void register(@Param("userAccount") String userAccount, @Param("userPassword") String password, @Param("userEmail") String email, @Param("userPhone") String phone, @Param("userPhoto") String photo);
 
     User accountLogin(@Param("userAccount") String account, @Param("userPassword") String password);

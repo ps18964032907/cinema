@@ -86,7 +86,14 @@
     select * from user
     where user_account = #{userAccount,jdbcType=VARCHAR}
     </select>
-
+    <select id="selectPhone" resultMap="BaseResultMap">
+        select * from user
+        where user_phone = #{userPhone,jdbcType=VARCHAR}
+    </select>
+    <select id="selectEmail" resultMap="BaseResultMap">
+        select * from user
+        where user_email = #{userEmail,jdbcType=VARCHAR}
+    </select>
     <select id="accountLogin" resultMap="BaseResultMap">
     select * from user
     where user_account = #{userAccount,jdbcType=VARCHAR}
@@ -97,4 +104,5 @@
     select * from user
     where user_email = #{userEmail,jdbcType=VARCHAR}
     </select>
+
 </mapper>
