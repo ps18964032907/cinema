@@ -1,13 +1,12 @@
 package com.pmsj.cinema.business.service;
 
+import com.pmsj.cinema.business.exception.CouponIllegalException;
 import com.pmsj.cinema.business.exception.NullParametersException;
 import com.pmsj.cinema.common.entity.*;
-import com.pmsj.cinema.common.mapper.CouponMapper;
-import com.pmsj.cinema.common.mapper.HallMovieMapper;
-import com.pmsj.cinema.common.mapper.OrderSeatMapper;
-import com.pmsj.cinema.common.mapper.UserCouponMapper;
+import com.pmsj.cinema.common.mapper.*;
 import com.pmsj.cinema.common.vo.TicketVo;
 import com.pmsj.cinema.common.vo.TicketsVo;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +32,8 @@ public class HallMovieService {
     UserCouponMapper userCouponMapper;
     @Autowired(required = false)
     OrderSeatMapper orderSeatMapper;
+    @Autowired(required = false)
+    OrderMapper orderMapper;
     @Autowired
     CouponMapper couponMapper;
     @Autowired
@@ -41,6 +42,11 @@ public class HallMovieService {
     OrderService orderService;
     @Autowired
     HallService hallService;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    private static final String DELAY_EXCHANGE="cinema_delay_exchange";
+    private static final String DELAY_ROUTING_KEY="cinema_delay_routing_key";
 
 
     public HallMovie selectById(Integer id) {
@@ -82,6 +88,7 @@ public class HallMovieService {
         double money = hallMovie.getFareMoney() * tickets.getTickets().size();
         order.setOrderTotalInitialCash(new BigDecimal(money));
         //优惠卷
+        order.setUserCouponId(tickets.getUserCouponId());
         UserCoupon userCoupon = userCouponMapper.selectByPrimaryKey(tickets.getUserCouponId());
         if(userCoupon!=null){
         Integer couponId=userCoupon.getCouponId();
@@ -108,8 +115,11 @@ public class HallMovieService {
         order.setOrderTime(new Date());
         //添加订单
         orderService.buyTickets(order);
-        //将订单编号存储到session中
-        session.setAttribute("orderNo", orderNo);
+//        //将订单编号存储到session中
+//        session.setAttribute("orderNo", orderNo);
+
+        //将订单编号存入消息队列
+        rabbitTemplate.convertAndSend(DELAY_EXCHANGE,DELAY_ROUTING_KEY,orderNo);
         return order.getOrderId();
     }
 
@@ -118,7 +128,7 @@ public class HallMovieService {
      *
      * @param tickets
      */
-    private int[] addSeat(TicketsVo tickets) {
+    private  int[] addSeat(TicketsVo tickets) {
         Integer hallMovieId = tickets.getHallMovieId();
         List<TicketVo> list = tickets.getTickets();
         int[] seatIds = new int[tickets.getTickets().size()];
@@ -141,19 +151,27 @@ public class HallMovieService {
     }
 
     @Transactional
-    public void buyTicket(TicketsVo tickets, HttpSession session) {
-        if (tickets.getTickets().size()==0){
-            throw new NullParametersException("未选座");
-        }
-        int[] seatIds = addSeat(tickets);
-        int orderid = addOrder(tickets, session);
-        for (int seatId : seatIds) {
-            OrderSeat orderSeat = new OrderSeat();
-            orderSeat.setOrderId(orderid);
-            orderSeat.setSeatId(seatId);
-            orderSeatMapper.insert(orderSeat);
-        }
-        userCouponMapper.deleteByPrimaryKey(tickets.getUserCouponId());
+    public  String buyTicket(TicketsVo tickets, HttpSession session) {
+            if (tickets.getTickets().size()==0){
+                throw new NullParametersException("未选座");
+            }
+            int[] seatIds = addSeat(tickets);
+            int orderid = addOrder(tickets, session);
+            for (int seatId : seatIds) {
+                OrderSeat orderSeat = new OrderSeat();
+                orderSeat.setOrderId(orderid);
+                orderSeat.setSeatId(seatId);
+                orderSeatMapper.insert(orderSeat);
+            }
+            //修改优惠卷状态 0 不可用 1 可用
+            UserCoupon userCoupon = userCouponMapper.selectByPrimaryKey(tickets.getUserCouponId());
+            if (userCoupon.getCouponStatus()==1){
+                userCoupon.setCouponStatus(0);
+                userCouponMapper.updateByPrimaryKey(userCoupon);
+            }else {
+                throw new CouponIllegalException("Coupon is not available");
+            }
+            return orderMapper.selectByPrimaryKey(orderid).getOrderNo();
 
     }
 

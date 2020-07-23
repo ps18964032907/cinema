@@ -12,6 +12,8 @@ public class Order {
 
     private Integer couponId;
 
+    private Integer userCouponId;
+
     private Integer userId;
 
     private Integer orderStatus;
@@ -112,5 +114,13 @@ public class Order {
 
     public void setHallMovieId(Integer hallMovieId) {
         this.hallMovieId = hallMovieId;
+    }
+
+    public Integer getUserCouponId() {
+        return userCouponId;
+    }
+
+    public void setUserCouponId(Integer userCouponId) {
+        this.userCouponId = userCouponId;
     }
 }

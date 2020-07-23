@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -30,7 +29,7 @@ public class AlipayControllar {
     OrderService orderService;
 
     @RequestMapping("/pay")
-    public void pay(HttpServletResponse httpResponse, HttpSession session) throws IOException {
+    public void pay(HttpServletResponse httpResponse,String orderNo) throws IOException {
 
 
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key,
@@ -41,8 +40,8 @@ public class AlipayControllar {
         alipayRequest.setReturnUrl(AlipayConfig.return_url);
         alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
 
-        //商品价格总额
-        String orderNo = (String) session.getAttribute("orderNo");
+//        //商品价格总额
+//        String orderNo = (String) session.getAttribute("orderNo");
         if (orderNo==null){
             return;
         }

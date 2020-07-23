@@ -7,4 +7,5 @@ public interface OrderSeatMapper {
     int insert(OrderSeat record);
 
     List<OrderSeat> selectAll();
+    List<OrderSeat> selectByOrderId(Integer orderId);
 }

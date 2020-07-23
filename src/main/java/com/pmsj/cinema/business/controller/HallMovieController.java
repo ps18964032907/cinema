@@ -93,10 +93,10 @@ public class HallMovieController {
      * @return
      */
     @RequestMapping("/buyTicket")
-    public String buyTicket(@RequestBody TicketsVo tickets, HttpSession session) {
-        hallMovieService.buyTicket(tickets, session);
+    public  String buyTicket(@RequestBody TicketsVo tickets, HttpSession session) {
+
         //orderService.buy2(tickets,session);
-        return "Success";
+        return hallMovieService.buyTicket(tickets, session);
     }
 
 
