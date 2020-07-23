@@ -36,9 +36,9 @@
   </select>
   <select id="selectAllByMovie" resultMap="BaseResultMap">
     SELECT c.*,u.user_name,u.user_photo
-    FROM COMMENT c
+    FROM comment c
     LEFT JOIN
-    USER u
+    user u
     ON
     c.user_id=u.user_id
     WHERE movie_id=#{movieId,jdbcType=INTEGER}
@@ -47,7 +47,7 @@
   </select>
     <select id="getHasComment" resultType="java.lang.Integer">
 
-      SELECT COUNT(*) FROM COMMENT
+      SELECT COUNT(*) FROM comment
     WHERE user_id = #{userId}
     AND movie_id = #{movieId}
     </select>
