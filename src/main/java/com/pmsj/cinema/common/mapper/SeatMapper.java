@@ -22,4 +22,6 @@ public interface SeatMapper {
 
     Seat selectByRowAndCol(@Param("col") Integer col,@Param("row") Integer row,@Param("hallMovieId") Integer hallMovieId);
     Seat selectByBlank(@Param("col") Integer col,@Param("row") Integer row,@Param("hallId") Integer hallId);
+
+    int deleteByHallId(Integer hallId);
 }

@@ -6,7 +6,7 @@ import com.pmsj.cinema.common.entity.Hall;
 import com.pmsj.cinema.common.entity.HallTpye;
 import com.pmsj.cinema.common.vo.HallBlankVo;
 import com.pmsj.cinema.common.vo.HallVo;
-import com.pmsj.cinema.common.vo.TicketsVo;
+import com.pmsj.cinema.system.exception.NullParametersException;
 import com.pmsj.cinema.system.exception.PageInfoErrorException;
 import com.pmsj.cinema.system.service.CinemaService;
 import com.pmsj.cinema.system.service.HallSystemService;
@@ -95,5 +95,38 @@ public class HallController {
         hallService.addHall(hallBlankVo);
     }
 
+    /**
+     * 批量删除
+     * @param list
+     * @return
+     */
+    @RequestMapping("/deleteBatches")
+    @ResponseBody
+    public String deleteBatches(@RequestBody List<Hall> list) {
+        try {
+            hallService.deleteBatches(list);
+            return "SUCCESS";
+        } catch (NullParametersException e) {
+            e.printStackTrace();
+            return "ERROR";
+        }
+    }
+
+    /**
+     * 删除
+     * @param hallId
+     * @return
+     */
+    @RequestMapping("/del")
+    @ResponseBody
+    public String del(@RequestBody Integer hallId) {
+        try {
+            hallService.deleteHall(hallId);
+            return "SUCCESS";
+        } catch (NullParametersException e) {
+            e.printStackTrace();
+            return "ERROR";
+        }
+    }
 
 }

@@ -30,6 +30,7 @@ public class HallSystemService {
     HallMapper hallMapper;
     @Autowired
     SeatSystemService seatService;
+
     /**
      * 分页查询所有影厅
      * @param pageNum
@@ -62,7 +63,7 @@ public class HallSystemService {
 
     /**
      * 添加影厅
-     * @param hall
+     * @param
      * @return
      */
     @Transactional
@@ -109,6 +110,35 @@ public class HallSystemService {
         if (existHall!=null){
             throw new DataExistException("Hall is existed");
         }
+    }
+
+    /**
+     * 批量删除
+     * @param list
+     */
+    @Transactional
+    public void deleteBatches(List<Hall> list){
+        if (list==null){
+            throw new NullParametersException("HallList is null");
+        }
+        for (Hall hall:list){
+            hallMapper.deleteByPrimaryKey(hall.getHallId());
+            seatService.delByHallid(hall.getHallId());
+        }
+    }
+
+    /**
+     * 根据id删除数据
+     * @param hallId
+     * @return
+     */
+    @Transactional
+    public Integer deleteHall(Integer hallId){
+        if(hallId==null){
+            throw new NullParametersException("HallId is null");
+        }
+        seatService.delByHallid(hallId);
+        return hallMapper.deleteByPrimaryKey(hallId);
     }
 
 

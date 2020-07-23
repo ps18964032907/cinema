@@ -55,8 +55,14 @@ public class BrandController {
     @ResponseBody
     public String addBrand(@RequestBody Brand brand) {
         try {
-            brandService.addBrand(brand);
-            return "SUCCESS";
+            if (brandService.getBrandByName(brand.getBrandName())!=null){
+                return "品牌重复";
+            }else{
+                brandService.addBrand(brand);
+                return "SUCCESS";
+            }
+
+
         } catch (NullParametersException e) {
             e.printStackTrace();
             return "ERROR";
