@@ -48,7 +48,7 @@ public class RabbitMqConfig {
     public Queue delayQueue(){
         Map<String,Object> arguments = new HashMap<>();
         //两分钟
-        arguments.put("x-message-ttl",12000);
+        arguments.put("x-message-ttl",120000);
         arguments.put("x-dead-letter-exchange",DEAD_LETTER_EXCHANGE);
         arguments.put("x-dead-letter-routing-key",DEAD_LETTER_ROUTING_KEY);
 
