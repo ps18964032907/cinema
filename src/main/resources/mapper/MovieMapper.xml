@@ -183,8 +183,6 @@ select m.*
             movie.movie_status &gt;0
         </if>
 
-        <where>
-
             <if test="tId!='' and tId!=0 and tId!=null">
                 and movie_tpye.type_id = #{tId}
             </if>
@@ -195,9 +193,6 @@ select m.*
                 and movie.movie_release_time like '%${year}%'
             </if>
 
-
-
-        </where>
         <if test="paixu==1">
             ORDER BY movie.movie_box_office DESC
         </if>

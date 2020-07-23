@@ -965,7 +965,7 @@
                             <a :href="'./dianyingxiangqing.html?movieId='+allmovie.movieId">
                                 <img :src="allmovie.movieImg" alt="" style="width: 160px; height: 220px">
                             </a>
-                            <a :href="'./yingyuanShop.html?movieId='+allmovie.movieId" v-if="allmovie.movieStatus==1||allmovie.movieStatus==2">购票</a>
+                            <a :href="'./yingyuanShop.html?movieId='+allmovie.movieId" v-if="status==1">购票</a>
                         </div>
                         <div>
                             <a :href="'./dianyingxiangqing.html?movieId='+allmovie.movieId">{{allmovie.movieName}}</a>
@@ -979,7 +979,7 @@
                             <a :href="'./dianyingxiangqing.html?movieId='+allmovie.movieId">
                                 <img :src="allmovie.movieImg" alt="" style="width: 160px; height: 220px">
                             </a>
-                            <a :href="'./yingyuanShop.html?movieId='+allmovie.movieId" v-if="allmovie.movieStatus==1||allmovie.movieStatus==2">购票</a>
+                            <a :href="'./yingyuanShop.html?movieId='+allmovie.movieId" v-if="status==1">购票</a>
                         </div>
                         <div>
                             <a :href="'./dianyingxiangqing.html?movieId='+allmovie.movieId">{{allmovie.movieName}}</a>
@@ -1067,7 +1067,8 @@
         },
         methods: {
             getStatus: function (index) {
-                console.log(index)
+                console.log(index);
+                this.status=index;
                 $("#status").val(index);
                 getAllMovie($("#formbody").serialize())
             },
@@ -1121,8 +1122,12 @@
         data: {
 
             movie: [],
+            status:1,
 
         },
+        beforeUpdate: function (){
+            this.status=movieStatus.status;
+        }
     });
 
     var user = new Vue({

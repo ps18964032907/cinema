@@ -21,7 +21,6 @@ public class MovieTopController {
     @RequestMapping("/top")
     public List<Movie> selectTopTen(Integer status) {
 
-        System.out.println(movieTopService.selectTopTen(status));
         return movieTopService.selectTopTen(status);
     }
 }

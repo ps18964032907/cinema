@@ -833,12 +833,12 @@
                         <span>评分</span>
                     </a>
                 </div>
-                <div class="beijing1_2_2_3" v-if="movieInfoUp.movieStatus==1">
-                    <a :href="'yingyuanShop.html?movieId='+movieInfoUp.movieId">特惠购票</a>
-                </div>
-                <div class="beijing1_2_2_3" v-if="movieInfoUp.movieStatus==2">
-                    <a :href="'yingyuanShop.html?movieId='+movieInfoUp.movieId">预售购票</a>
-                </div>
+<!--                <div class="beijing1_2_2_3" v-if="movieInfoUp.movieStatus==1">-->
+<!--                    <a :href="'yingyuanShop.html?movieId='+movieInfoUp.movieId">特惠购票</a>-->
+<!--                </div>-->
+<!--                <div class="beijing1_2_2_3" v-if="movieInfoUp.movieStatus==2">-->
+<!--                    <a :href="'yingyuanShop.html?movieId='+movieInfoUp.movieId">预售购票</a>-->
+<!--                </div>-->
             </div>
         </div>
         <div class="beijing1_3">
@@ -1400,8 +1400,11 @@
                 $.post("/comment/addComment",_this.commment,function(data2){
                     if(data2==0){
                         alert("每个用户只能评论一次，你想干嘛？！");}
+                    else if(data2==1){
+                        alert("评论成功！");
+                    }
                     else {
-                        alert("评论成功");
+                        alert("请先登陆后再评论！");
                     }
                     location.reload()
                 })

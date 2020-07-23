@@ -702,7 +702,7 @@ li {
   height: 38px;
   line-height: 38px;
   text-align: center;
-  display: flex;
+  /*display: flex;*/
 }
 .mian .mian1 .zhuL2 dl dd .zhuL2_2 .zhuL2_2_3 a {
   display: inline-block;

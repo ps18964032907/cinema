@@ -28,6 +28,9 @@ public class CommentService {
         if (hasComment == 0 || hasComment == null) {
             return commentMapper.insert(userId, userSocre, commentCreateTime, movieId, userComment, likeCount);
         }
+        else if (userId==null||userId.equals("")||userId==0){
+            return 1;
+        }
         return 0;
     }
 

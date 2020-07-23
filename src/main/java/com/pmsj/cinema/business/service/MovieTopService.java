@@ -19,7 +19,7 @@ public class MovieTopService {
 
     public List<Movie> selectTopTen(Integer status) {
 
-        PageHelper.startPage(1, 10);
+//        PageHelper.startPage(1, 10);
         return movieMapper.selectTopTen(status);
     }
 }
