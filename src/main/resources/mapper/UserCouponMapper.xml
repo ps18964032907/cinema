@@ -67,7 +67,7 @@
     on cinema.cinema_id = con.cinema_id
     where uc.user_id = #{userId}
     and uc.coupon_date &gt;= #{date}
-    and uc.coupon_status == 1
+    and uc.coupon_status = 1
 
     </select>
 
@@ -85,7 +85,7 @@
         on cinema.cinema_id = con.cinema_id
         where uc.user_id = #{userId}
         and uc.coupon_date &lt; #{date}
-        and uc.coupon_status == 1
+        and uc.coupon_status = 1
     </select>
 
 
