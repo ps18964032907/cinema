@@ -132,6 +132,12 @@ public class CinemaService {
         return hallMovieMapper.getHallMovies(cinemaId, startTime, endTime, movieId);
     }
 
+
+    public Date getRecentTime(Integer cinemaId, Integer movieId) {
+
+        return hallMovieMapper.getRecentTime(cinemaId, movieId);
+    }
+
     public List<Hall> getAllHallByCinemaId(Integer cinemaId) {
         return hallMapper.getAllHallByCinemaId(cinemaId);
 

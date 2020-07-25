@@ -76,10 +76,22 @@
         order by hall_movie.start_time desc
     </select>
     <select id="getHallMoviesByTime" resultType="java.lang.Integer">
-            select count(*) from hall_movie where hall_id = #{hallid}
-            and
-            /* 已有的开始时间 小于等于 当前的结束时间 并且 已有的结束时间 大于等于 当前的开始时间*/
-            start_time &lt;= #{endTime} and end_time &gt;= #{startTime}
+        select count(*) from hall_movie where hall_id = #{hallid}
+        and
+        /* 已有的开始时间 小于等于 当前的结束时间 并且 已有的结束时间 大于等于 当前的开始时间*/
+        start_time &lt;= #{endTime} and end_time &gt;= #{startTime}
+    </select>
+    <select id="getRecentTime" resultType="java.util.Date">
+        select min(hall_movie.start_time) from hall_movie
+        left join hall on hall.hall_id = hall_movie.hall_id
+        left join cinema on cinema.cinema_id = hall.cinema_id
+        where hall_movie.start_time > CURRENT_TIMESTAMP
+        <if test="cinemaId != null">
+            and cinema.cinema_id = #{cinemaId}
+        </if>
+        <if test="movieId != null">
+            and hall_movie.movie_id = #{movieId}
+        </if>
     </select>
 
 

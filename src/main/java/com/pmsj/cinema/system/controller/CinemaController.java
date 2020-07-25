@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -125,7 +126,6 @@ public class CinemaController {
 
     }
 
-
     @RequestMapping("editCinema")
     @ResponseBody
     public Result editCinema(Cinema cinema) {
@@ -162,6 +162,14 @@ public class CinemaController {
     public List<HallMovieVo> getHallMovies(Integer cinemaId, @DateTimeFormat(pattern = "yyyy-MM-dd") Date date, Integer movieId) throws ParseException {
 
         return cinemaService.getHallMovies(cinemaId, date, movieId);
+    }
+
+
+    @RequestMapping("getRecentTime")
+    @ResponseBody
+    public String getRecentTime(Integer cinemaId, Integer movieId) {
+        Date recentTime = cinemaService.getRecentTime(cinemaId, movieId);
+        return new SimpleDateFormat("yyyy-MM-dd").format(recentTime);
     }
 
 

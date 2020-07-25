@@ -35,6 +35,7 @@
     <script async="" src="../CSS/saved_resource" th:src="@{business/CSS/saved_resource}"></script>
     <script src="/js/vue.js"></script>
     <script src="/business/JS/jquery-1.11.0.min.js"></script>
+    <script src="/js/layer/layer.js"></script>
     <script src="../CSS/hm.js.下载" th:src="@{business/CSS/hm.js.下载}"></script>
     <script>"use strict";
     !function () {
@@ -2841,9 +2842,24 @@
             }
         },
         mounted: function () {
-
-            let _this = this;
             let queryVariable = getQueryVariable("cinemaId");
+            let movieId = getQueryVariable("movieId");
+            let dateTime = new Date();
+            $.ajaxSettings.async = false;
+            if (movieId) {
+                $.get("/cinema/getRecentTime?cinemaId=" + queryVariable + "&movieId=" + movieId, null, function (data) {
+                    dateTime = data;
+                });
+            } else {
+                $.get("/cinema/getRecentTime?cinemaId=" + queryVariable, null, function (data) {
+                    dateTime = data;
+                });
+            }
+
+
+            $.ajaxSettings.async = true;
+            console.log(dateTime);
+            let _this = this;
             $.get("/cinema/cinemaDetails?cinemaId=" + queryVariable, null, function (data) {
                 _this.cinema = data
                 console.log(data)
@@ -2865,10 +2881,10 @@
             lay('#version').html('-v' + laydate.v);
 
             //执行一个laydate实例
-            laydate.render({
+            let render = laydate.render({
                 elem: '#test1' //指定元素
                 ,
-                value: new Date(),
+                value: dateTime,
                 min: 0,
 
                 done: function (value, date) {
@@ -2876,8 +2892,11 @@
                     getHallMovies(value);
                 }
             });
-
-            getHallMovies("");
+            getHallMovies(dateTime);
+            var date2 =new Date(dateTime);
+            if(new Date().getTime() - date2.getTime() < 0){
+                layer.msg('影片当天没有排片，已为您查询该影片最近排片时间');
+            }
         }
     });
 
@@ -2889,6 +2908,9 @@
 
         if (movieId == false) {
             url = "/cinema/getHallMovies?cinemaId=" + queryVariable + "&date=" + date;
+
+        } else {
+
         }
 
         $.get(url, function (data) {
