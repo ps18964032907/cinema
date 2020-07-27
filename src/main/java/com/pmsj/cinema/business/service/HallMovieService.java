@@ -34,6 +34,8 @@ public class HallMovieService {
     OrderSeatMapper orderSeatMapper;
     @Autowired(required = false)
     OrderMapper orderMapper;
+    @Autowired(required = false)
+    SeatMapper seatMapper;
     @Autowired
     CouponMapper couponMapper;
     @Autowired
@@ -161,6 +163,7 @@ public class HallMovieService {
                 OrderSeat orderSeat = new OrderSeat();
                 orderSeat.setOrderId(orderid);
                 orderSeat.setSeatId(seatId);
+                orderSeat.setSeatName(seatMapper.selectByPrimaryKey(seatId).getSeatName());
                 orderSeatMapper.insert(orderSeat);
             }
             //修改优惠卷状态 0 不可用 1 可用

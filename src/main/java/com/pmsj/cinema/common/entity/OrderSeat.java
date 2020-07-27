@@ -5,6 +5,16 @@ public class OrderSeat {
 
     private Integer seatId;
 
+    private String seatName;
+
+    public String getSeatName() {
+        return seatName;
+    }
+
+    public void setSeatName(String seatName) {
+        this.seatName = seatName;
+    }
+
     public Integer getOrderId() {
         return orderId;
     }
