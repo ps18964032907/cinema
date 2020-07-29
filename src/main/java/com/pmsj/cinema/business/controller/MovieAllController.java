@@ -32,13 +32,7 @@ public class MovieAllController {
     private ElasticsearchTemplate elasticsearchTemplate;
 
 
-    @Autowired
-    MovieRepository movieRepository;
-    @PostConstruct
-    public void init() {
-        List<Movie> allMovies = movieService.getAllMovies();
-        movieRepository.saveAll(allMovies);
-    }
+
 
     @RequestMapping("/Movie")
     public PageInfo<Movie> selectAllMovie(Integer offset, Integer limit, @RequestParam(value = "status") Integer movieStatus, @RequestParam(value = "tId") Integer typeId, @RequestParam(value = "area") String movieArea, @RequestParam(value = "year") String movieReleaseTime, @RequestParam Integer paixu) {

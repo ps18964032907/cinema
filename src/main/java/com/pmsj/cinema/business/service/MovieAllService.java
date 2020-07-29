@@ -63,8 +63,11 @@ public class MovieAllService {
         MatchQueryBuilder builder = QueryBuilders.matchQuery("movieName", keyWord);
         // 执行查询
         Iterable<Movie> items = movieRepository.search(builder);
-        ArrayList<Movie> movies = Lists.newArrayList(items);
+        List<Movie> movies = Lists.newArrayList(items);
 
+        if (movies == null) {
+            movies = movieMapper.getMovieByKeyWord(keyWord);
+        }
         return movies;
         /* return movieMapper.getMovieByKeyWord(keyWord);*/
 
