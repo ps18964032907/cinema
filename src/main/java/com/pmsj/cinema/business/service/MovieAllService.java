@@ -63,11 +63,16 @@ public class MovieAllService {
         MatchQueryBuilder builder = QueryBuilders.matchQuery("movieName", keyWord);
         // 执行查询
         Iterable<Movie> items = movieRepository.search(builder);
-        List<Movie> movies = Lists.newArrayList(items);
+        ArrayList<Movie> movies = Lists.newArrayList(items);
 
-        if (movies == null) {
-            movies = movieMapper.getMovieByKeyWord(keyWord);
+        System.out.println(movies.size());
+        if (movies.size() == 0) {
+            System.out.println("数据库的查询");
+            return movieMapper.getMovieByKeyWord(keyWord);
         }
+
+        System.out.println("搜索的查询");
+
         return movies;
         /* return movieMapper.getMovieByKeyWord(keyWord);*/
 
