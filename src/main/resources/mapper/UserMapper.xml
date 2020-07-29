@@ -78,7 +78,7 @@
         select sum(order_total_discounts_cash) from `order` where user_id =  #{i} and order_status =2
     </select>
     <select id="getUserAllOrderCount" resultType="java.lang.Long">
-        select count(*) from `order` where user_id = #{i} and order_status = 1
+        select count(*) from `order` where user_id = #{i} and order_status = 2
     </select>
 
     <select id="selectUser" resultMap="BaseResultMap">

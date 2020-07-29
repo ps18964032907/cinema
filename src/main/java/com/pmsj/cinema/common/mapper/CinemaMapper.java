@@ -30,4 +30,6 @@ public interface CinemaMapper {
     Double getMinMoneyByCinemaId(Integer cinemaId);
 
     int getCountCinemaByLngAndLat(@Param("cinemaLat") String cinemaLat, @Param("cinemaLng") String cinemaLng);
+
+    Cinema getCinemaByOrderId(Integer id);
 }

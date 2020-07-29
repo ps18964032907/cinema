@@ -13,6 +13,7 @@ import com.pmsj.cinema.common.mapper.*;
 import com.pmsj.cinema.common.util.TimeUitl;
 import com.pmsj.cinema.common.vo.CinemaVo;
 import com.pmsj.cinema.common.vo.HallMovieVo;
+import com.pmsj.cinema.common.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -147,5 +148,10 @@ public class CinemaService {
     public int getCountCinemaByLngAndLat(String cinemaLat, String cinemaLng) {
 
         return cinemaMapper.getCountCinemaByLngAndLat(cinemaLat, cinemaLng);
+    }
+
+    public Cinema getCinemaByOrderId(Integer id) {
+
+        return cinemaMapper.getCinemaByOrderId(id);
     }
 }

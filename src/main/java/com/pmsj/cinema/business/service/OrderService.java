@@ -4,7 +4,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pmsj.cinema.business.exception.NullParametersException;
 import com.pmsj.cinema.business.util.ReflectUtil;
+import com.pmsj.cinema.common.entity.Coupon;
 import com.pmsj.cinema.common.entity.Order;
+import com.pmsj.cinema.common.mapper.CouponMapper;
 import com.pmsj.cinema.common.mapper.OrderMapper;
 import com.pmsj.cinema.common.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class OrderService {
 
     @Autowired(required = false)
     OrderMapper orderMapper;
+
+    @Autowired
+    CouponMapper couponMapper;
 //    @Autowired
 //    HallMovieService hallMovieService;
 
@@ -90,6 +95,11 @@ public class OrderService {
 
     public OrderVo getOrderById(Integer id) {
         return orderMapper.getOrderVoById(id);
+    }
+
+    public Coupon getCouponById(Integer id) {
+        return couponMapper.selectByPrimaryKey(id);
+
     }
 
 //    public void buy2(TicketsVo tickets, HttpSession session){

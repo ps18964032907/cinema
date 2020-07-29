@@ -13,8 +13,9 @@
     <!-- 引入组件库 -->
     <script src="/"></script>
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.4.7/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
-    <title>深蓝时代 | 交易管理</title>
+    <title>猫眼电影 | 交易管理</title>
     <style>
         * {
 
@@ -218,26 +219,134 @@
         </div>
         <div id="memberMain">
 
-            <div class="title"><h4>查看优惠劵</h4></div>
+            <div class="title"><h4>我的订单</h4></div>
             <div class="height18"></div>
             <div class="memberList clearfix">
                 <div class="tableClass" id="app">
-                    <el-dialog title="收货地址"  :visible.sync="dialogFormVisible">
-                        <el-form :model="form">
-                            <el-form-item label="活动名称" :label-width="formLabelWidth">
-                                <el-input v-model="form.name" autocomplete="off"></el-input>
-                            </el-form-item>
-                            <el-form-item label="活动区域" :label-width="formLabelWidth">
-                                <el-select v-model="form.region" placeholder="请选择活动区域">
-                                    <el-option label="区域一" value="shanghai"></el-option>
-                                    <el-option label="区域二" value="beijing"></el-option>
-                                </el-select>
-                            </el-form-item>
-                        </el-form>
-                        <div slot="footer" class="dialog-footer">
-                            <el-button @click="dialogFormVisible = false">取 消</el-button>
-                            <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
-                        </div>
+                    <el-dialog title="订单详情" :visible.sync="dialogFormVisible">
+                        <el-row>
+
+                            <el-col :span="24">
+                                <div class="grid-content bg-purple-light " style="background-color: #303133">
+                                    <template>
+                                        <el-table
+                                                :data="movieTable"
+                                                style="width: 100%">
+                                            <el-table-column
+                                                    prop="movieName"
+                                                    label="影片名称"
+                                                    width="252"
+                                            >
+                                            </el-table-column>
+                                            <el-table-column
+                                                    prop="orderCount"
+                                                    label="数量"
+                                                    width="252"
+                                            >
+                                            </el-table-column>
+                                            <el-table-column
+                                                    prop="orderUnitprice"
+                                                    label="单价"
+                                                    width="252"
+                                            >
+                                            </el-table-column>
+                                        </el-table>
+                                    </template>
+
+                                </div>
+                            </el-col>
+
+                        </el-row>
+                        <hr>
+                        <el-row style="text-align: right">
+
+                            <span v-if="form.orderTotalInitialCash != form.orderTotalDiscountsCash"
+                                  style="margin-right: 10px">优惠：-{{couponMoeny}}</span>
+                            合计：
+                            <span v-if="form.orderTotalInitialCash != form.orderTotalDiscountsCash">
+
+                                  <span style="margin-right: 10px"> <del>{{form.orderTotalInitialCash}}</del>
+                                  <span style="color: #F56C6C ;font-weight: bold">{{form.orderTotalDiscountsCash}}</span></span>
+                            </span>
+
+                            <span v-else>
+                                  <span style="color: #F56C6C ;font-weight: bold">{{form.orderTotalDiscountsCash}}</span></span>
+                            </span>
+
+                        </el-row>
+                        <el-row>
+                            <el-col :span="2">
+                                <div class="grid-content bg-purple" style="line-height: 32px; font-weight: bold;">
+                                    开始时间
+                                </div>
+                            </el-col>
+                            <el-col :span="5">
+                                <div class="grid-content bg-purple" style="line-height:32px; ">
+                                    {{form.orderTime}}
+                                </div>
+                            </el-col>
+                        </el-row>
+                        <br>
+                        <el-row>
+                            <el-col :span="2">
+                                <div class="grid-content bg-purple" style="line-height: 32px; font-weight: bold;">
+                                    影院名称
+                                </div>
+                            </el-col>
+                            <el-col :span="22">
+                                <div class="grid-content bg-purple">
+                                    <span style="line-height: 32px;">{{form.cinemaName}}</span>
+                                    <el-tag effect="dark" type="warning" style="height: auto;line-height:normal">
+                                        {{form.hallName}}
+                                    </el-tag>
+                                </div>
+                            </el-col>
+                        </el-row>
+                        <br>
+
+                        <el-row>
+                            <el-col :span="2">
+                                <div class="grid-content bg-purple" style="line-height: 32px; font-weight: bold;">
+                                    影院地址
+                                </div>
+                            </el-col>
+                            <el-col :span="22">
+                                <div class="grid-content bg-purple">
+                                    <span style="line-height: 32px;">{{location}}</span>
+                                </div>
+                            </el-col>
+                        </el-row>
+                        <br>
+
+                        <el-row>
+                            <el-col :span="2">
+                                <div class="grid-content bg-purple" style="line-height: 32px; font-weight: bold;">
+                                    座位
+                                </div>
+                            </el-col>
+                            <el-col :span="22">
+                                <div class="grid-content bg-purple">
+                                    <el-tag type="success" v-for="seat in form.seatList" style="margin-right: 3px">
+                                        {{seat.seatName}}
+                                    </el-tag>
+                                </div>
+                            </el-col>
+                        </el-row>
+                        <br>
+
+                        <el-row>
+                            <el-col :span="2">
+                                <div class="grid-content bg-purple" style="line-height: 32px; font-weight: bold;">
+                                    订单号
+                                </div>
+                            </el-col>
+                            <el-col :span="22">
+                                <div class="grid-content bg-purple" style="line-height: 32px;">
+                                    {{form.orderNo}}
+                                </div>
+                            </el-col>
+                        </el-row>
+
                     </el-dialog>
 
                     <div class="allOrder" v-for="(order,index) in orders.list">
@@ -352,10 +461,8 @@
 
 </body>
 
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <!-- <script src="index.js"></script> -->
 
-<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
 <script>
     let vue = new Vue({
         el: '#app',
@@ -365,17 +472,11 @@
             allMoney: 0,
             orderCount: 0,
             dialogFormVisible: false,
-            form: {
-                name: '',
-                region: '',
-                date1: '',
-                date2: '',
-                delivery: false,
-                type: [],
-                resource: '',
-                desc: ''
-            },
-            formLabelWidth: '120px'
+            form: {},
+            movieTable: [],
+            formLabelWidth: '120px',
+            location: "",
+            couponMoeny: '',
         },
 
 
@@ -389,11 +490,34 @@
                 });
             },
             openDetails: function (id) {
-                alert(id);
                 this.dialogFormVisible = true;
+                let _this = this;
+                _this.movieTable = [];
+
+
+                $.get("/PersonalCentreController/getCinemaById", {id: id}, function (data) {
+                    _this.location = "" + data.cinemaCity + data.cinemaArea + data.cinemaLocation
+                });
 
                 $.get("/PersonalCentreController/getOrderById?id=" + id, null, function (data) {
-                    console.log(data)
+                    _this.form = data;
+                    let movie = {
+                        movieName: data.movieName,
+                        orderCount: "X" + data.orderCount,
+                        orderUnitprice: data.orderUnitprice
+                    }
+
+                    if (data.couponId) {
+
+                        $.get("/PersonalCentreController/getCouponById", {id: data.couponId}, function (data) {
+                            console.log(data);
+                            _this.couponMoeny = data.couponMoeny
+                        });
+                    }
+
+
+                    _this.movieTable.push(movie);
+
                 })
             }
         },

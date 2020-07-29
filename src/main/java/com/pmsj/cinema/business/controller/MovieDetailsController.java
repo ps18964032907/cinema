@@ -28,12 +28,14 @@ public class MovieDetailsController {
         Movie movie = movieDetailsService.selectByPrimaryKey(movieId);
         return movie;
     }
+
     @RequestMapping("/movieType/{movieId}")
-    public List<MovieTpye> selectByMovieId(@PathVariable Integer movieId){
+    public List<MovieTpye> selectByMovieId(@PathVariable Integer movieId) {
         return movieDetailsService.selectByMovieId(movieId);
     }
+
     @RequestMapping("/movieIsOnline")
-    public int movieIsOnline(Integer movieId){
+    public int movieIsOnline(Integer movieId) {
         return movieDetailsService.getMovieIsOnline(movieId);
     }
 }

@@ -45,4 +45,5 @@
         and (`condition`.cinema_id = #{cinemaId} or `condition`.cinema_id is null or `condition`.cinema_id = 0)
         and user_coupon.coupon_status = 1
     </select>
+
 </mapper>

@@ -18,5 +18,6 @@ public interface CouponMapper {
 
     int updateByPrimaryKey(Coupon record);
 
-    List<Coupon> getUserAvailableCoupon(@Param("userId") Integer userId, @Param("cinemaId") Integer cinemaId, @Param("movieId")Integer movieId);
+    List<Coupon> getUserAvailableCoupon(@Param("userId") Integer userId, @Param("cinemaId") Integer cinemaId, @Param("movieId") Integer movieId);
+
 }

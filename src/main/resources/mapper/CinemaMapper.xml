@@ -158,5 +158,12 @@
          where cinema_lat = #{cinemaLat}
          and cinema_lng = #{cinemaLng}
     </select>
+    <select id="getCinemaByOrderId" resultMap="BaseResultMap">
+        select DISTINCT cinema.* from `order`
+        join hall_movie on hall_movie.hall_movie_id = `order`.hall_movie_id
+        JOIN hall on hall.hall_id = hall_movie.hall_id
+        join cinema on cinema.cinema_id = hall.cinema_id
+        where `order`.order_id = #{id}
+    </select>
 
 </mapper>

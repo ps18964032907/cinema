@@ -40,7 +40,7 @@ Vue.component('button-counter', {
     ,
     template: "    <header id=\"topHeader\">\n" +
         "        <div class=\"layout clearfix\">\n" +
-        "            <a class=\"logo\" href=\"#\">\n" +
+        "            <a class=\"logo\" href=\"/business/HTML/index.html\">\n" +
         "                <img class=\"fl\" id=\"topLogo\" src=\"http://img.iishk.com/uploadfile/allimg/170629/02001064O_0.png\n\" style=\"height: 74px\"\n" +
         "                     alt=\"让投资实现梦想\">\n" +
         "            </a>\n" +
