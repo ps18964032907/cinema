@@ -7,6 +7,7 @@ import com.pmsj.cinema.common.entity.MovieActor;
 import com.pmsj.cinema.common.mapper.MovieActorMapper;
 import com.pmsj.cinema.common.mapper.MovieMapper;
 import com.pmsj.cinema.common.mapper.MovieTpyeMapper;
+import com.pmsj.cinema.common.util.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,9 @@ public class MovieService {
     @Autowired
     MovieActorMapper movieActorMapper;
 
+    @Autowired
+    RedisUtils redisUtils;
+
 
     public PageInfo<Movie> getAllMovies(Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
@@ -47,8 +51,9 @@ public class MovieService {
     public void addMovie(Movie movie, String[] movieTypes, String[] cast0, String[] cast1, String[] cast1Role) {
         movie.setMovieStatus(2);
         movieMapper.insert(movie);
-
         int movieMapperMaxId = movieMapper.getMaxId();
+        movie.setMovieId(movieMapperMaxId);
+        redisUtils.hset("cinema-movie", "movie-" + movieMapperMaxId, movie);
 
         //类别关联添加
         for (String movieType : movieTypes) {
@@ -76,6 +81,7 @@ public class MovieService {
     }
 
     public int delMovie(Integer moiveId) {
+        redisUtils.hdel("cinema-movie", "movie-" + moiveId);
         return movieMapper.deleteByPrimaryKey(moiveId);
     }
 
@@ -88,6 +94,9 @@ public class MovieService {
         movieMapper.updateByPrimaryKey(movie);
 
         Integer movieMapperMaxId = movie.getMovieId();
+
+        movie.setMovieId(movieMapperMaxId);
+        redisUtils.hset("cinema-movie", "movie-" + movieMapperMaxId, movie);
 
         //类别关联
         movieTpyeMapper.deleteByMovie(movieMapperMaxId);

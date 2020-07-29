@@ -24,4 +24,6 @@ public interface OrderMapper {
     List<Integer> getOnlyOrderIdByUserId(int i);
 
     List<OrderVo> getAllOrderByOrderId(@Param("onlyOrderIdByUserId") List<Integer> onlyOrderIdByUserId);
+
+    OrderVo getOrderVoById(Integer id);
 }

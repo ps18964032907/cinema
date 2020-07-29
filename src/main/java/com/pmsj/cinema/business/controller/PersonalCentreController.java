@@ -30,7 +30,7 @@ public class PersonalCentreController {
     UserService userService;
 
     @Autowired
-    OrderService oderService;
+    OrderService orderService;
 
 
     @RequestMapping("getUser")
@@ -56,14 +56,19 @@ public class PersonalCentreController {
         }
         pageSize = 4;
         User user = (User) session.getAttribute("user");
-        return oderService.getAllOrderByUser(user.getUserId(), currentPage, pageSize);
+        return orderService.getAllOrderByUser(user.getUserId(), currentPage, pageSize);
     }
 
 
     @RequestMapping("getUserAllOrderCount")
     public int getUserAllOrderCount(HttpSession session) {
-
         User user = (User) session.getAttribute("user");
         return userService.getUserAllOrderCount(user.getUserId());
+    }
+
+    @RequestMapping("getOrderById")
+    public OrderVo getOrderById(Integer id) {
+        System.out.println(id);
+        return orderService.getOrderById(id);
     }
 }

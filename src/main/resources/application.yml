@@ -14,7 +14,13 @@ spring:
     username: guest
     password: guest
     port: 5672
-
+  redis:
+    database: 0
+    host: 119.45.53.114
+    password: 1234
+  data:
+    elasticsearch:
+      cluster-nodes: 119.45.53.114:9300
 server:
   port: 80
 

@@ -3,12 +3,17 @@ package com.pmsj.cinema.business.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pmsj.cinema.common.entity.Movie;
+import com.pmsj.cinema.common.entity.MovieRepository;
 import com.pmsj.cinema.common.entity.MovieTpye;
 import com.pmsj.cinema.common.mapper.MovieMapper;
 import com.pmsj.cinema.common.mapper.MovieTpyeMapper;
+import org.assertj.core.util.Lists;
+import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +26,10 @@ public class MovieAllService {
     MovieMapper movieMapper;
     @Autowired
     MovieTpyeMapper movieTpyeMapper;
+
+
+    @Autowired
+    MovieRepository movieRepository;
 
     public PageInfo<Movie> selectAllMovie(Integer offset, Integer limit, Integer movieStatus, Integer typeId, String movieArea, String movieReleaseTime, Integer paixu) {
         int PageNum = 1;
@@ -49,7 +58,15 @@ public class MovieAllService {
     }
 
     public List<Movie> getMovieByKeyWord(String keyWord) {
-        return movieMapper.getMovieByKeyWord(keyWord);
+
+
+        MatchQueryBuilder builder = QueryBuilders.matchQuery("movieName", keyWord);
+        // 执行查询
+        Iterable<Movie> items = movieRepository.search(builder);
+        ArrayList<Movie> movies = Lists.newArrayList(items);
+
+        return movies;
+        /* return movieMapper.getMovieByKeyWord(keyWord);*/
 
     }
 }

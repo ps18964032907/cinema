@@ -54,7 +54,7 @@ public class OrderService {
      * @return
      */
     public int buyTickets(Order order) {
-        String[] params = {"orderId", "couponId","userCouponId"};
+        String[] params = {"orderId", "couponId", "userCouponId"};
         if (order == null) {
             throw new NullParametersException("Order is null");
         } else {
@@ -78,7 +78,7 @@ public class OrderService {
     }
 
     public int updateOrderStatues(Order order) {
-        String[] params = {"couponId","userCouponId"};
+        String[] params = {"couponId", "userCouponId"};
         if (order == null) {
             throw new NullParametersException("Order is null");
         } else {
@@ -86,6 +86,10 @@ public class OrderService {
         }
         return orderMapper.updateByPrimaryKey(order);
 
+    }
+
+    public OrderVo getOrderById(Integer id) {
+        return orderMapper.getOrderVoById(id);
     }
 
 //    public void buy2(TicketsVo tickets, HttpSession session){
