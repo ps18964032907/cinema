@@ -13,6 +13,7 @@
     <!-- 引入组件库 -->
     <script src="/"></script>
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.4.7/lib/theme-chalk/index.css">
+
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
     <title>猫眼电影 | 交易管理</title>
@@ -347,6 +348,19 @@
                             </el-col>
                         </el-row>
 
+                        <el-row>
+                            <el-col :span="2">
+                                <div class="grid-content bg-purple" style="line-height: 32px; font-weight: bold;">
+                                    取票码
+                                </div>
+                            </el-col>
+                            <el-col :span="22">
+                                <div class="grid-content bg-purple" style="line-height: 32px;">
+                                    <img style="width: 200px" :src="'http://api.pwmqr.com/qrcode/create/?url='+form.orderNo">
+                                </div>
+                            </el-col>
+                        </el-row>
+
                     </el-dialog>
 
                     <div class="allOrder" v-for="(order,index) in orders.list">
@@ -462,7 +476,6 @@
 </body>
 
 <!-- <script src="index.js"></script> -->
-
 <script>
     let vue = new Vue({
         el: '#app',
