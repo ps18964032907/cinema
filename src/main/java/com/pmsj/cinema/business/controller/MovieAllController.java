@@ -33,11 +33,11 @@ public class MovieAllController {
 
 
     @Autowired
-    MovieRepository movieRepository;
+//    MovieRepository movieRepository;
     @PostConstruct
     public void init() {
         List<Movie> allMovies = movieService.getAllMovies();
-        movieRepository.saveAll(allMovies);
+//        movieRepository.saveAll(allMovies);
     }
 
     @RequestMapping("/Movie")

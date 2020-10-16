@@ -40,6 +40,9 @@ import java.util.List;
         public void recv(String orderNo){
 
            Order order =  orderService.getOrderByNo(orderNo);
+           if(order == null ){
+               return;
+           }
            //修改订单状态
             if (order.getOrderStatus()==1){
                 order.setOrderStatus(0);
